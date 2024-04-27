@@ -55,11 +55,85 @@ session_start();
                         <input type="date" id="fechaFin" class="form-control">
                       </div>
                       
-                      <div class="col-sm-12 col-md-3">
+                      <div class="col-sm-12 col-md-3 mt-4">
                         <a href="#!" class="btn btn-primary" role="buttom">Buscar</a>
                       </div>
                       
                     </div>
+
+                    <hr clas="my-4">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th>Total</th>
+                          <th>Usuario</th>
+                          <th>Sucursal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php 
+                          //Por default consultamos la venta del dia de todas
+                          //las sucursales pero si no tiene persmisos de admin
+                          //solo podra ver las ventas de su usuario y sucursal
+                          $fecha = date('Y-m-d');
+                          $sql = "";
+                          if($rolUsuario == "Administrador"){
+                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
+                            WHERE b.fechaVenta = '$fecha'";
+                          }elseif($rolUsuario == "Vendedor"){
+                            //solo podra ver las ventas de su usuario y sucursal
+                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
+                            WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
+                            AND a.sucursalID = '$idSucursalN'";
+                          }else{
+                            //el usuario encargado podra ver las ventas de todos
+                            //los usuarios, pero solo de su susucrsal
+                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
+                            WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
+                          }
+
+                          try {
+                            $query = mysqli_query($conexion, $sql);
+                            if(mysqli_num_rows($query) > 0){
+                              while($fetch = mysqli_fetch_assoc($query)){
+                                $fechaVenta = $fetch['fechaVenta'];
+                                $nombreprod = $fetch['nombreArticulo'];
+                                $cantVenta = $fetch['cantidadVenta'];
+                                $total = $fetch['subtotalVenta'];
+                                $usuarioVent = $fetch['usuarioVenta'];
+                                $sucVenta = $fetch['sucursalID'];
+
+                                echo "<tr>
+                                  <td>$fechaVenta</td>
+                                  <td>$nombreprod</td>
+                                  <td>$cantVenta</td>
+                                  <td>$total</td>
+                                  <td>$usuarioVent</td>
+                                  <td>$sucVenta</td>
+                                </tr>";
+                              }//fin del while
+                            }else{
+                              //sin resultados
+                              echo "<tr>
+                              <td colspan='6'>Sin ventas registradas</td>
+                              </tr>";
+                            }
+                          } catch (\Throwable $th) {
+                            //error en la consulta
+                            echo "<tr>
+                              <td colspan='6'>Error de consulta</td>
+                            </tr>";
+                          }
+                        ?>
+                      </tbody>
+                    </table>
 
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->

@@ -22,6 +22,10 @@
 		$sucursal = json_decode($sucursal);
 		$nombreSucursal = $sucursal->dato;
 
+		$dataUSer = getDataUser($idEmpresaSesion,$usuario);
+		$dataUSer = json_decode($dataUSer);
+		$idSucursalN = $dataUSer->sucursalID;
+
 		$tipoRol = verTipoUsuario($usuario);
 		$tipoUsuario = json_decode($tipoRol);
 		$rolUsuario = "";
