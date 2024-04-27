@@ -21,7 +21,7 @@ btnBuscar.addEventListener('click', function(){
       Swal.fire(
         'Servidor Inalcansable',
         'Verifica tu conexion a internet',
-        ''
+        'error'
       )
     }
   }else{

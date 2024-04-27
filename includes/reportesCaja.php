@@ -77,5 +77,6 @@ if(!empty($_SESSION['usuarioPOS'])){
 
   
   }
+}
 
 ?>
