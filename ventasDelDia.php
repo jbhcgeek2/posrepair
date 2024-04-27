@@ -45,7 +45,16 @@ session_start();
                   
 					        <div class="app-card-body p-3 p-lg-4" id="reportes">
       
-                    
+                    <div class="row">
+                      <div class="col-sm-12 col-md-3">
+                        <label for="form-label">Fecha Inicio</label>
+                        <input type="date" id="fechaIni" class="form-control">
+                      </div>
+                      <div class="col-sm-12 col-md-3">
+                        <label for="form-label">Fecha Fin</label>
+                        <input type="date" id="fechaFin" class="form-control">
+                      </div>
+                    </div>
 
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
