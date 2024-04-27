@@ -54,6 +54,8 @@ session_start();
                         <label for="form-label">Fecha Fin</label>
                         <input type="date" id="fechaFin" class="form-control">
                       </div>
+
+                      <button class="btn btn-primary">Buscar</button>
                     </div>
 
 					        </div><!--//app-card-body-->
