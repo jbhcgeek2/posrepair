@@ -125,9 +125,9 @@ session_start();
                                 </tr>";
                               }//fin del while
                               echo "<tr>
-                              <td colspan='3'>Total</td>
-                              <td>$totalVenta</td>
-                              <td colpan='2'></td>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
+                              <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
+                              <td colpan='2'> </td>
                               </tr>";
                             }else{
                               //sin resultados
