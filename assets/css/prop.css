@@ -1,0 +1,14 @@
+.imagenPerfil {
+  border-radius: 50%;
+}
+
+.imagenProducto {
+  border-radius: 10%;
+  width: 120px;
+  height: 120px;
+  border-color: black;
+}
+
+.grayScale{
+  filter: grayscale(100%);
+}
