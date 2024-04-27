@@ -180,4 +180,35 @@
     }
   }
 
+  function getSucById($idSucursal){
+    require('conexion.php');
+    $res = [];
+    if(!$conexion){
+      require('../conexion.php');
+      if(!$conexion){
+        require('../includes/conexion.php');
+      }
+    }
+
+    $sql = "SELECT * FROM SUCURSALES WHERE idSucursal = '$idSucursal'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) > 0){
+        $fetch = mysqli_fetch_assoc($query);
+        $nombreSuc = $fetch['nombreSuc'];
+
+        $res = ["status"=>"ok","dato"=>$nombreSuc];
+        return json_encode($res);
+      }else{
+        //sin resultados
+        $res = ["status"=>"ok","dato"=>"noData"];
+        return json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //error en la consulta
+      $res = ["status"=>"error","mensaje"=>"Ocurrio un error al consultar la sucursal: ".$th];
+      return json_encode($res);
+    }
+  }
+
 ?>

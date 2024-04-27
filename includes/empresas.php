@@ -107,4 +107,6 @@ function updateCapital($idEmpresa,$montoAfecta,$tipoMov,$idUsuario,$conceptoMov)
   
 
 }
+
+
 ?>
