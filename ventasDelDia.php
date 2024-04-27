@@ -101,6 +101,7 @@ session_start();
 
                           try {
                             $query = mysqli_query($conexion, $sql);
+                            $totalVenta = 0;
                             if(mysqli_num_rows($query) > 0){
                               while($fetch = mysqli_fetch_assoc($query)){
                                 $fechaVenta = $fetch['fechaVenta'];
@@ -110,17 +111,23 @@ session_start();
                                 $usuarioVent = $fetch['usuarioVenta'];
                                 $sucVenta = $fetch['sucursalID'];
 
+                                $totalVenta = $totalVenta + $cantVenta;
+
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
                                   <td>$fechaVenta</td>
                                   <td>$nombreprod</td>
                                   <td>$cantVenta</td>
-                                  <td>$total</td>
+                                  <td>$$total</td>
                                   <td>$usuarioVent</td>
                                   <td>$nombreSucVenta</td>
                                 </tr>";
                               }//fin del while
+                              echo "<tr>
+                              <td colspan='4'>$totalVenta</td>
+                              <td colpan='2'></td>
+                              </tr>";
                             }else{
                               //sin resultados
                               echo "<tr>
