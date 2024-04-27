@@ -56,7 +56,7 @@ session_start();
                       </div>
                       
                       <div class="col-sm-12 col-md-3 mt-4">
-                        <a href="#!" class="btn btn-primary" role="buttom">Buscar</a>
+                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscar">Buscar</a>
                       </div>
                       
                     </div>
