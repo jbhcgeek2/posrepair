@@ -111,7 +111,7 @@ session_start();
                                 $usuarioVent = $fetch['usuarioVenta'];
                                 $sucVenta = $fetch['sucursalID'];
 
-                                $totalVenta = $totalVenta + $cantVenta;
+                                $totalVenta = $totalVenta + $total;
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
@@ -125,7 +125,8 @@ session_start();
                                 </tr>";
                               }//fin del while
                               echo "<tr>
-                              <td colspan='4'>$totalVenta</td>
+                              <td colspan='3'>Total</td>
+                              <td>$totalVenta</td>
                               <td colpan='2'></td>
                               </tr>";
                             }else{
