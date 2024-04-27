@@ -35,7 +35,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verProveedores.php">Ir a Inicio</a>
+									        <a href="index.php">Ir a Inicio</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
@@ -61,7 +61,7 @@ session_start();
                           <div class="app-card-body p-3 p-lg-4">
                             <h5 class="stats-type mb-1">Salidas y Entradas de Efectivo</h5>
                           </div><!--//app-card-body-->
-                          <a class="app-card-link-mask" href="salEntEfe.php.php"></a>
+                          <a class="app-card-link-mask" href="salEntEfe.php"></a>
                         </div><!--//app-card-->
                       </div><!--//col-->
 
@@ -70,7 +70,7 @@ session_start();
                           <div class="app-card-body p-3 p-lg-4">
                             <h5 class="stats-type mb-1">Salidas y Entradas de Mercancia</h5>
                           </div><!--//app-card-body-->
-                          <a class="app-card-link-mask" href="salEntEfe.php.php"></a>
+                          <a class="app-card-link-mask" href="salEntMerca.php"></a>
                         </div><!--//app-card-->
                       </div><!--//col-->
 
