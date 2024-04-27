@@ -111,7 +111,7 @@ session_start();
                                 $sucVenta = $fetch['sucursalID'];
 
                                 $dataSuc = getSucById($sucVenta);
-                                $nombreSucVenta = json_decode($dataSuc)->data;
+                                $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
                                   <td>$fechaVenta</td>
                                   <td>$nombreprod</td>
