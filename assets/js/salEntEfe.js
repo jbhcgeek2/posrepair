@@ -17,13 +17,14 @@ btnMovs.addEventListener('click', function(){
     
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
+      console.log(res);
       if(res.status == "ok"){
         //se consulto bien, ahora verificamos si tiene datos
         let tabla = '';
-        if(res.data.length > 0){
+        if(res.data != "noData"){
           //creamos el for de datos
           for (let i = 0; i < res.data.length; i++) {
-            console.log(res.data);
+            // console.log(res.data);
             tabla = tabla+`
             <tr>
               <td></td>
