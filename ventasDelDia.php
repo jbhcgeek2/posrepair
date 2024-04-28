@@ -132,7 +132,7 @@ session_start();
                             }else{
                               //sin resultados
                               echo "<tr>
-                              <td colspan='6'>Sin ventas registradas</td>
+                              <td colspan='6' style='text-align:center;'>Sin ventas registradas</td>
                               </tr>";
                             }
                           } catch (\Throwable $th) {

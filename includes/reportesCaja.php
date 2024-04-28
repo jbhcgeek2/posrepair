@@ -16,7 +16,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
   $dataUSer = getDataUser($idEmpresaSesion,$usuario);
   $dataUSer = json_decode($dataUSer);
-  $idSucursalN = $dataUSer->sucursalID;
+  $idSucursal = $dataUSer->sucursalID;
 
   $tipoRol = verTipoUsuario($usuario);
   $tipoUsuario = json_decode($tipoRol);
@@ -45,13 +45,13 @@ if(!empty($_SESSION['usuarioPOS'])){
       $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
       INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
       WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.usuarioVenta = '$usuario' 
-      AND a.sucursalID = '$idSucursalN'";
+      AND a.sucursalID = '$idSucursal'";
     }else{
       //el usuario encargado podra ver las ventas de todos
       //los usuarios, pero solo de su susucrsal
       $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
       INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-      WHERE(b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$idSucursalN'";
+      WHERE(b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$idSucursal'";
     }
 
     try {
@@ -61,7 +61,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         $i = 0;
         while($fetch = mysqli_fetch_assoc($query)){
           $datos[$i] = $fetch;
-          $i++
+          $i++;
         }//fin del while
         $res = ["status"=>"ok","data"=>$datos];
         echo json_encode($res);
