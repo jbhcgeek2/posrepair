@@ -80,6 +80,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     //seccion para buscar movimienots de efectivo
     $fechaIniMov = $_POST['fechaIniMov'];
     $fechaFinMov = $_POST['fechaFinMov'];
+    $sql = "";
 
     if($rolUsuario == "Administrador"){
       $sql = "SELECT *,(SELECT b.userName FROM USUARIOS b WHERE b.idUsuario = a.usuarioMov) AS usmov,
