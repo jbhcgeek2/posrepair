@@ -47,12 +47,11 @@ btnBuscar.addEventListener('click', function(){
             `;
           }//fin del for
           //insertamos el row de totales
+          const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
           tabla = tabla+`
           <tr>
-            <td></td>
-            <td></td>
-            <td>Total Venta</td>
-            <td>${sumaTotal}</td>
+            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td class='fw-bold'>$${formattedNumber}</td>
             <td></td>
             <td></td>
           </tr>
