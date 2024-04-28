@@ -8,8 +8,8 @@ btnMovs.addEventListener('click', function(){
   if(fechaIniMov != "" && fechaFinMov != ""){
     //si estan capturadas mandamos el xml
     let datos = new FormData();
-    datos.append("fechaIniMov",fechaIniMov);
-    datos.append("fechaFinMov",fechaFinMov);
+    datos.append("fechaIniMov",fechaIniMov).value;
+    datos.append("fechaFinMov",fechaFinMov).value;
 
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/reportesCaja.php',false);

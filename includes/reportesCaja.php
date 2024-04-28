@@ -105,7 +105,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
       WHERE(b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$idSucursal'";
     }
-    echo $sql;
+    // echo $sql;
 
     try {
       $query = mysqli_query($conexion, $sql);
