@@ -21,7 +21,7 @@ btnMovs.addEventListener('click', function(){
       if(res.status == "ok"){
         //se consulto bien, ahora verificamos si tiene datos
         let tabla = '';
-        if(res.data != "noData"){
+        if(res.data != "NoData"){
           //creamos el for de datos
           for (let i = 0; i < res.data.length; i++) {
             // console.log(res.data);
