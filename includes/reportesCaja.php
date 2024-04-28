@@ -6,8 +6,8 @@ if(!empty($_SESSION['usuarioPOS'])){
   //insertamos los archivos que necesitamos
   include("articulos.php");
   include("usuarios.php");
-  include("documentos.php");
   include("conexion.php");
+  include("empresas.php");
 
   $usuario = $_SESSION['usuarioPOS'];
   $empresa = datoEmpresaSesion($usuario,"id");
@@ -76,7 +76,11 @@ if(!empty($_SESSION['usuarioPOS'])){
     }
 
   
+  }else{
+    //sin metodo
   }
+}else{
+  //sin sesion
 }
 
 ?>
