@@ -43,6 +43,8 @@ btnMovs.addEventListener('click', function(){
               classAux = "table-danger";
             }
 
+            sumaTotal = parseFloat(sumaTotal + montoMov);
+
             tabla = tabla+`
             <tr class='${classAux}'>
               <td>${fechaMov}</td>
@@ -54,6 +56,16 @@ btnMovs.addEventListener('click', function(){
             </tr>
             `;
           }//fin del for
+
+           const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
+          tabla = tabla+`
+          <tr>
+            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td class='fw-bold'>$${formattedNumber}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          `;
         }else{
           //no se tienen datos
           tabla = `<tr>
