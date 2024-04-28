@@ -25,8 +25,8 @@ btnBuscar.addEventListener('click', function(){
           //para reconstruir la tabla
           let sumaTotal = 0;
           for (let x = 0; x < res.data.length; x++) {
-            let fechaVenta = res.data[x];
-            console.log(res.data[x]);
+            let fechaVenta = res.data[x].fechaVenta;
+            console.log(fechaVenta);
             
           }//fin del for
           
