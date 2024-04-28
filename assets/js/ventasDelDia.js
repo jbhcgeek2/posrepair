@@ -40,7 +40,7 @@ btnBuscar.addEventListener('click', function(){
             <td>${fechaVenta}</td>
             <td>${prodName}</td>
             <td>${cantVenta}</td>
-            <td>${totVenta}</td>
+            <td>$${totVenta}</td>
             <td>${usVenta}</td>
             <td>${sucName}</td>
             </tr>

@@ -21,9 +21,8 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Ventas del Dia</h1>
-			    
-			    
+			    <h1 class="app-page-title">Salidas y Entradas de Efectivo</h1>
+			    			    
 			        <div class="col-12 col-lg-12">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
 					        <div class="app-card-header p-3">
@@ -56,7 +55,7 @@ session_start();
                       </div>
                       
                       <div class="col-sm-12 col-md-3 mt-4">
-                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscar">Buscar</a>
+                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscarMovs">Buscar</a>
                       </div>
                       
                     </div>
@@ -67,9 +66,9 @@ session_start();
                       <thead>
                         <tr>
                           <th>Fecha</th>
-                          <th>Producto</th>
-                          <th>Cantidad</th>
-                          <th>Total</th>
+                          <th>Concepto</th>
+                          <th>Monto</th>
+                          <th>Tipo Mov</th>
                           <th>Usuario</th>
                           <th>Sucursal</th>
                         </tr>
@@ -82,9 +81,11 @@ session_start();
                           $fecha = date('Y-m-d');
                           $sql = "";
                           if($rolUsuario == "Administrador"){
-                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-                            WHERE b.fechaVenta = '$fecha'";
+                            //el administrador vera todas los movimientos de todos los usuario y todas las sucursales
+                            $sql = "SELECT *,(SELECT b.userName FROM USUARIOS b WHERE b.idUsuario = a.usuarioMov) AS usmov,
+                            (SELECT c.nombreSuc FROM SUCURSALES c WHERE c.idSucursal = a.sucursalMovID) AS sucNameMov,
+                            (SELECT d.nombreConcepto FROM CONCEPTOSMOV d WHERE d.idConcepto = a.conceptoMov) AS concepName
+                            FROM MOVCAJAS a WHERE empresaMovID = '$idEmpresaSesion' AND fechaMovimiento = '$fehca'";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
@@ -104,24 +105,24 @@ session_start();
                             $totalVenta = 0;
                             if(mysqli_num_rows($query) > 0){
                               while($fetch = mysqli_fetch_assoc($query)){
-                                $fechaVenta = $fetch['fechaVenta'];
-                                $nombreprod = $fetch['nombreArticulo'];
-                                $cantVenta = $fetch['cantidadVenta'];
-                                $total = $fetch['subtotalVenta'];
-                                $usuarioVent = $fetch['usuarioVenta'];
-                                $sucVenta = $fetch['sucursalID'];
+                                $fechaMov = $fetch['fechaMovimiento'];
+                                $concep = $fetch['concepName'];
+                                $montoMov = $fetch['montoMov'];
+                                $tipoMov = $fetch['tipoMov'];
+                                $usuarioMov = $fetch['usmov'];
+                                $sucursalMov = $fetch['sucNameMov'];
 
                                 $totalVenta = $totalVenta + $total;
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
-                                  <td>$fechaVenta</td>
-                                  <td>$nombreprod</td>
-                                  <td>$cantVenta</td>
-                                  <td>$$total</td>
-                                  <td>$usuarioVent</td>
-                                  <td>$nombreSucVenta</td>
+                                  <td>$fechaMov</td>
+                                  <td>$concep</td>
+                                  <td>$$montoMov</td>
+                                  <td>$tipoMov</td>
+                                  <td>$usuarioMov</td>
+                                  <td>$sucursalMov</td>
                                 </tr>";
                               }//fin del while
                               echo "<tr>
