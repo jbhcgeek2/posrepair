@@ -2,14 +2,14 @@ let btnMovs = document.getElementById('btnBuscarMovs');
 
 btnMovs.addEventListener('click', function(){
   //verificamos que las fechas esten correctas
-  let fechaIniMov = document.getElementById('fechaIniMov');
-  let fechaFinMov = document.getElementById('fechaFinMov');
+  let fechaIniMov = document.getElementById('fechaIniMov').value;
+  let fechaFinMov = document.getElementById('fechaFinMov').value;
 
   if(fechaIniMov != "" && fechaFinMov != ""){
     //si estan capturadas mandamos el xml
     let datos = new FormData();
-    datos.append("fechaIniMov",fechaIniMov).value;
-    datos.append("fechaFinMov",fechaFinMov).value;
+    datos.append("fechaIniMov",fechaIniMov);
+    datos.append("fechaFinMov",fechaFinMov);
 
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/reportesCaja.php',false);
