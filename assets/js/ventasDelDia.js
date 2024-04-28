@@ -16,13 +16,20 @@ btnBuscar.addEventListener('click', function(){
     envio.send(datos);
 
     if(envio.status == 200){
-      console.log(envio.responseText);
       let res = JSON.parse(envio.responseText);
+      console.log(res);
       //verificamos la respuesta
       if(res.status == "ok"){
-        if(res.data.lengh > 0){
-          //si se tienen datos
-          console.log("Con datos");
+        if(res.data.length > 0){
+          //si se tienen datos. hacemos un ciclo for
+          //para reconstruir la tabla
+          let sumaTotal = 0;
+          for (let x = 0; x < res.data.length; x++) {
+            let fechaVenta = res.data[x];
+            console.log(res.data[x]);
+            
+          }//fin del for
+          
         }else{
           //no se tienen datos
           console.log("Sin datos");
