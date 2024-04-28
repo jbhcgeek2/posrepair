@@ -39,9 +39,9 @@ btnMovs.addEventListener('click', function(){
         }else{
           //no se tienen datos
           tabla = `<tr>
-          <td colpan='6' style='text-align:center;' class='fw-bold'>Sin resultados</td>
-        </tr>
-        `;
+            <td colspan='6' style='text-align:center;' class='fw-bold'>Sin resultados</td>
+          </tr>
+          `;
         }
         document.getElementById('bodyTableReport').innerHTML = tabla;
       }else{
