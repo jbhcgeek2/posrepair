@@ -44,14 +44,14 @@ if(!empty($_SESSION['usuarioPOS'])){
       //solo podra ver las ventas de su usuario y sucursal
       $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
       INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-      WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
+      WHERE (b.fechaVenta BETWEEN $fechaIni AND $fechaFin) AND a.usuarioVenta = '$usuario' 
       AND a.sucursalID = '$idSucursalN'";
     }else{
       //el usuario encargado podra ver las ventas de todos
       //los usuarios, pero solo de su susucrsal
       $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
       INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-      WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
+      WHERE(b.fechaVenta BETWEEN $fechaIni AND $fechaFin) AND a.sucursalID = '$idSucursalN'";
     }
 
     try {
