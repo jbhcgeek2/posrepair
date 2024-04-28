@@ -23,7 +23,7 @@ btnMovs.addEventListener('click', function(){
         if(res.data.length > 0){
           //creamos el for de datos
           for (let i = 0; i < res.data.length; i++) {
-            console.log(res.data[i]);
+            console.log(res.data);
             tabla = tabla+`
             <tr>
               <td></td>
