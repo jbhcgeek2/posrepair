@@ -17,6 +17,25 @@ btnBuscar.addEventListener('click', function(){
 
     if(envio.status == 200){
       console.log(envio.responseText);
+      let res = JSON.parse(envio.responseText);
+      //verificamos la respuesta
+      if(res.status == "ok"){
+        if(res.data.lengh > 0){
+          //si se tienen datos
+          console.log("Con datos");
+        }else{
+          //no se tienen datos
+          console.log("Sin datos");
+        }
+      }else{
+        //ocurrio un error en la consulta
+        let err = res.mensaje;
+        Swal.fire(
+          'Ha ocurrido un error',
+          'Verificar: '+err,
+          'error'
+        )
+      }
     }else{
       Swal.fire(
         'Servidor Inalcansable',
