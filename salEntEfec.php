@@ -47,11 +47,11 @@ session_start();
                     <div class="row">
                       <div class="col-sm-12 col-md-3">
                         <label for="form-label">Fecha Inicio</label>
-                        <input type="date" id="fechaIni" class="form-control">
+                        <input type="date" id="fechaIniMov" class="form-control">
                       </div>
                       <div class="col-sm-12 col-md-3">
                         <label for="form-label">Fecha Fin</label>
-                        <input type="date" id="fechaFin" class="form-control">
+                        <input type="date" id="fechaFinMov" class="form-control">
                       </div>
                       
                       <div class="col-sm-12 col-md-3 mt-4">
