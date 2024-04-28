@@ -23,16 +23,34 @@ btnMovs.addEventListener('click', function(){
         let tabla = '';
         if(res.data != "NoData"){
           //creamos el for de datos
+          let sumaTotal = 0;
           for (let i = 0; i < res.data.length; i++) {
             // console.log(res.data);
+            let auxRes = res.data;
+            let fechaMov = auxRes[i].fechaMovimiento;
+            let concepName = auxRes[i].concepName;
+            let montoMov = auxRes[i].montoMov;
+            let tipoMov = auxRes[i].tipoMov;
+            let userMov = auxRes[i].usuarioMov;
+            let sucMov = auxRes[i].usmov;
+            let auxTipoMov = "";
+            let classAux = "";
+            if(tipoMov == "E"){
+              auxTipoMov = "Entrada";
+              classAux = "table-success";
+            }else{
+              auxTipoMov = "Salida";
+              classAux = "table-danger";
+            }
+
             tabla = tabla+`
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr class='${classAux}'>
+              <td>${fechaMov}</td>
+              <td>${concepName}</td>
+              <td>${montoMov}</td>
+              <td>${auxTipoMov}</td>
+              <td>${userMov}</td>
+              <td>${sucMov}</td>
             </tr>
             `;
           }//fin del for
