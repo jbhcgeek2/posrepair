@@ -42,7 +42,7 @@ btnMovs.addEventListener('click', function(){
             }else{
               auxTipoMov = "Salida";
               classAux = "table-danger";
-              sumaTotal = parseFloat(sumaTotal) - parseFloat(montoMov);
+              sumaTotal = parseFloat(sumaTotal) + parseFloat(montoMov);
             }
 
             
