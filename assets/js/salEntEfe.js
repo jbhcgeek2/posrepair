@@ -38,12 +38,14 @@ btnMovs.addEventListener('click', function(){
             if(tipoMov == "E"){
               auxTipoMov = "Entrada";
               classAux = "table-success";
+              sumaTotal = parseFloat(sumaTotal) + parseFloat(montoMov);
             }else{
               auxTipoMov = "Salida";
               classAux = "table-danger";
+              sumaTotal = parseFloat(sumaTotal) - parseFloat(montoMov);
             }
 
-            sumaTotal = parseFloat(sumaTotal + montoMov);
+            
 
             tabla = tabla+`
             <tr class='${classAux}'>
@@ -60,8 +62,9 @@ btnMovs.addEventListener('click', function(){
            const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
           tabla = tabla+`
           <tr>
-            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td colspan='2' class='fw-bold' style='text-align:right'>Total Venta</td>
             <td class='fw-bold'>$${formattedNumber}</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
