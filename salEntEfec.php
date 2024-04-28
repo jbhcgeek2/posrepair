@@ -133,7 +133,7 @@ session_start();
                             }else{
                               //sin resultados
                               echo "<tr>
-                              <td colspan='6' style='text-align:center;'>Sin ventas registradas</td>
+                              <td colspan='6' style='text-align:center;'>Sin Movimientos registradas</td>
                               </tr>";
                             }
                           } catch (\Throwable $th) {
@@ -170,7 +170,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/ventasDelDia.js"></script>
+    <script src="assets/js/salEntEfe.js"></script>
 </body>
 </html> 
 
