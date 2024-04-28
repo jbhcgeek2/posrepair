@@ -85,7 +85,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $fechaIniMov = $_POST['fechaIniMov'];
     $fechaFinMov = $_POST['fechaFinMov'];
     $sql = "";
-    echo $rolUsuario;
+    echo $idEmpresaSesion;
 
     if($rolUsuario == "Administrador"){
       $sql = "SELECT *,(SELECT b.userName FROM USUARIOS b WHERE b.idUsuario = a.usuarioMov) AS usmov,
