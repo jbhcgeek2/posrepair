@@ -74,7 +74,7 @@ session_start();
                           <th>Sucursal</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="bodyTableReport">
                         <?php 
                           //Por default consultamos la venta del dia de todas
                           //las sucursales pero si no tiene persmisos de admin

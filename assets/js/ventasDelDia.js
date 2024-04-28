@@ -24,15 +24,49 @@ btnBuscar.addEventListener('click', function(){
           //si se tienen datos. hacemos un ciclo for
           //para reconstruir la tabla
           let sumaTotal = 0;
+          let tabla = '';
           for (let x = 0; x < res.data.length; x++) {
             let fechaVenta = res.data[x].fechaVenta;
-            console.log(fechaVenta);
-            
+            let prodName = res.data[x].nombreArticulo;
+            let cantVenta = res.data[x].cantidadVenta;
+            let usVenta = res.data[x].usuarioVenta;
+            let sucName = res.data[x].nombreSuc;
+            let totVenta = res.data[x].totalVenta;
+
+            sumaTotal = parseFloat(sumaTotal) + parseFloat(totVenta);
+
+            tabla = tabla+`
+            <tr>
+            <td>${fechaVenta}</td>
+            <td>${prodName}</td>
+            <td>${cantVenta}</td>
+            <td>${totVenta}</td>
+            <td>${usVenta}</td>
+            <td>${sucName}</td>
+            </tr>
+            `;
           }//fin del for
+          //insertamos el row de totales
+          tabla = tabla+`
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Total Venta</td>
+            <td>${sumaTotal}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          `;
+
+          //insertamos el contenido nuevo en la tabla
+          document.getElementById('bodyTableReport').innerHTML = tabla;
           
         }else{
           //no se tienen datos
-          console.log("Sin datos");
+          tabla = `<tr>
+            <td colspan='6' style='text-align:center;'><strong>Sin Resultados</strong></td>
+          </tr>`;
+          document.getElementById('bodyTableReport').innerHTML = tabla;
         }
       }else{
         //ocurrio un error en la consulta
