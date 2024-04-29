@@ -21,7 +21,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Salidas y Entradas de Efectivo</h1>
+			    <h1 class="app-page-title">Salidas y Entradas de Mercancia</h1>
 			    			    
 			        <div class="col-12 col-lg-12">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
@@ -126,15 +126,15 @@ session_start();
                                   <td>$sucursalMov</td>
                                 </tr>";
                               }//fin del while
-                              echo "<tr>
-                              <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
-                              <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
-                              <td colpan='2'> </td>
-                              </tr>";
+                              // echo "<tr>
+                              // <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
+                              // <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
+                              // <td colpan='2'> </td>
+                              // </tr>";
                             }else{
                               //sin resultados
                               echo "<tr>
-                              <td colspan='6' style='text-align:center;'>Sin Movimientos registradas</td>
+                              <td colspan='6' style='text-align:center;'>Sin Movimientos registrados</td>
                               </tr>";
                             }
                           } catch (\Throwable $th) {
