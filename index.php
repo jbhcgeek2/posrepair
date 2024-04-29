@@ -7,6 +7,7 @@
 <body class="app">   	
   <?php
     include("includes/header.php");
+		include("includes/conexion.php");
 		//este resumen solo estara habilitado para administradores
 		// echo $rolUsuario;
 		if($rolUsuario == "Vendedor"){
