@@ -42,12 +42,23 @@ btnBuscar.addEventListener('click', function(){
             `;
             
           }//fin del for
+          //insertamos la tabla
+          document.getElementById('bodyTableReport').innerHTML = tabla;
         }else{
           //sin datos registrados
-
+          tabla = `<tr>
+            <td colspan='6' style='text-align:center;' class='fw-bold'>Sin resultados</td>
+          </tr>`;
+          document.getElementById('bodyTableReport').innerHTML = tabla;
         }
       }else{
-        //error de consulta
+        //ocurrio un error en la consulta de datos
+        let err = res.mensaje;
+        Swal.fire(
+          'Ha ocurrido un error',
+          'Verificar: '+err,
+          'error'
+        )
       }
     }else{
       //error de comunicacion
