@@ -17,6 +17,36 @@
 			</script>
 			<?php
 		}
+
+		//realizamos las consultas para ver las ventas totales en el mes
+		$sqlVentas = "SELECT SUM(totalVenta) AS ventasEnMes FROM VENTAS WHERE MONTH(fechaVenta) = MONTH(CURDATE())";
+		try {
+			$queryVentas = mysqli_query($conexion, $sqlVentas);
+			$fetchVentas = mysqli_fetch_assoc($queryVentas);
+			$totVentas = $fetchVentas['ventasEnMes'];
+		} catch (\Throwable $th) {
+			//error de consulta
+			$totalVentas = "1";
+		}
+		$sqlVentasAnt = "SELECT SUM(totalVenta) AS ventasMesAnt FROM VENTAS
+		WHERE MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
+		AND YEAR(fechaVenta) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
+		try {
+			$queryVentasAnt = mysqli_query($conexion, $sqlVentasAnt);
+			$fetchVentasAnt = mysqli_fetch_assoc($queryVentasAnt);
+			$totVentasAnt = $fetchVentasAnt['ventasMesAnt'];
+		} catch (\Throwable $th) {
+			$totalVentas = "1";	
+		}
+
+		$diferenciaVentas = $totVentas - $totVentasAnt;
+		$porcentageVentas = ($diferenciaVentas / $sqlVentasAnt) * 100;
+		if($diferenciaVentas > 0){
+			//incrementaron las ventas
+
+		}else{
+			//las ventas disminuyeros
+		}
   ?>
     
     <div class="app-wrapper">
@@ -29,7 +59,7 @@
 			    <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
 				    <div class="inner">
 							
-					    <div class="app-card-body p-3 p-lg-4">
+					    <div class="app-card-body p-3 p-lg-4" style="display:none;">
 						    <h3 class="mb-3">Welcome, developer!</h3>
 						    <div class="row gx-5 gy-3">
 						      <div class="col-12 col-lg-9">
@@ -56,14 +86,15 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Ventas Totales</h4>
-							    <div class="stats-figure">$12,628</div>
+							    <h4 class="stats-type mb-1">Ventas en el mes</h4>
+							    <div class="stats-figure"><?php echo number_format($totVentas,2); ?></div>
 							    <div class="stats-meta text-success">
 								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-</svg> 20%</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
+  										<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+										</svg> 
+										<?php echo $porcentageVentas; ?>%</div>
+						    	</div><!--//app-card-body-->
+						    	<a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 				    
