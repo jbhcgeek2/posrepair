@@ -42,6 +42,7 @@
 
 		$diferenciaVentas = $totVentas - $totVentasAnt;
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
+		$porcentageVentas = number_format($porcentageVentas,2);
 		if($diferenciaVentas > 0){
 			//incrementaron las ventas
 		}else{
