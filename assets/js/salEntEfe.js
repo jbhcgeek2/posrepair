@@ -31,17 +31,17 @@ btnMovs.addEventListener('click', function(){
             let concepName = auxRes[i].concepName;
             let montoMov = auxRes[i].montoMov;
             let tipoMov = auxRes[i].tipoMov;
-            let userMov = auxRes[i].usuarioMov;
-            let sucMov = auxRes[i].usmov;
+            let userMov = auxRes[i].usmov;
+            let sucMov = auxRes[i].sucNameMov;
             let auxTipoMov = "";
             let classAux = "";
             if(tipoMov == "E"){
               auxTipoMov = "Entrada";
-              classAux = "table-success";
+              // classAux = "table-success";
               sumaTotal = parseFloat(sumaTotal) + parseFloat(montoMov);
             }else{
               auxTipoMov = "Salida";
-              classAux = "table-danger";
+              // classAux = "table-danger";
               sumaTotal = parseFloat(sumaTotal) + parseFloat(montoMov);
             }
 
@@ -59,16 +59,16 @@ btnMovs.addEventListener('click', function(){
             `;
           }//fin del for
 
-           const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
-          tabla = tabla+`
-          <tr>
-            <td colspan='2' class='fw-bold' style='text-align:right'>Total Venta</td>
-            <td class='fw-bold'>$${formattedNumber}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          `;
+          //  const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
+          // tabla = tabla+`
+          // <tr>
+          //   <td colspan='2' class='fw-bold' style='text-align:right'>Total Venta</td>
+          //   <td class='fw-bold'>$${formattedNumber}</td>
+          //   <td></td>
+          //   <td></td>
+          //   <td></td>
+          // </tr>
+          // `;
         }else{
           //no se tienen datos
           tabla = `<tr>
