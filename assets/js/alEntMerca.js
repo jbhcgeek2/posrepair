@@ -17,9 +17,38 @@ btnBuscar.addEventListener('click', function(){
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
       console.log(res);
+      if(res.status == "ok"){
+        if(res.data != "NoData"){
+          let tabla = '';
+          for (let x = 0; x < res.data.length; x++) {
+            let fecha = res.data[x].fechaMov;
+            let prodName = res.data[x].nombreProdMov;
+            let montoUni = res.data[x].precioCompra;
+            let cantiMov = res.data[x].cantidad;
+            let tipoMov = res.data[x].tipoMov;
+            let userMov = res.data[x].usuarioMov;
+            let sucMov = res.data[x].nombreSuc;
 
-      
+            tabla = tabla+ `
+            <tr>
+              <td>${fecha}</td>
+              <td>${prodName}</td>
+              <td>${montoUni}</td>
+              <td>${cantiMov}</td>
+              <td>${tipoMov}</td>
+              <td>${userMov}</td>
+              <td>${sucMov}</td>
+            </tr>
+            `;
+            
+          }//fin del for
+        }else{
+          //sin datos registrados
 
+        }
+      }else{
+        //error de consulta
+      }
     }else{
       //error de comunicacion
       Swal.fire(
