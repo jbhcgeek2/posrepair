@@ -41,10 +41,9 @@
 		}
 
 		$diferenciaVentas = $totVentas - $totVentasAnt;
-		$porcentageVentas = ($diferenciaVentas / $sqlVentasAnt) * 100;
+		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
 		if($diferenciaVentas > 0){
 			//incrementaron las ventas
-
 		}else{
 			//las ventas disminuyeros
 		}
