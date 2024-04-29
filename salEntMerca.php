@@ -134,13 +134,13 @@ session_start();
                             }else{
                               //sin resultados
                               echo "<tr>
-                              <td colspan='6' style='text-align:center;'>Sin Movimientos registrados</td>
+                              <td colspan='7' style='text-align:center;'>Sin Movimientos registrados</td>
                               </tr>";
                             }
                           } catch (\Throwable $th) {
                             //error en la consulta
                             echo "<tr>
-                              <td colspan='6'>Error de consulta</td>
+                              <td colspan='7'>Error de consulta</td>
                             </tr>";
                           }
                         ?>

@@ -138,9 +138,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     if($rolUsuario == "Administrador"){
       $sql = "SELECT a.idSucursal,a.nombreSuc,b.*,
       (SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = b.prodMov) AS nombreProdMov 
-      FROM SUCURSALES a  INNER JOIN DETALLEINGRESO b 
-      ON a.idSucursal = b.sucursalID WHERE a.empresaSucID = '$idEmpresaSesion' AND 
-      (b.fechaMov BETWEEN '$fechaIniMerca' AND '$fechaFinMerca'";
+      FROM SUCURSALES a  INNER JOIN DETALLEINGRESO b ON a.idSucursal = b.sucursalID WHERE 
+      a.empresaSucID = '$idEmpresaSesion' AND (b.fechaMov BETWEEN '$fechaIniMerca' AND '$fechaFinMerca')";
     }elseif($rolUsuario == "Vendedor"){
       //solo podra ver las ventas de su usuario y sucursal
       $sql = "SELECT *,(SELECT b.userName FROM USUARIOS b WHERE b.idUsuario = a.usuarioMov) AS usmov,
