@@ -205,7 +205,7 @@
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Inventario Actual</h4>
 							    <div class="stats-figure"><?php echo $artiActual; ?></div>
-							    <!-- <div class="stats-meta">New</div> -->
+							    <div class="stats-meta">Articulos Disponibles</div>
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
