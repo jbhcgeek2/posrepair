@@ -39,8 +39,25 @@ session_start();
 
               <div class="app-card-body p-3 p-lg-4">
                 <div class="row">
-                  <form action="">
+                  <form id="nuevoUsuarioEmp">
+                    <div class="row">
 
+                      <div class="col-sm-12 col-md-4 mb-3">
+                        <label for="nombreUser" class="form-label">Nombres</label>
+                        <input type="text" id="nombreUser" name="nombreUser" class="form-control">
+                      </div>
+                      <div class="col-sm-12 col-md-4 mb-3">
+                        <label for="apPaterno" class="form-label">Apellido Paterno</label>
+                        <input type="text" id="apPaterno" name="apPaterno" class="form-control">
+                      </div>
+                      <div class="col-sm-12 col-md-4 mb-3">
+                        <label for="apMaterno" class="form-label">Apellido Materno</label>
+                        <input type="text" id="apMaterno" name="apMaterno" class="form-control">
+                      </div>
+
+
+
+                    </div><!--Fin row form-->
                   </form>
                 </div>
               </div>
