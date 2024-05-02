@@ -19,7 +19,7 @@ var lineChartConfig = {
 	type: 'line',
 
 	data: {
-		labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+		labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
 		
 		datasets: [{
 			label: 'Current week',
@@ -27,13 +27,13 @@ var lineChartConfig = {
 			backgroundColor: window.chartColors.green,
 			borderColor: window.chartColors.green,
 			data: [
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint()
+				'10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'10'
 			],
 		}, {
 			label: 'Previous week',
