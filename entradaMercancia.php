@@ -177,6 +177,23 @@ session_start();
                       <label for="proveedorMov" class="form-label">Proveedor</label>
                       <select name="proveedorMov" id="proveedorMov" class="form-select">
                         <option value="">Seleccione...</option>
+                        <?php 
+                          //consultamos los proveedores de la empresa
+                          $sqlProv = "SELECT * FROM PROVEEDORES WHERE provEmpresaID = '$idEmprersa' AND estatusProveedor = '1'";
+                          try {
+                            $queryProv = mysqli_query($conexion, $sqlProv);
+                            while($fetchProv = mysqli_fetch_assoc($queryProv)){
+                              $idProv = $fetchProv['idProveedor'];
+                              $nombreProv = $fetchProv['nombreProveedor'];
+                              
+                              echo "<option value='$idProv'>$nombreProv</option>";
+                            }//fin del while
+                          } catch (\Throwable $th) {
+                            //error de base de datos
+                            echo "<option value='0'>Error de BD</option>";
+                          }
+                          
+                        ?>
                         <option value="1">Default</option>
                       </select>
                     </div>
