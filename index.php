@@ -18,9 +18,10 @@
 			</script>
 			<?php
 		}
-
+		$fechaHoy = date('Y-m-d');
 		//realizamos las consultas para ver las ventas totales en el mes
-		$sqlVentas = "SELECT SUM(totalVenta) AS ventasEnMes FROM VENTAS WHERE MONTH(fechaVenta) = MONTH(CURDATE())";
+		$sqlVentas = "SELECT SUM(totalVenta) AS ventasEnMes FROM VENTAS 
+		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(CURDATE())";
 		try {
 			$queryVentas = mysqli_query($conexion, $sqlVentas);
 			$fetchVentas = mysqli_fetch_assoc($queryVentas);
@@ -30,7 +31,7 @@
 			$totalVentas = "1";
 		}
 		$sqlVentasAnt = "SELECT SUM(totalVenta) AS ventasMesAnt FROM VENTAS
-		WHERE MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
+		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
 		AND YEAR(fechaVenta) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
 		try {
 			$queryVentasAnt = mysqli_query($conexion, $sqlVentasAnt);
@@ -61,8 +62,8 @@
 
 		//para consultar los gatros mensuales, consultaremos la tabla de movimientos caja
 		//aquellos que tengan el concepto de salida y adquisicion de mercancia (9 y 10)
-		$sqlGasto = "SELECT SUM(montoMov) AS gastoMensual FROM MOVCAJAS WHERE conceptoMov IN (9,10) 
-		AND MONTH(fechaMovimiento) = MONTH(CURDATE())";
+		$sqlGasto = "SELECT SUM(montoMov) AS gastoMensual FROM MOVCAJAS WHERE empresaMovID = '$idEmpresaSesion' 
+		AND conceptoMov IN (9,10) AND MONTH(fechaMovimiento) = MONTH(CURDATE())";
 		try {
 			$queryGasto = mysqli_query($conexion, $sqlGasto);
 			$fetchGasto = mysqli_fetch_assoc($queryGasto);
@@ -74,7 +75,7 @@
 		}
 		
 		$sqlGasAnt = "SELECT SUM(montoMov) AS gastoMesAnt FROM MOVCAJAS
-		WHERE conceptoMov IN (9,10) AND MONTH(fechaMovimiento) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
+		WHERE empresaMovID = '$idEmpresaSesion' AND conceptoMov IN (9,10) AND MONTH(fechaMovimiento) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
 		AND YEAR(fechaMovimiento) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
 		try {
 			$queryGasAnt = mysqli_query($conexion, $sqlGasAnt);
@@ -101,6 +102,17 @@
 			}
 		} catch (\Throwable $th) {
 			//
+		}
+
+		$sqlVentasDia = "SELECT SUM(totalVenta) AS ventasDia FROM VENTAS WHERE 
+		empresaID = '$idEmpresaSesion' AND fechaVenta = '$fechaHoy'";
+		try {
+			$queryVentasHoy = mysqli_query($conexion, $sqlVentasDia);
+			$fetchVentasHoy = mysqli_fetch_assoc($queryVentasHoy);
+			$ventasHoy = $fetchVentasHoy['ventasDia'];
+
+		} catch (\Throwable $th) {
+			$ventasHoy = "0";
 		}
 
   ?>
@@ -159,7 +171,7 @@
 							    <div class="stats-figure">$<?php echo number_format($montoGasto,2); ?></div>
 							    <div class="stats-meta <?php echo $colorGasto; ?>">
 								    <?php echo $iconoGasto; ?>
-										<?php echo $porcentGasto; ?>
+										<?php echo $porcentGasto; ?>%
 									</div>
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
@@ -169,10 +181,10 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Servicios</h4>
-							    <div class="stats-figure">23</div>
+							    <h4 class="stats-type mb-1">Ventas del Dia</h4>
+							    <div class="stats-figure"><?php echo number_format($ventasHoy,2); ?></div>
 							    <div class="stats-meta">
-								    Open</div>
+								  </div>
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
