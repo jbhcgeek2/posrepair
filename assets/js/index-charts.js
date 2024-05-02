@@ -22,7 +22,7 @@ var lineChartConfig = {
 		labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
 		
 		datasets: [{
-			label: 'Current week',
+			label: 'Semana Actual',
 			fill: false,
 			backgroundColor: window.chartColors.green,
 			borderColor: window.chartColors.green,
@@ -36,7 +36,7 @@ var lineChartConfig = {
 				'10'
 			],
 		}, {
-			label: 'Previous week',
+			label: 'Semana Pasada',
 		    borderDash: [3, 5],
 			backgroundColor: window.chartColors.gray,
 			borderColor: window.chartColors.gray,
