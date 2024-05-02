@@ -43,16 +43,20 @@
 		$diferenciaVentas = $totVentas - $totVentasAnt;
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
 		$porcentageVentas = number_format($porcentageVentas,2);
+		$iconoVentas = "";
+		$colorVentas = "";
 		if($diferenciaVentas > 0){
 			//incrementaron las ventas
 			$iconoVentas = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
 			<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
 			</svg>';
+			$colorVentas = "text-success";
 		}else{
 			//las ventas disminuyeros
 			$iconoVentas = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
 			<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
 			</svg>';
+			$colorVentas = "text-danger";
 		}
 
 		//para consultar los gatros mensuales, consultaremos la tabla de movimientos caja
@@ -110,7 +114,7 @@
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Ventas en el mes</h4>
 							    <div class="stats-figure">$<?php echo number_format($totVentas,2); ?></div>
-							    <div class="stats-meta text-success">
+							    <div class="stats-meta <?php echo $colorVentas; ?>">
 								    <?php echo $iconoVentas; ?>
 										<?php echo $porcentageVentas; ?>%</div>
 						    	</div><!--//app-card-body-->
