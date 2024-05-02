@@ -54,6 +54,8 @@ if(!empty($_SESSION['usuarioPOS'])){
         $idIngreso = mysqli_insert_id($conexion);
         $montoTotal = 0;
         $restaCap = 0;
+        $salMerca = 0;
+        $montoSalida = 0;
         //continuamos a realizar los ingresos detallados
         //buscamos los articulos que se afectaron
         $van = 0;
@@ -82,6 +84,11 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $restaCap = 1;
               }else{
                 $nuevosArti = $numArti-$cantidad;
+                if($tipoMov == "Salida"){
+                  $salMerca = 1;
+                  $montoSalida = $precioCompraMov * $cantidad;
+                }
+                
               }
               
               $actualizaCant = setCantidad($nuevosArti,$idProdMov,$sucursalId);
@@ -99,8 +106,25 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }else{
                     $van = 1;
                   }
-                }else{
-                  //no hacemos nada
+                }elseif($tipoMov == "Salida"){
+                  //aplicamos directamente la salida de la mercancia en el saldo de la empresa
+                  //PROCESAMOS
+                  //verificamos si se da alguna salida de mercancia
+                  
+                  $salidaCap = updateCapital($idEmprersa,$montoSalida,"Salida",$sucursalId,"10");
+                  $salidaCap = json_decode($salidaCap);
+                  if($updateCap->status == "ok"){
+                    //insrtamos el movimiento en cajas
+                    $observ = "Salida de Mercancia";
+                    $setMov = guardaMovCaja($montoSalida,$fecha,$hora,$idUsuario,'10',$observ,$sucursalId,'S',$idEmprersa);
+                    $setMov = json_decode($setMov);
+                    if($setMov->status == "ok"){
+                      //se proceso la salida correctamente
+                    }else{
+                      //error al procear la salida
+                    }
+                  }
+                  
                 }
                 
               }else{
