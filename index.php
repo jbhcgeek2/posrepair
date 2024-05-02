@@ -45,11 +45,30 @@
 		$porcentageVentas = number_format($porcentageVentas,2);
 		if($diferenciaVentas > 0){
 			//incrementaron las ventas
+			$iconoVentas = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+			<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
+			</svg>';
 		}else{
 			//las ventas disminuyeros
+			$iconoVentas = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+			<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+			</svg>';
 		}
 
 		//para consultar los gatros mensuales, consultaremos la tabla de movimientos caja
+		//aquellos que tengan el concepto de salida y adquisicion de mercancia (9 y 10)
+		$sqlGasto = "SELECT SUM(montoMov) AS gastoMensual FROM MOVCAJAS WHERE conceptoMov IN (9,10) 
+		AND MONTH(fechaMovimiento) = MONTH(CURDATE())";
+		try {
+			$queryGasto = mysqli_query($conexion, $sqlGasto);
+			$fetchGasto = mysqli_fetch_assoc($queryGasto);
+			$montoGasto = $fetchGasto['gastoMensual'];
+
+		} catch (\Throwable $th) {
+			//error en la consulta
+			$montoGasto = '0.00';
+		}
+
   ?>
     
     <div class="app-wrapper">
@@ -90,11 +109,9 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Ventas en el mes</h4>
-							    <div class="stats-figure"><?php echo number_format($totVentas,2); ?></div>
+							    <div class="stats-figure">$<?php echo number_format($totVentas,2); ?></div>
 							    <div class="stats-meta text-success">
-								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  										<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-										</svg> 
+								    <?php echo $iconoVentas; ?>
 										<?php echo $porcentageVentas; ?>%</div>
 						    	</div><!--//app-card-body-->
 						    	<a class="app-card-link-mask" href="#"></a>
@@ -105,7 +122,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Gasto Mensual</h4>
-							    <div class="stats-figure">$2,250</div>
+							    <div class="stats-figure">$<?php echo number_format($montoGasto,2); ?></div>
 							    <div class="stats-meta text-success">
 								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   										<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
