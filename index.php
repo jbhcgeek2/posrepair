@@ -115,6 +115,17 @@
 			$ventasHoy = "0";
 		}
 
+		$sqlArti = "SELECT SUM(b.existenciaSucursal) AS totArti FROM SUCURSALES a  INNER JOIN 
+		ARTICULOSUCURSAL b ON a.idSucursal = b.sucursalID WHERE a.empresaSucID = '1' AND b.existenciaSucursal > 0";
+		try {
+			$queryArti = mysqli_query($conexion, $sqlArti);
+			$fetchArti = mysqli_fetch_assoc($queryArti);
+			$artiActual = $fetchArti['totArti'];
+		} catch (\Throwable $th) {
+			//error de consulta
+			$artiActual = 0;
+		}
+
   ?>
     
     <div class="app-wrapper">
@@ -182,7 +193,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Ventas del Dia</h4>
-							    <div class="stats-figure"><?php echo number_format($ventasHoy,2); ?></div>
+							    <div class="stats-figure">$<?php echo number_format($ventasHoy,2); ?></div>
 							    <div class="stats-meta">
 								  </div>
 						    </div><!--//app-card-body-->
@@ -192,9 +203,9 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Invoices</h4>
-							    <div class="stats-figure">6</div>
-							    <div class="stats-meta">New</div>
+							    <h4 class="stats-type mb-1">Inventario Actual</h4>
+							    <div class="stats-figure"><?php echo $artiActual; ?></div>
+							    <!-- <div class="stats-meta">New</div> -->
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
