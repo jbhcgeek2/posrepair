@@ -47,8 +47,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     if(!empty($proveedor) && !empty($numeroComprobante) && !empty($tipoComprobante) && $numOperaciones > 0){
       //primero ingresamos la venta
       $sql = "INSERT INTO INGRESO (numComprobante,tipoComprobante,fechaIngreso,
-      horaIngreso,totalIngreso,totArticulos,empresaID) VALUES ('$numeroComprobante',
-      '$tipoComprobante','$fecha','$hora','$totalCompra','$totalArticulos','$idEmprersa')";
+      horaIngreso,totalIngreso,totArticulos,proveedorID,empresaID) VALUES ('$numeroComprobante',
+      '$tipoComprobante','$fecha','$hora','$totalCompra','$totalArticulos','$proveedor','$idEmprersa')";
       try {
         $query = mysqli_query($conexion, $sql);
         $idIngreso = mysqli_insert_id($conexion);
