@@ -113,12 +113,12 @@ if(!empty($_SESSION['usuarioPOS'])){
                   
                   $salidaCap = updateCapital($idEmprersa,$montoSalida,"Salida",$sucursalId,"10");
                   $salidaCap = json_decode($salidaCap);
-                  if($updateCap->status == "ok"){
+                  if($salidaCap->status == "ok"){
                     //insrtamos el movimiento en cajas
                     $observ = "Salida de Mercancia";
-                    $setMov = guardaMovCaja($montoSalida,$fecha,$hora,$idUsuario,'10',$observ,$sucursalId,'S',$idEmprersa);
-                    $setMov = json_decode($setMov);
-                    if($setMov->status == "ok"){
+                    $setMovSal = guardaMovCaja($montoSalida,$fecha,$hora,$idUsuario,'10',$observ,$sucursalId,'S',$idEmprersa);
+                    $setMovSal = json_decode($setMovSal);
+                    if($setMovSal->status == "ok"){
                       //se proceso la salida correctamente
                     }else{
                       //error al procear la salida
