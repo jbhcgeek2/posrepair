@@ -6,6 +6,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   require("usuarios.php");
   require("empresas.php");
   require("articulos.php");
+  require("conexion.php");
   require("documentos.php");
 
   $usuario = $_SESSION['usuarioPOS'];
