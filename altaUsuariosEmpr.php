@@ -55,6 +55,57 @@ session_start();
                         <input type="text" id="apMaterno" name="apMaterno" class="form-control">
                       </div>
 
+                      <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        <label for="telUser" class="form-label">Telefono</label>
+                        <input type="text" id="telUser" name="telUser" class="form-control">
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <label for="mailUser" class="form-label">Correo</label>
+                        <input type="text" id="mailUser" name="mailUser" class="form-control">
+                      </div>
+
+                      <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        <label for="userName" class="form-label">Usuario</label>
+                        <input type="text" id="mailUser" name="userName" class="form-control">
+                      </div>
+
+                      <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        <label for="passwordUser" class="form-label">Contrasena</label>
+                        <input type="password" id="passwordUser" name="passwordUser" class="form-control">
+                      </div>
+
+                      <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <label for="scUsuario" class="form-label">Sucursal</label>
+                        <select name="scUsuario" id="scUsuario">
+                          <option value="" selected disabled>Seleccione</option>
+                          <?php 
+                            //consuiltamos las sucursales de la empresa
+                          ?>
+                        </select>
+                      </div>
+
+                      <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <label for="tipoUser" class="form-label">Tipo de Usuario</label>
+                        <select name="tipoUser" id="tipoUser">
+                          <option value="" selected disabled>Seleccione</option>
+                          <?php 
+                            //consuiltamos las sucursales de la empresa
+                            $sqlTU = "SELECT * FROM ROLES";
+                            $queryTU = mysqli_query($conexion, $sqlTU);
+                            while($fetchTU = mysqli_fetch_assoc($queryTU)){
+                              $idTipo = $fetchTU['idRol'];
+                              $nombreTipo = $fetchTU['nombreRol'];
+
+                              echo "<option value='$idTipo'>$nombreTipo</option>";
+                            }//fin del while
+                          ?>
+                        </select>
+                      </div>
+
+                      
+
+
+
 
 
                     </div><!--Fin row form-->
