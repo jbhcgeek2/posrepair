@@ -20,6 +20,10 @@ session_start();
     $datosUsuario = getDataUser($usuario,$idEmprersa);
     $idSucursal = json_decode($datosUsuario)->sucursalID;
     // $idUsuario = json_decode($datosUsuario)->idUsuario;
+
+
+    //solo el usuario administrador podra dar de alta nuevos usuarios
+
     
   ?>
     
@@ -112,11 +116,11 @@ session_start();
 
                       
 
-
-
-
-
                     </div><!--Fin row form-->
+
+                    <div class="row">
+                      <a href="#!" class="btn-success">Registrar</a>
+                    </div>
                   </form>
                 </div>
               </div>
