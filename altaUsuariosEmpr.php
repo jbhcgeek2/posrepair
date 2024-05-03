@@ -55,7 +55,7 @@ session_start();
                         <input type="text" id="apMaterno" name="apMaterno" class="form-control">
                       </div>
 
-                      <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                      <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
                         <label for="telUser" class="form-label">Telefono</label>
                         <input type="text" id="telUser" name="telUser" class="form-control">
                       </div>
@@ -74,17 +74,30 @@ session_start();
                         <input type="password" id="passwordUser" name="passwordUser" class="form-control">
                       </div>
 
-                      <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                      <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
                         <label for="scUsuario" class="form-label">Sucursal</label>
                         <select name="scUsuario" id="scUsuario" class="form-select">
                           <option value="" selected disabled>Seleccione</option>
                           <?php 
                             //consuiltamos las sucursales de la empresa
+                            $verSuc = verSucursales("",$idEmpresaSesion);
+                            $verSuc = json_decode($verSuc);
+                            if($verSuc->status == "ok"){
+                              for($x = 0; count($verSuc->dato) < $x; $x++){
+                                $nombreSuc = $verSuc->dato['nombreSuc'];
+                                $idSuc = $verSuc->dato['idSucursal'];
+
+                                echo "<option value='$idSuc'>$nombreSuc</option>";
+                              }//fin del for
+                            }else{
+                              //error de consulta
+                              echo "<option value='0'>Error de BD</option>";
+                            }
                           ?>
                         </select>
                       </div>
 
-                      <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                      <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
                         <label for="tipoUser" class="form-label">Tipo de Usuario</label>
                         <select name="tipoUser" id="tipoUser" class="form-select">
                           <option value="" selected disabled>Seleccione</option>
