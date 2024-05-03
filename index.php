@@ -223,10 +223,18 @@
 										<div class="col-auto">
 											<div class="card-header-action">
 												<!-- <a href="charts.html">More charts</a> -->
+
 											</div><!--//card-header-actions-->
 										</div><!--//col-->
 									</div><!--//row-->
 								</div><!--//app-card-header-->
+
+
+								<div class="col-sm-12">
+									<?php 
+										echo date('N');
+									?>
+								</div>
 
 								<div class="app-card-body p-3 p-lg-4">
 									<div class="chart-container">
