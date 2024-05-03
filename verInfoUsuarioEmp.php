@@ -34,10 +34,10 @@ session_start();
     }else{
       //cargamos la informacion del usuario
 
-      $idUsuario = $_GET['data'];
+      $idUsuarioGet = $_GET['data'];
 
-      if(!empty($idUsuario)){
-        $sqlUser = "SELECT * FROM USAURIOS WHERE idUsuario = '$idUsuario' AND empresaID = '$idEmpresaSesion'";
+      if(!empty($idUsuarioGet)){
+        $sqlUser = "SELECT * FROM USAURIOS WHERE idUsuario = '$idUsuarioGet' AND empresaID = '$idEmpresaSesion'";
         try {
           $queryUser = mysqli_query($conexion, $sqlUser);
           if(mysqli_num_rows($queryUser) == 1){
