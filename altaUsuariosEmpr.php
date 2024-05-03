@@ -80,8 +80,9 @@ session_start();
                           <option value="" selected disabled>Seleccione</option>
                           <?php 
                             //consuiltamos las sucursales de la empresa
-                            $verSuc = verSucursales($usuario,"");
+                            $verSuc = verSucursales($usuario,$idEmpresaSesion);
                             $verSuc = json_decode($verSuc);
+                            print_r($verSuc);
                             if($verSuc->status == "ok"){
                               for($x = 0; count($verSuc->dato) < $x; $x++){
                                 $nombreSuc = $verSuc->dato[$x]['nombreSuc'];
