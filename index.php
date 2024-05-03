@@ -232,7 +232,7 @@
 
 								<div class="col-sm-12">
 									<?php 
-									$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes"
+									$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes",
 									"6"=>"Sabado","7",=>"Domingo"];
 										$dia = date('N');
 										echo $dias[$dia];
