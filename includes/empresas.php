@@ -108,5 +108,32 @@ function updateCapital($idEmpresa,$montoAfecta,$tipoMov,$idUsuario,$conceptoMov)
 
 }
 
+function getNumUsers($idEmpresa){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+
+  //buscamos los usuarios y el plan de la empresa
+  $sql = "SELECT *,(SELECT COUNT(*) FROM USUARIOS c WHERE c.empresaID = a.idEmpresa) 
+  AS numUsers FROM EMPRESAS a INNER JOIN SUSCRIPCION b ON 
+  a.suscripcionID = b.idSuscripcion WHERE a.idEmpresa = '$idEmpresa'";
+  try {
+    $query = mysqli_query($conexion, $sql);
+    $fetch = mysqli_fetch_assoc($query);
+    $numUsers = $fetch['numUsers'];
+    $res = ["status"=>"ok","data"=>$numUsers];
+    return json_encode($res);
+  } catch (\Throwable $th) {
+    //error de consulta
+    $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al consultar la empresa"];
+    return json_encode($res);
+  }
+}
+
 
 ?>

@@ -118,8 +118,8 @@ session_start();
 
                     </div><!--Fin row form-->
 
-                    <div class="row">
-                      <a href="#!" class="btn-success">Registrar</a>
+                    <div class="row " style="text-align:center;">
+                      <a href="#!" class="btn btn-success" id="btnAltaUser">Registrar</a>
                     </div>
                   </form>
                 </div>
