@@ -70,7 +70,7 @@ session_start();
 
                       <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                         <label for="userName" class="form-label">Usuario</label>
-                        <input type="text" id="mailUser" name="userName" class="form-control">
+                        <input type="text" id="userName" name="userName" class="form-control">
                       </div>
 
                       <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
