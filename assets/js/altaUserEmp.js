@@ -10,7 +10,7 @@ btnAlta.addEventListener('click', function(){
     let datos = new FormData(document.getElementById('nuevoUsuarioEmp'));
 
     let envio = new XMLHttpRequest();
-    envio.open('click','../includes/altaUsuario.php',false);
+    envio.open('POST','../includes/altaUsuario.php',false);
     envio.send(datos);
   
     if(envio.status == 200){
