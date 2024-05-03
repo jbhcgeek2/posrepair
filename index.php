@@ -240,8 +240,19 @@
 										$nuevaFecha = date('Y-m-d', strtotime($fechaActual . ' + ' . $diasASumar . ' days'));
 										// Sumar los días a la fecha actual
 
-										echo $nuevaFecha; // Imprimir la nueva fecha
+										echo $nuevaFecha."<br>"; // Imprimir la nueva fecha
 
+										$hoy = date('N'); // Obtener el número del día de la semana actual
+
+										$diaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+
+										for ($i = $hoy; $i <= 7; $i++) {
+												echo $diaSemana[$i-1] . "\n";
+										}
+
+										for ($i = 1; $i < $hoy; $i++) {
+												echo $diaSemana[$i-1] . "\n";
+										}
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
 										$dia = date('N');
