@@ -40,7 +40,7 @@ session_start();
         $sqlUser = "SELECT * FROM USAURIOS WHERE idUsuario = '$idUsuario' AND empresaID = '$idEmpresaSesion'";
         try {
           $queryUser = mysqli_query($conexion, $sqlUser);
-          if(mysqli_num_rows($queryUser) == 0){
+          if(mysqli_num_rows($queryUser) == 1){
             //si se tienen datos de usuario
             $fetchUser = mysqli_fetch_assoc($queryUser);
 
