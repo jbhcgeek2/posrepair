@@ -23,7 +23,51 @@ session_start();
 
 
     //solo el usuario administrador podra dar de alta nuevos usuarios
+    if($rolUsuario != "Administrador"){
+      //acceso denegado
+      ?>
+        <script>
+          window.location = '../verUsuarioEmpr.php';
+        </script>
+      <?php
+    }
 
+    //verificamos si aun pouede registrar usuarios
+    $numUs = getNumUsers($idEmpresaSesion);
+    $numUs = json_decode($numUs);
+    if($numUs->status == "ok"){
+      $totUs = $numUs->mensaje;
+
+      if($totUs == "full"){
+        //limite de usuario
+        ?>
+          <script src="assets/js/swetAlert.js"></script>
+          <script>
+            Swal.fire(
+              'Limite de Usuario superados',
+              'Has llegado al limite de usuarios registrados para tu plan',
+              'warning'
+            ).then(function(){
+              window.location = '../verUsuarioEmpr.php';
+            })
+          </script>
+        <?php
+      }
+    }else{
+      //error
+      ?>
+          <script src="assets/js/swetAlert.js"></script>
+          <script>
+            Swal.fire(
+              'Error',
+              'Ha ocurrido un error inesperado',
+              'error'
+            ).then(function(){
+              window.location = '../verUsuarioEmpr.php';
+            })
+          </script>
+        <?php
+    }
     
   ?>
     
