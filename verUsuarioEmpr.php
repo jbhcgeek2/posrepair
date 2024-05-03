@@ -44,7 +44,7 @@ session_start();
 
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoUsuarios">
-                    <table>
+                    <table class="table">
                       <thead>
                         <tr>
                           <th>Nombre</th>
@@ -53,7 +53,7 @@ session_start();
                           <th>Ver</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="table-striped">
                         <?php 
                           //coinsultsmos los usuarios
                           $sqlUs = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion'";
