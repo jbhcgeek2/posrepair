@@ -52,9 +52,10 @@ if(!empty($_SESSION['usuarioPOS'])){
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Impresion de Ticket</title>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu&subset=cyrillic,latin' rel='stylesheet' type='text/css' />
       </head>
       <body>
-        <div style="border: 0px solid #000; width:250px; text-align:center">
+        <div style="border: 0px solid #000; width:250px; text-align:center font-family: 'Ubuntu', sans-serif;">
           <div style="font-size: 15px;">
             <?php echo $nombreEmpresa; ?><br>
             Sucursal: <?php echo $nombreSucursal; ?><br>
