@@ -145,6 +145,9 @@ if(!empty($_SESSION['usuarioPOS'])){
           </p>
         </div>
       </body>
+      <script>
+        window.print();
+      </script>
     </html>
     <?php
   }else{
