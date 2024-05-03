@@ -80,20 +80,14 @@ session_start();
                           <option value="" selected disabled>Seleccione</option>
                           <?php 
                             //consuiltamos las sucursales de la empresa
-                            $verSuc = verSucursales($usuario,$idEmpresaSesion);
-                            $verSuc = json_decode($verSuc);
-                            print_r($verSuc);
-                            if($verSuc->status == "ok"){
-                              for($x = 0; count($verSuc->dato) < $x; $x++){
-                                $nombreSuc = $verSuc->dato[$x]['nombreSuc'];
-                                $idSuc = $verSuc->dato[$x]['idSucursal'];
-
-                                echo "<option value='$idSuc'>$nombreSuc</option>";
-                              }//fin del for
-                            }else{
-                              //error de consulta
-                              echo "<option value='0'>Error de BD</option>";
-                            }
+                            $sqlSucs = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' 
+                            AND estatusSuc = '1'";
+                            $querySucs = mysqli_query($conexion, $sqlSucs);
+                            while($fetchSucs = mysqli_fetch_assoc($querySucs)){
+                              $idSucs = $fetchSucs['idSucursal'];
+                              $nombreSuc = $fetchSucs['nombreSuc'];
+                              echo "<option value='$idSucs'>$nombreSuc</option>";
+                            }//fin del while
                           ?>
                         </select>
                       </div>
