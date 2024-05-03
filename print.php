@@ -55,11 +55,14 @@ if(!empty($_SESSION['usuarioPOS'])){
       </head>
       <body>
         <div style="border: 0px solid #000; width:250px; text-align:center">
-          <?php echo $nombreEmpresa; ?><br>
-          Sucursal: <?php echo $nombreSucursal; ?><br>
-          Domicilio: <?php echo $venta->sucursalVenta->calleSuc; ?><br>
-          Telefono: <?php echo $venta->sucursalVenta->telefonoSuc; ?><br>
-          <br>
+          <div style="font-size: 15px;">
+            <?php echo $nombreEmpresa; ?><br>
+            Sucursal: <?php echo $nombreSucursal; ?><br>
+            Domicilio: <?php echo $venta->sucursalVenta->calleSuc; ?><br>
+            Telefono: <?php echo $venta->sucursalVenta->telefonoSuc; ?><br>
+            <br>
+          </div>
+          
 
           <table style="width:100%;">
             <thead>
