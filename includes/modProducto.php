@@ -37,6 +37,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $categoria = $_POST['categoria'];
       $descripcion = $_POST['descripcion'];
       $codigo = $_POST['codigoProducto'];
+      $proveedor = $_POST['proveedor'];
 
       //verificamos si se va a cambiar de imagen
       $imgArti = "";
@@ -61,7 +62,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         $datos = ["nombre"=>$nombreProd,"descri"=>$descripcion,
         "estatusProd"=>$estatus,"pUnitario"=>$precioMenu,"pMayo"=>$precioMayo,
         "mayoreoDesde"=>$mayoDesde,"categoria"=>$categoria,"producto"=>$idProd,
-        "imagen"=>$imgArti,"codigo"=>$codigo];
+        "imagen"=>$imgArti,"codigo"=>$codigo,"proveedor"=>$proveedor];
         $datos = json_encode($datos);
   
         $update = actualizaProducto($datos);

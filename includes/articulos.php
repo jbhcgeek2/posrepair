@@ -154,6 +154,7 @@ function actualizaProducto($datos){
   $cat = $data->categoria;
   $idArti = $data->producto;
   $codig = $data->codigo;
+  $proveedor = $data->proveedor;
 
   if(!empty($data->imagen)){
     //si existe ruta de imagen actualizamos
@@ -161,12 +162,13 @@ function actualizaProducto($datos){
     $sql = "UPDATE ARTICULOS SET nombreArticulo = '$nombre', descripcionArticulo='$descr',
     estatusArticulo = '$estatus', precioUnitario = '$pUnitario', precioMayoreo = '$pMayo', 
     mayoreoDesde = '$mayoreo', categoriaID = '$cat', imgArticulo = '$imagen',
-    codigoProducto = '$codig' WHERE idArticulo = '$idArti'";
+    codigoProducto = '$codig', proveedorID = '$proveedor' WHERE idArticulo = '$idArti'";
   }else{
     //si no existe ruta de imagen no hacemos nada
     $sql = "UPDATE ARTICULOS SET nombreArticulo = '$nombre', descripcionArticulo='$descr',
     estatusArticulo = '$estatus', precioUnitario = '$pUnitario', precioMayoreo = '$pMayo', 
-    mayoreoDesde = '$mayoreo', categoriaID = '$cat', codigoProducto = '$codig' WHERE idArticulo = '$idArti'";
+    mayoreoDesde = '$mayoreo', categoriaID = '$cat', codigoProducto = '$codig',
+    proveedorID = '$proveedor' WHERE idArticulo = '$idArti'";
   }
 
 
