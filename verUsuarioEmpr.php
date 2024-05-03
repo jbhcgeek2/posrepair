@@ -13,6 +13,15 @@ session_start();
     include("includes/empresas.php");
     include("includes/conexion.php");
     
+    //solo el usuario administrador podra dar de alta nuevos usuarios
+    if($rolUsuario != "Administrador"){
+      //acceso denegado
+      ?>
+        <script>
+          window.location = '../verUsuarioEmpr.php';
+        </script>
+      <?php
+    }
     
   ?>
     
