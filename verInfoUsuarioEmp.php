@@ -151,7 +151,7 @@ session_start();
                               $idSucs = $fetchSucs['idSucursal'];
                               $nombreSuc = $fetchSucs['nombreSuc'];
                               if($idSucs == $sucursalUser){
-                                echo "<option value='$idSucs' selected disabled>$nombreSuc</option>";
+                                echo "<option value='$idSucs' selected>$nombreSuc</option>";
                               }else{
                                 echo "<option value='$idSucs'>$nombreSuc</option>";
                               }
@@ -173,7 +173,7 @@ session_start();
                               $nombreTipo = $fetchTU['nombreRol'];
 
                               if($idTipo == $tipoUser){
-                                echo "<option value='$idTipo' selected disabled>$nombreTipo</option>";
+                                echo "<option value='$idTipo' selected>$nombreTipo</option>";
                               }else{
                                 echo "<option value='$idTipo'>$nombreTipo</option>";
                               }
@@ -191,11 +191,11 @@ session_start();
                           <?php 
                             //consuiltamos las sucursales de la empresa
                             if($statusUser == 1){
-                              echo "<option value='1' selected disabled>Activo</option>
+                              echo "<option value='1' selected>Activo</option>
                               <option value='0'>Baja</option>";
                             }else{
                               echo "<option value='1'>Activo</option>
-                              <option value='0' selected disabled>Baja</option>";
+                              <option value='0' selected>Baja</option>";
                             }
                           ?>
                         </select>
