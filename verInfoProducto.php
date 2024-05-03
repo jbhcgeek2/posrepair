@@ -155,11 +155,40 @@ session_start();
                               ?>
                             </select>
                           </div>
-                          <div class="col-sm-12 col-md-6 col-lg-6">
+                          <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                             <label for="codigo" class="form-label">Codigo</label>
                             <input type="text" class="form-control" id="codigoProducto" 
                             name="codigoProducto" value="<?php echo $datosProd->data->codigoProducto; ?>">
                           </div>
+
+                          <div class="col-sm-12 col-md-6 mb-3">
+                            <label for="proveedor" class="form-label">Proveedor</label>
+                            <select name="proveedor" id="proveedor" class="form-select form-control required">
+                              <?php 
+                                //consultamos los proveedores de la empresa
+                                $sqlProv = "SELECT * FROM PROVEEDORES WHERE provEmpresaID = '$idEmpresaSesion' 
+                                AND estatusProveedor = '1'";
+                                try {
+                                  $queryProv = mysqli_query($conexion, $sqlProv);
+                                  while($fetchProv = mysqli_fetch_assoc($queryProv)){
+                                    $nombreProv = $fetchProv['nombreProveedor'];
+                                    $idProv = $fetchProv['idProveedor'];
+
+                                    if($idProv == $datosProd->data->proveedorID){
+                                      echo "<option value='$idProv' selected>$nombreProv</option>";
+                                    }else{
+                                      echo "<option value='$idProv'>$nombreProv</option>";
+                                    }
+
+                                    
+                                  }//fin del while
+                                } catch (\Throwable $th) {
+                                  
+                                }
+                              ?>
+                            </select>
+                          </div>
+
                         </div>
 
                         
