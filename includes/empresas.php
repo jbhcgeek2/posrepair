@@ -126,7 +126,20 @@ function getNumUsers($idEmpresa){
     $query = mysqli_query($conexion, $sql);
     $fetch = mysqli_fetch_assoc($query);
     $numUsers = $fetch['numUsers'];
-    $res = ["status"=>"ok","data"=>$numUsers];
+    $maxUsers = $fetch['maxUsers'];
+    if($maxUsers == "0"){
+      //tiene plan ilimitado y si podra registrrar
+      $mensaje = "continua";
+    }else{
+      if($numUsers < $maxUsers){
+        //si puede registrar
+        $mensaje = "continua";
+      }else{
+        //ya no puede registrar, llego al limite
+        $mensaje = "full";
+      }
+    }
+    $res = ["status"=>"ok","data"=>$numUsers,"mensaje"=>$mensaje];
     return json_encode($res);
   } catch (\Throwable $th) {
     //error de consulta

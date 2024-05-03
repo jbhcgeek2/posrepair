@@ -28,7 +28,50 @@ if(!empty($_SESSION['usuarioPOS'])){
     //antes de continuar, verificamos el numero de usuario de la empresa
     //para ver si aun cuenta con disponibilidad
     $numUs = getNumUsers($idEmpresaSesion);
-    print_r($numUs);
+    $numUs = json_decode($numUs);
+    if($numUs->status == "ok"){
+      $totUs = $numUs->mensaje;
+
+      if($totUs == "continua"){
+        //podemos registrar el usuario
+        //verificamos si el usuario ya existe
+        $sqlUs = "SELECT * FROM USUARIOS WHERE userName = '$nombreUsuario' AND empresaID = '$idEmpresaSesion'";
+        try {
+          $queryUs = mysqli_query($conexion, $sqlUs);
+          if(mysqli_num_rows($queryUs) == 0){
+            //podemos continuar
+            $altaUs = nuevoUsuario($idEmpresaSesion,$nombre,$paterno,$materno,$tel,$correo,
+            $nombreUsuario,$contra,$sucUsuario,$tipoUsuario);
+            $altaUs = json_decode($altaUs);
+            if($altaUs->status == "ok" && $altaUs->dato == "operationSuccess"){
+              $res = ["status"=>"ok","data"=>"operationSuccess"];
+              echo json_encode($res);
+            }else{
+              //ocurrio un error al insertar el usuario
+              $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error desconocido al insertar el usuario."];
+              echo json_encode($res);
+            }
+          }else{
+            //el usuario ya existe
+            $res = ["status"=>"ok","mensaje"=>"userExist"];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          //throw $th;
+          $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al consultar existencia de usuarios. ".$th];
+          echo json_encode($res);
+        }
+        
+      }else{
+        //ya no tiene espacio
+        $res = ["status"=>"ok","mensaje"=>"planInsuficiente"];
+        echo json_encode($res);
+      }
+    }else{
+      //error al consultar el datos del los usuario
+      $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al consultar la empresa."];
+      echo json_encode($res);
+    }
   }
 }
 ?>
