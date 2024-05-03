@@ -70,13 +70,16 @@ session_start();
                                   $tel = "N/A";
                                 }
                                 $statusUS = $fetchUs['statusUsuario'];
+                                $classTr = "";
                                 if($statusUS == "1"){
                                   $statusUS = "Activo";
+                                  $classTr = "";
                                 }else{
                                   $statusUS = "Baja";
+                                  $classTr = "table-secondary";
                                 }
 
-                                echo "<tr>
+                                echo "<tr class='$classTr'>
                                 <td>$nombre</td>
                                 <td>$userName</td>
                                 <td>$tel</td>
