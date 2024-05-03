@@ -54,7 +54,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             }
           }else{
             //el usuario ya existe
-            $res = ["status"=>"ok","mensaje"=>"userExist"];
+            $res = ["status"=>"error","mensaje"=>"userExist"];
             echo json_encode($res);
           }
         } catch (\Throwable $th) {

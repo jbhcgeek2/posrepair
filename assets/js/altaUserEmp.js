@@ -26,11 +26,26 @@ btnAlta.addEventListener('click', function(){
         })
       }else{
         let err = res.mensaje;
-        Swal.fire(
-          'Ha ocurrido un error',
-          'Verificar: '+err,
-          'error'
-        )
+        if(err == "planInsuficiente"){
+          Swal.fire(
+            'Accion Denegada',
+            'Has llegado al limite de usuarios registrados para tu plan',
+            'warning'
+          )
+        }else if(err == "userExist"){
+          Swal.fire(
+            'El usuario ya existe',
+            'Por favor indica un usuario diferente',
+            'error'
+          )
+        }else{
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+err,
+            'error'
+          )
+        }
+        
       }
       
     }else{
