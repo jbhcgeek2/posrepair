@@ -54,7 +54,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         <title>Impresion de Ticket</title>
       </head>
       <body>
-        <div style="border: 1px solid #000; width:300px; text-align:center">
+        <div style="border: 0px solid #000; width:250px; text-align:center">
           <?php echo $nombreEmpresa; ?><br>
           Sucursal: <?php echo $nombreSucursal; ?><br>
           Domicilio: <?php echo $venta->sucursalVenta->calleSuc; ?><br>
