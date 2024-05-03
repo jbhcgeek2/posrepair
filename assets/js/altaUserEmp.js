@@ -14,7 +14,25 @@ btnAlta.addEventListener('click', function(){
     envio.send(datos);
   
     if(envio.status == 200){
-      console.log(envio.responseText);
+      let res = JSON.parse(envio.responseText);
+      if(res.data == "operationSuccess"){
+        //se registro el usuario
+        Swal.fire({
+          title: 'Usuario Registrado',
+          text: 'Se inserto correctamente el usuario',
+          icon: 'success'
+        }).then(function(){
+          window.location = '../verUsuarioEmpr.php';
+        })
+      }else{
+        let err = res.mensaje;
+        Swal.fire(
+          'Ha ocurrido un error',
+          'Verificar: '+err,
+          'error'
+        )
+      }
+      
     }else{
       //error dfe comunicacion
       Swal.fire(
