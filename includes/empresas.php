@@ -121,7 +121,7 @@ function getNumUsers($idEmpresa){
   //buscamos los usuarios y el plan de la empresa
   $sql = "SELECT *,(SELECT COUNT(*) FROM USUARIOS c WHERE c.empresaID = a.idEmpresa) 
   AS numUsers FROM EMPRESAS a INNER JOIN SUSCRIPCION b ON 
-  a.suscripcionID = b.idSuscripcion WHERE a.idEmpresa = '$idEmpresa'";
+  a.suscripcionID = b.idSuscripcion WHERE a.idEmpresa = '$idEmpresa' AND c.statusUsuario = '1'";
   try {
     $query = mysqli_query($conexion, $sql);
     $fetch = mysqli_fetch_assoc($query);

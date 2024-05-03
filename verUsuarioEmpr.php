@@ -35,7 +35,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="altaProducto.php">Registrar Usuario</a>
+									        <a href="altaUsuariosEmpr.php">Registrar Usuario</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
@@ -50,6 +50,7 @@ session_start();
                           <th>Nombre</th>
                           <th>Usuario</th>
                           <th>Telefono</th>
+                          <th>Estatus</th>
                           <th>Ver</th>
                         </tr>
                       </thead>
@@ -65,11 +66,21 @@ session_start();
                                 $userName = $fetchUs['userName'];
                                 $tel = $fetchUs['telUsuario'];
                                 $idUser = $fetchUs['idUsuario'];
+                                if($tel == "" || $tel == " "){
+                                  $tel = "N/A";
+                                }
+                                $statusUS = $fetchUs['statusUsuario'];
+                                if($statusUS == "1"){
+                                  $statusUS = "Activo";
+                                }else{
+                                  $statusUS = "Baja";
+                                }
 
                                 echo "<tr>
                                 <td>$nombre</td>
                                 <td>$userName</td>
                                 <td>$tel</td>
+                                <td>$statusUS</td>
                                 <td>
                                   <a href='verInfoUsuarioEmp.php?data=$idUser' class='btn btn-primary'>Ver</a>
                                 </td>
@@ -77,6 +88,9 @@ session_start();
                               }//fin del while
                             }else{
                               //sin resultados
+                              echo "<tr>
+                                <td colspan='5' style='text-align:center'><h5>Sin Resultados</h5></td>
+                              </tr>";
                             }
                           } catch (\Throwable $th) {
                             //throw $th;
