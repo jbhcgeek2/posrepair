@@ -531,7 +531,7 @@ btnCobro.addEventListener('click', function(){
             text: 'Puede mandar a imprimir su ticket',
             icon: 'success'
           }).then(function(){
-            window.open("https://postrepair.tecuanisoft.com/print.php?t="+ticket,"Impresion de Ticket", "width=300, height=500");
+            window.open("https://postrepair.tecuanisoft.com/print.php?t="+ticket,"Impresion de Ticket");
             location.reload();
           })
         }else{

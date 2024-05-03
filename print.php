@@ -55,7 +55,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         <link href='http://fonts.googleapis.com/css?family=Ubuntu&subset=cyrillic,latin' rel='stylesheet' type='text/css' />
       </head>
       <body>
-        <div style="border: 0px solid #000; width:250px; text-align:center font-family: 'Ubuntu', sans-serif;">
+        <div style="border: 0px solid #000; width:250px; text-align:center; font-family: 'Ubuntu', sans-serif;">
           <div style="font-size: 15px;">
             <?php echo $nombreEmpresa; ?><br>
             Sucursal: <?php echo $nombreSucursal; ?><br>
