@@ -232,7 +232,18 @@
 
 								<div class="col-sm-12">
 									<?php 
-									$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
+
+										$fechaActual = date('Y-m-d'); // Obtener la fecha actual
+
+										$diasASumar = 1; // Número de días a sumar
+
+										$nuevaFecha = date('Y-m-d', strtotime($fechaActual . ' + ' . $diasASumar . ' days'));
+										// Sumar los días a la fecha actual
+
+										echo $nuevaFecha; // Imprimir la nueva fecha
+
+
+										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
 										$dia = date('N');
 										echo $dias[$dia];
 									?>
