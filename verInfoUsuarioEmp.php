@@ -104,6 +104,7 @@ session_start();
                 <div class="row">
                   <form id="modUsuarioEmp">
                     <div class="row">
+                      <input type="hidden" name="usuarioMod" id="usuarioMod" value="<?php echo $idUsuarioGet; ?>">
 
                       <div class="col-sm-12 col-md-4 mb-3">
                         <label for="nombreUser" class="form-label">Nombres</label>
@@ -204,8 +205,10 @@ session_start();
 
                     </div><!--Fin row form-->
 
-                    <div class="row " style="text-align:center;">
-                      <a href="#!" class="btn btn-success" id="btnModUser">Registrar</a>
+                    <div class="row" style="text-align:center;">
+                      <div class="col-sm-12 col-md-4 offset-md-4">
+                        <a href="#!" class="btn btn-success" id="btnModUser">Actualizar</a>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -232,7 +235,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/ModUserEmp.js"></script>
+    <script src="assets/js/modUserEmp.js"></script>
 
 </body>
 </html> 
