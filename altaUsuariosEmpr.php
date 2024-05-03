@@ -76,7 +76,7 @@ session_start();
 
                       <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                         <label for="scUsuario" class="form-label">Sucursal</label>
-                        <select name="scUsuario" id="scUsuario">
+                        <select name="scUsuario" id="scUsuario" class="form-select">
                           <option value="" selected disabled>Seleccione</option>
                           <?php 
                             //consuiltamos las sucursales de la empresa
@@ -86,7 +86,7 @@ session_start();
 
                       <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                         <label for="tipoUser" class="form-label">Tipo de Usuario</label>
-                        <select name="tipoUser" id="tipoUser">
+                        <select name="tipoUser" id="tipoUser" class="form-select">
                           <option value="" selected disabled>Seleccione</option>
                           <?php 
                             //consuiltamos las sucursales de la empresa
