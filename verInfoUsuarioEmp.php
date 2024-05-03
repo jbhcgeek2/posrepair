@@ -64,6 +64,11 @@ session_start();
           }
         } catch (\Throwable $th) {
           //error de consulta
+          ?>
+            <script>
+              window.location = '../verUsuarioEmpr.php';
+            </script>
+          <?php
         }
       }else{
         //no se tienen datos
