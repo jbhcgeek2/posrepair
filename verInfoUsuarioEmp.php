@@ -97,7 +97,7 @@ session_start();
 
               <div class="app-card-body p-3 p-lg-4">
                 <div class="row">
-                  <form id="nuevoUsuarioEmp">
+                  <form id="modUsuarioEmp">
                     <div class="row">
 
                       <div class="col-sm-12 col-md-4 mb-3">
