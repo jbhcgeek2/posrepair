@@ -248,6 +248,7 @@
 
 										for ($i = $hoy; $i <= 7; $i++) {
 											echo $diaSemana[$i-1] . "<br>";
+											echo date('Y-m-d', strtotime($fechaActual . ' + 1 days'));
 										}
 
 										for ($i = 1; $i < $hoy; $i++) {
