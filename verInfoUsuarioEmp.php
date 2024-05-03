@@ -37,7 +37,7 @@ session_start();
       $idUsuarioGet = $_GET['data'];
 
       if(!empty($idUsuarioGet)){
-        $sqlUser = "SELECT * FROM USAURIOS WHERE idUsuario = '$idUsuarioGet' AND empresaID = '$idEmpresaSesion'";
+        $sqlUser = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuarioGet' AND empresaID = '$idEmpresaSesion'";
         try {
           $queryUser = mysqli_query($conexion, $sqlUser);
           if(mysqli_num_rows($queryUser) == 1){
