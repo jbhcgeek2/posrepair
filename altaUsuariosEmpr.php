@@ -84,8 +84,8 @@ session_start();
                             $verSuc = json_decode($verSuc);
                             if($verSuc->status == "ok"){
                               for($x = 0; count($verSuc->dato) < $x; $x++){
-                                $nombreSuc = $verSuc->dato['nombreSuc'];
-                                $idSuc = $verSuc->dato['idSucursal'];
+                                $nombreSuc = $verSuc->dato[$x]['nombreSuc'];
+                                $idSuc = $verSuc->dato[$x]['idSucursal'];
 
                                 echo "<option value='$idSuc'>$nombreSuc</option>";
                               }//fin del for
