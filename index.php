@@ -339,7 +339,7 @@
 																	$claseInve2 = "color:#dc3545 !important;";
 																}else{
 																	$claseInve = "";
-																	$claseInve2 = "color: none !important;";
+																	$claseInve2 = "color: black !important;";
 																}
 
 																echo "<tr>
