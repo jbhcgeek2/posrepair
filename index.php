@@ -302,6 +302,11 @@
 							        <div class="col-auto">
 						                <h4 class="app-card-title">Productos por agotarse</h4>
 							        </div><!--//col-->
+											<div class="col-auto">
+								        <div class="card-header-action">
+									        <a href="verProductos.php">Ver Inventario</a>
+								        </div><!--//card-header-actions-->
+							        </div><!--//col-->
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-3 p-lg-4">
@@ -319,7 +324,7 @@
 														// tomaremos los productos que tengan menos de 5 productos en existencia
 														$sqlInve = "SELECT a.*,b.nombreArticulo,c.nombreSuc FROM ARTICULOSUCURSAL a INNER JOIN ARTICULOS b 
 														ON a.articuloID = b.idArticulo INNER JOIN SUCURSALES c ON a.sucursalID = c.idSucursal 
-														WHERE a.existenciaSucursal <= 5 AND b.empresaID = '$idEmpresaSesion'";
+														WHERE a.existenciaSucursal <= 5 AND b.empresaID = '$idEmpresaSesion' LIMIT 8";
 														try {
 															$queryInve = mysqli_query($conexion, $sqlInve);
 															while($fetchInve = mysqli_fetch_assoc($queryInve)){
