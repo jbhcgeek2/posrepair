@@ -83,7 +83,6 @@ var lineChartConfig = {
 		    borderDash: [3, 5],
 			backgroundColor: window.chartColors.gray,
 			borderColor: window.chartColors.gray,
-			
 			data: [
 				valorLunesPasado,
 				valorMartesPasado,
