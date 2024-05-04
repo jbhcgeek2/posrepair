@@ -14,6 +14,16 @@ var randomDataPoint = function(){ return Math.round(Math.random()*10000)};
 
 
 //Chart.js Line Chart Example 
+let datos = new FormData();
+datos.append('getVentasWeek','yes');
+
+let envio = new XMLHttpRequest();
+envio.open('POST','../includes/indexOperations.php',false);
+envio.send(datos);
+
+let res = JSON.parse(envio.responseText);
+console.log(res);
+
 
 var lineChartConfig = {
 	type: 'line',
