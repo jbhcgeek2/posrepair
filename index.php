@@ -358,9 +358,14 @@
 												$totalesVentas = $totalesVentas + $fetch5['totales'];
 											}
 											echo $totalesVentas;
-											
-											while($fetch6 = mysqli_fetch_assoc($queryProd)){
-												$nombreProd = $fetch6['nameArti'];
+
+											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
+											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID";
+											$queryProd2 = mysqli_query($conexion, $sqlProd2);
+
+											while($fetch7 = mysqli_fetch_assoc($queryProd2)){
+												$nombreProd = $fetch7['nameArti'];
 												echo '
 												<div class="item p-3">
 													<div class="row align-items-center">
