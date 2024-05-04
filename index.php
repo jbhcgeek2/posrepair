@@ -333,17 +333,20 @@
 																$nombreSuc = $fetchInve['nombreSuc'];
 																$idProdInve = $fetchInve['articuloID'];
 																$claseInve = "";
+																$claseInve2 = "";
 																if($existencia <= 3){
 																	$claseInve = "text-danger";
+																	$claseInve2 = "color:#dc3545 !important;";
 																}else{
 																	$claseInve = "";
+																	$claseInve2 = "";
 																}
 
 																echo "<tr>
 																	<td class='$claseInve'>$prod</td>
 																	<td class='stat-cell $claseInve'>$nombreSuc</td>
 																	<td class='stat-cell $claseInve'>
-																		<a href='verInfoProducto.php?infoProd=$idProdInve' style='color:#dc3545 !important;'>
+																		<a href='verInfoProducto.php?infoProd=$idProdInve' style='$claseInve2'>
 																			$existencia
 																		</a>
 																	</td>
