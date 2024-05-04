@@ -210,9 +210,8 @@ var barChartConfig = {
 	},
 	options: {
 		responsive: true,
-		aspectRatio: 1.5,
 		legend: {
-			position: 'top',
+			position: 'right',
 			align: 'end',
 		},
 		title: {
