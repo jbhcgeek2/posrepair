@@ -240,11 +240,12 @@
 										$nuevaFecha = date('Y-m-d', strtotime($fechaActual . ' + ' . $diasASumar . ' days'));
 										// Sumar los días a la fecha actual
 
-										echo $nuevaFecha."<br>"; // Imprimir la nueva fecha
+										// echo $nuevaFecha."<br>"; // Imprimir la nueva fecha
 
 										$hoy = date('N'); // Obtener el número del día de la semana actual
 
 										$diaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+										$semanaActual = [];
 										
 										$auxFec = date('Y-m-d');
 										for ($i = $hoy; $i <= 7; $i++) {
