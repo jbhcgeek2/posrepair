@@ -22,6 +22,7 @@ envio.open('POST','../includes/indexOperations.php',false);
 envio.send(datos);
 
 let res = JSON.parse(envio.responseText);
+console.log(res);
 console.log(res.actual['sabado']);
 
 
