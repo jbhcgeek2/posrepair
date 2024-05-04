@@ -274,9 +274,13 @@
 										print_r($semanaActual);
 
 										//Teniendo en cuenta lo anterior calcularemos la semana pasada
-
+										$semanaPasada = [];
 										$ultimoDia = $semanaActual['lunes'];
 										echo "<br> Ultio Dia, ".$ultimoDia;
+
+										for($x = 7; $x >= 1; $x--){
+											echo $diaSemana[$x]."<br>";
+										}//fin del for
 
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
