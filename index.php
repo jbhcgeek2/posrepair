@@ -358,6 +358,7 @@
 												$totalesVentas = $totalesVentas + $fetch5['totales'];
 											}
 											echo $totalesVentas;
+											
 											while($fetch6 = mysqli_fetch_assoc($queryProd)){
 												$nombreProd = $fetch6['nameArti'];
 												echo '
