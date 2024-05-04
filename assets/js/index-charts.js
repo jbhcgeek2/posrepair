@@ -177,14 +177,14 @@ var lineChartConfig = {
 let productos = res.prodsVenta;
 console.log(productos);
 console.log(productos[0].nameArti);
-
-let name1 = productos[0].nameArti;
-let name2 = productos[1].nameArti;
-let name3 = productos[2].nameArti;
-let name4 = productos[3].nameArti;
-let name5 = productos[4].nameArti;
-let name6 = productos[5].nameArti;
-let name7 = productos[6].nameArti;
+// cadena.slice(0, 10)
+let name1 = productos[0].nameArti.slice(0,10)+".";
+let name2 = productos[1].nameArti.slice(0,10)+".";
+let name3 = productos[2].nameArti.slice(0,10)+".";
+let name4 = productos[3].nameArti.slice(0,10)+".";
+let name5 = productos[4].nameArti.slice(0,10)+".";
+let name6 = productos[5].nameArti.slice(0,10)+".";
+let name7 = productos[6].nameArti.slice(0,10)+".";
 
 var barChartConfig = {
 	type: 'bar',
