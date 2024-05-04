@@ -278,9 +278,15 @@
 										$ultimoDia = $semanaActual['lunes'];
 										echo "<br> Ultio Dia, ".$ultimoDia;
 
+										$auxFec2 = $ultimoDia;
 										for($x = 7; $x >= 1; $x--){
-											echo $diaSemana[$x]."<br>";
+											$auxFec2 = date('Y-m-d', strtotime($auxFec2. ' - 1 days'));
+											$semanaPasada[$diaSemana[$x]] = $auxFec2;
+											// echo $diaSemana[$x]."<br>";
 										}//fin del for
+										echo "<br>=====<br>";
+										asort($semanaPasada);
+										print_r($semanaPasada);
 
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
