@@ -96,9 +96,35 @@ if(!empty($_SESSION['usuarioPOS'])){
     }//fin del for
     // echo "<br>=====<br>";
     $semanaPasada = $semanaPasada;
+
+
+    //consultamos los datos de los productos mas vendidos
+    $sql4 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
+    $query4 = mysqli_query($conexion,$sql4);
+    $sucursales = '';
+    while($fetch4 = mysqli_fetch_assoc($query4)){
+      $idSucursal = $fetch4['idSucursal'];
+      if($sucursales == ""){
+        $sucursales = $idSucursal;
+      }else{
+        $sucursales = $sucursales.",".$idSucursal;
+      }
+      
+    }
+
+    $sql5 = "SELECT SUM(cantidadVenta) AS totales,
+    (SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
+    ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID ORDER BY totales DESC";
+    $query5 = mysqli_query($conexion, $sql5);
+    $datos = [];
+    $i = 0;
+    while($fetch5 = mysqli_fetch_assoc($query5)){
+      $datos[$i] = $fetch5;
+      $i++;
+    }
     // print_r($semanaPasada);
     $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada,
-    "datoSemActual"=>$datoSemActual,"datoSemPasada"=>$datoSemPasada];
+    "datoSemActual"=>$datoSemActual,"datoSemPasada"=>$datoSemPasada,"prodsVenta"=>$datos];
     echo json_encode($res);
 
   }

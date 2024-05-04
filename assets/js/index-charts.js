@@ -173,6 +173,7 @@ var lineChartConfig = {
 
 
 // Chart.js Bar Chart Example 
+// solicitamos los datos de articulos mas vendidos
 
 var barChartConfig = {
 	type: 'bar',
