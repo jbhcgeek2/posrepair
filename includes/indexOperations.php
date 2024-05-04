@@ -6,11 +6,19 @@ session_start();
 if(!empty($_SESSION['usuarioPOS'])){
 
   if(!empty($_POST['getVentasWeek'])){
+    include("conexion.php");
+    include("usuarios.php");
+
+    $empresa = datoEmpresaSesion($usuario,"id");
+		$empresa = json_decode($empresa);
+		$idEmpresaSesion = $empresa->dato;
 
     $hoy = date('N'); // Obtener el número del día de la semana actual
 
     $diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miercoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sabado', '7'=>'domingo'];
     $semanaActual = [];
+    $datoDia = [];
+    
     // echo $diaSemana[$hoy]."<br>";
     
     $auxFec = date('Y-m-d');
@@ -19,6 +27,12 @@ if(!empty($_SESSION['usuarioPOS'])){
       // echo $diaSemana[$i] . "<br>";
       $semanaActual[$diaSemana[$i]]=$auxFec;
 
+      $sql = "SELECT SUM(totalVenta) AS ventasDia FROM VENTAS WHERE 
+      fechaVenta = '$auxFec' AND empresaID = '$idEmpresaSesion'";
+      $query = mysqli_query($conexion, $sql);
+      $fetch = mysqli_fetch_assoc($query);
+      $ventas = $fetch['ventasDia'];
+      $datoDia[$auxFec] = $ventas;
       $auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
       // echo $auxFec;
       
@@ -32,6 +46,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     $auxFec = date('Y-m-d');
     for ($i = $hoy; $i >= 1; $i--) {
       // echo $diaSemana[$i] . "<br>";
+      //consultamos las ventas del dia
+      
       $semanaActual[$diaSemana[$i]]=$auxFec;
       $auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
     }
@@ -53,7 +69,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     // echo "<br>=====<br>";
     $semanaPasada = $semanaPasada;
     // print_r($semanaPasada);
-    $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada];
+    $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada,"datoDia"=>$datoDia];
     echo json_encode($res);
 
   }
