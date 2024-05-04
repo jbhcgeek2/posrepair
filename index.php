@@ -310,21 +310,21 @@
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="chart-container">
-				                    <canvas id="canvas-barchart" ></canvas>
-						        </div>
+						        
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
 			        </div><!--//col-->
 			        
 			    </div><!--//row-->
+
+
 			    <div class="row g-4 mb-4">
 				    <div class="col-12 col-lg-6">
 				        <div class="app-card app-card-progress-list h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
 							        <div class="col-auto">
-						                <h4 class="app-card-title">Progress</h4>
+						                <h4 class="app-card-title">Productos Mas Vendidos</h4>
 							        </div><!--//col-->
 							        <div class="col-auto">
 								        <div class="card-header-action">
@@ -334,22 +334,38 @@
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body">
-							    <div class="item p-3">
-								    <div class="row align-items-center">
-									    <div class="col">
-										    <div class="title mb-1 ">Project lorem ipsum dolor sit amet</div>
-										    <div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-									    </div><!--//col-->
-									    <div class="col-auto">
-										    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-</svg>
-									    </div><!--//col-->
-								    </div><!--//row-->
-								    <a class="item-link-mask" href="#"></a>
-							    </div><!--//item-->
+										<?php 
+											$sqlProd = "SELECT SUM(cantidadVenta) AS totales,
+											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID";
+											$queryProd = mysqli_query($conexion, $sqlProd);
+											$totalesVentas = 0;
+
+											while($fetch5 = mysqli_fetch_assoc($query5)){
+												$totalesVentas = $totalesVentas + $fetch5['totales'];
+											}
+
+											echo $totalesVentas;
+
+										?>
+							    	<div class="item p-3">
+								    	<div class="row align-items-center">
+									    	<div class="col">
+										    	<div class="title mb-1 ">Project lorem ipsum dolor sit amet</div>
+										    	<div class="progress">
+  													<div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+									    	</div><!--//col-->
+
+									    	<div class="col-auto">
+										    	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  													<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+													</svg>
+									    	</div><!--//col-->
+								    	</div><!--//row-->
+
+								    	<a class="item-link-mask" href="#"></a>
+							    	</div><!--//item-->
 							    
 							    
 							     <div class="item p-3">

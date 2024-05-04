@@ -112,19 +112,10 @@ if(!empty($_SESSION['usuarioPOS'])){
       
     }
 
-    $sql5 = "SELECT SUM(cantidadVenta) AS totales,
-    (SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-    ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID ORDER BY totales DESC LIMIT 7";
-    $query5 = mysqli_query($conexion, $sql5);
-    $datos = [];
-    $i = 0;
-    while($fetch5 = mysqli_fetch_assoc($query5)){
-      $datos[$i] = $fetch5;
-      $i++;
-    }
+    
     // print_r($semanaPasada);
     $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada,
-    "datoSemActual"=>$datoSemActual,"datoSemPasada"=>$datoSemPasada,"prodsVenta"=>$datos];
+    "datoSemActual"=>$datoSemActual,"datoSemPasada"=>$datoSemPasada];
     echo json_encode($res);
 
   }
