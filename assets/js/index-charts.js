@@ -186,6 +186,14 @@ let name5 = productos[4].nameArti.slice(0,10)+".";
 let name6 = productos[5].nameArti.slice(0,10)+".";
 let name7 = productos[6].nameArti.slice(0,10)+".";
 
+let valurProd1 = productos[0].totales;
+let valurProd2 = productos[1].totales;
+let valurProd3 = productos[2].totales;
+let valurProd4 = productos[3].totales;
+let valurProd5 = productos[4].totales;
+let valurProd6 = productos[5].totales;
+let valurProd7 = productos[6].totales;
+
 var barChartConfig = {
 	type: 'bar',
 
@@ -198,20 +206,20 @@ var barChartConfig = {
 			borderWidth: 1,
 			maxBarThickness: 16,
 			data: [
-				23,
-				45,
-				76,
-				75,
-				62,
-				37,
-				83
+				valurProd1,
+				valurProd2,
+				valurProd3,
+				valurProd4,
+				valurProd5,
+				valurProd6,
+				valurProd7
 			]
 		}]
 	},
 	options: {
 		responsive: true,
 		legend: {
-			position: 'right',
+			position: 'buttom',
 			align: 'end',
 		},
 		title: {
