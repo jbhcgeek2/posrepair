@@ -245,10 +245,12 @@
 										$hoy = date('N'); // Obtener el número del día de la semana actual
 
 										$diaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
-
+										
+										$auxFec = date('Y-m-d');
 										for ($i = $hoy; $i <= 7; $i++) {
 											echo $diaSemana[$i-1] . "<br>";
-											echo date('Y-m-d', strtotime($fechaActual . ' + '.$i.' days'));
+											$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
+											echo $auxFec;
 										}
 
 										for ($i = 1; $i < $hoy; $i++) {
