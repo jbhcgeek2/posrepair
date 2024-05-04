@@ -333,10 +333,10 @@
 																	$claseInve = "";
 																}
 
-																echo "<tr class='$claseInve'>
-																	<td>$prod</td>
-																	<td class='stat-cell'>$nombreSuc</td>
-																	<td class='stat-cell'>$existencia</td>
+																echo "<tr>
+																	<td class='$claseInve'>$prod</td>
+																	<td class='stat-cell $claseInve'>$nombreSuc</td>
+																	<td class='stat-cell $claseInve'>$existencia</td>
 																</tr>";
 															}//fin del while
 														} catch (\Throwable $th) {
