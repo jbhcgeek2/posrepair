@@ -255,7 +255,7 @@
 										}
 
 										for ($i = 1; $i < $hoy; $i++) {
-											echo $diaSemana[$i-1] . "<br>";
+											echo $diaSemana[$i-2] . "<br>";
 										}
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
