@@ -264,7 +264,7 @@
 										// for ($i = 1; $i < $hoy; $i++) {
 										// 	echo $diaSemana[$i-1] . "<br>";
 										// }
-										for ($i = $hoy; $i <= 1; $i--) {
+										for ($i = $hoy; $i >= 1; $i--) {
 											echo $diaSemana[$i] . "<br>";
 										}
 
