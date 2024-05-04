@@ -35,7 +35,11 @@ let valorMiercolesActual = res.datoSemActual[miercolesActual];
 let juevesActual = res.actual['jueves'];
 let valorJuevesActual = res.datoSemActual[juevesActual];
 let viernesActual = res.actual['viernes'];
-let valorViernesActual = res.datoSemActual[juevesActual];
+let valorViernesActual = res.datoSemActual[viernesActual];
+let sabadoActual = res.actual['sabado'];
+let valorSabadoActual = res.datoSemActual[sabadoActual];
+let domingoActual = res.actual['viernes'];
+let valorDomingoActual = res.datoSemActual[domingoActual];
 
 
 
@@ -56,8 +60,8 @@ var lineChartConfig = {
 				valorMiercolesActual,
 				valorJuevesActual,
 				valorViernesActual,
-				'10',
-				'10'
+				valorSabadoActual,
+				valorDomingoActual
 			],
 		}, {
 			label: 'Semana Pasada',
