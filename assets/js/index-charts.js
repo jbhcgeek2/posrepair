@@ -177,13 +177,22 @@ var lineChartConfig = {
 let productos = res.prodsVenta;
 console.log(productos);
 console.log(productos[0].nameArti);
+
+let name1 = productos[0].nameArti;
+let name2 = productos[1].nameArti;
+let name3 = productos[2].nameArti;
+let name4 = productos[3].nameArti;
+let name5 = productos[4].nameArti;
+let name6 = productos[5].nameArti;
+let name7 = productos[6].nameArti;
+
 var barChartConfig = {
 	type: 'bar',
 
 	data: {
-		labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		labels: [name1, name2, name3, name4, name5, name6, name7],
 		datasets: [{
-			label: 'Orders',
+			label: 'Productos',
 			backgroundColor: window.chartColors.green,
 			borderColor: window.chartColors.green,
 			borderWidth: 1,
