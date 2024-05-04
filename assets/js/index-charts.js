@@ -216,11 +216,11 @@ var barChartConfig = {
 			]
 		}]
 	},
+
 	options: {
 		responsive: true,
 		legend: {
 			position: 'buttom',
-			align: 'end',
 		},
 		title: {
 			display: true,
@@ -240,7 +240,25 @@ var barChartConfig = {
 			titleFontColor: window.chartColors.text,
 
 		},
-		
+		scales: {
+			xAxes: [{
+				display: true,
+				gridLines: {
+					drawBorder: false,
+					color: window.chartColors.border,
+				},
+
+			}],
+			yAxes: [{
+				display: true,
+				gridLines: {
+					drawBorder: false,
+					color: window.chartColors.borders,
+				},
+
+				
+			}]
+		}
 		
 	}
 }
