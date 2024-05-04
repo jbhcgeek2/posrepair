@@ -24,6 +24,19 @@ envio.send(datos);
 let res = JSON.parse(envio.responseText);
 console.log(res);
 console.log(res.actual['sabado']);
+console.log(res.datoSemActual);
+
+let lunesActual = res.actual['lunes'];
+let valorLunesActual = res.datoSemActual[lunesActual];
+let martesActual = res.actual['martes'];
+let valorMartesActual = res.datoSemActual[martesActual];
+let miercolesActual = res.actual['martes'];
+let valorMiercolesActual = res.datoSemActual[miercolesActual];
+let juevesActual = res.actual['martes'];
+let valorJuevesActual = res.datoSemActual[juevesActual];
+let viernesActual = res.actual['martes'];
+let valorViernesActual = res.datoSemActual[juevesActual];
+
 
 
 var lineChartConfig = {
@@ -38,11 +51,11 @@ var lineChartConfig = {
 			backgroundColor: window.chartColors.green,
 			borderColor: window.chartColors.green,
 			data: [
-				'10',
-				'10',
-				'10',
-				'10',
-				'10',
+				valorLunesActual,
+				valorMartesActual,
+				valorMiercolesActual,
+				valorJuevesActual,
+				valorViernesActual,
 				'10',
 				'10'
 			],
