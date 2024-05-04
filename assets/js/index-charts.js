@@ -187,7 +187,7 @@ let name6 = productos[5].nameArti.slice(0,10)+".";
 let name7 = productos[6].nameArti.slice(0,10)+".";
 
 var barChartConfig = {
-	type: 'bar',
+	type: 'pie',
 
 	data: {
 		labels: [name1, name2, name3, name4, name5, name6, name7],
