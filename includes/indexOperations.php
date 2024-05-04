@@ -36,7 +36,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
     }
 
-    $semanaActual = asort($semanaActual);
+    $semanaActual = $semanaActual;
     // print_r($semanaActual);
 
     //Teniendo en cuenta lo anterior calcularemos la semana pasada
@@ -53,8 +53,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     // echo "<br>=====<br>";
     $semanaPasada = $semanaPasada;
     // print_r($semanaPasada);
-
-    echo json_encode($semanaPasada);
+    $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada];
+    echo json_encode($res);
 
   }
 }
