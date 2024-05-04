@@ -264,9 +264,15 @@
 										// for ($i = 1; $i < $hoy; $i++) {
 										// 	echo $diaSemana[$i-1] . "<br>";
 										// }
+										$auxFec = date('Y-m-d');
 										for ($i = $hoy; $i >= 1; $i--) {
 											echo $diaSemana[$i] . "<br>";
+											$semanaActual[$diaSemana[$i]]=$auxFec;
+											$auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
 										}
+
+										print_r($semanaActual);
+
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
 										$dia = date('N');
