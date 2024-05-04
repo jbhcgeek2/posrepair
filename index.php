@@ -244,7 +244,7 @@
 
 										$hoy = date('N'); // Obtener el número del día de la semana actual
 
-										$diaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+										$diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miércoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sábado', '7'=>'domingo'];
 										$semanaActual = [];
 										echo $hoy;
 										
