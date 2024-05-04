@@ -335,6 +335,18 @@
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body">
 										<?php 
+											$sql4 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
+											$query4 = mysqli_query($conexion,$sql4);
+											$sucursales = '';
+											while($fetch4 = mysqli_fetch_assoc($query4)){
+												$idSucursal = $fetch4['idSucursal'];
+												if($sucursales == ""){
+													$sucursales = $idSucursal;
+												}else{
+													$sucursales = $sucursales.",".$idSucursal;
+												}
+												
+											}
 											$sqlProd = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
 											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID";

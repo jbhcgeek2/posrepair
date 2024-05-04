@@ -99,18 +99,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
 
     //consultamos los datos de los productos mas vendidos
-    $sql4 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
-    $query4 = mysqli_query($conexion,$sql4);
-    $sucursales = '';
-    while($fetch4 = mysqli_fetch_assoc($query4)){
-      $idSucursal = $fetch4['idSucursal'];
-      if($sucursales == ""){
-        $sucursales = $idSucursal;
-      }else{
-        $sucursales = $sucursales.",".$idSucursal;
-      }
-      
-    }
+    
 
     
     // print_r($semanaPasada);
