@@ -195,7 +195,7 @@ let valurProd6 = productos[5].totales;
 let valurProd7 = productos[6].totales;
 
 var barChartConfig = {
-	type: 'bar',
+	type: 'polarArea',
 
 	data: {
 		labels: [name1, name2, name3, name4, name5, name6, name7],
