@@ -331,6 +331,7 @@
 																$prod = $fetchInve['nombreArticulo'];
 																$existencia = $fetchInve['existenciaSucursal'];
 																$nombreSuc = $fetchInve['nombreSuc'];
+																$idProdInve = $fetchInve['articuloID'];
 																$claseInve = "";
 																if($existencia <= 3){
 																	$claseInve = "text-danger";
@@ -341,7 +342,11 @@
 																echo "<tr>
 																	<td class='$claseInve'>$prod</td>
 																	<td class='stat-cell $claseInve'>$nombreSuc</td>
-																	<td class='stat-cell $claseInve'>$existencia</td>
+																	<td class='stat-cell $claseInve'>
+																		<a href='verInfoProducto.php?infoProd=$idProdInve'>
+																			$existencia
+																		</a>
+																	</td>
 																</tr>";
 															}//fin del while
 														} catch (\Throwable $th) {
