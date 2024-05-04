@@ -54,7 +54,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $semanaPasada = asort($semanaPasada);
     // print_r($semanaPasada);
 
-    echo json_encode($semanaPasadaF);
+    echo json_encode($semanaPasada);
 
   }
 }
