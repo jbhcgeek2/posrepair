@@ -17,7 +17,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
     $diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miercoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sabado', '7'=>'domingo'];
     $semanaActual = [];
-    $datoDia = [];
+    $datoSemActual = [];
     
     // echo $diaSemana[$hoy]."<br>";
     
@@ -32,7 +32,11 @@ if(!empty($_SESSION['usuarioPOS'])){
       $query = mysqli_query($conexion, $sql);
       $fetch = mysqli_fetch_assoc($query);
       $ventas = $fetch['ventasDia'];
-      $datoDia[$auxFec] = $ventas;
+      if($ventas == NULL){
+        $ventas = 0;
+      }
+      $datoSemActual[$auxFec] = $ventas;
+
       $auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
       // echo $auxFec;
       
@@ -47,6 +51,16 @@ if(!empty($_SESSION['usuarioPOS'])){
     for ($i = $hoy; $i >= 1; $i--) {
       // echo $diaSemana[$i] . "<br>";
       //consultamos las ventas del dia
+
+      $sql2 = "SELECT SUM(totalVenta) AS ventasDia FROM VENTAS WHERE 
+      fechaVenta = '$auxFec' AND empresaID = '$idEmpresaSesion'";
+      $query2 = mysqli_query($conexion, $sql2);
+      $fetch2 = mysqli_fetch_assoc($query2);
+      $ventas2 = $fetch2['ventasDia'];
+      if($ventas2 == NULL){
+        $ventas2 = 0;
+      }
+      $datoSemActual[$auxFec] = $ventas2;
       
       $semanaActual[$diaSemana[$i]]=$auxFec;
       $auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
