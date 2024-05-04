@@ -38,8 +38,23 @@ let viernesActual = res.actual['viernes'];
 let valorViernesActual = res.datoSemActual[viernesActual];
 let sabadoActual = res.actual['sabado'];
 let valorSabadoActual = res.datoSemActual[sabadoActual];
-let domingoActual = res.actual['viernes'];
+let domingoActual = res.actual['domingo'];
 let valorDomingoActual = res.datoSemActual[domingoActual];
+
+let lunesPasado = res.pasada['lunes'];
+let valorLunesPasado = res.datoSemPasada[lunesPasado];
+let martesPasado = res.pasada['martes'];
+let valorMartesPasado = res.datoSemPasada[martesPasado];
+let miercolesPasado = res.pasada['miercoles'];
+let valorMiercolesPasado = res.datoSemPasadal[miercolesPasado];
+let juevesPasado = res.pasada['jueves'];
+let valorJuevesPasado = res.datoSemPasada[juevesPasado];
+let viernesPasado = res.pasada['viernes'];
+let valorViernesPasado = res.datoSemPasada[viernesPasado];
+let sabadoPasado = res.pasada['sabado'];
+let valorSabadoPasado = res.datoSemPasada[sabadoPasado];
+let domingoPasado = res.pasada['domingo'];
+let valorDomingoPasado = res.datoSemPasada[domingoPasado];
 
 
 
@@ -70,13 +85,13 @@ var lineChartConfig = {
 			borderColor: window.chartColors.gray,
 			
 			data: [
-				'10',
-				'10',
-				'10',
-				'10',
-				'10',
-				'10',
-				'10'
+				valorLunesPasado,
+				valorMartesPasado,
+				valorMiercolesPasado,
+				valorJuevesPasado,
+				valorViernesPasado,
+				valorSabadoPasado,
+				valorDomingoPasado
 			],
 			fill: false,
 		}]
