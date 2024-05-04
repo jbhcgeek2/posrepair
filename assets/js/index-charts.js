@@ -30,11 +30,11 @@ let lunesActual = res.actual['lunes'];
 let valorLunesActual = res.datoSemActual[lunesActual];
 let martesActual = res.actual['martes'];
 let valorMartesActual = res.datoSemActual[martesActual];
-let miercolesActual = res.actual['martes'];
+let miercolesActual = res.actual['miercoles'];
 let valorMiercolesActual = res.datoSemActual[miercolesActual];
-let juevesActual = res.actual['martes'];
+let juevesActual = res.actual['jueves'];
 let valorJuevesActual = res.datoSemActual[juevesActual];
-let viernesActual = res.actual['martes'];
+let viernesActual = res.actual['viernes'];
 let valorViernesActual = res.datoSemActual[juevesActual];
 
 
