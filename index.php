@@ -250,6 +250,7 @@
 										
 										$auxFec = date('Y-m-d');
 										for ($i = $hoy; $i <= 7; $i++) {
+											echo $i;
 											echo $diaSemana[$i-1] . "<br>";
 
 											// $auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
