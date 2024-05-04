@@ -341,7 +341,7 @@
 											$queryProd = mysqli_query($conexion, $sqlProd);
 											$totalesVentas = 0;
 
-											while($fetch5 = mysqli_fetch_assoc($query5)){
+											while($fetch5 = mysqli_fetch_assoc($queryProd)){
 												$totalesVentas = $totalesVentas + $fetch5['totales'];
 											}
 
