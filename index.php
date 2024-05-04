@@ -326,11 +326,7 @@
 							        <div class="col-auto">
 						                <h4 class="app-card-title">Productos Mas Vendidos</h4>
 							        </div><!--//col-->
-							        <div class="col-auto">
-								        <div class="card-header-action">
-									        <a href="#">All projects</a>
-								        </div><!--//card-header-actions-->
-							        </div><!--//col-->
+							        
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body">
@@ -357,7 +353,7 @@
 											while($fetch5 = mysqli_fetch_assoc($queryProd)){
 												$totalesVentas = $totalesVentas + $fetch5['totales'];
 											}
-											echo $totalesVentas;
+											// echo $totalesVentas;
 
 											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
@@ -372,7 +368,7 @@
 												<div class="item p-3">
 													<div class="row align-items-center">
 														<div class="col">
-															<div class="title mb-1 ">'.$nombreProd.'</div>
+															<div class="title mb-1 ">'.$nombreProd.' - '.$ventasProd.'</div>
 															<div class="progress">
 																<div class="progress-bar bg-success" role="progressbar" style="width: '.$porcentaje.'%;" aria-valuenow="'.$porcentaje.'" aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
@@ -385,30 +381,13 @@
 														</div><!--//col-->
 													</div><!--//row-->
 
-													<a class="item-link-mask" href="#"></a>
+													<a class="item-link-mask" href="#!"></a>
 												</div><!--//item-->';
 											}
 
 
 										?>
-							    	<div class="item p-3">
-								    	<div class="row align-items-center">
-									    	<div class="col">
-										    	<div class="title mb-1 ">Project lorem ipsum dolor sit amet</div>
-										    	<div class="progress">
-  													<div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-													</div>
-									    	</div><!--//col-->
-
-									    	<div class="col-auto">
-										    	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  													<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-													</svg>
-									    	</div><!--//col-->
-								    	</div><!--//row-->
-
-								    	<a class="item-link-mask" href="#"></a>
-							    	</div><!--//item-->
+							    	
 							    
 							    
 							     
