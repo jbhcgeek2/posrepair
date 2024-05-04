@@ -66,13 +66,13 @@ var lineChartConfig = {
 			borderColor: window.chartColors.gray,
 			
 			data: [
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint(),
-				randomDataPoint()
+				'10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'10',
+				'10'
 			],
 			fill: false,
 		}]
