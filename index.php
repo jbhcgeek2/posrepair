@@ -259,12 +259,12 @@
 											
 										}
 
-										print_r($semanaActual);
+										// print_r($semanaActual);
 
 										// for ($i = 1; $i < $hoy; $i++) {
 										// 	echo $diaSemana[$i-1] . "<br>";
 										// }
-										for ($i = $hoy; $i < $hoy; $i--) {
+										for ($i = $hoy; $i <= 1; $i--) {
 											echo $diaSemana[$i] . "<br>";
 										}
 
