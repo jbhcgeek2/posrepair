@@ -233,37 +233,23 @@
 								<div class="col-sm-12">
 									<?php 
 
-										$fechaActual = date('Y-m-d'); // Obtener la fecha actual
-
-										$diasASumar = 1; // Número de días a sumar
-
-										$nuevaFecha = date('Y-m-d', strtotime($fechaActual . ' + ' . $diasASumar . ' days'));
-										// Sumar los días a la fecha actual
-
-										// echo $nuevaFecha."<br>"; // Imprimir la nueva fecha
-
 										$hoy = date('N'); // Obtener el número del día de la semana actual
 
 										$diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miércoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sábado', '7'=>'domingo'];
 										$semanaActual = [];
-										echo $diaSemana[$hoy]."<br>";
+										// echo $diaSemana[$hoy]."<br>";
 										
-										$auxFec = date('Y-m-d');
-										for ($i = $hoy; $i <= 7; $i++) {
-											// echo $i;
-											// echo $diaSemana[$i] . "<br>";
-											$semanaActual[$diaSemana[$i]]=$auxFec;
+										// $auxFec = date('Y-m-d');
+										// for ($i = $hoy; $i <= 7; $i++) {
+										// 	// echo $i;
+										// 	// echo $diaSemana[$i] . "<br>";
+										// 	$semanaActual[$diaSemana[$i]]=$auxFec;
 
-											$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
-											// echo $auxFec;
+										// 	$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
+										// 	// echo $auxFec;
 											
-										}
-
-										// print_r($semanaActual);
-
-										// for ($i = 1; $i < $hoy; $i++) {
-										// 	echo $diaSemana[$i-1] . "<br>";
 										// }
+
 										$auxFec = date('Y-m-d');
 										for ($i = $hoy; $i >= 1; $i--) {
 											echo $diaSemana[$i] . "<br>";
@@ -289,8 +275,8 @@
 										print_r($semanaPasada);
 
 
-										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
-										$dia = date('N');
+										// $dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
+										// $dia = date('N');
 										// echo $dias[$dia];
 									?>
 								</div>
