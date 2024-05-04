@@ -35,8 +35,9 @@ if(!empty($_SESSION['usuarioPOS'])){
     $semanaPasadaF = asort($semanaPasada);
     // print_r($semanaPasada);
 
-    $res = ["actual"=>$semanaActualF,"pasada"=>$semanaPasadaF];
-    echo json_encode($res);
+    // $res = ["actual"=>$semanaActualF,"pasada"=>$semanaPasadaF];
+
+    echo json_encode($semanaPasadaF);
 
   }
 }
