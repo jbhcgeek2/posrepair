@@ -255,7 +255,7 @@
 
 											$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
 											// echo $auxFec;
-											$semanaActual[$diaSemana[$i-1]]=$auxFec;
+											$semanaActual[$diaSemana[$i]]=$auxFec;
 										}
 
 										print_r($semanaActual);
