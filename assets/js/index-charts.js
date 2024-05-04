@@ -63,7 +63,6 @@ var lineChartConfig = {
 
 	data: {
 		labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
-		
 		datasets: [{
 			label: 'Semana Actual',
 			fill: false,
@@ -107,7 +106,7 @@ var lineChartConfig = {
 		
 		title: {
 			display: true,
-			text: 'Chart.js Line Chart Example',
+			text: 'Semana Actual VS Semana Paasada',
 			
 		}, 
 		tooltips: {
