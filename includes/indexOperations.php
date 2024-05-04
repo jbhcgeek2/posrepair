@@ -51,7 +51,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       // echo $diaSemana[$x]."<br>";
     }//fin del for
     // echo "<br>=====<br>";
-    $semanaPasada = asort($semanaPasada);
+    $semanaPasada = $semanaPasada;
     // print_r($semanaPasada);
 
     echo json_encode($semanaPasada);
