@@ -343,7 +343,7 @@
 																	<td class='$claseInve'>$prod</td>
 																	<td class='stat-cell $claseInve'>$nombreSuc</td>
 																	<td class='stat-cell $claseInve'>
-																		<a href='verInfoProducto.php?infoProd=$idProdInve'>
+																		<a href='verInfoProducto.php?infoProd=$idProdInve' class='$claseInve'>
 																			$existencia
 																		</a>
 																	</td>
