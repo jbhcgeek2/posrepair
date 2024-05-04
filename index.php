@@ -253,12 +253,12 @@
 											echo $i;
 											echo $diaSemana[$i] . "<br>";
 
-											// $auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
+											$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
 											// echo $auxFec;
-											// $semanaActual[$diaSemana[$i-1]]=$auxFec;
+											$semanaActual[$diaSemana[$i-1]]=$auxFec;
 										}
 
-										// print_r($semanaActual);
+										print_r($semanaActual);
 
 										for ($i = 1; $i < $hoy; $i++) {
 											// echo $diaSemana[$i-2] . "<br>";
