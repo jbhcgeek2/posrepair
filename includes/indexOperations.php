@@ -83,7 +83,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     // echo "<br>=====<br>";
     $semanaPasada = $semanaPasada;
     // print_r($semanaPasada);
-    $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada,"datoDia"=>$datoDia];
+    $res = ["actual"=>$semanaActual,"pasada"=>$semanaPasada,"datoDia"=>$datoSemActual];
     echo json_encode($res);
 
   }
