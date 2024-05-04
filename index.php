@@ -270,7 +270,7 @@
 											$semanaActual[$diaSemana[$i]]=$auxFec;
 											$auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
 										}
-
+										asort($semanaActual);
 										print_r($semanaActual);
 
 
