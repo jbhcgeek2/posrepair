@@ -174,7 +174,9 @@ var lineChartConfig = {
 
 // Chart.js Bar Chart Example 
 // solicitamos los datos de articulos mas vendidos
-
+let productos = res.prodsVenta;
+console.log(productos);
+console.log(productos[0].nameArti);
 var barChartConfig = {
 	type: 'bar',
 
