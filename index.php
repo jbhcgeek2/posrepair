@@ -326,10 +326,11 @@
 																$prod = $fetchInve['nombreArticulo'];
 																$existencia = $fetchInve['existenciaSucursal'];
 																$nombreSuc = $fetchInve['nombreSuc'];
+																$claseInve = "";
 																if($existencia <= 3){
-																	$claseInve = "";
-																}else{
 																	$claseInve = "text-danger";
+																}else{
+																	$claseInve = "";
 																}
 
 																echo "<tr class='$claseInve'>
