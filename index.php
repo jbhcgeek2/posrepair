@@ -246,6 +246,7 @@
 
 										$diaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
 										$semanaActual = [];
+										echo $hoy;
 										
 										$auxFec = date('Y-m-d');
 										for ($i = $hoy; $i <= 7; $i++) {
@@ -264,7 +265,7 @@
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
 										$dia = date('N');
-										echo $dias[$dia];
+										// echo $dias[$dia];
 									?>
 								</div>
 
