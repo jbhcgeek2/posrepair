@@ -415,21 +415,22 @@
 												$nombreProd = $fetch7['nameArti'];
 												$ventasProd = $fetch7['totales'];
 												$porcentaje = ($ventasProd / $totalesVentas) * 100;
+												$porcentaje2 = number_format($porcentaje,2);
 												echo '
 												<div class="item p-3">
 													<div class="row align-items-center">
 														<div class="col">
-															<div class="title mb-1 ">'.$nombreProd.' - '.$ventasProd.'</div>
+															<div class="title mb-1 ">'.$nombreProd.' - '.$porcentaje2.'%</div>
 															<div class="progress">
 																<div class="progress-bar bg-success" role="progressbar" style="width: '.$porcentaje.'%;" aria-valuenow="'.$porcentaje.'" aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 														</div><!--//col-->
 
-														<div class="col-auto">
+														<!--<div class="col-auto">
 															<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 																<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
 															</svg>
-														</div><!--//col-->
+														</div>-->
 													</div><!--//row-->
 
 													<a class="item-link-mask" href="#!"></a>
