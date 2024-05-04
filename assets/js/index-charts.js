@@ -187,7 +187,7 @@ let name6 = productos[5].nameArti.slice(0,10)+".";
 let name7 = productos[6].nameArti.slice(0,10)+".";
 
 var barChartConfig = {
-	type: 'pie',
+	type: 'polarArea',
 
 	data: {
 		labels: [name1, name2, name3, name4, name5, name6, name7],
@@ -213,12 +213,12 @@ var barChartConfig = {
 		responsive: true,
 		aspectRatio: 1.5,
 		legend: {
-			position: 'bottom',
+			position: 'top',
 			align: 'end',
 		},
 		title: {
 			display: true,
-			text: 'Chart.js Bar Chart Example'
+			text: 'Productos Mas Vendidos'
 		},
 		tooltips: {
 			mode: 'index',
@@ -256,6 +256,77 @@ var barChartConfig = {
 		
 	}
 }
+
+// var barChartConfig = {
+// 	type: 'polarArea',
+
+// 	data: {
+// 		labels: [name1, name2, name3, name4, name5, name6, name7],
+// 		datasets: [{
+// 			label: 'Productos',
+// 			backgroundColor: window.chartColors.green,
+// 			borderColor: window.chartColors.green,
+// 			borderWidth: 1,
+// 			maxBarThickness: 16,
+			
+// 			data: [
+// 				23,
+// 				45,
+// 				76,
+// 				75,
+// 				62,
+// 				37,
+// 				83
+// 			]
+// 		}]
+// 	},
+// 	options: {
+// 		responsive: true,
+// 		aspectRatio: 1.5,
+// 		legend: {
+// 			position: 'bottom',
+// 			align: 'end',
+// 		},
+// 		title: {
+// 			display: true,
+// 			text: 'Chart.js Bar Chart Example'
+// 		},
+// 		tooltips: {
+// 			mode: 'index',
+// 			intersect: false,
+// 			titleMarginBottom: 10,
+// 			bodySpacing: 10,
+// 			xPadding: 16,
+// 			yPadding: 16,
+// 			borderColor: window.chartColors.border,
+// 			borderWidth: 1,
+// 			backgroundColor: '#fff',
+// 			bodyFontColor: window.chartColors.text,
+// 			titleFontColor: window.chartColors.text,
+
+// 		},
+// 		scales: {
+// 			xAxes: [{
+// 				display: true,
+// 				gridLines: {
+// 					drawBorder: false,
+// 					color: window.chartColors.border,
+// 				},
+
+// 			}],
+// 			yAxes: [{
+// 				display: true,
+// 				gridLines: {
+// 					drawBorder: false,
+// 					color: window.chartColors.borders,
+// 				},
+
+				
+// 			}]
+// 		}
+		
+// 	}
+// }
 
 
 
