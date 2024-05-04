@@ -233,38 +233,55 @@
 								<div class="col-sm-12">
 									<?php 
 
-										// $hoy = date('N'); // Obtener el número del día de la semana actual
+										$hoy = date('N'); // Obtener el número del día de la semana actual
 
-										// $diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miércoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sábado', '7'=>'domingo'];
-										// $semanaActual = [];
+										$diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miércoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sábado', '7'=>'domingo'];
+										$semanaActual = [];
+										echo $diaSemana[$hoy]."<br>";
 										
-										// $auxFec = date('Y-m-d');
-										// for ($i = $hoy; $i >= 1; $i--) {
-										// 	echo $diaSemana[$i] . "<br>";
-										// 	$semanaActual[$diaSemana[$i]]=$auxFec;
-										// 	$auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
-										// }
-										// asort($semanaActual);
+										$auxFec = date('Y-m-d');
+										for ($i = $hoy; $i <= 7; $i++) {
+											// echo $i;
+											// echo $diaSemana[$i] . "<br>";
+											$semanaActual[$diaSemana[$i]]=$auxFec;
+
+											$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
+											// echo $auxFec;
+											
+										}
+
 										// print_r($semanaActual);
 
-										// //Teniendo en cuenta lo anterior calcularemos la semana pasada
-										// $semanaPasada = [];
-										// $ultimoDia = $semanaActual['lunes'];
-										// echo "<br> Ultio Dia, ".$ultimoDia;
+										// for ($i = 1; $i < $hoy; $i++) {
+										// 	echo $diaSemana[$i-1] . "<br>";
+										// }
+										$auxFec = date('Y-m-d');
+										for ($i = $hoy; $i >= 1; $i--) {
+											echo $diaSemana[$i] . "<br>";
+											$semanaActual[$diaSemana[$i]]=$auxFec;
+											$auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
+										}
+										asort($semanaActual);
+										print_r($semanaActual);
 
-										// $auxFec2 = $ultimoDia;
-										// for($x = 7; $x >= 1; $x--){
-										// 	$auxFec2 = date('Y-m-d', strtotime($auxFec2. ' - 1 days'));
-										// 	$semanaPasada[$diaSemana[$x]] = $auxFec2;
-										// 	// echo $diaSemana[$x]."<br>";
-										// }//fin del for
-										// echo "<br>=====<br>";
-										// asort($semanaPasada);
-										// print_r($semanaPasada);
+										//Teniendo en cuenta lo anterior calcularemos la semana pasada
+										$semanaPasada = [];
+										$ultimoDia = $semanaActual['lunes'];
+										echo "<br> Ultio Dia, ".$ultimoDia;
+
+										$auxFec2 = $ultimoDia;
+										for($x = 7; $x >= 1; $x--){
+											$auxFec2 = date('Y-m-d', strtotime($auxFec2. ' - 1 days'));
+											$semanaPasada[$diaSemana[$x]] = $auxFec2;
+											// echo $diaSemana[$x]."<br>";
+										}//fin del for
+										echo "<br>=====<br>";
+										asort($semanaPasada);
+										print_r($semanaPasada);
 
 
-										// $dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
-										// $dia = date('N');
+										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
+										$dia = date('N');
 										// echo $dias[$dia];
 									?>
 								</div>

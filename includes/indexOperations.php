@@ -8,7 +8,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   if(!empty($_POST['getVentasWeek'])){
 
     $hoy = date('N'); // Obtener el número del día de la semana actual
-    $diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miércoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sábado', '7'=>'domingo'];
+    $diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miercoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sabado', '7'=>'domingo'];
     $semanaActual = [];
     
     $auxFec = date('Y-m-d');
