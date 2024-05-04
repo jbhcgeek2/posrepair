@@ -22,9 +22,9 @@ envio.open('POST','../includes/indexOperations.php',false);
 envio.send(datos);
 
 let res = JSON.parse(envio.responseText);
-console.log(res);
-console.log(res.actual['sabado']);
-console.log(res.datoSemActual);
+// console.log(res);
+// console.log(res.actual['sabado']);
+// console.log(res.datoSemActual);
 
 let lunesActual = res.actual['lunes'];
 let valorLunesActual = res.datoSemActual[lunesActual];
