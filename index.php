@@ -326,16 +326,16 @@
 																$prod = $fetchInve['nombreArticulo'];
 																$existencia = $fetchInve['existenciaSucursal'];
 																$nombreSuc = $fetchInve['nombreSuc'];
-																if($existencia < 3){
+																if($existencia <= 3){
 																	$claseInve = "";
 																}else{
 																	$claseInve = "text-danger";
 																}
 
-																echo "<tr>
+																echo "<tr class='$claseInve'>
 																	<td>$prod</td>
 																	<td class='stat-cell'>$nombreSuc</td>
-																	<td class='stat-cell $claseInve'>$existencia</td>
+																	<td class='stat-cell'>$existencia</td>
 																</tr>";
 															}//fin del while
 														} catch (\Throwable $th) {
