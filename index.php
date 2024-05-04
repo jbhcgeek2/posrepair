@@ -361,18 +361,20 @@
 
 											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID";
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID ORDER BY totales DESC LIMIT 5";
 											$queryProd2 = mysqli_query($conexion, $sqlProd2);
 
 											while($fetch7 = mysqli_fetch_assoc($queryProd2)){
 												$nombreProd = $fetch7['nameArti'];
+												$ventasProd = $fetch7['totales'];
+												$porcentaje = ($ventasProd / $totalesVentas) * 100;
 												echo '
 												<div class="item p-3">
 													<div class="row align-items-center">
 														<div class="col">
 															<div class="title mb-1 ">'.$nombreProd.'</div>
 															<div class="progress">
-																<div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+																<div class="progress-bar bg-success" role="progressbar" style="width: '.$porcentaje.'%;" aria-valuenow="'.$porcentaje.'" aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 														</div><!--//col-->
 
