@@ -240,25 +240,7 @@ var barChartConfig = {
 			titleFontColor: window.chartColors.text,
 
 		},
-		scales: {
-			xAxes: [{
-				display: true,
-				gridLines: {
-					drawBorder: false,
-					color: window.chartColors.border,
-				},
-
-			}],
-			yAxes: [{
-				display: true,
-				gridLines: {
-					drawBorder: false,
-					color: window.chartColors.borders,
-				},
-
-				
-			}]
-		}
+		
 		
 	}
 }
