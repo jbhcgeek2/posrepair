@@ -273,6 +273,11 @@
 										asort($semanaActual);
 										print_r($semanaActual);
 
+										//Teniendo en cuenta lo anterior calcularemos la semana pasada
+
+										$ultimoDia = $semanaActual['lunes'];
+										echo "<br> Ultio Dia, ".$ultimoDia;
+
 
 										$dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
 										$dia = date('N');
