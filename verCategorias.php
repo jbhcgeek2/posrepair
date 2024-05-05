@@ -49,7 +49,7 @@ session_start();
                         <tr>
                           <th>Categoria</th>
                           <th>Estatus</th>
-                          <th>Productos</th>
+                          <th>Productos Asignados</th>
                           <th></th>
                         </tr>
                       </thead>

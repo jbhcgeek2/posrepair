@@ -343,7 +343,7 @@
 									</a>
 									<div id="submenu-categorias" class="collapse submenu submenu-categorias" data-bs-parent="#menu-accordion">
 										<ul class="submenu-list list-unstyled">
-											<li class="submenu-item"><a class="submenu-link" href="verUsuarioEmpr.php">Ver Categorias</a></li>
+											<li class="submenu-item"><a class="submenu-link" href="verCategorias.php">Ver Categorias</a></li>
 											<li class="submenu-item"><a class="submenu-link" href="altaCategoria.php">Registrar Categorias</a></li>
 										</ul>
 									</div>
