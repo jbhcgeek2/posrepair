@@ -73,8 +73,8 @@ session_start();
                             </div>
 
                             <div class="col-sm-12 col-md-6 col-lg-4">
-                              <label for="planEmpresa" class="form-label"></label>
-                              <select name="planEmpresa" id="planEmpresa" class="form-control">
+                              <label for="planEmpresa" class="form-label">Suscripcion</label>
+                              <select name="planEmpresa" id="planEmpresa" class="form-select">
                                 <option value="" selected disabled>Seleccione</option>
                                 <?php 
                                   //consultamos los planes de las empresas
@@ -98,6 +98,55 @@ session_start();
                                 ?>
                               </select>
                             </div>
+
+                            <hr class="my-4">
+
+                            <!-- seccion de sucursales -->
+
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Sucursal</th>
+                                  <th>Direccion</th>
+                                  <th>Telefono</th>
+                                  <th>Editar</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php 
+                                  //consultamos las sucursales de la empresa
+                                  $sqlSuc = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
+                                  try {
+                                    $querySuc = mysqli_query($conexion, $sqlSuc);
+                                    if(mysqli_num_rows($querySuc) > 0){
+                                      while($fetchSucs = mysqli_fetch_assoc($querySuc)){
+                                        $nombreSuc = $fetchSucs['nombreSuc'];
+                                        $direccionSuc = $fetchSucs['calleSuc'];
+                                        $telSuc = $fetchSucs['telefonoSuc'];
+
+                                        echo "<tr>
+                                          <td>$nombreSuc</td>
+                                          <td>$direccionSuc</td>
+                                          <td>$telSuc</td>
+                                        </tr>";
+                                      }//fin del while sucursales
+                                    }else{
+                                      //sin sucursales registreadas
+                                      echo "<tr>
+                                        <td colspan='4' style='text-align:center;'><h5>Sin Sucursales Registradas</h5></td>
+                                      </tr>";
+                                    }
+                                  } catch (\Throwable $th) {
+                                    //error de consulta
+                                    echo "<tr>
+                                      <td colspan='4' style='text-align:center;'><h5>Error de consulta a la base de datos</h5></td>
+                                    </tr>";
+                                  }
+                                  
+
+                                ?>
+                              </tbody>
+                            </table>
                             
                             <?php
                           }else{
