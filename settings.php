@@ -109,7 +109,7 @@ session_start();
 
                               <div class="row" style="text-align:center;">
                                 <div class="col-sm-12 col-md-4 offset-md-4">
-                                  <a href="#!" class="btn btnprimary" id="btnUpdateDatos">Actualizar Datos</a>
+                                  <a href="#!" class="btn btn-primary" id="btnUpdateDatos">Actualizar Datos</a>
                                 </div>
                               </div>
 
