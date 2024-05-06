@@ -66,38 +66,41 @@ session_start();
                               $nombreEmp = $fetchEmp['nombreEmpresa'];
                               $suscripcion = $fetchEmp['suscripcionID'];
                               ?>
-                              <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
-                                <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
-                                <input type="text" id="nombreEmpresa" name="nombreEmpresa" class="form-control" 
-                                value="<?php echo $nombreEmp; ?>">
-                              </div>
+                              <div class="row">
+                                <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
+                                  <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
+                                  <input type="text" id="nombreEmpresa" name="nombreEmpresa" class="form-control" 
+                                  value="<?php echo $nombreEmp; ?>">
+                                </div>
 
-                              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
-                                <label for="planEmpresa" class="form-label">Suscripcion</label>
-                                <select name="planEmpresa" id="planEmpresa" class="form-select">
-                                  <option value="" selected disabled>Seleccione</option>
-                                  <?php 
-                                    //consultamos los planes de las empresas
-                                    $sqlPlanes = "SELECT * FROM SUSCRIPCION";
-                                    $queryPlanes = mysqli_query($conexion, $sqlPlanes);
-                                    if(mysqli_num_rows($queryPlanes) > 0){
-                                      while($fetchPlanes = mysqli_fetch_assoc($queryPlanes)){
-                                        $nombrePlan = $fetchPlanes['nombreSuscripcion'];
-                                        $idPlan = $fetchPlanes['idSuscripcion'];
-                                        if($idPlan == $suscripcion){
-                                          echo "<option value='$idPlan' selected>$nombrePlan</option>";
-                                        }else{
-                                          echo "<option value='$idPlan'>$nombrePlan</option>";
-                                        }
-                                        
-                                      }//fin del while planes
-                                    }else{
-                                      //sin planes registrados
-                                    }
+                                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                                  <label for="planEmpresa" class="form-label">Suscripcion</label>
+                                  <select name="planEmpresa" id="planEmpresa" class="form-select">
+                                    <option value="" selected disabled>Seleccione</option>
+                                    <?php 
+                                      //consultamos los planes de las empresas
+                                      $sqlPlanes = "SELECT * FROM SUSCRIPCION";
+                                      $queryPlanes = mysqli_query($conexion, $sqlPlanes);
+                                      if(mysqli_num_rows($queryPlanes) > 0){
+                                        while($fetchPlanes = mysqli_fetch_assoc($queryPlanes)){
+                                          $nombrePlan = $fetchPlanes['nombreSuscripcion'];
+                                          $idPlan = $fetchPlanes['idSuscripcion'];
+                                          if($idPlan == $suscripcion){
+                                            echo "<option value='$idPlan' selected>$nombrePlan</option>";
+                                          }else{
+                                            echo "<option value='$idPlan'>$nombrePlan</option>";
+                                          }
+                                          
+                                        }//fin del while planes
+                                      }else{
+                                        //sin planes registrados
+                                      }
 
-                                  ?>
-                                </select>
+                                    ?>
+                                  </select>
+                                </div>
                               </div>
+                              
 
                               <div class="input-group col-sm-12 mb-3">
                                 <input type="file" id="logotipo" name="logotipo" class="form-control">
