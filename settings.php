@@ -66,13 +66,13 @@ session_start();
                             $nombreEmp = $fetchEmp['nombreEmpresa'];
                             $suscripcion = $fetchEmp['suscripcionID'];
                             ?>
-                            <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                            <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
                               <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
                               <input type="text" id="nombreEmpresa" name="nombreEmpresa" class="form-control" 
                               value="<?php echo $nombreEmp; ?>">
                             </div>
 
-                            <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                               <label for="planEmpresa" class="form-label">Suscripcion</label>
                               <select name="planEmpresa" id="planEmpresa" class="form-select">
                                 <option value="" selected disabled>Seleccione</option>
@@ -123,11 +123,17 @@ session_start();
                                         $nombreSuc = $fetchSucs['nombreSuc'];
                                         $direccionSuc = $fetchSucs['calleSuc'];
                                         $telSuc = $fetchSucs['telefonoSuc'];
+                                        $idSuc = $fetchSucs['idSucursal'];
 
                                         echo "<tr>
                                           <td>$nombreSuc</td>
                                           <td>$direccionSuc</td>
                                           <td>$telSuc</td>
+                                          <td>
+                                            <a href='verInfoSuc.php?data=$idSuc' class='btn btn-primary'>
+                                              Editar
+                                            </a>
+                                          </td>
                                         </tr>";
                                       }//fin del while sucursales
                                     }else{
