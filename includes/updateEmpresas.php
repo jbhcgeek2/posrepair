@@ -62,8 +62,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $res = ["status"=>"error","mensaje"=>"No fue posible actualizar el logotipo: ".$th];
                 echo json_encode($res);
               }
-              $res = ["status"=>"ok","mensaje"=>"operationComplete"];
-              echo json_encode($res);
+              // $res = ["status"=>"ok","mensaje"=>"operationComplete"];
+              // echo json_encode($res);
             }else{
               //error al subir la imagen
               $err = $subir->mensaje;
