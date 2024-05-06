@@ -72,29 +72,33 @@ session_start();
                               value="<?php echo $nombreEmp; ?>">
                             </div>
 
-                            <select name="planEmpresa" id="planEmpresa">
-                              <option value="" selected disabled>Seleccione</option>
-                              <?php 
-                                //consultamos los planes de las empresas
-                                $sqlPlanes = "SELECT * FROM SUSCRIPCION";
-                                $queryPlanes = mysqli_query($conexion, $sqlPlanes);
-                                if(mysqli_num_rows($queryPlanes) > 0){
-                                  while($fetchPlanes = mysqli_fetch_assoc($queryPlanes)){
-                                    $nombrePlan = $fetchPlanes['nombreSuscripcion'];
-                                    $idPlan = $fetchPlanes['idSuscripcion'];
-                                    if($idPlan == $suscripcion){
-                                      echo "<option value='$idPlan' selected>$nombrePlan</option>";
-                                    }else{
-                                      echo "<option value='$idPlan'>$nombrePlan</option>";
-                                    }
-                                    
-                                  }//fin del while planes
-                                }else{
-                                  //sin planes registrados
-                                }
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                              <label for="planEmpresa" class="form-label"></label>
+                              <select name="planEmpresa" id="planEmpresa" class="form-control">
+                                <option value="" selected disabled>Seleccione</option>
+                                <?php 
+                                  //consultamos los planes de las empresas
+                                  $sqlPlanes = "SELECT * FROM SUSCRIPCION";
+                                  $queryPlanes = mysqli_query($conexion, $sqlPlanes);
+                                  if(mysqli_num_rows($queryPlanes) > 0){
+                                    while($fetchPlanes = mysqli_fetch_assoc($queryPlanes)){
+                                      $nombrePlan = $fetchPlanes['nombreSuscripcion'];
+                                      $idPlan = $fetchPlanes['idSuscripcion'];
+                                      if($idPlan == $suscripcion){
+                                        echo "<option value='$idPlan' selected>$nombrePlan</option>";
+                                      }else{
+                                        echo "<option value='$idPlan'>$nombrePlan</option>";
+                                      }
+                                      
+                                    }//fin del while planes
+                                  }else{
+                                    //sin planes registrados
+                                  }
 
-                              ?>
-                            </select>
+                                ?>
+                              </select>
+                            </div>
+                            
                             <?php
                           }else{
                             //empresa no localizada
