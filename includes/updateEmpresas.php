@@ -43,8 +43,8 @@ if(!empty($_SESSION['usuarioPOS'])){
           if(!empty($_FILES['logotipo']['tmp_name'])){
             //verificamos el tipo de imagen
             $tmpFile = $_FILES['logotipo']['tmp_name'];
-            $nombreFile = "logotipo_".$idEmpresaSesion;
-            $ruta = "imgEmpr/".$idEmpresaSesion;
+            $nombreFile = "logotipo";
+            $ruta = "../imgEmpr";
             $subir = uploadDoc($tmpFile,'imagen',$nombreFile,$ruta,$idEmpresaSesion);
             $subir = json_decode($subir);
             if($subir->estatus == "ok"){
