@@ -99,13 +99,25 @@ session_start();
                               </select>
                             </div>
 
+                            <div class="col-sm-12 mb-3">
+                              <input type="file" id="logotipo" name="logotipo" class="form-control">
+                              <label for="input-group-text">Sube tu Logotipo</label>
+
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-12 col-md-4 offset-m4">
+                                <a href="#!" class="btn btnprimary" id="btnUpdateDatos">Actualizar Datos</a>
+                              </div>
+                            </div>
+
                             <hr class="my-4">
 
                             <!-- seccion de sucursales -->
                             <div class="row">
                               <h5 class="text-center">Sucursales registradas</h5>
                             </div>
-                            
+
                             <table class="table">
                               <thead>
                                 <tr>
