@@ -42,7 +42,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           //verificamos si se subio imagen para procesarla
           if(!empty($_FILES['logotipo']['tmp_name'])){
             //verificamos el tipo de imagen
-            $tmpFile = $_FILES['logotipo']['tmp_name'];
+            $tmpFile = $_FILES['logotipo'];
             $nombreFile = "logotipo";
             $ruta = "../imgEmpr";
             $subir = uploadDoc($tmpFile,'imagen',$nombreFile,$ruta,$idEmpresaSesion);
