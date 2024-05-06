@@ -102,7 +102,10 @@ session_start();
                             <hr class="my-4">
 
                             <!-- seccion de sucursales -->
-
+                            <div class="row">
+                              <h5 class="text-center">Sucursales registradas</h5>
+                            </div>
+                            
                             <table class="table">
                               <thead>
                                 <tr>
