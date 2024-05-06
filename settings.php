@@ -60,7 +60,7 @@ session_start();
                         $sqlEmp = "SELECT * FROM EMPRESAS WHERE idEmpresa = '$idEmpresaSesion'";
                         try {
                           $queryEmp = mysqli_query($conexion, $sqlEmp);
-                          if(mysqli_num_rows($query) == 1){
+                          if(mysqli_num_rows($queryEmp) == 1){
                             $fetchEmp = mysqli_fetch_assoc($queryEmp);
 
                             $nombreEmp = $fetchEmp['nombreEmpresa'];
