@@ -128,7 +128,14 @@
 								</a>
                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                   <li><a class="dropdown-item" href="account.html">Mi Cuenta</a></li>
-                  <li><a class="dropdown-item" href="settings.html">Configuracion</a></li>
+									<?php 
+										//verificamos el tipo de usuario debe ser administrador
+										//para ver la seccion de configuracion
+										if($rolUsuario == "Administrador"){
+											echo '<li><a class="dropdown-item" href="settings.php">Configuracion</a></li>';
+										}
+									?>
+                  
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="logOut.php">Cerrar Sesion</a></li>
                 </ul>
