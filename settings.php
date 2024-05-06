@@ -30,7 +30,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Registro de Sucursal</h1>
+			    <h1 class="app-page-title">Configuracion de cuenta</h1>
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -44,7 +44,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verSucursales.php">Ver Sucursales</a>
+									        <a href="account.php">Mis Datos</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
@@ -56,8 +56,55 @@ session_start();
       
                     <div class="row">
                       <?php 
-                        
+                        //consultamos los datos de la empresa
+                        $sqlEmp = "SELECT * FROM EMPRESAS WHERE idEmpresa = '$idEmpresaSesion'";
+                        try {
+                          $queryEmp = mysqli_query($conexion, $sqlEmp);
+                          if(mysqli_num_rows($query) == 1){
+                            $fetchEmp = mysqli_fetch_assoc($queryEmp);
+
+                            $nombreEmp = $fetchEmp['nombreEmpresa'];
+                            $suscripcion = $fetchEmp['suscripcionID'];
+                            ?>
+                            <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                              <label for="nombreEmpresa" class="form-label">Nombre Empresa</label>
+                              <input type="text" id="nombreEmpresa" name="nombreEmpresa" class="form-control" 
+                              value="<?php echo $nombreEmp; ?>">
+                            </div>
+
+                            <select name="planEmpresa" id="planEmpresa">
+                              <option value="" selected disabled>Seleccione</option>
+                              <?php 
+                                //consultamos los planes de las empresas
+                                $sqlPlanes = "SELECT * FROM SUSCRIPCION";
+                                $queryPlanes = mysqli_query($conexion, $sqlPlanes);
+                                if(mysqli_num_rows($queryPlanes) > 0){
+                                  while($fetchPlanes = mysqli_fetch_assoc($queryPlanes)){
+                                    $nombrePlan = $fetchPlanes['nombreSuscripcion'];
+                                    $idPlan = $fetchPlanes['idSuscripcion'];
+                                    if($idPlan == $suscripcion){
+                                      echo "<option value='$idPlan' selected>$nombrePlan</option>";
+                                    }else{
+                                      echo "<option value='$idPlan'>$nombrePlan</option>";
+                                    }
+                                    
+                                  }//fin del while planes
+                                }else{
+                                  //sin planes registrados
+                                }
+
+                              ?>
+                            </select>
+                            <?php
+                          }else{
+                            //empresa no localizada
+                          }
+                        } catch (\Throwable $th) {
+                          //throw $th;
+                        }
                       ?>
+
+                      
                     </div>
 
 					        </div><!--//app-card-body-->
