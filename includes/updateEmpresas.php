@@ -48,6 +48,20 @@ if(!empty($_SESSION['usuarioPOS'])){
             $subir = uploadDoc($tmpFile,'imagen',$nombreFile,$ruta,$idEmpresaSesion);
             $subir = json_decode($subir);
             if($subir->estatus == "ok"){
+              //ahora actualizamos el campo de la foto
+              $rutaCompleta = $subir->dato;
+              $sqlUpdate2 = "UPDATE EMPRESAS SET imgLogoEmpresa = '$rutaCompleta' WHERE 
+              idEmpresa = '$idEmpresaSesion'";
+              try {
+                $queryUpdate2 = mysqli_query($conexion, $sqlUpdate2);
+                //se aplico correctamente
+                $res = ["status"=>"ok","mensaje"=>"operationComplete"];
+                echo json_encode($res);
+              } catch (\Throwable $th) {
+                //error al actualizar el logo
+                $res = ["status"=>"error","mensaje"=>"No fue posible actualizar el logotipo: ".$th];
+                echo json_encode($res);
+              }
               $res = ["status"=>"ok","mensaje"=>"operationComplete"];
               echo json_encode($res);
             }else{

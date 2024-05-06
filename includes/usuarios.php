@@ -34,6 +34,9 @@
           case 'saldoTransferencia':
             $valor = $fetch['saldoEfectivo'];
             break;
+          case 'logo':
+            $valor = $fetch['imgLogoEmpresa'];
+            break;
           
           default:
             $valor = "error";

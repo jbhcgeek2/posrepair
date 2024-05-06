@@ -18,6 +18,10 @@
 		$empresa2 = json_decode($empresa2);
 		$nombrEmpresa = $empresa2->dato;
 
+		$empresa3 = datoEmpresaSesion($usuario,"logo");
+		$empresa3 = json_decode($empresa3);
+		$logoEmp = $empresa3->dato;
+
 		$sucursal = getSucursalUsuario($usuario);
 		$sucursal = json_decode($sucursal);
 		$nombreSucursal = $sucursal->dato;
@@ -132,7 +136,7 @@
 			            
               <div class="app-utility-item app-user-dropdown dropdown">
                 <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-									<img src="assets/images/profiles/profileDefault.jpg" alt="Perfil" class="imagenPerfil">
+									<img src="<?php echo $logoEmp; ?>" alt="Perfil" class="imagenPerfil">
 								</a>
                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                   <li><a class="dropdown-item" href="account.php">Mi Cuenta</a></li>

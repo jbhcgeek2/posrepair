@@ -18,7 +18,23 @@ btnUpdateDatos.addEventListener('click', function(){
 
       if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
-        console.log(res);
+        if(res.status == "ok"){
+          //se actualizo correctamente
+          Swal.fire(
+            'Informacion actualizada',
+            'Se completo correctamente la actualizacion',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
+        }else{
+          let err = res.mensaje;
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+err,
+            'error'
+          )
+        }
       }else{
         //error de comunicacion
         Swal.fire(
