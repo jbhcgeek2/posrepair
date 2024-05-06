@@ -98,9 +98,10 @@ session_start();
                             <?php
                           }else{
                             //empresa no localizada
+                            echo "<h5 class='text-center'>Empresa no localizada</h5>";
                           }
                         } catch (\Throwable $th) {
-                          //throw $th;
+                          echo "<h5 class='text-center'>Error de consulta a la base de datos</h5>";
                         }
                       ?>
 
