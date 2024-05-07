@@ -73,26 +73,54 @@ session_start();
                               //mostramos el formato de alta
                               ?>
                               <form id="dataAltaSuc" class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                                  <label for="nombreAltaSuc" class="form-label">Nombre Sucursal</label>
-                                  <input type="text" id="nombreAltaSuc" name="nombreAltaSuc" class="form-control">
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                  <label for="nombreServ" class="form-label">Servicio</label>
+                                  <input type="text" id="nombreServ" name="nombreServ" class="form-control">
                                 </div>
-                                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                                  <label for="domAltaSuc" class="form-label">Domicilio</label>
-                                  <input type="text" id="domAltaSuc" name="domAltaSuc" class="form-control">
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                                  <label for="telAltaSuc" class="form-label">Telefono</label>
-                                  <input type="text" id="telAltaSuc" name="telAltaSuc" class="form-control">
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                                  <label for="statusAltaSuc" class="form-label">Estatus</label>
-                                  <select name="statusAltaSuc" id="statusAltaSuc" class="form-select">
-                                    <option value="" disabled>Seleccione...</option>
-                                    <option value="1" selected>Activa</option>
-                                    <option value="0" disabled>Inactiva</option>
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                  <label for="precioFijo" class="form-label">Servicio</label>
+                                  <select name="precioFijo" id="precioFijo" class="form-select">
+                                    <option value=""selected disabled>Seleccione...</option>
+                                    <option value="1">Fijo</option>
+                                    <option value="0">Variable</option>
                                   </select>
                                 </div>
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                  <label for="precioServ" class="form-label">Precio</label>
+                                  <input type="text" id="precioServ" name="precioServ" class="form-control">
+                                </div>
+
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                  <label for="catServicio" class="form-label">Servicio</label>
+                                  <select name="catServicio" id="catServicio" class="form-select">
+                                    <option value=""selected disabled>Seleccione...</option>
+                                    <option value="newCatServ">Nueva Categoria</option>
+                                    <?php 
+                                      //consultamos las categorias de la empresa
+                                      $sqlCat = "SELECT * FROM CATEGORIASERVICIO WHERE empresaID = '$idEmpresaSesion'";
+                                      try {
+                                        $queryCat = mysqli_query($conexion, $sqlCat);
+                                        if(mysqli_num_rows($queryCat) > 0){
+                                          while($fetchCat = mysqli_fetch_assoc($queryCat)){
+                                            $nombreCat = $fetchCat['nombreCatServ'];
+                                            $idCatServ = $fetchCat['idCategoriaServ'];
+                                            
+                                            echo "<option value='$idCatServ'>$nombreCat</option>";
+                                          }//fin del while cat
+                                        }else{
+                                          //sin categorias Registradas
+                                          echo "<option value='noData'>Sin Categorias</option>";
+                                        }
+                                      } catch (\Throwable $th) {
+                                        //throw $th;
+                                      }
+                                    ?>
+                                  </select>
+                                </div>
+                                
+
+                                
+                                
                               </form>
                               <div class="col-sm-12 col-md-4 offset-md-4 text-center">
                                 <a href="#!" class="btn btn-primary" role="buttom" id="altaSuc">Registrar</a>
