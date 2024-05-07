@@ -1,7 +1,7 @@
 let precioSel = document.getElementById('precioFijo');
 
 precioSel.addEventListener('change', function(){
-  let datoFijo = a;
+  let datoFijo = precioSel.value;
   //verificaremos si escojio un precio fijo o no, para
   //deshabilitar el campo de precio
 
