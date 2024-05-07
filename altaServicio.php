@@ -72,26 +72,26 @@ session_start();
                             if($procedeAlta == "si"){
                               //mostramos el formato de alta
                               ?>
-                              <form id="dataAltaSuc" class="row">
-                                <div class="col-sm-12 col-md-4 mb-3">
+                              <form id="dataAltaServ" class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
                                   <label for="nombreServ" class="form-label">Servicio</label>
                                   <input type="text" id="nombreServ" name="nombreServ" class="form-control">
                                 </div>
-                                <div class="col-sm-12 col-md-4 mb-3">
-                                  <label for="precioFijo" class="form-label">Servicio</label>
+                                <div class="col-sm-12 col-md-3 mb-3">
+                                  <label for="precioFijo" class="form-label">Tipo de Precio</label>
                                   <select name="precioFijo" id="precioFijo" class="form-select">
                                     <option value=""selected disabled>Seleccione...</option>
                                     <option value="1">Fijo</option>
                                     <option value="0">Variable</option>
                                   </select>
                                 </div>
-                                <div class="col-sm-12 col-md-4 mb-3">
+                                <div class="col-sm-12 col-md-3 mb-3">
                                   <label for="precioServ" class="form-label">Precio</label>
-                                  <input type="text" id="precioServ" name="precioServ" class="form-control">
+                                  <input type="number" id="precioServ" name="precioServ" class="form-control">
                                 </div>
 
-                                <div class="col-sm-12 col-md-4 mb-3">
-                                  <label for="catServicio" class="form-label">Servicio</label>
+                                <div class="col-sm-12 col-md-4 offset-md-4 mb-3">
+                                  <label for="catServicio" class="form-label">Categoria de Servicio</label>
                                   <select name="catServicio" id="catServicio" class="form-select">
                                     <option value=""selected disabled>Seleccione...</option>
                                     <option value="newCatServ">Nueva Categoria</option>
@@ -113,6 +113,7 @@ session_start();
                                         }
                                       } catch (\Throwable $th) {
                                         //throw $th;
+                                        echo "<option value=''>Error de cosnulta</option>";
                                       }
                                     ?>
                                   </select>
@@ -123,7 +124,7 @@ session_start();
                                 
                               </form>
                               <div class="col-sm-12 col-md-4 offset-md-4 text-center">
-                                <a href="#!" class="btn btn-primary" role="buttom" id="altaSuc">Registrar</a>
+                                <a href="#!" class="btn btn-primary" role="buttom" id="altaServ">Registrar</a>
                               </div>
                               
                               <?php
