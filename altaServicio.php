@@ -21,7 +21,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Registro de Sucursal</h1>
+			    <h1 class="app-page-title">Registro de Servicios</h1>
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -35,7 +35,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verSucursales.php">Ver Sucursales</a>
+									        <a href="verServicios.php">Ver Servicios</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
@@ -49,18 +49,18 @@ session_start();
                       <?php 
                         //verificamos si el usuario cuenta con permisos para registrar una nueva sucursal
                         $sql1 = "SELECT *,(SELECT count(*) FROM SERVICIOS c WHERE 
-                        c.empresaSucID = a.idEmpresa ) AS numSucAlta FROM EMPRESAS a INNER JOIN SUSCRIPCION b ON 
+                        c.empresaID = a.idEmpresa ) AS numServAlta FROM EMPRESAS a INNER JOIN SUSCRIPCION b ON 
                         a.suscripcionID = b.idSuscripcion WHERE a.idEmpresa = '$idEmpresaSesion'";
                         try {
                           $query1 = mysqli_query($conexion, $sql1);
                           if(mysqli_num_rows($query1) > 0){
                             $fetch1 = mysqli_fetch_assoc($query1);
                             $procedeAlta = "no";
-                            if($fetch1['maxSucursales'] == 0){
+                            if($fetch1['maxServicios'] == 0){
                               //tiene acceso a sucursales ilimitadas
                               $procedeAlta = "si";
                             }else{
-                              if($fetch1['numSucAlta'] < $fetch1['maxSucursales']){
+                              if($fetch1['numSerAlta'] < $fetch1['maxServicios']){
                                 //podemos continuar
                                 $procedeAlta = "si";
                               }else{
