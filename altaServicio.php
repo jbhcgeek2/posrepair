@@ -79,7 +79,7 @@ session_start();
                                 </div>
                                 <div class="col-sm-12 col-md-4 mb-3">
                                   <label for="precioFijo" class="form-label">Servicio</label>
-                                  <select name="precioFijo" id="precioFijo" class="form-select" onchange="precioFijo(this.value)">
+                                  <select name="precioFijo" id="precioFijo" class="form-select">
                                     <option value=""selected disabled>Seleccione...</option>
                                     <option value="1">Fijo</option>
                                     <option value="0">Variable</option>
