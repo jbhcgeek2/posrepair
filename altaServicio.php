@@ -79,7 +79,7 @@ session_start();
                                 </div>
                                 <div class="col-sm-12 col-md-4 mb-3">
                                   <label for="precioFijo" class="form-label">Servicio</label>
-                                  <select name="precioFijo" id="precioFijo" class="form-select">
+                                  <select name="precioFijo" id="precioFijo" class="form-select" onchange="precioFijo(this.value)">
                                     <option value=""selected disabled>Seleccione...</option>
                                     <option value="1">Fijo</option>
                                     <option value="0">Variable</option>
@@ -104,7 +104,7 @@ session_start();
                                           while($fetchCat = mysqli_fetch_assoc($queryCat)){
                                             $nombreCat = $fetchCat['nombreCatServ'];
                                             $idCatServ = $fetchCat['idCategoriaServ'];
-                                            
+
                                             echo "<option value='$idCatServ'>$nombreCat</option>";
                                           }//fin del while cat
                                         }else{
@@ -172,7 +172,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/altaSucursal.js"></script>
+    <script src="assets/js/altaServicio.js"></script>
 </body>
 </html> 
 
