@@ -63,7 +63,15 @@ session_start();
                               if(mysqli_num_rows($queryServ) > 0){
                                 while($fetchServ = mysqli_fetch_assoc($queryServ)){
                                   $nombreServicio = $fetchServ['nombreServicio'];
-                                  $estatusServicio = $fetchServ[''];
+                                  $estatusServicio = $fetchServ['estatusCategoria'];
+                                  $tipoPrecio = $fetchServ['precioFijo'];
+                                  $categoria = $fetchServ['categoriaServicio'];
+                                  $precio = 0;
+                                  if($tipoPrecio == "1"){
+                                    $precio = $fetchServ['precioServicio'];
+                                  }else{
+                                    $precio = "N/A";
+                                  }
 
                                   $telProv = $fetchSuc['telProveedor'];
                                   if($estatuProv == 1){
@@ -74,11 +82,11 @@ session_start();
                                   $idProv = $fetchSuc['idProveedor'];
 
                                   echo "<tr>
-                                    <td>$nombreProv</td>
-                                    <td>$telProv</td>
-                                    <td>$mailProv</td>
+                                    <td>$nombreServicio</td>
+                                    <td>$categoria</td>
+                                    <td>$precio</td>
                                     <td>
-                                      <a href='verInfoProv.php?data=$idProv'>Ver</a>
+                                      <a href='verInfoServ.php?data=$idProv' class='btn btn-primary'>Editar</a>
                                     </td>
                                   </tr>";
                                 }//fin del while
