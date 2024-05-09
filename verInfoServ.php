@@ -13,6 +13,56 @@ session_start();
     include("includes/empresas.php");
     include("includes/conexion.php");
     include("includes/articulos.php");
+
+    //verificamos que exista el get
+    
+    if(empty($_GET['data'])){
+      //esta vacio, lo redireccionamos
+      ?>
+      <script>
+        window.location = 'verServicios.php';
+      </script>
+      <?php
+    }else{
+      $idServicio = $_GET['data'];
+      //ahora verificamos que exista el servicio
+      $sqlServ = "SELECT * FROM SERVICIOS WHERE idServicio = '$idServicio' AND empresaID = '$idEmpresaSesion'";
+      try {
+        $queryServ = mysqli_query($conexion, $sqlServ);
+        if(mysqli_num_rows($queryServ) == 1){
+          //si existe, aqui cargamos los datos del servicio
+          $fetchServ = mysqli_fetch_assoc($queryServ);
+
+          $nombreServicio = $fetchServ['nombreServicio'];
+          $catServ = $fetchServ['categoriaServicio'];
+          $estatusServ = $fetchServ['estatusCategoria'];
+          $precioServ = $fetchServ['precioServicio'];
+          $tipoPrecio = $fetchServ['precioFijo'];
+
+          $clasePrecio = "";
+          if($tipoPrecio == 1){
+            $clasePrecio = "";
+          }else{
+            $clasePrecio = "disabled";
+            $precioServ = "0";
+          }
+        }else{
+          //no existe lo sacamos
+          ?>
+          <script>
+            window.location = 'verServicios.php';
+          </script>
+          <?php
+        }
+      } catch (\Throwable $th) {
+        //ocurrio un error, no decimos nada, pero lo sacamos
+        ?>
+        <script>
+          window.location = 'verServicios.php';
+        </script>
+        <?php
+      }
+    }
     
   ?>
     
@@ -46,107 +96,94 @@ session_start();
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoSucur">
       
                     <div class="row">
-                      <?php 
-                        //verificamos si el usuario cuenta con permisos para registrar una nueva sucursal
-                        $sql1 = "SELECT *,(SELECT count(*) FROM SERVICIOS c WHERE 
-                        c.empresaID = a.idEmpresa ) AS numServAlta FROM EMPRESAS a INNER JOIN SUSCRIPCION b ON 
-                        a.suscripcionID = b.idSuscripcion WHERE a.idEmpresa = '$idEmpresaSesion'";
-                        try {
-                          $query1 = mysqli_query($conexion, $sql1);
-                          if(mysqli_num_rows($query1) > 0){
-                            $fetch1 = mysqli_fetch_assoc($query1);
-                            $procedeAlta = "no";
-                            if($fetch1['maxServicios'] == 0){
-                              //tiene acceso a sucursales ilimitadas
-                              $procedeAlta = "si";
-                            }else{
-                              if($fetch1['numSerAlta'] < $fetch1['maxServicios']){
-                                //podemos continuar
-                                $procedeAlta = "si";
+                      
+                      <form id="dataAltaServ" class="row">
+                        <div class="col-sm-12 col-md-6 mb-3">
+                          <label for="nombreServ" class="form-label">Servicio</label>
+                          <input type="text" id="nombreServ" name="nombreServ" 
+                          value='<?php echo $nombreServicio; ?>' class="form-control">
+                        </div>
+                        <div class="col-sm-12 col-md-3 mb-3">
+                          <label for="precioFijo" class="form-label">Tipo de Precio</label>
+                          <select name="precioFijo" id="precioFijo" class="form-select">
+                            <option value="" disabled>Seleccione...</option>
+                            <?php 
+                              if($tipoPrecio == '1'){
+                                echo '<option value="1" selected>Fijo</option>
+                                <option value="0">Variable</option>';
                               }else{
-                                //ya tiene limite de sucursales
-                                $procedeAlta = "no";
+                                echo '<option value="1">Fijo</option>
+                                <option value="0" selected>Variable</option>';
                               }
-                            }
+                            ?>
+                          </select>
+                        </div>
+                        <div class="col-sm-12 col-md-3 mb-3">
+                          <label for="precioServ" class="form-label">Precio</label>
+                          <input type="number" id="precioServ" <?php echo $clasePrecio; ?> 
+                          value="<?php echo $precioServ; ?>" name="precioServ" class="form-control">
+                        </div>
 
-                            if($procedeAlta == "si"){
-                              //mostramos el formato de alta
-                              ?>
-                              <form id="dataAltaServ" class="row">
-                                <div class="col-sm-12 col-md-6 mb-3">
-                                  <label for="nombreServ" class="form-label">Servicio</label>
-                                  <input type="text" id="nombreServ" name="nombreServ" class="form-control">
-                                </div>
-                                <div class="col-sm-12 col-md-3 mb-3">
-                                  <label for="precioFijo" class="form-label">Tipo de Precio</label>
-                                  <select name="precioFijo" id="precioFijo" class="form-select">
-                                    <option value=""selected disabled>Seleccione...</option>
-                                    <option value="1">Fijo</option>
-                                    <option value="0">Variable</option>
-                                  </select>
-                                </div>
-                                <div class="col-sm-12 col-md-3 mb-3">
-                                  <label for="precioServ" class="form-label">Precio</label>
-                                  <input type="number" id="precioServ" name="precioServ" class="form-control">
-                                </div>
+                        <div class="col-sm-12 col-md-4 mb-3">
+                          <label for="catServicio" class="form-label">Categoria de Servicio</label>
+                          <select name="catServicio" id="catServicio" class="form-select">
+                            <option value=""selected disabled>Seleccione...</option>
+                            <option value="newCatServ">Nueva Categoria</option>
+                            <?php 
+                              //consultamos las categorias de la empresa
+                              $sqlCat = "SELECT * FROM CATEGORIASERVICIO WHERE empresaID = '$idEmpresaSesion'";
+                              try {
+                                $queryCat = mysqli_query($conexion, $sqlCat);
+                                if(mysqli_num_rows($queryCat) > 0){
+                                  while($fetchCat = mysqli_fetch_assoc($queryCat)){
+                                    $nombreCat = $fetchCat['nombreCatServ'];
+                                    $idCatServ = $fetchCat['idCategoriaServ'];
 
-                                <div class="col-sm-12 col-md-4 offset-md-4 mb-3">
-                                  <label for="catServicio" class="form-label">Categoria de Servicio</label>
-                                  <select name="catServicio" id="catServicio" class="form-select">
-                                    <option value=""selected disabled>Seleccione...</option>
-                                    <option value="newCatServ">Nueva Categoria</option>
-                                    <?php 
-                                      //consultamos las categorias de la empresa
-                                      $sqlCat = "SELECT * FROM CATEGORIASERVICIO WHERE empresaID = '$idEmpresaSesion'";
-                                      try {
-                                        $queryCat = mysqli_query($conexion, $sqlCat);
-                                        if(mysqli_num_rows($queryCat) > 0){
-                                          while($fetchCat = mysqli_fetch_assoc($queryCat)){
-                                            $nombreCat = $fetchCat['nombreCatServ'];
-                                            $idCatServ = $fetchCat['idCategoriaServ'];
+                                    if($catServ == $nombreCat){
+                                      echo "<option value='$nombreCat' selected>$nombreCat</option>";
+                                    }else{
+                                      echo "<option value='$nombreCat'>$nombreCat</option>";
+                                    }
 
-                                            echo "<option value='$nombreCat'>$nombreCat</option>";
-                                          }//fin del while cat
-                                        }else{
-                                          //sin categorias Registradas
-                                          echo "<option value='noData'>Sin Categorias</option>";
-                                        }
-                                      } catch (\Throwable $th) {
-                                        //throw $th;
-                                        echo "<option value=''>Error de cosnulta</option>";
-                                      }
-                                    ?>
-                                  </select>
-                                </div>
-                                
+                                    
+                                  }//fin del while cat
+                                }else{
+                                  //sin categorias Registradas
+                                  echo "<option value='noData'>Sin Categorias</option>";
+                                }
+                              } catch (\Throwable $th) {
+                                //throw $th;
+                                echo "<option value=''>Error de cosnulta</option>";
+                              }
+                            ?>
+                          </select>
+                        </div>
 
-                                
-                                
-                              </form>
-                              <div class="col-sm-12 col-md-4 offset-md-4 text-center">
-                                <a href="#!" class="btn btn-primary" role="buttom" id="altaServ">Registrar</a>
-                              </div>
+                        <div class="col-sm-12 col-md-4">
+                          <label for="estatusServ" class="form-label">Estatus</label>
+                          <select name="estatusServ" id="estatusServ" class="form-select">
+                            <option value="" disabled>Seleccione...</option>
+                            <?php 
+                              if($estatusServ == "1"){
+                                echo "<option value='1' selected>Activo</option>
+                                <option value='0'>Deshabilitado</option>";
+                              }else{
+                                //deshabilitado
+                                echo "<option value='1'>Activo</option>
+                                <option value='0' selected>Deshabilitado</option>";
+                              }
+                            ?>
+                          </select>
+                        </div>
+                        
+
+                        
+                        
+                      </form>
+                      <div class="col-sm-12 col-md-4 offset-md-4 text-center">
+                        <a href="#!" class="btn btn-primary" role="buttom" id="altaServ">Registrar</a>
+                      </div>
                               
-                              <?php
-                            }else{
-                              //le indicamos que ya tiene el maximo de sucursales
-                              ?>
-                              <div class="row">
-                                <div class="col-sm-12 text-center">
-                                  <h5>Se ha llegado al limite de sucursales</h5>
-                                  <img src="assets/images/limite.png" width="100px" alt="Limite de Sucursales">
-                                  <p>Adquiere un nuevo plan para registrar mas sucursales.</p>
-                                </div>
-                              </div>
-                              <?php
-                            }
-                          }else{
-                            //no se tienen datos de la empresa
-                          }
-                        } catch (\Throwable $th) {
-                          //throw $th;
-                        }
-                      ?>
                     </div>
 
 					        </div><!--//app-card-body-->
