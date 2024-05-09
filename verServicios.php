@@ -87,7 +87,7 @@ session_start();
                                     <td>$categoria</td>
                                     <td>$precio</td>
                                     <td>
-                                      <a href='verInfoServ.php?data=$idProv' class='btn btn-primary'>Editar</a>
+                                      <a href='verInfoServ.php?data=$idServ' class='btn btn-primary'>Editar</a>
                                     </td>
                                   </tr>";
                                 }//fin del while
