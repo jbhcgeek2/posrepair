@@ -68,7 +68,7 @@ session_start();
                                   $categoria = $fetchServ['categoriaServicio'];
                                   $precio = 0;
                                   if($tipoPrecio == "1"){
-                                    $precio = $fetchServ['precioServicio'];
+                                    $precio = "$".number_format($fetchServ['precioServicio'],2);
                                   }else{
                                     $precio = "N/A";
                                   }
