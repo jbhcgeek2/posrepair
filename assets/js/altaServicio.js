@@ -32,7 +32,7 @@ btnAltaServ.addEventListener('click', function(){
       Swal.fire({
         title: 'Registro completo',
         text: 'Deseas Registrar otra categoria?',
-        iconHtml: '?',
+        icon: 'success',
         showDenyButton: true,
         confirmButtonText: 'Registrar otra',
         denyButtonText: 'Terminar'

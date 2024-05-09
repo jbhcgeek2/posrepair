@@ -105,7 +105,7 @@ session_start();
                                             $nombreCat = $fetchCat['nombreCatServ'];
                                             $idCatServ = $fetchCat['idCategoriaServ'];
 
-                                            echo "<option value='$idCatServ'>$nombreCat</option>";
+                                            echo "<option value='$nombreCat'>$nombreCat</option>";
                                           }//fin del while cat
                                         }else{
                                           //sin categorias Registradas
