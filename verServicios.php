@@ -35,7 +35,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="altaProveedor.php">Registrar Servicio</a>
+									        <a href="altaServicio.php">Registrar Servicio</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
