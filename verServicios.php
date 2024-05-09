@@ -66,6 +66,7 @@ session_start();
                                   $estatusServicio = $fetchServ['estatusCategoria'];
                                   $tipoPrecio = $fetchServ['precioFijo'];
                                   $categoria = $fetchServ['categoriaServicio'];
+                                  $idServ = $fetchServ['idServicio'];
                                   $precio = 0;
                                   if($tipoPrecio == "1"){
                                     $precio = "$".number_format($fetchServ['precioServicio'],2);
