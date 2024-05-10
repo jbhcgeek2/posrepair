@@ -98,7 +98,7 @@ session_start();
                     <div class="row">
                       
                       <form id="dataModServ" class="row">
-                        <input type="hidden" name="servData" id="sevData" value="<?php echo  $idServicio; ?>">
+                        <input type="hidden" name="servData" id="servData" value="<?php echo  $idServicio; ?>">
                         <div class="col-sm-12 col-md-6 mb-3">
                           <label for="nombreServ" class="form-label">Servicio</label>
                           <input type="text" id="nombreServ" name="nombreServ" 
