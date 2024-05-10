@@ -61,7 +61,7 @@ if(!empty($_SESSION['usuarioPOS'])){
               //podemos gacer la modificacion
               $sqlServ4 ="UPDATE SERVICIOS SET nombreServicio = '$nombreServ',
               categoriaServicio = '$catServicio', estatusCategoria = '$statusServ',
-              precioServicio = '$precio', precioFijo = '$precio' WHERE idServicio = '$idServicio' 
+              precioServicio = '$precio', precioFijo = '$tipoPrecio' WHERE idServicio = '$idServicio' 
               AND empresaID = '$idEmpresaSesion'";
               try {
                 $queryServ4 = mysqli_query($conexion, $sqlServ4);
