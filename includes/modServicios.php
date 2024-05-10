@@ -20,6 +20,11 @@ if(!empty($_SESSION['usuarioPOS'])){
     $catServicio = $_POST['catServicio'];
     $precio = $_POST['precioServ'];
     $statusServ = $_POST['estatusServ'];
+    if($tipoPrecio == "0"){
+      $precio = "0";
+    }else{
+      $precio = $precio;
+    }
 
 
     $sqlServ = "SELECT * FROM SERVICIOS WHERE idServicio = '$idServicio' AND 
