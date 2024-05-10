@@ -19,7 +19,7 @@ btnAltaCat.addEventListener('click', function(){
 
       if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
-        if(res.status == 200){
+        if(res.status == 'ok'){
           Swal.fire(
             'Categoria Insertada',
             'Se inserto correctamente la categoria',

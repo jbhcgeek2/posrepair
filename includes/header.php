@@ -320,7 +320,8 @@
 										<ul class="submenu-list list-unstyled">
 											<li class="submenu-item"><a class="submenu-link" href="verServicios.php">Ver Servicios</a></li>
 											<li class="submenu-item"><a class="submenu-link" href="altaServicio.php">Registrar Servicio</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaCatServicio.php">Categoria de Servicios</a></li>
+											<li class="submenu-item"><a class="submenu-link" href="verCatServicio.php">Ver Categorias de Servicio</a></li>
+											<li class="submenu-item"><a class="submenu-link" href="altaCatServicio.php">Nueva Categoria de Servicios</a></li>
 										</ul>
 									</div>
 								</li>
