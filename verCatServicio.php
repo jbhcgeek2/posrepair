@@ -49,7 +49,6 @@ session_start();
                       <table class="table table-striped align-middlet">
                         <thead>
                           <tr>
-                            <th>Servicio</th>
                             <th>Categoria</th>
                             <th>Estatus</th>
                             <th>Editar</th>
@@ -66,6 +65,12 @@ session_start();
                                   $nombreCatServ = $fetchCatServ['nombreCatServ'];
                                   $estatusCatServ = $fetchCatServ['estatusCategoriaServ'];
                                   $idCatServ = $fetchCatServ['precioFijo'];
+
+                                  if($estatusCatServ == '1'){
+                                    $estatusCatServ = "Activo";
+                                  }else{
+                                    $estatusCatServ = "Baja";
+                                  }
                                   
 
                                   echo "<tr>
@@ -75,7 +80,7 @@ session_start();
                                       <a href='verInfoServ.php?data=$idCatServ' class='btn btn-primary'>Editar</a>
                                     </td>
                                   </tr>";
-                                  
+
                                 }//fin del while
                               }else{
                                 //sin sucursales registradas
