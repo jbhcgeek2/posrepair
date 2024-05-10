@@ -97,7 +97,8 @@ session_start();
       
                     <div class="row">
                       
-                      <form id="dataAltaServ" class="row">
+                      <form id="dataModServ" class="row">
+                        <input type="hidden" name="servData" id="sevData" value="<?php echo  $idServicio; ?>">
                         <div class="col-sm-12 col-md-6 mb-3">
                           <label for="nombreServ" class="form-label">Servicio</label>
                           <input type="text" id="nombreServ" name="nombreServ" 
@@ -181,7 +182,7 @@ session_start();
                         
                       </form>
                       <div class="col-sm-12 col-md-4 offset-md-4 text-center">
-                        <a href="#!" class="btn btn-primary" role="buttom" id="altaServ">Registrar</a>
+                        <a href="#!" class="btn btn-primary" role="buttom" id="updateServ">Actualizar</a>
                       </div>
                               
                     </div>
@@ -210,7 +211,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/altaServicio.js"></script>
+    <script src="assets/js/modServicio.js"></script>
 </body>
 </html> 
 
