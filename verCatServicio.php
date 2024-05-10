@@ -77,7 +77,7 @@ session_start();
                                     <td>$nombreCatServ</td>
                                     <td>$estatusCatServ</td>
                                     <td>
-                                      <a href='verInfoServ.php?data=$idCatServ' class='btn btn-primary'>Editar</a>
+                                      <a href='verInfoCatServ.php?data=$idCatServ' class='btn btn-primary'>Editar</a>
                                     </td>
                                   </tr>";
 
