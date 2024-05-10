@@ -42,6 +42,30 @@ if(!empty($_SESSION['usuarioPOS'])){
 
 
 
+  }elseif(!empty($_POST['nombreCatServ'])){
+    //seccion para registrar la categoria de servicio
+    $nombreCat = $_POST['nombreCatServ'];
+    $descCat = $_POST['descripcionCatServ'];
+    $usuario = $_SESSION['usuarioPOS'];
+
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $empresa = json_decode($empresa);
+    $idEmpresa = $empresa->dato;
+
+
+    $sqlCatServ = "INSERT INTO CATEGORIASERVICIO (nombreCatServ,estatusCategoriaServ,
+    descripcionCategoriaServ,empresaID) VALUE ('$nombreCat','1','$descCat','$idEmpresa')";
+
+    try {
+      $queryCatServ = mysqli_query($conexion, $sqlCatServ);
+      //se inserto correctamente la categoria
+      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      echo json_encode($res);
+    } catch (\Throwable $th) {
+      //ocurrio un error al insertar la categoria
+      $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al insertar la categoria de servicio: '.$th];
+      echo json_encode($res);
+    }
   }
 }
 ?>
