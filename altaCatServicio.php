@@ -35,7 +35,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verServicios.php">Ver Categoria de Servicio</a>
+									        <a href="verCatServicio.php">Ver Categoria de Servicio</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
