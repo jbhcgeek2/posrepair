@@ -14,7 +14,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     //seccion para modificar un servicio
     //pero antes de actualizarlo verificamos el estatuis actaul,
     //si cambia verificaremos el numero de servicios disponibles para blokear
-    $idServicio = $_POST['srvData'];
+    $idServicio = $_POST['servData'];
     $nombreServ = $_POST['nombreServ'];
     $tipoPrecio = $_POST['precioFijo'];
     $catServicio = $_POST['categoriaServicio'];
