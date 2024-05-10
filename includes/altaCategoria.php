@@ -85,7 +85,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           //si existe la categoria
          //hacemos la actualizacion
          $sqlUpdate = "UPDATE CATEGORIASERVICIO SET nombreCatServ = '$nombreCatUpdate', 
-         estatusCategoriaServ = '$estatusCat' descripcionCategoriaServ = '$descripcion' 
+         estatusCategoriaServ = '$estatusCat', descripcionCategoriaServ = '$descripcion' 
          WHERE idCategoriaServ = '$idCatServ'";
          try {
           $queryUpdate = mysqli_query($conexion, $sqlUpdate);
