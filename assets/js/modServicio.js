@@ -29,7 +29,9 @@ btnUpdate.addEventListener('click', function(){
               'Servicio Actualizado',
               'Se actualizo correctamente el servicio',
               'success'
-            )
+            ).then(function(){
+              location.reload();
+            })
           }else{
             //ocurrio un error en la actualizacion
             let err = res.mensaje;
@@ -59,4 +61,17 @@ btnUpdate.addEventListener('click', function(){
       //no hacemos nada
     }
   })
+})
+
+let tipoPre = document.getElementById('precioFijo');
+tipoPre.addEventListener('change', function(){
+  let valorSel = tipoPre.value;
+  if(valorSel == "1"){
+    //se habilita el campo
+    document.getElementById('precioServ').removeAttribute('disabled');
+
+  }else{
+    //se deshabilita el campo
+    document.getElementById('precioServ').setAttribute('disabled',true);
+  }
 })
