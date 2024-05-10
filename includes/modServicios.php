@@ -17,7 +17,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $idServicio = $_POST['servData'];
     $nombreServ = $_POST['nombreServ'];
     $tipoPrecio = $_POST['precioFijo'];
-    $catServicio = $_POST['categoriaServicio'];
+    $catServicio = $_POST['catServicio'];
     $precio = $_POST['precioServ'];
     $statusServ = $_POST['estatusServ'];
 
@@ -35,7 +35,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           //no ay cambio de status, por lo que hacemos una modificacion normal
           $sqlServ2 = "UPDATE SERVICIOS SET nombreServicio = '$nombreServ',
           categoriaServicio = '$catServicio', estatusCategoria = '$statusServ',
-          precioServicio = '$precio', precioFijo = '$precio' WHERE idServicio = '$idServicio' 
+          precioServicio = '$precio', precioFijo = '$tipoPrecio' WHERE idServicio = '$idServicio' 
           AND empresaID = '$idEmpresaSesion'";
           try {
             $queryServ2 = mysqli_query($conexion, $sqlServ2);
