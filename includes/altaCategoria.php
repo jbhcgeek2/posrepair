@@ -6,6 +6,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   
   include("articulos.php");
   include("usuarios.php");
+  include("conexion.php");
 
   if(!empty($_POST['nombreCat'])){
     //seccion para insertar la nueva categoria
