@@ -69,9 +69,19 @@ tipoPre.addEventListener('change', function(){
   if(valorSel == "1"){
     //se habilita el campo
     document.getElementById('precioServ').removeAttribute('disabled');
-
   }else{
     //se deshabilita el campo
     document.getElementById('precioServ').setAttribute('disabled',true);
+  }
+})
+
+
+let catServicio = document.getElementById('catServicio');
+catServicio.addEventListener('change', function(){
+  let catSer = catServicio.value;
+
+  if(catSer == "newCatServ"){
+    //quiere dar de alta una nueva categoria
+    window.location = "altaCatServicio.php";
   }
 })
