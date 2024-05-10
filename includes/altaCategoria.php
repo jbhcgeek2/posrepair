@@ -67,6 +67,45 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al insertar la categoria de servicio: '.$th];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['nombreCatServUpdate'])){
+    $usuario = $_SESSION['usuarioPOS'];
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $empresa = json_decode($empresa);
+    $idEmpresa = $empresa->dato;
+    //seccion para modificar una categoria de servicio
+    $idCatServ = $_POST['dataCatServUpate'];
+    $nombreCatUpdate = $_POST['nombreCatServUpdate'];
+    $estatusCat = $_POST['estatusCatServUpdate'];
+    $descripcion = $_POST['descripcionCatServUpdate'];
+    //verificamos la existencia
+    $sqlCatServ = "SELECT * FROM CATEGORIASERVICIO WHERE idCategoriaServ = '$idCatServ' AND empresaID = '$idEmpresa'";
+      try {
+        $queryCatServ = mysqli_query($conexion,$sqlCatServ);
+        if(mysqli_num_rows($queryCatServ) == 1){
+          //si existe la categoria
+         //hacemos la actualizacion
+         $sqlUpdate = "UPDATE CATEGORIASERVICIO SET nombreCatServ = '$nombreCatUpdate' 
+         estatusCategoriaServ = '$estatusCat' descripcionCategoriaServ = '$descripcion' 
+         WHERE idCategoriaServ = '$idCatServ'";
+         try {
+          $queryUpdate = mysqli_query($conexion, $sqlUpdate);
+          //se hizo la actualizacion
+          $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+          echo json_encode($res);
+         } catch (\Throwable $th) {
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al actualizar: '.$th];
+          echo json_encode($res);
+         }
+
+        }else{
+          //categoria no localizable
+          $res = ['status'=>'error','mensaje'=>'No fue posible localizar la categoria.'];
+          echo json_encode($res);
+        }
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la categoria a modificar'];
+        echo json_encode($res);
+      }
   }
 }
 ?>
