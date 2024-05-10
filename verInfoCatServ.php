@@ -76,12 +76,12 @@ session_start();
                     <div class="row">
                       <form id="dataAltaServCat" class="row">
                         <input type="hidden" name="dataCatServUpate" id="dataCatServUpate" value="<?php echo $idCatServ; ?>">
-                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-8 mb-3">
                           <label for="nombreCatServUpdate" class="form-label">Categoria de Servicio</label>
                           <input type="text" id="nombreCatServUpdate" name="nombreCatServUpdate" class="form-control" 
                           value="<?php echo $nombreCat; ?>">
                         </div>
-                        <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="estatusCatServUpdate" class="form-label">Estatus Categoria</label>
                           <select name="estatusCatServUpdate" id="estatusCatServUpdate" class="form-select">
                             <option value=""selected disabled>Seleccione...</option>
@@ -96,7 +96,7 @@ session_start();
                             ?>
                           </select>
                         </div>
-                        <div class="col-sm-12 col-md-6 col-lg-8 mb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-12 mb-3">
                           <label for="descripcionCatServUpdate" class="form-label">Descripcion</label>
                           <input type="text" id="descripcionCatServUpdate" name="descripcionCatServUpdate" class="form-control" 
                           value="<?php echo $descripcion;  ?>">
