@@ -57,7 +57,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $fetchServ3 = mysqli_fetch_assoc($queryServ3);
             $numActivos = $fetchServ3['numServAlta'];
             $numPErmitodos = $fetchServ3['maxServicios'];
-            if($numActivos < $numPErmitodos){
+            if($numActivos < $numPErmitodos || $numPErmitodos == '0'){
               //podemos gacer la modificacion
               $sqlServ4 ="UPDATE SERVICIOS SET nombreServicio = '$nombreServ',
               categoriaServicio = '$catServicio', estatusCategoria = '$statusServ',
