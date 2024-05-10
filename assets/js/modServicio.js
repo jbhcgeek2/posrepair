@@ -19,7 +19,7 @@ btnUpdate.addEventListener('click', function(){
         let datos = new FormData(document.getElementById('dataModServ'));
 
         let envio = new XMLHttpRequest();
-        envio.open('POST','../includes/modServicios.js',false);
+        envio.open('POST','../includes/modServicios.php',false);
         envio.send(datos);
 
         if(envio.status == 200){
