@@ -64,7 +64,7 @@ session_start();
 
                                   $nombreCatServ = $fetchCatServ['nombreCatServ'];
                                   $estatusCatServ = $fetchCatServ['estatusCategoriaServ'];
-                                  $idCatServ = $fetchCatServ['precioFijo'];
+                                  $idCatServ = $fetchCatServ['idCategoriaServ'];
 
                                   if($estatusCatServ == '1'){
                                     $estatusCatServ = "Activo";
