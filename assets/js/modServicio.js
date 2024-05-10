@@ -1,4 +1,4 @@
-let btnUpdate = document.getElementById(updateServ);
+let btnUpdate = document.getElementById('updateServ');
 
 btnUpdate.addEventListener('click', function(){
   //preguntamos si desea actualizar el servicio
