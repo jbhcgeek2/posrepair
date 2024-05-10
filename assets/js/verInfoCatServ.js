@@ -24,7 +24,9 @@ btnUpdate.addEventListener('click', function(){
             'Categoria actualizada',
             'Se actualizo correctamente la categoria',
             'success'
-          )
+          ).then(function(){
+            location.reload();
+          })
         }else{
           //ocurrio un error
           let err = res.mensaje;
