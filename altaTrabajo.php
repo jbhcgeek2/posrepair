@@ -73,7 +73,8 @@ session_start();
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="fechaServicio" class="form-label">Fecha</label>
-                          <input type="date" id="fechaServicio" name="fechaServicio" value="<?php echo date('Y-m-d'); ?>">
+                          <input type="date" id="fechaServicio" name="fechaServicio" 
+                          value="<?php echo date('Y-m-d'); ?>" class="form-control">
                         </div>
                         
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
