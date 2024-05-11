@@ -458,7 +458,7 @@
 							        </div><!--//col-->
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="#">View report</a>
+									        <a href="reportesCaja.php">View report</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 						        </div><!--//row-->
