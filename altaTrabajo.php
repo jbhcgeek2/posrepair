@@ -97,9 +97,30 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-6">
-                          <label for="tipoServicio">Tipo de Servicio</label>
-                          <select name="tipoServicio" id="tipoServicio" class="form-select">Seleccione</select>
+                        <div class="col-sm-12 col-md-6 mb-3">
+                          <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select">
+                            <option value="" selected disabled>Seleccione...</option>
+                            <?php 
+                              $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
+                              estatusCategoria = '1'";
+                              try {
+                                $queryTServ = mysqli_query($conexion, $sqlTServ);
+                                if(mysqli_num_rows($queryTServ) > 0){
+                                  while($fetchTServ = mysqli_fetch_assoc($queryTServ)){
+                                    $nombreServ = $fetchTServ['nombreServicio'];
+                                    $idServicio = $fetchTServ['idServicio'];
+                                    echo "<option value='$idServicio'>$nombreServ</option>";
+                                  }//fin del while
+                                }else{
+                                  //sin servicios registrados
+                                  echo "<option value='noData'>Registrar Servicio</option>";
+                                }
+                              } catch (\Throwable $th) {
+                                echo "<option value='error'>Error de consulta DB</option>";
+                              }
+                            ?>
+                          </select>
                         </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-4 mb-3">
@@ -107,7 +128,7 @@ session_start();
                           <input type="text" name="marcaServicio" id="marcaServicio" class="form-control">
                         </div>
 
-                        <div class="col-sm-12 col-md-3 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-3 offset-md-3 col-lg-4 mb-3">
                           <label for="modeloServicio" class="form-label">Modelo</label>
                           <input type="text" name="modeloServicio" id="modeloServicio" class="form-control">
                         </div>
@@ -124,14 +145,16 @@ session_start();
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
                             <span class="input-group-text p-3">Descripcion del Problema</span>
-                            <textarea name="accesorioServicio" id="accesorioServicio" class="form-control"></textarea>
+                            <textarea name="accesorioServicio" id="accesorioServicio" style="height:70px;"
+                            class="form-control"></textarea>
                           </div>
                         </div>
 
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
                             <span class="input-group-text">Observaciones</span>
-                            <textarea name="observServicio" id="observServicio" class="form-control"></textarea>
+                            <textarea name="observServicio" id="observServicio" style="height:70px;"
+                            class="form-control"></textarea>
                           </div>
                         </div>
 
