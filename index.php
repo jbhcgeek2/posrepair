@@ -484,6 +484,35 @@
 									            30%
 									          </td>
 													</tr>
+													<?php
+														//realizamos la consulta para ver los vendedores
+														$sqlVentas2 = "SELECT *,
+														(SELECT d.nombreSuc FROM DETALLEVENTA c INNER JOIN SUCURSALES d ON c.sucursalID = d.idSucursal 
+														WHERE c.ventaID = a.idVenta LIMIT 1) AS sucVenta FROM VENTAS a INNER JOIN USUARIOS b 
+														ON a.usuarioID = b.idUsuario WHERE a.empresaID = '1' ORDER BY a.idVenta DESC LIMIT 6";
+														try {
+															$queryVentas2 = mysqli_query($conexion, $sqlVentas2);
+															if(mysqli_num_rows($queryVentas2) > 0){
+																while($fetchVentas2 = mysqli_fetch_assoc($queryVentas2)){
+																	$montoVenta = $fetchVentas2['totalVenta'];
+																	$nombreVenta = $fetchVentas2['nombreUsuario']." ".$fetchVentas2['apPaternoUsuario']." ".$fetchVenta2['apMaternoUsuario'];
+																	$sucVenta = $fetchVentas2['sucVenta'];
+
+																	echo "<tr>
+																	<td>$nombreVenta</td>
+																	<td>$sucVenta</td>
+																	<td>$montoVenta</td>
+																	</tr>";
+																	
+
+																}//fin del while 2
+															}else{
+																//sin ventas registradas
+															}
+														} catch (\Throwable $th) {
+															//ocurrio un error en la consulta de datos
+														}
+													?>
 													
 												</tbody>
 											</table>
