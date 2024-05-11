@@ -50,9 +50,9 @@ session_start();
                       
                       <form id="dataAltaSuc" class="row">
 
-                        <div class="col-sm-12 col-md-6 col-lg-4">
-                          <label for="clienteTrabajo" class="">Cliente</label>
-                          <select name="clienteTrabajo" id="clienteTrabajo">
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                          <label for="clienteTrabajo" class="form-label">Cliente</label>
+                          <select name="clienteTrabajo" id="clienteTrabajo" class="form-select">
                             <option value="" selected disabled>Seleccione...</option>
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
@@ -71,10 +71,15 @@ session_start();
                             ?>
                           </select>
                         </div>
-
+                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
+                          <label for="fechaServicio" class="form-label">Fecha</label>
+                          <input type="date" id="fechaServicio" name="fechaServicio" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                        
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="nombreAltaSuc" class="form-label">Nombre Sucursal</label>
-                          <input type="text" id="nombreAltaSuc" name="nombreAltaSuc" class="form-control">
+                          <label for="sucursalServicio" class="form-label">Sucursal</label>
+                          <input type="text" id="sucursalServicio" name="sucursalServicio" 
+                          value="<?php echo $nombreSucursal; ?>" class="form-control" readonly>
                         </div>
 
                         

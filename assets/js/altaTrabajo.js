@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }).then((result)=>{
     if(result.isConfirmed){
       //ya esta registrado
-  
     }else{
       //no esta registrado, lo damos de alta
       window.location = 'altaCliente.php';
