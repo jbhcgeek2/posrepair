@@ -60,8 +60,8 @@ session_start();
                               if($clientes->status == 'ok'){
 
                                 for ($i=0; $i <count($clientes->data) ; $i++) { 
-                                  $nombreCliente = $clientes->data[$i]['nombreCliente'];
-                                  
+                                  $nombreCliente = $clientes->data[$i]->nombreCliente;
+
                                   echo "<option value=''>$nombreCliente</option>";
                                 }
                               }else{

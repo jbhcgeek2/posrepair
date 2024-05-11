@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
   Swal.fire({
     title: 'Antes de continuar...',
@@ -15,5 +16,5 @@ document.addEventListener("DOMContentLoaded", function() {
       window.location = 'altaCliente.php';
     }
   })
-  
+
 })
