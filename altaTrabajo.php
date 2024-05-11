@@ -83,7 +83,9 @@ session_start();
                           value="<?php echo $nombreSucursal; ?>" class="form-control" readonly>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        
+
+                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="tipoDispositivo" class="form-label">Dispositivo</label>
                           <select name="tipoDispositivo" id="tipoDispositivo" class="form-select">
                             <option value="" selected disabled>Seleccione...</option>
@@ -94,16 +96,22 @@ session_start();
                             <option value="Smartwatch">Smartwatch</option>
                           </select>
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+
+                        <div class="col-sm-12 col-md-6">
+                          <label for="tipoServicio">Tipo de Servicio</label>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select">Seleccione</select>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 col-lg-4 mb-3">
                           <label for="marcaServicio" class="form-label">Marca</label>
                           <input type="text" name="marcaServicio" id="marcaServicio" class="form-control">
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-3 col-lg-4 mb-3">
                           <label for="modeloServicio" class="form-label">Modelo</label>
                           <input type="text" name="modeloServicio" id="modeloServicio" class="form-control">
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-3 col-lg-4 mb-3">
                           <label for="numberDevice" class="form-label">IMEI / ESN / SN</label>
                           <input type="text" name="numberDevice" id="numberDevice" class="form-control">
                         </div>
@@ -115,7 +123,7 @@ session_start();
 
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
-                            <span class="input-group-text">Descripcion del Problema</span>
+                            <span class="input-group-text p-3">Descripcion del Problema</span>
                             <textarea name="accesorioServicio" id="accesorioServicio" class="form-control"></textarea>
                           </div>
                         </div>
@@ -128,7 +136,7 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                          <label for="contraDisp" class="form-label">Contrasena Dispositivo</label>
+                          <label for="contraDisp" class="form-label">Contraseña Dispositivo</label>
                           <input type="text" name="contraDisp" id="contraDisp" class="form-control">
                         </div>
 
@@ -139,12 +147,12 @@ session_start();
 
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                           <label for="costoServicio" class="form-label">Costo</label>
-                          <input type="date" name="costoServicio" id="costoServicio" class="form-control">
+                          <input type="number" name="costoServicio" id="costoServicio" class="form-control">
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                           <label for="anticipoServicio" class="form-label">Anticipo</label>
-                          <input type="date" name="anticipoServicio" id="anticipoServicio" class="form-control">
+                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control">
                         </div>
 
 
