@@ -474,7 +474,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
+													<!-- <tr>
 														<td><a href="#">google.com</a></td>
 														<td class="stat-cell">110</td>
 														<td class="stat-cell">
@@ -483,7 +483,7 @@
 															</svg> 
 									            30%
 									          </td>
-													</tr>
+													</tr> -->
 													<?php
 														//realizamos la consulta para ver los vendedores
 														$sqlVentas2 = "SELECT *,
@@ -495,16 +495,15 @@
 															if(mysqli_num_rows($queryVentas2) > 0){
 																while($fetchVentas2 = mysqli_fetch_assoc($queryVentas2)){
 																	$montoVenta = $fetchVentas2['totalVenta'];
-																	$nombreVenta = $fetchVentas2['nombreUsuario']." ".$fetchVentas2['apPaternoUsuario']." ".$fetchVenta2['apMaternoUsuario'];
+																	$nombreVenta = $fetchVentas2['nombreUsuario']." ".$fetchVentas2['apPaternoUsuario']." ".$fetchVentas2['apMaternoUsuario'];
 																	$sucVenta = $fetchVentas2['sucVenta'];
 
 																	echo "<tr>
-																	<td>$nombreVenta</td>
-																	<td>$sucVenta</td>
-																	<td>$montoVenta</td>
+																	<td><a href='#!'>$nombreVenta</a></td>
+																	<td class='stat-cell'>$sucVenta</td>
+																	<td class='stat-cell'>$$montoVenta</td>
 																	</tr>";
 																	
-
 																}//fin del while 2
 															}else{
 																//sin ventas registradas
