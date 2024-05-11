@@ -1,3 +1,4 @@
+
 Swal.fire({
   title: 'Antes de continuar...',
   text: 'Ya se encuentra registrado el cliente?',
@@ -8,7 +9,7 @@ Swal.fire({
 }).then((result)=>{
   if(result.isConfirmed){
     //ya esta registrado
-    
+
   }else{
     //no esta registrado, lo damos de alta
     window.location = 'altaCliente.php';
