@@ -116,15 +116,15 @@ session_start();
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
                             <span class="input-group-text">Descripcion del Problema</span>
+                            <textarea name="accesorioServicio" id="accesorioServicio" class="form-control"></textarea>
                           </div>
-                          <textarea name="accesorioServicio" id="accesorioServicio" class="form-control"></textarea>
                         </div>
 
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
                             <span class="input-group-text">Observaciones</span>
+                            <textarea name="observServicio" id="observServicio" class="form-control"></textarea>
                           </div>
-                          <textarea name="observServicio" id="observServicio" class="form-control"></textarea>
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
