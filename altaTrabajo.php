@@ -77,11 +77,77 @@ session_start();
                           value="<?php echo date('Y-m-d'); ?>" class="form-control">
                         </div>
                         
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="sucursalServicio" class="form-label">Sucursal</label>
                           <input type="text" id="sucursalServicio" name="sucursalServicio" 
                           value="<?php echo $nombreSucursal; ?>" class="form-control" readonly>
                         </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="tipoDispositivo" class="form-label">Dispositivo</label>
+                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select">
+                            <option value="" selected disabled>Seleccione...</option>
+                            <option value="Celular">Celular</option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Desktop">Desktop</option>
+                            <option value="Smartwatch">Smartwatch</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="marcaServicio" class="form-label">Marca</label>
+                          <input type="text" name="marcaServicio" id="marcaServicio" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="modeloServicio" class="form-label">Modelo</label>
+                          <input type="text" name="modeloServicio" id="modeloServicio" class="form-control">
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="numberDevice" class="form-label">IMEI / ESN / SN</label>
+                          <input type="text" name="numberDevice" id="numberDevice" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 mb-3">
+                          <label for="accesorioServicio" class="form-label">Accesorios</label>
+                          <input type="text" name="accesorioServicio" id="accesorioServicio" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 mb-3">
+                          <div class="input-group">
+                            <span class="input-group-text">Descripcion del Problema</span>
+                          </div>
+                          <textarea name="accesorioServicio" id="accesorioServicio" class="form-control"></textarea>
+                        </div>
+
+                        <div class="col-sm-12 mb-3">
+                          <div class="input-group">
+                            <span class="input-group-text">Observaciones</span>
+                          </div>
+                          <textarea name="observServicio" id="observServicio" class="form-control"></textarea>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="contraDisp" class="form-label">Contrasena Dispositivo</label>
+                          <input type="text" name="contraDisp" id="contraDisp" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="costoServicio" class="form-label">Costo</label>
+                          <input type="date" name="costoServicio" id="costoServicio" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                          <label for="anticipoServicio" class="form-label">Anticipo</label>
+                          <input type="date" name="anticipoServicio" id="anticipoServicio" class="form-control">
+                        </div>
+
+
 
                         
                       </form>
