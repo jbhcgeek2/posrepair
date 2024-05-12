@@ -19,8 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
   let tipoServ = document.getElementById('tipoServicio');
   tipoServ.addEventListener('change', function(){
     //buscaremos el precio sugerido del servicio
+    let dato = tipoServ.value;
     let datoServ = new FormData();
-    datoServ.append('servCheck',datoServ);
+    datoServ.append('servCheck',dato);
 
     let envioServ = new XMLHttpRequest();
     envioServ.open('POST','../includes/trabajosOperaciones.php', false);
