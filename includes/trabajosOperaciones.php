@@ -24,7 +24,7 @@
       $sql = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' 
       AND idServicio = '$idServ'";
       try {
-        $query = mysqli_query($conexion, $sq);
+        $query = mysqli_query($conexion, $sql);
 
         if(mysqli_num_rows($query) == 1){
           $fetch = mysqli_fetch_assoc($query);

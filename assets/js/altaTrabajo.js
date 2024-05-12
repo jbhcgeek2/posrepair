@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
       if(res.status == "ok"){
         //se consulto correctamente
         document.getElementById('costoServicio').value = res.data;
-        
       }else{
         //error de operacion
         let err = res.mensaje;
