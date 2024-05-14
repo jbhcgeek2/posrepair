@@ -53,6 +53,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
   })
 
+  let btnAlta = document.getElementById('altaTrabajo');
+  btnAlta.addEventListener('click', function(){
+    //le preguntamos que si esta seguro registrar
+
+    Swal.fire({
+      title: 'Registrar Trabajo?',
+      text: 'Estas seguro de registrarlo?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Si, registrar',
+      denyButtonText: 'Cancelar'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //cargamos los datos
+
+        let datos = new FormData(document.getElementById('dataAltaTrab'));
+        //verificamos que los datos requeridos esten cargados
+        
+
+      }
+    })
+  });
+
 })
 
 
