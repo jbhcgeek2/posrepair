@@ -70,7 +70,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let datos = new FormData(document.getElementById('dataAltaTrab'));
         //verificamos que los datos requeridos esten cargados
-        
+        datos.forEach(function(valor, clave){
+          console.log('Valor: '+valor+' del campo '+clave);
+        })
 
       }
     })

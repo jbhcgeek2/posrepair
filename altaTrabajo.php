@@ -51,7 +51,7 @@ session_start();
                       <form id="dataAltaTrab" class="row">
 
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                          <label for="clienteTrabajo" class="form-label">Cliente <span class='danger-text'>*<span></label>
+                          <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
                           <select name="clienteTrabajo" id="clienteTrabajo" class="form-select" required>
                             <option value="" selected disabled>Seleccione...</option>
                             <?php 
@@ -73,22 +73,23 @@ session_start();
                           <div class="invalid-feedback">Selecciona un cliente valido</div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="fechaServicio" class="form-label">Fecha</label>
+                          <label for="fechaServicio" class="form-label">Fecha <span class='text-danger fw-bold'>*<span></label>
                           <input type="date" id="fechaServicio" name="fechaServicio" 
-                          value="<?php echo date('Y-m-d'); ?>" class="form-control">
+                          value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
+                          <div class="invalid-feedback">Indique una fecha valida</div>
                         </div>
                         
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="sucursalServicio" class="form-label">Sucursal</label>
                           <input type="text" id="sucursalServicio" name="sucursalServicio" 
-                          value="<?php echo $nombreSucursal; ?>" class="form-control" readonly>
+                          value="<?php echo $nombreSucursal; ?>" class="form-control" readonly required>
                         </div>
 
                         
 
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="tipoDispositivo" class="form-label">Dispositivo</label>
-                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select">
+                          <label for="tipoDispositivo" class="form-label">Dispositivo <span class='text-danger fw-bold'>*<span></label>
+                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select" required>
                             <option value="" selected disabled>Seleccione...</option>
                             <option value="Celular">Celular</option>
                             <option value="Tablet">Tablet</option>
@@ -96,11 +97,12 @@ session_start();
                             <option value="Desktop">Desktop</option>
                             <option value="Smartwatch">Smartwatch</option>
                           </select>
+                          <div class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
-                          <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
-                          <select name="tipoServicio" id="tipoServicio" class="form-select">
+                          <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select" required>
                             <option value="" selected disabled>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
@@ -122,20 +124,24 @@ session_start();
                               }
                             ?>
                           </select>
+                          <div class="invalid-feedback">Selecciona servicio valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="marcaServicio" class="form-label">Marca</label>
-                          <input type="text" name="marcaServicio" id="marcaServicio" class="form-control">
+                          <label for="marcaServicio" class="form-label">Marca <span class='text-danger fw-bold'>*<span></label>
+                          <input type="text" name="marcaServicio" id="marcaServicio" class="form-control" required>
+                          <div class="invalid-feedback">Indique una marca valida</div>
                         </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="modeloServicio" class="form-label">Modelo</label>
-                          <input type="text" name="modeloServicio" id="modeloServicio" class="form-control">
+                          <label for="modeloServicio" class="form-label">Modelo <span class='text-danger fw-bold'>*<span></label>
+                          <input type="text" name="modeloServicio" id="modeloServicio" class="form-control" required>
+                          <div class="invalid-feedback">indique un modelo valido</div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="numberDevice" class="form-label">IMEI / ESN / SN</label>
-                          <input type="text" name="numberDevice" id="numberDevice" class="form-control">
+                          <label for="numberDevice" class="form-label">IMEI / ESN / SN <span class='text-danger fw-bold'>*<span></label>
+                          <input type="text" name="numberDevice" id="numberDevice" class="form-control" required>
+                          <div class="invalid-feedback">Indique un dato valido</div>
                         </div>
 
                         <div class="col-sm-12 mb-3">
@@ -145,9 +151,10 @@ session_start();
 
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
-                            <span class="input-group-text p-3">Descripcion del Problema</span>
+                            <span class="input-group-text p-3">Descripcion del Problema <span class='text-danger fw-bold'>*<span></span>
                             <textarea name="accesorioServicio" id="accesorioServicio" style="height:70px;"
-                            class="form-control"></textarea>
+                            class="form-control" required></textarea>
+                            <div class="invalid-feedback">Indique la problematica que presenta el dispositivo</div>
                           </div>
                         </div>
 
@@ -165,8 +172,9 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
-                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control">
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega <span class='text-danger fw-bold'>*<span></label>
+                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
+                          <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
