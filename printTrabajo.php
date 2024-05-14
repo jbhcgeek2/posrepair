@@ -36,7 +36,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $domSuc = $trabajo->data->calleSuc;
     $telSuc = $trabajo->data->telefonoSuc;
     $numServ = $trabajo->data->numTrabajo;
-    $numServ = str_pad($numServ,3,STR_PAD_RIGHT);
+    $numServ = str_pad($numServ,3 ,'0',STR_PAD_LEFT);
     $nombreCliente = $trabajo->data->nombreCliente;
     $fechaRegistro = $trabajo->data->fechaRegistro;
     $horaRegistro = $trabajo->data->horaRegistro;
@@ -146,7 +146,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td style="font-weight:bold;">Costo Aproximado:</td>
               </tr>
               <tr>
-                <td><?php echo $costoAprox; ?></td>
+                <td>$<?php echo $costoAprox; ?></td>
               </tr>
               <tr>
                 <th style="border-top: 1px dotted;"></th>
@@ -155,7 +155,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td style="font-weight:bold;">Anticipo:</td>
               </tr>
               <tr>
-                <td><?php echo $anticipo; ?></td>
+                <td>$<?php echo $anticipo; ?></td>
               </tr>
               <tr>
                 <th style="border-top: 1px dotted;"></th>
