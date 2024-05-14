@@ -169,6 +169,23 @@ if(!empty($_SESSION['usuarioPOS'])){
               <tr>
                 <th style="border-top: 1px dotted;"></th>
               </tr>
+              <tr>
+                <td style="font-weight:bold;text-align:center">Condiciones del Servicio</td>
+              </tr>
+              <tr>
+                <th style="text-align: justify;">
+                  <ul>
+                    <li>
+                      Toda Revision causa honorarios ($100.00).
+                    </li>
+                    <li>
+                      NOTA:Riesgo de dano en pantallas (LCD-Touch) en la intervencion del equipo 
+                      sin responsabilidad del establecimiento notificacion al cliente oral y escrito.
+                    </li>
+                  </ul>
+                </th>
+              </tr>
+              
                
                 
             </tbody>
