@@ -7,7 +7,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   include("includes/conexion.php");
   include("includes/usuarios.php");
   include("includes/cliente.php");
-  include("includes/trabajos.php");
+  include("includes/ventas.php");
   
 
   $usuario = $_SESSION['usuarioPOS'];
@@ -24,12 +24,12 @@ if(!empty($_SESSION['usuarioPOS'])){
   $nombreEmpresa = json_decode($nombreEmpresa)->dato;
 
   //verificamos que la venta exista
-  $venta = ticketTrabajo($ticket,$idEmprersa);
-  $venta = json_decode($venta);
+  $trabajo = ticketTrabajo($ticket,$idEmprersa);
+  $trabajo = json_decode($trabajo);
   // print_r($venta);718037884639
 
-  if($venta->status == "ok"){
-    print_r($venta);
+  if($trabajo->status == "ok"){
+    print_r($trabajo);
     
     ?> 
     <!DOCTYPE html>

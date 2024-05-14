@@ -162,9 +162,13 @@ function ticketTrabajo($idTrabajo,$idEmpresa){
       return json_encode($res);
     }else{
       //trabajo no lozalizado
+      $res = ['status'=>'error','mensaje'=>'No fue posible localizar el trabajo'];
+      return json_encode($res);
     }
   } catch (\Throwable $th) {
     //throw $th;
+    $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar el trabajo: '.$th];
+    return json_encode($res);
   }
 }
 
