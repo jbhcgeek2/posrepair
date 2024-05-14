@@ -54,16 +54,16 @@ if(!empty($_SESSION['usuarioPOS'])){
           <table style="width:100%;">
             <thead>
               <tr>
-                <th colspan="3" style="text-align:left;">Ticket No. <?php echo $ticketNo; ?></th>
+                <th colspan="3" style="text-align:left;">Ticket No. <?php ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Cliente - <?php echo $cliente; ?></th>
+                <th colspan="3" style="font-weight:100;">Cliente - <?php ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Fecha y hora - <?php echo $fechaHora; ?></th>
+                <th colspan="3" style="font-weight:100;">Fecha y hora - <?php ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Cajero - <?php echo $nombreUsuario; ?></th>
+                <th colspan="3" style="font-weight:100;">Cajero - <?php ?></th>
               </tr>
               <tr>
                 <th colspan="3" style="border-top: 1px solid;"></th>
