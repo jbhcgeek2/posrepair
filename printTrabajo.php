@@ -31,8 +31,8 @@ if(!empty($_SESSION['usuarioPOS'])){
 
   if($trabajo->status == "ok"){
     
-    $datosTrab = json_decode($trabajo);
-    $nombreSuc = $datosTrab->data->nombreSuc;
+    // $datosTrab = json_decode($trabajo);
+    $nombreSuc = $trabajo->data->nombreSuc;
     
     ?> 
     <!DOCTYPE html>
