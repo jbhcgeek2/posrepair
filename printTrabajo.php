@@ -98,7 +98,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $dispositivo; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Tipo de Servicio:</td>
@@ -107,7 +107,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Descripcion del problema:</td>
@@ -116,7 +116,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Observaciones:</td>
@@ -125,7 +125,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Accesorios:</td>
@@ -134,7 +134,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Costo Aproximado:</td>
@@ -143,7 +143,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Anticipo:</td>
@@ -152,7 +152,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
               <tr>
                 <td>Fecha Estimada de entrega:</td>
@@ -161,7 +161,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px; solid;"></th>
+                <th style="border-top: 1px solid;"></th>
               </tr>
                
                 
