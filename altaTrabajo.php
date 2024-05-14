@@ -61,8 +61,9 @@ session_start();
 
                                 for ($i=0; $i <count($clientes->data) ; $i++) { 
                                   $nombreCliente = $clientes->data[$i]->nombreCliente;
+                                  $cliente = $cliente->data[$i]->idClientes;
 
-                                  echo "<option value=''>$nombreCliente</option>";
+                                  echo "<option value='$cliente'>$nombreCliente</option>";
                                 }
                               }else{
                                 //error de consulta
@@ -151,8 +152,8 @@ session_start();
 
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
-                            <span class="input-group-text p-3">Descripcion del Problema <span class='text-danger fw-bold'>*<span></span>
-                            <textarea name="accesorioServicio" id="accesorioServicio" style="height:70px;"
+                            <span class="input-group-text p-3">Descripcion del Problema <span class='text-danger fw-bold'>*</span></span>
+                            <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
                             class="form-control" required></textarea>
                             <div class="invalid-feedback">Indique la problematica que presenta el dispositivo</div>
                           </div>

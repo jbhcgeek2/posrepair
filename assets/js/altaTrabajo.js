@@ -70,9 +70,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let datos = new FormData(document.getElementById('dataAltaTrab'));
         //verificamos que los datos requeridos esten cargados
+        let pasa = 0;
         datos.forEach(function(valor, clave){
           console.log('Valor: '+valor+' del campo '+clave);
         })
+
+        if(pasa == 0){
+          //carmagos el envio
+          let envio = new XMLHttpRequest();
+          envio.open('POST','../includes/trabajosOperaciones.php', false);
+          envio.send(datos);
+
+          if(envio.status == 200){
+            //se completo
+            let res = JSON.parse(envio.responseText);
+            console.log(res);
+          }else{
+            Swal.fire(
+              'Servidor Inalcansable',
+              'Verifica tu conexion a internet',
+              'error'
+            )
+          }
+
+        }
 
       }
     })
