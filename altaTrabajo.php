@@ -61,7 +61,7 @@ session_start();
 
                                 for ($i=0; $i <count($clientes->data) ; $i++) { 
                                   $nombreCliente = $clientes->data[$i]->nombreCliente;
-                                  $cliente = $cliente->data[$i]->idClientes;
+                                  $cliente = $clientes->data[$i]->idClientes;
 
                                   echo "<option value='$cliente'>$nombreCliente</option>";
                                 }
