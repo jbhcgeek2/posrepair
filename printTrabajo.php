@@ -7,6 +7,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   include("includes/conexion.php");
   include("includes/usuarios.php");
   include("includes/cliente.php");
+  include("includes/trabajos.php");
   
 
   $usuario = $_SESSION['usuarioPOS'];
@@ -18,7 +19,6 @@ if(!empty($_SESSION['usuarioPOS'])){
   $idSucursal = json_decode($datosUsuario)->sucursalID;
   $idUsuario = json_decode($datosUsuario)->idUsuario;
   // echo $idUsuario;
-  $nombreUsuario = json_decode($datosUsuario)->nombreUsuario." ".json_decode($datosUsuario)->apPaternoUsuario." ".json_decode($datosUsuario)->apMaternoUsuario;
 
   $nombreEmpresa = datoEmpresaSesion($usuario,"nombre");
   $nombreEmpresa = json_decode($nombreEmpresa)->dato;
@@ -29,21 +29,8 @@ if(!empty($_SESSION['usuarioPOS'])){
   // print_r($venta);718037884639
 
   if($venta->status == "ok"){
-    // print_r($venta);
-    $nombreSucursal = $venta->sucursalVenta->nombreSuc;
-    $fechaHora = $venta->venta->fechaVenta." - ".$venta->venta->horaVenta;
-    $ticketNo = $venta->venta->num_comprobante;
-    //para obtener los datos del cliente
-    $cliente = $venta->venta->clienteID;
-    if($cliente == 1){
-      //publico en general
-      $cliente = "Publico en General";
-    }else{
-      $dataCliente = verCliente($cliente,$idEmprersa);
-      // $cliente = $venta->venta->clienteID;
-      $dataCliente = json_decode($dataCliente);
-      $cliente = $dataCliente->data->nombreCliente;
-    }
+    print_r($venta);
+    
     ?> 
     <!DOCTYPE html>
     <html lang="en">
