@@ -176,16 +176,22 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <th style="text-align: justify;font-size:13px;">
                   - Toda Revision causa honorarios ($100.00).<br>
                 
-                  -NOTA:Riesgo de dano en pantallas (LCD-Touch) en la intervencion del equipo 
+                  - NOTA:Riesgo de dano en pantallas (LCD-Touch) en la intervencion del equipo 
                   sin responsabilidad del establecimiento notificacion al cliente oral y escrito.<br>
-                    
+                  
+                  - Despues de 60 dias de la fecha de entrega otorgo mi(s) equipo(s) y accesorios a Telcel
+                  para que disponga de ellos.<br>
+                  - Toda reparacion tiene un mes de garantia (excepto equipos mojados, con humedad o sarro).<br>
+                  - Sin comprobante no se entregara su articulo.<br>
+                  - No nos hacemos responsables por articulos no registrados en su nota.
                 </th>
               </tr>
-              
-               
                 
             </tbody>
           </table>
+          <p style="margin-top:30px;text-align:center">
+            <span class="border-top:1px solid;">     Firma del cliente     </span>
+          </p>
           <p>
             Gracias por su preferencia<br>
             Vuelva pronto
