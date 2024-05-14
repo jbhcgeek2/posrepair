@@ -33,6 +33,17 @@ if(!empty($_SESSION['usuarioPOS'])){
     
     // $datosTrab = json_decode($trabajo);
     $nombreSuc = $trabajo->data->nombreSuc;
+    $domSuc = $trabajo->data->calleSuc;
+    $telSuc = $trabajo->data->telefonoSuc;
+    $numServ = $trabajo->data->numTrabajo;
+    $numServ = str_pad($numServ,3,STR_PAD_LEFT);
+    $nombreCliente = $trabajo->data->nombreCliente;
+    $fechaRegistro = $trabajo->data->fechaRegistro;
+    $horaRegistro = $trabajo->data->horaRegistro;
+    $nombreUsuario = $trabajo->data->nombreUsuario;
+
+    $dispositivo = $trabajo->data->tipoDispositivo." ".$trabajo->data->marca." ".$trabajo->data->modelo;
+
     
     ?> 
     <!DOCTYPE html>
@@ -48,8 +59,8 @@ if(!empty($_SESSION['usuarioPOS'])){
           <div style="font-size: 15px;">
             <?php echo $nombreEmpresa; ?><br>
             Sucursal: <?php echo $nombreSuc; ?><br>
-            Domicilio: <?php  ?><br>
-            Telefono: <?php  ?><br>
+            Domicilio: <?php echo $domSuc; ?><br>
+            Telefono: <?php echo $telSuc; ?><br>
             <br>
           </div>
           
@@ -57,31 +68,34 @@ if(!empty($_SESSION['usuarioPOS'])){
           <table style="width:100%;">
             <thead>
               <tr>
-                <th colspan="3" style="text-align:left;">Ticket No. <?php ?></th>
+                <th colspan="3" style="text-align:left;">Servicio No. <?php echo $numServ; ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Cliente - <?php ?></th>
+                <th colspan="3" style="font-weight:100;">Cliente - <?php echo $nombreCliente; ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Fecha y hora - <?php ?></th>
+                <th colspan="3" style="font-weight:100;">Fecha y hora - <?php echo $fechaRegistro." - ".$horaRegistro; ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Cajero - <?php ?></th>
+                <th colspan="3" style="font-weight:100;">Empleado - <?php echo $nombreUsuario; ?></th>
               </tr>
               <tr>
                 <th colspan="3" style="border-top: 1px solid;"></th>
               </tr>
               <tr>
-                <th>UND</th>
-                <th>ARTICULO</th>
-                <th>TOTAL</th>
+                <th>Datos del Servicio</th>
               </tr>
               <tr>
                 <th colspan="3" style="border-top: 1px solid;"></th>
               </tr>
             </thead>
             <tbody>
-              
+              <tr>
+                <td>Dispositivo:</td>
+              </tr>
+              <tr>
+                <td><?php echo $dispositivo; ?></td>
+              </tr>
                
                 
             </tbody>
