@@ -27,7 +27,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   $trabajo = ticketTrabajo($ticket,$idEmprersa);
   $trabajo = json_decode($trabajo);
   // print_r($venta);718037884639
-  print_r($trabajo);
+  // print_r($trabajo);
 
   if($trabajo->status == "ok"){
     
@@ -189,8 +189,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                 
             </tbody>
           </table>
-          <p style="margin-top:30px;text-align:center">
-            <span class="border-top:1px solid;">     Firma del cliente     </span>
+          <p style="margin-top:70px;text-align:center;border-top:1px solid;">
+            <span>Firma del cliente</span>
           </p>
           <p>
             Gracias por su preferencia<br>
