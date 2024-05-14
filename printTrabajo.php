@@ -43,6 +43,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $nombreUsuario = $trabajo->data->nombreUsuario;
 
     $dispositivo = $trabajo->data->tipoDispositivo." ".$trabajo->data->marca." ".$trabajo->data->modelo;
+    $tipoServicio = $trabajo->data->nombreServicio;
 
     
     ?> 
@@ -95,6 +96,72 @@ if(!empty($_SESSION['usuarioPOS'])){
               </tr>
               <tr>
                 <td><?php echo $dispositivo; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Tipo de Servicio:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Descripcion del problema:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Observaciones:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Accesorios:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Costo Aproximado:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Anticipo:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
+              </tr>
+              <tr>
+                <td>Fecha Estimada de entrega:</td>
+              </tr>
+              <tr>
+                <td><?php echo $tipoServicio; ?></td>
+              </tr>
+              <tr>
+                <th style="border-top: 1px; solid;"></th>
               </tr>
                
                 
