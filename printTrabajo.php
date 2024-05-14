@@ -28,9 +28,11 @@ if(!empty($_SESSION['usuarioPOS'])){
   $trabajo = json_decode($trabajo);
   // print_r($venta);718037884639
   print_r($trabajo);
-  
+
   if($trabajo->status == "ok"){
     
+    $datosTrab = json_decode($trabajo);
+    $nombreSuc = $datosTrab->data->nombreSuc;
     
     ?> 
     <!DOCTYPE html>
@@ -45,7 +47,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         <div style="border: 0px solid #000; width:250px; text-align:center; font-family: 'Ubuntu', sans-serif;">
           <div style="font-size: 15px;">
             <?php echo $nombreEmpresa; ?><br>
-            Sucursal: <?php  ?><br>
+            Sucursal: <?php echo $nombreSuc; ?><br>
             Domicilio: <?php  ?><br>
             Telefono: <?php  ?><br>
             <br>
