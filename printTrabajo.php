@@ -27,9 +27,10 @@ if(!empty($_SESSION['usuarioPOS'])){
   $trabajo = ticketTrabajo($ticket,$idEmprersa);
   $trabajo = json_decode($trabajo);
   // print_r($venta);718037884639
-
+  print_r($trabajo);
+  
   if($trabajo->status == "ok"){
-    print_r($trabajo);
+    
     
     ?> 
     <!DOCTYPE html>
