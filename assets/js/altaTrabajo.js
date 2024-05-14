@@ -73,6 +73,16 @@ document.addEventListener("DOMContentLoaded", function() {
         let pasa = 0;
         datos.forEach(function(valor, clave){
           console.log('Valor: '+valor+' del campo '+clave);
+          //si el campo esta vacio lo marcaremos como valido
+          let campo = document.getElementById(clave);
+          if(valor.trim() == ""){
+            //campo vacio
+            campo.classList.add('is-invalid');
+            pasa++;
+          }else{
+            campo.classList.remove('is-invalid');
+            campo.classList.add('is-valid');
+          }
         })
 
         if(pasa == 0){
@@ -84,7 +94,24 @@ document.addEventListener("DOMContentLoaded", function() {
           if(envio.status == 200){
             //se completo
             let res = JSON.parse(envio.responseText);
-            console.log(res);
+            if(res.status == 'ok'){
+              //se completo el proceso
+              Swal.fire(
+                'Trabajo Registrado',
+                'Se ha registrado el trabajo correctamente',
+                'success'
+              ).then(function(){
+                location.reload();
+              })
+            }else{
+              // ocurrio un error al insertar el trabajo
+              let err = res.mensaje;
+              Swal.fire(
+                'Ha ocurrido un error',
+                'Verificar: '+err,
+                'error'
+              )
+            }
           }else{
             Swal.fire(
               'Servidor Inalcansable',

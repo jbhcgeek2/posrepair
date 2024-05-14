@@ -31,7 +31,8 @@ $usuario,$sucursal,$empresa){
     try {
       $query2 = mysqli_query($conexion, $sql2);
       //hasta este punto se da por terminao y completado
-      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      $idTrabajo = mysqli_insert_id($query2);
+      $res = ['status'=>'ok','mensaje'=>'operationComplete','data'=>$idTrabajo];
       return json_encode($res);
     } catch (\Throwable $th) {
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el trabajo: '.$th];
