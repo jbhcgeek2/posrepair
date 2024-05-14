@@ -98,76 +98,76 @@ if(!empty($_SESSION['usuarioPOS'])){
             </thead>
             <tbody>
               <tr>
-                <td>Dispositivo:</td>
+                <td style="font-weight:bold;">Dispositivo:</td>
               </tr>
               <tr>
                 <td><?php echo $dispositivo; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Tipo de Servicio:</td>
+                <td style="font-weight:bold;">Tipo de Servicio:</td>
               </tr>
               <tr>
                 <td><?php echo $tipoServicio; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Descripcion del problema:</td>
+                <td style="font-weight:bold;">Descripcion del problema:</td>
               </tr>
               <tr>
                 <td><?php echo $problema; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Observaciones:</td>
+                <td style="font-weight:bold;">Observaciones:</td>
               </tr>
               <tr>
                 <td><?php echo $observaciones; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Accesorios:</td>
+                <td style="font-weight:bold;">Accesorios:</td>
               </tr>
               <tr>
                 <td><?php echo $accesorios; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Costo Aproximado:</td>
+                <td style="font-weight:bold;">Costo Aproximado:</td>
               </tr>
               <tr>
                 <td><?php echo $costoAprox; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Anticipo:</td>
+                <td style="font-weight:bold;">Anticipo:</td>
               </tr>
               <tr>
                 <td><?php echo $anticipo; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
               <tr>
-                <td>Fecha Estimada de entrega:</td>
+                <td style="font-weight:bold;">Fecha Estimada de entrega:</td>
               </tr>
               <tr>
                 <td><?php echo $fechaEntrega; ?></td>
               </tr>
               <tr>
-                <th style="border-top: 1px solid;"></th>
+                <th style="border-top: 1px dotted;"></th>
               </tr>
                
                 
