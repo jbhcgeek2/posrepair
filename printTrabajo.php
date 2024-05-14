@@ -78,55 +78,9 @@ if(!empty($_SESSION['usuarioPOS'])){
               </tr>
             </thead>
             <tbody>
-              <?php 
-                $sumaTotal = 0;
-                $descuento = $venta->venta->descuentoVenta;
-                $totalVenta = $venta->venta->totalVenta;
-                $montoPago = $venta->venta->montoPago;
-                $cambioPago = $venta->venta->cambioPago;
-                for($x = 0; $x < count($venta->detalleVenta); $x++){
-                  $cantidad = $venta->detalleVenta[$x]->cantidadVenta;
-                  $subtotal = $venta->detalleVenta[$x]->subtotalVenta;
-                  $sumaTotal = $sumaTotal + $subtotal;
-                  $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
-
-                  echo "<tr>
-                    <td style='text-align:center;'>$cantidad</td>
-                    <td style='font-size:12px;'>$nombreArti</td>
-                    <td style='text-align: right;'>$".number_format($subtotal,2)."</td>
-                  </tr>";
-                }//fin del for
-                //indicamos si cuenta con descuento
-                echo "
+              
+               
                 
-                <tr>
-                  <td colspan='2' style='text-align: right;'>Descuentos</td>
-                  <td style='text-align: right;'>$descuento%</td>
-                </tr>
-                <tr>
-                  <td colspan='2' style='text-align: right;'>Subtotal</td>
-                  <td style='text-align: right;'>$$sumaTotal</td>
-                </tr>
-                <tr>
-                  <th colspan='3' style='border-top: 1px solid;'></th>
-                </tr>
-                <tr style='font-weight: bold; font-size:20px;'>
-                  <td colspan='2' style='text-align: center;'>Total a Pagar</td>
-                  <td style='text-align: right;'>$$totalVenta</td
-                </tr>
-                <tr>
-                  <th colspan='3' style='border-top: 1px solid;'></th>
-                </tr>
-                <tr style='border-button: 1px solid;'>
-                  <td colspan='2' style='text-align: right;'>Monto Recibido</td>
-                  <td style='text-align: right;'>$$montoPago</td>
-                </tr>
-                <tr>
-                  <td colspan='2' style='text-align: right;'>Cambio</td>
-                  <td style='text-align: right;'>$$cambioPago</td>
-                </tr>
-                ";
-              ?>
             </tbody>
           </table>
           <p>
