@@ -149,10 +149,10 @@ function ticketTrabajo($idTrabajo,$idEmpresa){
     }
   }
 
-  $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes
+  $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
   INNER JOIN USUARIOS c ON a.usuarioID = c.idUsuario INNER JOIN SUCURSALES d 
-  ON a.sucursalID = d.idSucursal INNER JOIN EMPRESAS e ON a.empresaID = e.idEmpresa 
-  WHERE a.idTrabajo  = '$idTrabajo' AND a.empresaID = '$idEmpresa'";
+  ON a.sucursalID = d.idSucursal INNER JOIN EMPRESAS e ON e.idEmpresa = a.empresaID 
+  WHERE a.idTrabajo = '$idTrabajo' AND a.empresaID = '$idEmpresa'";
   try {
     $query = mysqli_query($conexion, $sql);
     if(mysqli_num_rows($query) == 1){
