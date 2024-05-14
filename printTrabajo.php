@@ -96,7 +96,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <th colspan="3" style="border-top: 1px solid;"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style="text-align:left;">
               <tr>
                 <td style="font-weight:bold;">Dispositivo:</td>
               </tr>
