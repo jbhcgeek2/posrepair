@@ -71,8 +71,26 @@ session_start();
                               }
                             ?>
                           </select>
-                          <div id="clienteTrabajoFeedBack" class="invalid-feedback">Selecciona un cliente valido</div>
+                          
                         </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega <span class='text-danger fw-bold'>*<span></label>
+                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
+                          <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="costoServicio" class="form-label">Costo</label>
+                          <input type="number" name="costoServicio" id="costoServicio" class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="anticipoServicio" class="form-label">Anticipo</label>
+                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control">
+                        </div>
+
+
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="fechaServicio" class="form-label">Fecha <span class='text-danger fw-bold'>*<span></label>
                           <input type="date" id="fechaServicio" name="fechaServicio" 
@@ -171,25 +189,6 @@ session_start();
                           <label for="contraDisp" class="form-label">Contraseña Dispositivo</label>
                           <input type="text" name="contraDisp" id="contraDisp" class="form-control">
                         </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="fechaEntrega" class="form-label">Fecha de Entrega <span class='text-danger fw-bold'>*<span></label>
-                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
-                          <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="costoServicio" class="form-label">Costo</label>
-                          <input type="number" name="costoServicio" id="costoServicio" class="form-control">
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="anticipoServicio" class="form-label">Anticipo</label>
-                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control">
-                        </div>
-
-
-
                         
                       </form>
 
