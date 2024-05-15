@@ -213,14 +213,14 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-6 mb-3">
-                          <span class="input-group-text p-3">Descripcion del Problema</span>
-                          <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
+                          <span class="form-label">Descripcion del Problema</span>
+                          <textarea name="descripcionProblema" id="descripcionProblema" 
                           class="form-control" reeadonly><?php echo $problema; ?></textarea>
                         </div>
 
                         <div class="col-sm-12 col-md-6 mb-3">  
-                          <span class="input-group-text">Observaciones</span>
-                          <textarea name="observServicio" id="observServicio" style="height:70px;"
+                          <span class="form-label">Observaciones</span>
+                          <textarea name="observServicio" id="observServicio"
                           class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
 
