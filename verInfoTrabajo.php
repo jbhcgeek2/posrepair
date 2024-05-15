@@ -94,8 +94,28 @@ session_start();
                           <label for="clienteTrabajo" class="form-label">Cliente</label>
                           <input type="text" id="clienteTrabajo" class="form-control" value="<?php echo $nombreCliente; ?>" readonly>
                         </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required
+                          value="<?php echo $fechaEntrega; ?>">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="costoServicio" class="form-label">Costo</label>
+                          <input type="number" name="costoServicio" id="costoServicio" class="form-control" 
+                          value="<?php echo $costoIni; ?>" readonly>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="anticipoServicio" class="form-label">Anticipo</label>
+                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control" 
+                          value="<?php echo $anticipo; ?>" readonly>
+                        </div>
+
+
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="fechaServicio" class="form-label">Fecha</label>
+                          <label for="fechaServicio" class="form-label">Fecha Alta</label>
                           <input type="date" id="fechaServicio" name="fechaServicio" 
                           value="<?php echo $fechaTrabajo; ?>" class="form-control" readonly>
                         </div>
@@ -201,23 +221,7 @@ session_start();
                           value="<?php echo $contraDis; ?>">
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
-                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required
-                          value="<?php echo $fechaEntrega; ?>">
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="costoServicio" class="form-label">Costo</label>
-                          <input type="number" name="costoServicio" id="costoServicio" class="form-control" 
-                          value="<?php echo $costoIni; ?>" readonly>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="anticipoServicio" class="form-label">Anticipo</label>
-                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control" 
-                          value="<?php echo $anticipo; ?>" readonly>
-                        </div>
+                        
 
 
 
