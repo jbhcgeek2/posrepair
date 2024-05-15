@@ -89,7 +89,7 @@
             //las fechas son correectas, podemos registrar el producto
             $nuevoTrabajo = altaTrabajo($cliente,$fechaAlta,$tipoDispo,$tipoServ,$marca,$modeloServicio,
             $serieDispo,$accesorios,$problema,$observacion,$contraDispo,$fechaEntrega,$costoServ,$anticipo,
-            $usuario,$idSucursalN,$idEmpresaSesion);
+            $usuario,$idSucursalN,$idEmpresaSesion,$idUsuario);
 
             echo $nuevoTrabajo;
           }else{

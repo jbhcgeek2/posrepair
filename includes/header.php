@@ -26,7 +26,7 @@
 		$sucursal = json_decode($sucursal);
 		$nombreSucursal = $sucursal->dato;
 
-		$dataUSer = getDataUser($idEmpresaSesion,$usuario);
+		$dataUSer = getDataUser($usuario,$idEmpresaSesion);
 		$dataUSer = json_decode($dataUSer);
 		$idSucursalN = $dataUSer->sucursalID;
 
