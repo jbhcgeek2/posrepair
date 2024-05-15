@@ -21,7 +21,40 @@ session_start();
     $trabajo = ticketTrabajo($idTicket,$idEmpresaSesion);
     $trabajo = json_decode($trabajo);
 
-    print_r($trabajo);
+    if($trabajo->status == "ok"){
+      print_r($trabajo);
+
+      $nombreCliente = $trabajo->data->nombreCliente;
+      $fechaTrabajo = $trabajo->data->fechaTrabajo;
+      $sucursal = $trabajo->data->nombreSuc;
+      $tipoDispo = $trabajo->data->tipoDispositivo;
+      $tipoServicio = $trabajo->data->servicioID;
+      $marca = $trabajo->data->marca;
+      $modelo = $trabajo->data->modelo;
+      $imei = $trabajo->data->imeiClave;
+      $accesorios = $trabajo->data->accesorios;
+      $problema = $trabajo->data->problema;
+      $observaciones = $trabajo->data->observaciones;
+      $contraDis = $trabajo->data->contraDispo;
+      $fechaEntrega = $trabajo->data->fechaEntrega;
+      $costoIni = $trabajo->data->costoInicial;
+      $anticipo = $trabajo->data->anticipo;
+      $costoFin = $trabajo->data->costoFinal;
+      $estatusTrab = $trabajo->data->estatusTrabajo;
+
+       
+
+
+    }else{
+      //lo mandamos fuera
+      ?>
+        <script>
+          window.location = 'verTrabajos.php';
+        </script>
+      <?php
+    }
+
+    
   ?>
     
     <div class="app-wrapper">
@@ -29,7 +62,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Registrar Nuevo Trabajo</h1>
+			    <h1 class="app-page-title">Informacion de Trabajo</h1>
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -58,59 +91,46 @@ session_start();
                       <form id="dataAltaTrab" class="row">
 
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                          <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <select name="clienteTrabajo" id="clienteTrabajo" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
-                            <option value="" selected>Seleccione...</option>
-                            <?php 
-                              $clientes = verClientes($idEmpresaSesion);
-                              $clientes = json_decode($clientes);
-                              if($clientes->status == 'ok'){
-
-                                for ($i=0; $i <count($clientes->data) ; $i++) { 
-                                  $nombreCliente = $clientes->data[$i]->nombreCliente;
-                                  $cliente = $clientes->data[$i]->idClientes;
-
-                                  echo "<option value='$cliente'>$nombreCliente</option>";
-                                }
-                              }else{
-                                //error de consulta
-                                echo "<option>Error de consulta a la BD</option>";
-                              }
-                            ?>
-                          </select>
-                          <div id="clienteTrabajoFeedBack" class="invalid-feedback">Selecciona un cliente valido</div>
+                          <label for="clienteTrabajo" class="form-label">Cliente</label>
+                          <input type="text" id="clienteTrabajo" class="form-control" value="<?php echo $nombreCliente; ?>" readonly>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="fechaServicio" class="form-label">Fecha <span class='text-danger fw-bold'>*<span></label>
+                          <label for="fechaServicio" class="form-label">Fecha</label>
                           <input type="date" id="fechaServicio" name="fechaServicio" 
-                          value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
-                          <div class="invalid-feedback">Indique una fecha valida</div>
+                          value="<?php echo $fechaTrabajo; ?>" class="form-control" readonly>
                         </div>
                         
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="sucursalServicio" class="form-label">Sucursal</label>
                           <input type="text" id="sucursalServicio" name="sucursalServicio" 
-                          value="<?php echo $nombreSucursal; ?>" class="form-control" readonly required>
+                          value="<?php echo $sucursal; ?>" class="form-control" readonly required>
                         </div>
 
                         
 
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="tipoDispositivo" class="form-label">Dispositivo <span class='text-danger fw-bold'>*<span></label>
-                          <select name="tipoDispositivo" id="tipoDispositivo" aria-describedby="tipoDispositivoFeedBack" class="form-select" required>
+                          <label for="tipoDispositivo" class="form-label">Dispositivo</label>
+                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select" readonly>
                             <option value="" selected>Seleccione...</option>
-                            <option value="Celular">Celular</option>
-                            <option value="Tablet">Tablet</option>
-                            <option value="Laptop">Laptop</option>
-                            <option value="Desktop">Desktop</option>
-                            <option value="Smartwatch">Smartwatch</option>
+                            <?php 
+                              $dispos = ['Celular','Tablet','Laptop','Desktop','Smartwatch'];
+                              for ($i=0; $i < count($dispos); $i++) { 
+                                
+                                if($tipoDispo == $dispos[$i]){
+                                  echo "<option value='".$dispos[$i]."' selected>".$dispos[$i]."</option>";
+                                }else{
+                                  echo "<option value='".$dispos[$i]."'>".$dispos[$i]."</option>";
+                                }
+                                
+                              }//fin del for
+                            ?>
                           </select>
                           <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
-                          <select name="tipoServicio" id="tipoServicio" class="form-select" aria-describedby="tipoServicioFeedBack" required>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select" readonly>
                             <option value="" selected>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
@@ -230,7 +250,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/altaTrabajo.js"></script>
+    <script src="assets/js/verInfoTrabajo.js"></script>
 </body>
 </html> 
 
