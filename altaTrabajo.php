@@ -53,7 +53,7 @@ session_start();
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
                           <select name="clienteTrabajo" id="clienteTrabajo" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
-                            <option value="" selected disabled>Seleccione...</option>
+                            <option value="" selected>Seleccione...</option>
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
                               $clientes = json_decode($clientes);

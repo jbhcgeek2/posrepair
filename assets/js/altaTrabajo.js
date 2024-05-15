@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
           console.log('Valor: '+valor+' del campo '+clave);
           //si el campo esta vacio lo marcaremos como valido
           let campo = document.getElementById(clave);
-          if(valor.trim() == ""){
+          if(valor.trim() == "" || valor){
             //campo vacio
             campo.classList.add('is-invalid');
             pasa++;
