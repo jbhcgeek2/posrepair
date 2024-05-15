@@ -113,6 +113,24 @@ session_start();
                           value="<?php echo $anticipo; ?>" readonly>
                         </div>
 
+                        <div class="col-sm-12 col-md-4 offset-md-4">
+                          <label for="estatusTrabajo">Estatus Trabajo</label>
+                          <select name="estatusTrabajo" id="estatusTrabajo">
+                            <option value="">Seleccione</option>
+                            <?php 
+                              //
+                              $estatus = ["Activo","En Proceso","En Espera","Finalizado","Cancelado"];
+                              for ($i=0; $i < count($estatus); $i++) { 
+                                if($estatus[$i] == $estatusTrab){
+                                  echo "<option value='".$estatus[$i]."' selected>".$estatus[$i]."</option>";
+                                }else{
+                                  echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
+                                }
+                              }//fin del for
+                            ?>
+                          </select>
+                        </div>
+
                         <hr class="my-4">
                         <h4 class="fw-bold">Informacion Tecnica</h4>
 
@@ -188,7 +206,7 @@ session_start();
                         </div>
 
 
-                        <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="fechaServicio" class="form-label">Fecha Alta</label>
                           <input type="date" id="fechaServicio" name="fechaServicio" 
                           value="<?php echo $fechaTrabajo; ?>" class="form-control" readonly>
@@ -213,13 +231,13 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-6 mb-3">
-                          <span class="form-label">Descripcion del Problema</span>
+                          <label class="form-label">Descripcion del Problema</label>
                           <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
                           class="form-control" reeadonly><?php echo $problema; ?></textarea>
                         </div>
 
                         <div class="col-sm-12 col-md-6 mb-3">  
-                          <span class="form-label">Observaciones</span>
+                          <label class="form-label">Observaciones</label>
                           <textarea name="observServicio" id="observServicio" style="height:70px;"
                           class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
