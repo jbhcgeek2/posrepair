@@ -47,4 +47,23 @@ $usuario,$sucursal,$empresa,$idUsuario){
 
 }
 
+
+function getTrabajo($idTrabajo,$idEmpresa){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+
+  $sql = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmpresa'";
+  try {
+    $query = mysqli_query($conexion, $sql);
+    
+  } catch (\Throwable $th) {
+    //throw $th;
+  }
+}
 ?>
