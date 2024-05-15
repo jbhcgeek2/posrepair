@@ -101,18 +101,20 @@ session_start();
                           value="<?php echo $fechaEntrega; ?>">
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
                           <label for="costoServicio" class="form-label">Costo</label>
                           <input type="number" name="costoServicio" id="costoServicio" class="form-control" 
                           value="<?php echo $costoIni; ?>" readonly>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
                           <label for="anticipoServicio" class="form-label">Anticipo</label>
                           <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control" 
                           value="<?php echo $anticipo; ?>" readonly>
                         </div>
 
+                        <hr class="my-4">
+                        <h4 class="fw-bold">Informacion Tecnica</h4>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="fechaServicio" class="form-label">Fecha Alta</label>
