@@ -90,21 +90,21 @@ session_start();
 
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="tipoDispositivo" class="form-label">Dispositivo <span class='text-danger fw-bold'>*<span></label>
-                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select" required>
-                            <option value="" selected disabled>Seleccione...</option>
+                          <select name="tipoDispositivo" id="tipoDispositivo" aria-describedby="tipoDispositivoFeedBack" class="form-select" required>
+                            <option value="" selected>Seleccione...</option>
                             <option value="Celular">Celular</option>
                             <option value="Tablet">Tablet</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Desktop">Desktop</option>
                             <option value="Smartwatch">Smartwatch</option>
                           </select>
-                          <div class="invalid-feedback">Selecciona un dispositivo valido</div>
+                          <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
-                          <select name="tipoServicio" id="tipoServicio" class="form-select" required>
-                            <option value="" selected disabled>Seleccione...</option>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select" aria-describedby="tipoServicioFeedBack" required>
+                            <option value="" selected>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
                               estatusCategoria = '1'";
@@ -125,7 +125,7 @@ session_start();
                               }
                             ?>
                           </select>
-                          <div class="invalid-feedback">Selecciona servicio valido</div>
+                          <div id="tipoServicioFeedBack" class="invalid-feedback">Selecciona servicio valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
