@@ -71,18 +71,24 @@ document.addEventListener("DOMContentLoaded", function() {
         let datos = new FormData(document.getElementById('dataAltaTrab'));
         //verificamos que los datos requeridos esten cargados
         let pasa = 0;
+        let camposReq = ['clienteTrabajo','fechaServicio','sucursalServicio','tipoDispositivo','tipoServicio',
+        'marcaServicio','modeloServicio','numberDevice','descripcionProblema','fechaEntrega'];
         datos.forEach(function(valor, clave){
           console.log('Valor: '+valor+' del campo '+clave);
           //si el campo esta vacio lo marcaremos como valido
           let campo = document.getElementById(clave);
-          if(valor.trim() == "" || valor){
-            //campo vacio
-            campo.classList.add('is-invalid');
-            pasa++;
-          }else{
-            campo.classList.remove('is-invalid');
-            campo.classList.add('is-valid');
+
+          if(camposReq.includes(campo)){
+            if(valor.trim() == "" || valor){
+              //campo vacio
+              campo.classList.add('is-invalid');
+              pasa++;
+            }else{
+              campo.classList.remove('is-invalid');
+              campo.classList.add('is-valid');
+            }
           }
+          
         })
 
         if(pasa == 0){
