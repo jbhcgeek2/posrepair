@@ -174,12 +174,17 @@ session_start();
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="modeloServicio" class="form-label">Modelo</label>
                           <input type="text" name="modeloServicio" id="modeloServicio" class="form-control" 
-                          value="<?php echo $modelo; ?>" required>
+                          value="<?php echo $modelo; ?>" readonly>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="numberDevice" class="form-label">IMEI / ESN / SN </label>
                           <input type="text" name="numberDevice" id="numberDevice" class="form-control" 
-                          value="<?php echo $imei; ?>" required>
+                          value="<?php echo $imei; ?>" readonly>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                          <label for="contraDisp" class="form-label">Contraseña Dispositivo</label>
+                          <input type="text" name="contraDisp" id="contraDisp" class="form-control" 
+                          value="<?php echo $contraDis; ?>">
                         </div>
 
 
@@ -207,27 +212,19 @@ session_start();
                           value="<?php echo $accesorios; ?>" class="form-control">
                         </div>
 
-                        <div class="col-sm-12 mb-3">
-                          <div class="input-group">
-                            <span class="input-group-text p-3">Descripcion del Problema</span>
-                            <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
-                            class="form-control" reeadonly><?php echo $problema; ?></textarea>
-                          </div>
+                        <div class="col-sm-12 col-md-6 mb-3">
+                          <span class="input-group-text p-3">Descripcion del Problema</span>
+                          <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
+                          class="form-control" reeadonly><?php echo $problema; ?></textarea>
                         </div>
 
-                        <div class="col-sm-12 mb-3">
-                          <div class="input-group">
-                            <span class="input-group-text">Observaciones</span>
-                            <textarea name="observServicio" id="observServicio" style="height:70px;"
-                            class="form-control" readonly><?php echo $observaciones; ?></textarea>
-                          </div>
+                        <div class="col-sm-12 col-md-6 mb-3">  
+                          <span class="input-group-text">Observaciones</span>
+                          <textarea name="observServicio" id="observServicio" style="height:70px;"
+                          class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="contraDisp" class="form-label">Contraseña Dispositivo</label>
-                          <input type="text" name="contraDisp" id="contraDisp" class="form-control" 
-                          value="<?php echo $contraDis; ?>">
-                        </div>
+                        
 
                         
 
