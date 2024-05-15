@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
           let campo = document.getElementById(clave);
 
           if(camposReq.includes(clave)){
-            if(valor.trim() == "" || valor){
+            if(valor.trim() == "" ||  valor == " "){
               //campo vacio
               campo.classList.add('is-invalid');
               pasa++;
