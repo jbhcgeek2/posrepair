@@ -103,10 +103,8 @@ session_start();
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="sucursalServicio" class="form-label">Sucursal</label>
                           <input type="text" id="sucursalServicio" name="sucursalServicio" 
-                          value="<?php echo $sucursal; ?>" class="form-control" readonly required>
+                          value="<?php echo $sucursal; ?>" class="form-control" readonly>
                         </div>
-
-                        
 
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
                           <label for="tipoDispositivo" class="form-label">Dispositivo</label>
@@ -119,17 +117,16 @@ session_start();
                                 if($tipoDispo == $dispos[$i]){
                                   echo "<option value='".$dispos[$i]."' selected>".$dispos[$i]."</option>";
                                 }else{
-                                  echo "<option value='".$dispos[$i]."'>".$dispos[$i]."</option>";
+                                  echo "<option value='".$dispos[$i]."' disabled>".$dispos[$i]."</option>";
                                 }
                                 
                               }//fin del for
                             ?>
                           </select>
-                          <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
-                          <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
+                          <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
                           <select name="tipoServicio" id="tipoServicio" class="form-select" readonly>
                             <option value="" selected>Seleccione...</option>
                             <?php 
@@ -141,7 +138,11 @@ session_start();
                                   while($fetchTServ = mysqli_fetch_assoc($queryTServ)){
                                     $nombreServ = $fetchTServ['nombreServicio'];
                                     $idServicio = $fetchTServ['idServicio'];
-                                    echo "<option value='$idServicio'>$nombreServ</option>";
+                                    if($idServicio == $tipoServicio){
+                                      echo "<option value='$idServicio' selected>$nombreServ</option>";
+                                    }else{
+                                      echo "<option value='$idServicio' disabled>$nombreServ</option>";
+                                    }
                                   }//fin del while
                                 }else{
                                   //sin servicios registrados
@@ -152,37 +153,37 @@ session_start();
                               }
                             ?>
                           </select>
-                          <div id="tipoServicioFeedBack" class="invalid-feedback">Selecciona servicio valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="marcaServicio" class="form-label">Marca <span class='text-danger fw-bold'>*<span></label>
-                          <input type="text" name="marcaServicio" id="marcaServicio" class="form-control" required>
-                          <div class="invalid-feedback">Indique una marca valida</div>
+                          <label for="marcaServicio" class="form-label">Marca</label>
+                          <input type="text" name="marcaServicio" id="marcaServicio" class="form-control" 
+                          value="<?php echo $marca; ?>" required>
                         </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="modeloServicio" class="form-label">Modelo <span class='text-danger fw-bold'>*<span></label>
-                          <input type="text" name="modeloServicio" id="modeloServicio" class="form-control" required>
-                          <div class="invalid-feedback">indique un modelo valido</div>
+                          <label for="modeloServicio" class="form-label">Modelo</label>
+                          <input type="text" name="modeloServicio" id="modeloServicio" class="form-control" 
+                          value="<?php echo $modelo; ?>" required>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="numberDevice" class="form-label">IMEI / ESN / SN <span class='text-danger fw-bold'>*<span></label>
-                          <input type="text" name="numberDevice" id="numberDevice" class="form-control" required>
-                          <div class="invalid-feedback">Indique un dato valido</div>
+                          <label for="numberDevice" class="form-label">IMEI / ESN / SN </label>
+                          <input type="text" name="numberDevice" id="numberDevice" class="form-control" 
+                          value="<?php echo $imei; ?>" required>
+                          
                         </div>
 
                         <div class="col-sm-12 mb-3">
                           <label for="accesorioServicio" class="form-label">Accesorios</label>
-                          <input type="text" name="accesorioServicio" id="accesorioServicio" class="form-control">
+                          <input type="text" name="accesorioServicio" id="accesorioServicio" 
+                          value="<?php echo $accesorios; ?>" class="form-control">
                         </div>
 
                         <div class="col-sm-12 mb-3">
                           <div class="input-group">
-                            <span class="input-group-text p-3">Descripcion del Problema <span class='text-danger fw-bold'>*</span></span>
+                            <span class="input-group-text p-3">Descripcion del Problema</span>
                             <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
-                            class="form-control" required></textarea>
-                            <div class="invalid-feedback">Indique la problematica que presenta el dispositivo</div>
+                            class="form-control" reeadonly><?php echo $problema; ?></textarea>
                           </div>
                         </div>
 
@@ -190,29 +191,32 @@ session_start();
                           <div class="input-group">
                             <span class="input-group-text">Observaciones</span>
                             <textarea name="observServicio" id="observServicio" style="height:70px;"
-                            class="form-control"></textarea>
+                            class="form-control" readonly><?php echo $observaciones; ?></textarea>
                           </div>
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="contraDisp" class="form-label">Contraseña Dispositivo</label>
-                          <input type="text" name="contraDisp" id="contraDisp" class="form-control">
+                          <input type="text" name="contraDisp" id="contraDisp" class="form-control" 
+                          value="<?php echo $contraDis; ?>">
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="fechaEntrega" class="form-label">Fecha de Entrega <span class='text-danger fw-bold'>*<span></label>
-                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
-                          <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+                          <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required
+                          value="<?php echo $fechaEntrega; ?>">
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="costoServicio" class="form-label">Costo</label>
-                          <input type="number" name="costoServicio" id="costoServicio" class="form-control">
+                          <input type="number" name="costoServicio" id="costoServicio" class="form-control" 
+                          value="<?php echo $costoIni; ?>" readonly>
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="anticipoServicio" class="form-label">Anticipo</label>
-                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control">
+                          <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control" 
+                          value="<?php echo $anticipo; ?>" readonly>
                         </div>
 
 

@@ -61,7 +61,12 @@ function getTrabajo($idTrabajo,$idEmpresa){
   $sql = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmpresa'";
   try {
     $query = mysqli_query($conexion, $sql);
-    
+    if(mysqli_num_row($query) == 1){
+      //si existe el trabajo
+      
+    }else{
+      //trabajo no localizado
+    }
   } catch (\Throwable $th) {
     //throw $th;
   }
