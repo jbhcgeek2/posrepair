@@ -120,6 +120,12 @@ document.addEventListener("DOMContentLoaded", function() {
             )
           }
 
+        }else{
+          Swal.fire(
+            'Campos Incompletos',
+            'Completa la informacion requerida',
+            'warning'
+          )
         }
 
       }

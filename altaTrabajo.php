@@ -52,7 +52,7 @@ session_start();
 
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <select name="clienteTrabajo" id="clienteTrabajo" class="form-select" required>
+                          <select name="clienteTrabajo" id="clienteTrabajo" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
                             <option value="" selected disabled>Seleccione...</option>
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
@@ -71,7 +71,7 @@ session_start();
                               }
                             ?>
                           </select>
-                          <div class="invalid-feedback">Selecciona un cliente valido</div>
+                          <div id="clienteTrabajoFeedBack" class="invalid-feedback">Selecciona un cliente valido</div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="fechaServicio" class="form-label">Fecha <span class='text-danger fw-bold'>*<span></label>

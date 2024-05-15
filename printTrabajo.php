@@ -181,7 +181,6 @@ if(!empty($_SESSION['usuarioPOS'])){
                   
                   - Despues de 60 dias de la fecha de entrega otorgo mi(s) equipo(s) y accesorios a Telcel
                   para que disponga de ellos.<br>
-                  - Toda reparacion tiene un mes de garantia (excepto equipos mojados, con humedad o sarro).<br>
                   - Sin comprobante no se entregara su articulo.<br>
                   - No nos hacemos responsables por articulos no registrados en su nota.
                 </th>

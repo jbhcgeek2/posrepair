@@ -82,7 +82,7 @@
         //verificamos que la fecha no sea pasada
         $fechaActual = date('Y-m-d');
 
-        if($fechaAlta >= $fechaActual){
+        if($fechaAlta <= $fechaActual){
           if($fechaEntrega >= $fechaActual){
             //las fechas son correectas, podemos registrar el producto
             $nuevoTrabajo = altaTrabajo($cliente,$fechaAlta,$tipoDispo,$tipoServ,$marca,$modeloServicio,
@@ -97,7 +97,7 @@
           }
         }else{
           //fecha de alta incorrecta
-          $res = ['status'=>'error','mensaje'=>'Asegurate de ingresar una fecha de alta correcta.'];
+          $res = ['status'=>'error','mensaje'=>'No se pueden ingresar fechas futuras.'];
           echo json_encode($res);
         }
         
