@@ -114,8 +114,8 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-4 offset-md-4">
-                          <label for="estatusTrabajo">Estatus Trabajo</label>
-                          <select name="estatusTrabajo" id="estatusTrabajo">
+                          <label for="estatusTrabajo" class="form-label">Estatus Trabajo</label>
+                          <select name="estatusTrabajo" id="estatusTrabajo" class="form-select">
                             <option value="">Seleccione</option>
                             <?php 
                               //
