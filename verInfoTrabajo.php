@@ -22,7 +22,7 @@ session_start();
     $trabajo = json_decode($trabajo);
 
     if($trabajo->status == "ok"){
-      print_r($trabajo);
+      // print_r($trabajo);
 
       $nombreCliente = $trabajo->data->nombreCliente;
       $fechaTrabajo = $trabajo->data->fechaTrabajo;
@@ -128,7 +128,7 @@ session_start();
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
                           <select name="tipoServicio" id="tipoServicio" class="form-select" readonly>
-                            <option value="" selected>Seleccione...</option>
+                            <option value="" disabled>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
                               estatusCategoria = '1'";
@@ -223,10 +223,6 @@ session_start();
 
                         
                       </form>
-
-                      <div class="col-sm-12 col-md-4 offset-md-4 text-center">
-                        <a href="#!" class="btn btn-primary" role="buttom" id="altaTrabajo">Registrar</a>
-                      </div>
                               
                     </div>
 
