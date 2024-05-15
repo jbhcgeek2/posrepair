@@ -13,9 +13,11 @@
 		$empresa = json_decode($empresa);
 		$idEmpresaSesion = $empresa->dato;
 
-    $dataUSer = getDataUser($idEmpresaSesion,$usuario);
+    $dataUSer = getDataUser($usuario,$idEmpresaSesion);
 		$dataUSer = json_decode($dataUSer);
 		$idSucursalN = $dataUSer->sucursalID;
+    $idUsuario = $dataUSer->idUsuario;
+    
 
     //verificamos la existencia de metodos
     if(!empty($_POST['servCheck'])){

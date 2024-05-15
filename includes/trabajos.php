@@ -2,7 +2,7 @@
 
 function altaTrabajo($cliente,$fechAlta, $tipoDispo,$tipoServ, $marca,$modeloServicio,
 $serieDispo,$accesorios,$problema,$observacion,$contraDispo,$fechaEntrega,$costoServ,$anticipo,
-$usuario,$sucursal,$empresa){
+$usuario,$sucursal,$empresa,$idUsuario){
   require('conexion.php');
   $res = [];
   if(!$conexion){
@@ -20,12 +20,14 @@ $usuario,$sucursal,$empresa){
 
     $numServ = $fetch['numServicios'];
     $numServ = $numServ+1;
+    $fechaActual = date('Y-m-d');
+    $horaActual = date('H:i:s');
 
     //ahora si insertamos el trabajo
-    $sql2 = "INSERT INTO TRABAJOS (numTrabajo,estatusTrabajo,fechaTrabajo,clienteID,
-    sucursalID,empresaID,tipoDispositivo,servicioID,marca,modelo,imeiClave,
+    $sql2 = "INSERT INTO TRABAJOS (numTrabajo,estatusTrabajo,fechaTrabajo,fechaRegistro,horaRegistro,clienteID,
+    sucursalID,usuarioID,empresaID,tipoDispositivo,servicioID,marca,modelo,imeiClave,
     accesorios,problema,observaciones,contraDispo,fechaEntrega,costoInicial,anticipo) 
-    VALUES ('$numServ','Activo','$fechAlta','$cliente','$sucursal','$empresa','$tipoDispo',
+    VALUES ('$numServ','Activo','$fechAlta','$fechaActual','$horaActual','$cliente','$sucursal','$idUsuario','$empresa','$tipoDispo',
     '$tipoServ','$marca','$modeloServicio','$serieDispo','$accesorios','$problema','$observacion',
     '$contraDispo','$fechaEntrega','$costoServ','$anticipo')";
     try {
