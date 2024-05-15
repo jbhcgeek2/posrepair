@@ -107,7 +107,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 'Se ha registrado el trabajo correctamente',
                 'success'
               ).then(function(){
-                location.reload();
+                //una vez registrado el trabajo, abrimos una nueva ventana
+                //para la impresion del ticket
+                let trabajoT = res.data;
+                window.open('../printTrabajo.php?t='+trabajoT,'_blank');
+                window.location = 'verInfoTrabajo.php?data='+trabajoT;
               })
             }else{
               // ocurrio un error al insertar el trabajo

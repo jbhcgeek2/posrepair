@@ -33,7 +33,7 @@ $usuario,$sucursal,$empresa,$idUsuario){
     try {
       $query2 = mysqli_query($conexion, $sql2);
       //hasta este punto se da por terminao y completado
-      $idTrabajo = mysqli_insert_id($query2);
+      $idTrabajo = mysqli_insert_id($conexion);
       $res = ['status'=>'ok','mensaje'=>'operationComplete','data'=>$idTrabajo];
       return json_encode($res);
     } catch (\Throwable $th) {
