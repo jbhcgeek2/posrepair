@@ -116,37 +116,6 @@ session_start();
                         <hr class="my-4">
                         <h4 class="fw-bold">Informacion Tecnica</h4>
 
-                        <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="fechaServicio" class="form-label">Fecha Alta</label>
-                          <input type="date" id="fechaServicio" name="fechaServicio" 
-                          value="<?php echo $fechaTrabajo; ?>" class="form-control" readonly>
-                        </div>
-                        
-                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="sucursalServicio" class="form-label">Sucursal</label>
-                          <input type="text" id="sucursalServicio" name="sucursalServicio" 
-                          value="<?php echo $sucursal; ?>" class="form-control" readonly>
-                        </div>
-
-                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="tipoDispositivo" class="form-label">Dispositivo</label>
-                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select" readonly>
-                            <option value="" selected>Seleccione...</option>
-                            <?php 
-                              $dispos = ['Celular','Tablet','Laptop','Desktop','Smartwatch'];
-                              for ($i=0; $i < count($dispos); $i++) { 
-                                
-                                if($tipoDispo == $dispos[$i]){
-                                  echo "<option value='".$dispos[$i]."' selected>".$dispos[$i]."</option>";
-                                }else{
-                                  echo "<option value='".$dispos[$i]."' disabled>".$dispos[$i]."</option>";
-                                }
-                                
-                              }//fin del for
-                            ?>
-                          </select>
-                        </div>
-
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
                           <select name="tipoServicio" id="tipoServicio" class="form-select" readonly>
@@ -177,6 +146,25 @@ session_start();
                           </select>
                         </div>
 
+                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
+                          <label for="tipoDispositivo" class="form-label">Dispositivo</label>
+                          <select name="tipoDispositivo" id="tipoDispositivo" class="form-select" readonly>
+                            <option value="" selected>Seleccione...</option>
+                            <?php 
+                              $dispos = ['Celular','Tablet','Laptop','Desktop','Smartwatch'];
+                              for ($i=0; $i < count($dispos); $i++) { 
+                                
+                                if($tipoDispo == $dispos[$i]){
+                                  echo "<option value='".$dispos[$i]."' selected>".$dispos[$i]."</option>";
+                                }else{
+                                  echo "<option value='".$dispos[$i]."' disabled>".$dispos[$i]."</option>";
+                                }
+                                
+                              }//fin del for
+                            ?>
+                          </select>
+                        </div>
+
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="marcaServicio" class="form-label">Marca</label>
                           <input type="text" name="marcaServicio" id="marcaServicio" class="form-control" 
@@ -192,8 +180,26 @@ session_start();
                           <label for="numberDevice" class="form-label">IMEI / ESN / SN </label>
                           <input type="text" name="numberDevice" id="numberDevice" class="form-control" 
                           value="<?php echo $imei; ?>" required>
-                          
                         </div>
+
+
+                        <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
+                          <label for="fechaServicio" class="form-label">Fecha Alta</label>
+                          <input type="date" id="fechaServicio" name="fechaServicio" 
+                          value="<?php echo $fechaTrabajo; ?>" class="form-control" readonly>
+                        </div>
+                        
+                        <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
+                          <label for="sucursalServicio" class="form-label">Sucursal</label>
+                          <input type="text" id="sucursalServicio" name="sucursalServicio" 
+                          value="<?php echo $sucursal; ?>" class="form-control" readonly>
+                        </div>
+
+                        
+
+                        
+
+                        
 
                         <div class="col-sm-12 mb-3">
                           <label for="accesorioServicio" class="form-label">Accesorios</label>
