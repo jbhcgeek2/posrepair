@@ -58,6 +58,7 @@ estatus.addEventListener('change', function(){
   })
 })
 
+var datosArtiConsulta;
 let catArti = document.getElementById('catArticulo');
 catArti.addEventListener('change', function(){
   //para esta accion mostraremos aquelllos articulos de esa categoria
@@ -80,6 +81,7 @@ catArti.addEventListener('change', function(){
       //mostramos los resultados en el select
       console.log(res.data);
       if(res.data != "noData"){
+        datosArtiConsulta = res.data;
         let campoSel = "<option value=''>Seleccione...</option>";
         for (let z = 0; z < res.data.length; z++) {
           let nombreArti = res.data[z].nombreArticulo;
@@ -113,3 +115,14 @@ catArti.addEventListener('change', function(){
     );
   }
 })
+
+
+let selArti = document.getElementById('articuloAgrega');
+selArti.addEventListener('change', function(){
+  let articuloSel = selArti.value;
+  //buscamos en los datos globales
+  let auxDatos = datosArtiConsulta;
+  for (let x = 0; x < auxDatos.length; x++) {
+    console.log(auxDatos[x]);
+  }//fin del for
+});
