@@ -259,6 +259,7 @@ session_start();
                     <div class="row">
                       <hr class="my-4">
                       <h4 class="fw-bold">Articulos utilizados</h4>
+                      <br>
 
                       <?php 
                         //consultaremos las piezas utilizadas en la reparacion
@@ -278,15 +279,15 @@ session_start();
                                 <input type='text' id='nombreArti' value='$nombreArti' class='form-control' readonly>
                               </div>
                               <div class='col-sm-12 col-md-3 mb-3'>
-                                <label for='cantidad'>Cantidad</label>
+                                <label for='cantidad' class='form-label>Cantidad</label>
                                 <input type='number' id='cantidad' value='$cantidad' class='form-control' readonly>
                               </div>
                               <div class='col-sm-12 col-md-3 mb-3'>
-                                <label for='precioUni'>Precio Unitario</label>
+                                <label for='precioUni' class='form-label>Precio Unitario</label>
                                 <input type='number' id='precioUni' value='$precio' class='form-control' readonly>
                               </div>
                               <div class='col-sm-12 col-md-3 mb-3'>
-                                <label for='subtotal'>Subtotal</label>
+                                <label for='subtotal' class='form-label>Subtotal</label>
                                 <input type='number' id='subtotal' value='$subtotal' class='form-control' readonly>
                               </div>
                               <hr class='my-4'>
