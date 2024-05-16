@@ -127,6 +127,31 @@
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el estatus: '.$th];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['getAtArti'])){
+      $categoria = $_POST['getAtArti'];
+      
+      $sql = "SELECT * FROM ARTICULOS a INNER JOIN ARTICULOSUCURSAL b ON a.idArticulo = b.articuloID 
+      WHERE a.categoriaID = '$categoria' AND b.sucursalID = '$idSucursalN' AND b.existenciaSucursal > '0'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        if(mysqli_num_rows($query) > 0){
+          $datos = [];
+          $x = 0;
+          while($fetch = mysqli_fetch_assoc($query)){
+            $datos[$x] = $fetch;
+            $x++;
+          }//fin del while
+          $res = ['status'=>'ok','data'=>$datos];
+          echo json_encode($res);
+        }else{
+          //sin articulos
+          $res = ['status'=>'ok','data'=>'noData'];
+          echo json_encode($res);
+        }
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al consultar los articulos disponibles'];
+        echo json_encode($res);
+      }
     }
   }
 ?>

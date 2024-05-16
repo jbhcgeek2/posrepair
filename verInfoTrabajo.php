@@ -271,8 +271,8 @@ session_start();
                               </div>
 
                               <div class="col-sm-12 col-md-6 mb-3">
-                                <label for="catArticulo">Categoria</label>
-                                <select name="catArticulo" id="catArticulo">
+                                <label for="catArticulo" class="form-label">Categoria</label>
+                                <select name="catArticulo" id="catArticulo" class="form-select">
                                   <option value="" selected disabled>Seleccione...</option>
                                   <?php 
                                     $sqlCat = "SELECT * FROM CATEGORIA WHERE empresaID = '$idEmpresaSesion' 

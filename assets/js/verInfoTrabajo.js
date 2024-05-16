@@ -57,3 +57,51 @@ estatus.addEventListener('change', function(){
     }
   })
 })
+
+let catArti = document.getElementById('catArticulo');
+catArti.addEventListener('change', function(){
+  //para esta accion mostraremos aquelllos articulos de esa categoria
+  //que existan en la sucursal
+  let categoria = catArti.value;
+
+  let datos = new FormData();
+  datos.append('getAtArti',categoria);
+
+  let envio = new XMLHttpRequest();
+  envio.open('POST','../includes/trabajosOperaciones.php',false);
+
+  envio.send(datos);
+
+  if(envio.status == 200){
+    //se consulto bien
+    let res = JSON.parse(envio.responseText);
+
+    if(res.status == 'ok'){
+      //mostramos los resultados en el select
+      console.log(res.data);
+      if(res.data != "noData"){
+        let campoSel = "<option value=''>Seleccione...</option>";
+        for (let z = 0; z < res.data.length; z++) {
+          console.log(res.data[x]);
+        }//fin del for
+      }else{
+        //no se tienen articulos
+      }
+    }else{
+      //ocurrio un error ela consultar los estatus
+      let err = res.mensaje;
+      Swal.fire(
+        'Ha ocurrido un error',
+        'Verificar: '+err,
+        'error'
+      )
+    }
+  }else{
+    //error de servidor
+    Swal.fire(
+      'Servidor Inalcansable',
+      'Verifica tu conexion a internet',
+      'error'
+    );
+  }
+})
