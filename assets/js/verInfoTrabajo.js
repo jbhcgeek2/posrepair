@@ -1,6 +1,6 @@
 
 let estatus = document.getElementById('estatusTrabajo');
-estatus.addEventListener('click', function(){
+estatus.addEventListener('change', function(){
   //metodo para realizar el cambio de estatus de un trabajo
   //primero preguntamos si desea cambiar el estatus
   Swal.fire({
