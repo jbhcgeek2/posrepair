@@ -109,6 +109,24 @@
         echo json_encode($res);
       }
 
+    }elseif(!empty($_POST['trabajoStatus'])){
+      //metodo para actualizar el estatus de un trabajo
+      $idTrabajo = $_POST['trabajoStatus'];
+      $status = $_POST['nuevoStatus'];
+
+      $sql = "UPDATE TRABAJOS SET estatusTrabajo = '$status' WHERE idTrabajo = '$idTrabajo' AND 
+      empresaID = '$idEmpresaSesion'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        //se completo el registro
+        $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+        echo json_encode($res);
+
+      } catch (\Throwable $th) {
+        //error al actualizar el estatus
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el estatus: '.$th];
+        echo json_encode($res);
+      }
     }
   }
 ?>
