@@ -241,16 +241,37 @@ session_start();
                           <textarea name="observServicio" id="observServicio" style="height:70px;"
                           class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
-
-                        
-
-                        
-
-
-
                         
                       </form>
+
+                      <div class="row text-center">
+                        <div class="col-sm-12 col-md-6">
+                          <a href="#!" class="btn btn-primary" id="btnAddPieza" data-bs-toggle="modal" 
+                          data-bs-target="#modalPieza">Registrar Pieza</a>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                          <a href="#!" class="btn btn-danger">Finalizar Trabajo</a>
+                        </div>
+                      </div>
                               
+                    </div>
+
+                    <div class="modal fade" id="modalPieza" tabindex="-1" aria-labelledby="modalPiezaLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalPiezaLabel">Registrar Pieza</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Registrar</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
 					        </div><!--//app-card-body-->
