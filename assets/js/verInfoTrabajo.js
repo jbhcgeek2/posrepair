@@ -158,7 +158,7 @@ btnGuardar.addEventListener('click', function(){
     //si se proceara el movimiento
     let articulo = document.getElementById('articuloAgrega').value;
     let precio = document.getElementById('precioArti').value;
-    let cantidad = document.getElementById('precioArti').value;
+    let cantidad = document.getElementById('cantidadArti').value;
     let total = document.getElementById('totalExtra').value;
     let trabajo = document.getElementById('datoTrabajo').value;
 
