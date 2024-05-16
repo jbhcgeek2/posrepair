@@ -7,6 +7,7 @@
     include("conexion.php");
     include("usuarios.php");
     include("trabajos.php");
+    include("articulos.php");
 
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
