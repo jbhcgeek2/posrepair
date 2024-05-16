@@ -82,10 +82,18 @@ catArti.addEventListener('change', function(){
       if(res.data != "noData"){
         let campoSel = "<option value=''>Seleccione...</option>";
         for (let z = 0; z < res.data.length; z++) {
-          console.log(res.data[x]);
+          let nombreArti = res.data[z].nombreArticulo;
+          let idArti = res.data[z].idArticulo;
+          campoSel = campoSel+`<option value='${idArti}'>${nombreArti}</option>`;
         }//fin del for
+        document.getElementById('articuloAgrega').innerHTML = campoSel;
       }else{
         //no se tienen articulos
+        Swal.fire(
+          'Sin Articulos disponibles',
+          'Asegurate de contar con inventario en sucursal',
+          'warning'
+        )
       }
     }else{
       //ocurrio un error ela consultar los estatus
