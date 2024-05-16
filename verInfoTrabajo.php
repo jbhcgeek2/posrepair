@@ -256,7 +256,8 @@ session_start();
                               
                     </div>
 
-                    <div class="modal fade" id="modalPieza" tabindex="-1" aria-labelledby="modalPiezaLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalPieza" tabindex="-1" data-bs-backdrop="static" 
+                      aria-labelledby="modalPiezaLabel" data-bs-keyboard="false" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -264,7 +265,47 @@ session_start();
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <p>Aqui podras registrar las piezas/articulos que se utilicen en este trabajo</p>
+                              </div>
 
+                              <div class="col-sm-12 col-md-6 mb-3">
+                                <label for="catArticulo">Categoria</label>
+                                <select name="catArticulo" id="catArticulo">
+                                  <option value="" selected disabled>Seleccione...</option>
+                                  <?php 
+                                    $sqlCat = "SELECT * FROM CATEGORIA WHERE empresaID = '$idEmpresaSesion' 
+                                    AND estatusCategoria = '1'";
+                                    try {
+                                      $queryCat = mysqli_query($conexion, $sqlCat);
+                                      if(mysqli_num_rows($queryCat) > 0){
+                                        while($fetchcat = mysqli_fetch_assoc($queryCat)){
+                                          $nombreCat = $fetchcat['nombreCategoria'];
+                                          $idCat = $fetchcat['idCategoria'];
+
+                                          echo "<option value='$idCat'>$nombreCat</option>";
+                                        }//fin del while
+                                      }else{
+                                        //sin categorias registradas
+                                        echo "<option>Sin Categorias</option>";
+                                      }
+                                    } catch (\Throwable $th) {
+                                      //throw $th;
+                                      echo "<option>Error de consulta</option>";
+                                    }
+                                  ?>
+                                </select>
+                              </div>
+                              <div class="col-sm-12 col-md-6 mb-3">
+                                <label for="articuloAgrega" class="form-label">Articulo</label>
+                                <select name="articuloAgrega" id="articuloAgrega" class="form-select">
+                                  <option value="" selected disabled>Seleccione...</option>
+                                  <option value=""></option>
+                                </select>
+                              </div>
+                              
+                            </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
