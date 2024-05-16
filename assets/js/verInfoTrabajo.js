@@ -79,7 +79,7 @@ catArti.addEventListener('change', function(){
 
     if(res.status == 'ok'){
       //mostramos los resultados en el select
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data != "noData"){
         datosArtiConsulta = res.data;
         let campoSel = "<option value=''>Seleccione...</option>";
@@ -123,7 +123,7 @@ selArti.addEventListener('change', function(){
   //buscamos en los datos globales
   let auxDatos = datosArtiConsulta;
   for (let x = 0; x < auxDatos.length; x++) {
-    console.log(auxDatos[x]);
+    // console.log(auxDatos[x]);
     if(auxDatos[x].idArticulo == articuloSel){
       //ponemos el precio sugerido
       document.getElementById('precioArti').value = auxDatos[x].precioUnitario;

@@ -256,6 +256,52 @@ session_start();
                               
                     </div>
 
+                    <div class="row">
+                      <hr class="my-4">
+                      <h4 class="fw-bold">Articulos utilizados</h4>
+
+                      <?php 
+                        //consultaremos las piezas utilizadas en la reparacion
+                        $sqlArtiExt = "SELECT a.*,b.nombreArticulo FROM DETALLETRABAJO a INNER JOIN ARTICULOS b 
+                        ON a.articuloID = b.idArticulo WHERE a.trabajoID = '$idTicket'";
+                        try {
+                          $queryArtiExt = mysqli_query($conexion, $sqlArtiExt);
+                          if(mysqli_num_rows($queryArtiExt) > 0){
+                            while($fetchArtiExt = mysqli_fetch_assoc($queryArtiExt)){
+                              $nombreArti = $fetchArtiExt['nombreArticulo'];
+                              $cantidad = $fetchArtiExt['cantidad'];
+                              $precio = $fetchArtiExt['precioUnitario'];
+                              $subtotal = $fetchArtiExt['subTotalArticulo'];
+
+                              echo "<div class='col-sm-12 col-md-3 mb-3'>
+                                <label class='form-label' for='nombreArti'>Articulo</label>
+                                <input type='text' id='nombreArti' value='$nombreArti' class='form-control' readonly>
+                              </div>
+                              <div class='col-sm-12 col-md-3 mb-3'>
+                                <label for='cantidad'>Cantidad</label>
+                                <input type='number' id='cantidad' value='$cantidad' class='form-control' readonly>
+                              </div>
+                              <div class='col-sm-12 col-md-3 mb-3'>
+                                <label for='precioUni'>Precio Unitario</label>
+                                <input type='number' id='precioUni' value='$precio' class='form-control' readonly>
+                              </div>
+                              <div class='col-sm-12 col-md-3 mb-3'>
+                                <label for='subtotal'>Subtotal</label>
+                                <input type='number' id='subtotal' value='$subtotal' class='form-control' readonly>
+                              </div>
+                              <hr class='my-4'>
+                              ";
+                            }//fin del while
+                          }else{
+                            //no se tienen articulos registrados para este trabajo
+
+                          }
+                        } catch (\Throwable $th) {
+                          //throw $th;
+                        }
+                      ?>
+                    </div>
+
                     <div class="modal fade" id="modalPieza" tabindex="-1" data-bs-backdrop="static" 
                       aria-labelledby="modalPiezaLabel" data-bs-keyboard="false" aria-hidden="true">
                       <div class="modal-dialog">
