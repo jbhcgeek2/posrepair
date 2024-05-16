@@ -124,5 +124,23 @@ selArti.addEventListener('change', function(){
   let auxDatos = datosArtiConsulta;
   for (let x = 0; x < auxDatos.length; x++) {
     console.log(auxDatos[x]);
+    if(auxDatos[x].idArticulo == articuloSel){
+      //ponemos el precio sugerido
+      document.getElementById('precioArti').value = auxDatos[x].precioUnitario;
+    }
   }//fin del for
 });
+
+
+function updateTotal(){
+  //funcion para actualizar el total
+  //cuando se modifique las cantidades o el precio
+  let precio = document.getElementById('precioArti').value;
+  let cantidad = document.getElementById('cantidadArti').value;
+
+  if(precio > 0 && cantidad > 0){
+    let total = cantidad * precio;
+    document.getElementById('totalExtra').value = total;
+  }
+}
+

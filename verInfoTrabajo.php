@@ -305,6 +305,21 @@ session_start();
                                 </select>
                               </div>
                               
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="precioArti" class="form-label">Precio de venta</label>
+                                <input type="number" id="precioArti" name="precioArti" class="form-control" onchange="updateTotal()">
+                              </div>
+
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="cantidadArti" class="form-label">Cantidad</label>
+                                <input type="number" id="cantidadArti" name="cantidadArti" class="form-control" onchange="updateTotal()">
+                              </div>
+                              
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="totalExtra" class="form-label">Total</label>
+                                <input type="number" id="totalExtra" class="form-control">
+                              </div>
+                              
                             </div>
                           </div>
                           <div class="modal-footer">
