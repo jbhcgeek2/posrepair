@@ -152,6 +152,60 @@
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al consultar los articulos disponibles'];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['artiServicio'])){
+      //seccion para registrar la pieza a un servicio/trabajo
+      $articulo = $_POST['artiServicio'];
+      $precioArticulo = $_POST['precioArtiServ'];
+      $cantidadArti = $_POST['cantidadArtiServ'];
+      $totalArti = $_POST['totalArtiServ'];
+      $trabajo = $_POST['trabajoArtiServ'];
+      $fecha = date('Y-m-d');
+      $hora = date('H:i:s');
+
+      $existenciaActual = getArtiSucursal($idSucursalN,$articulo);
+      $existenciaActual = json_decode($existenciaActual);
+      if($existenciaActual->status == "ok" && $existenciaActual->mensaje == "operationSuccess"){
+        //verificamos si cuenta con la cantidad necesaria
+        if($existenciaActual->data >= $cantidadArti){
+          //si se cuenta con el inventario suficiente
+          //primero insertaremos y despues descontaremos la pieza
+          $sql = "INSERT INTO DETALLETRABAJO (articuloID,cantidad,precioUnitario,subTotalArticulo,
+          sucursalID,empresaID,trabajoID,usuarioUtiliza,fechaMovimiento,horaMovimiento) VALUES 
+          ('$articulo','$cantidadArti','$precioArticulo','$totalArti','$idSucursalN','$idEmpresaSesion',
+          '$trabajo','$usuario','$fecha','$hora')";
+          try {
+            $query = mysqli_query($conexion,$sql);
+            //se inserto ahora, vamos a descontar el articulo del inventario
+            $nuevaCantidad = $existenciaActual->data - $cantidadArti;
+
+            $updateCant = setCantidad($nuevaCantidad,$articulo,$idSucursalN);
+            $updateCant = json_decode($updateCant);
+            if($updateCant->status == 'ok'){
+              $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+              echo json_encode($res);
+            }else{
+              //error, le decimos que contacte a soporte
+              $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error fatal, contacta a soporte tecnico.'];
+              echo json_encode($res);
+            }
+          } catch (\Throwable $th) {
+            //no se proceso la consulta
+            $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al insertar el articulo: '.$th];
+            echo json_encode($res);
+          }
+        }else{
+          //no cuenta con el inventario suficiente
+          $res = ['status'=>'error','mensaje'=>'No cuentas con el inventario suficiente para registrar el articulo.'];
+          echo json_encode($res);
+        }
+      }else{
+        //no tiene inventario
+        $res = ['status'=>'error','mensaje'=>'No se cuenta con inventario en la sucursal.'];
+        echo json_encode($res);
+      }
+
+      
+
     }
   }
 ?>

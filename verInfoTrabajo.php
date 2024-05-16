@@ -324,7 +324,7 @@ session_start();
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Registrar</button>
+                            <button type="button" class="btn btn-primary" id="btnSave">Registrar</button>
                           </div>
                         </div>
                       </div>
