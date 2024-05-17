@@ -252,6 +252,7 @@ costoFin.addEventListener('keyup', function(){
   }
 
   if(gananciaEst > 0){
+    document.getElementById('gananciaEstimada').classList.remove('text-danger');
     document.getElementById('gananciaEstimada').classList.add('text-primary');
   }else{
     document.getElementById('gananciaEstimada').classList.remove('text-primary');
