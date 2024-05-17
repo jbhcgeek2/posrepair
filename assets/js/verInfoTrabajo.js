@@ -211,8 +211,22 @@ btnFinaliza.addEventListener('click', function(){
   let totalTotal = document.getElementById('sumaTotalArtis').value;
   let montoIni = document.getElementById('costoServicio').value;
 
+  let costoFinal = document.getElementById('costoFinal').value;
+  let costoInicial = document.getElementById('costoIniFinal').value;
+  let costoProd = document.getElementById('montoArticulos').value;
+
+  let ganEstimada = costoInicial - costoProd;
+  if(ganEstimada > 0){
+    document.getElementById('gananciaEstimada').classList.add('text-primary');
+  }else{
+    document.getElementById('gananciaEstimada').classList.remove('text-primary');
+    document.getElementById('gananciaEstimada').classList.add('text-danger');
+  }
+  document.getElementById('gananciaEstimada').innerHTML = '$'+ganEstimada;
+
   if(montoIni >= totalTotal){
     //el servicio generara ganancia
+    
 
   }else{
     //se gasto de mas, solo lo notificamos
@@ -227,5 +241,9 @@ btnFinaliza.addEventListener('click', function(){
 let costoFin = document.getElementById('costoFinal');
 costoFin.addEventListener('keyup', function(){
   let costoFinal = document.getElementById('costoFinal').value;
-  
+  let costoInicial = document.getElementById('costoIniFinal').value;
+  let costoProd = document.getElementById('montoArticulos').value;
+
+
+
 });

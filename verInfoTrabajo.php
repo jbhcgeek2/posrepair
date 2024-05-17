@@ -420,7 +420,7 @@ session_start();
                                 value="<?php echo $sumArti; ?>" readonly>
                               </div>
 
-                              <div class="col-sm-12 col-md-4 offset-md-2 mb-3">
+                              <div class="col-sm-12 col-md-4 offset-md-4 mb-3">
                                 <label for="costoFinal" class="form-label">Costo Final</label>
                                 <input type="number" id="costoFinal" class="form-control">
                               </div>
@@ -428,7 +428,7 @@ session_start();
 
                             <div class="row">
                               <p>Se prevee obtener una ganancia aproximada de 
-                                <span class="fw-cold text-primary" id="gananciaEstimada">$0</span> 
+                                <span class="fw-bold text-primary" id="gananciaEstimada">$0</span> 
                               </p>
                             </div>
 
