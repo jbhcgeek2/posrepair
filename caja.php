@@ -193,6 +193,9 @@ session_start();
                 <!-- Seccion para cobrar trabajos -->
                 <h4 class="app-card-title">Servicios listo para cobro</h4>
 
+
+                <hr class="my-4">
+
                 <div class="row m-1" id="resultBusqueda" style="height: 500px; overflow-y:scroll;">
 
                   <?php 
