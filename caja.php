@@ -193,13 +193,13 @@ session_start();
                 <!-- Seccion para cobrar trabajos -->
                 <h4 class="app-card-title">Servicios listo para cobro</h4>
 
-                <table>
+                <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Folio</th>
-                      <th>Cliente</th>
-                      <th>Dispositivo</th>
-                      <th>Monto</th>
+                      <th scope="col">Folio</th>
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Dispositivo</th>
+                      <th scope="col">Monto</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -215,6 +215,7 @@ session_start();
 
                             $nombreCliente = $fetchTrab['nombreCliente'];
                             $folioTrabajo = $fetchTrab['numTrabajo'];
+                            $folioTrabajo = str_pad($folioTrabajo, 3, '0', STR_PAD_LEFT);
                             $dispositivo = $fetchTrab['tipoDispositivo']." ".$fetchTrab['marca']." ".$fetchTrab['modelo'];
                             $monto = $fetchTrab['costoFinal'];
 
