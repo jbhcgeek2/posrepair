@@ -212,6 +212,7 @@ btnFinaliza.addEventListener('click', function(){
   let montoIni = document.getElementById('costoServicio').value;
 
   if(montoIni >= totalTotal){
+    //el servicio generara ganancia
 
   }else{
     //se gasto de mas, solo lo notificamos
@@ -222,3 +223,9 @@ btnFinaliza.addEventListener('click', function(){
     )
   }
 })
+
+let costoFin = document.getElementById('costoFinal');
+costoFin.addEventListener('keyup', function(){
+  let costoFinal = document.getElementById('costoFinal').value;
+  
+});
