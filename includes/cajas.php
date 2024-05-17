@@ -793,7 +793,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         //antes de agregarlo a DETALLEVENTA verificamos que no este ya agregado al carrito
         $sql2 = "SELECT * FROM DETALLEVENTA WHERE trabajoID = '$idTrabajo'";
         try {
-          $query = mysqli_query($conexion, $sql2);
+          $query2 = mysqli_query($conexion, $sql2);
           if(mysqli_num_rows($query2) == 0){
             //no se encuentra agregado ahora lo agregamos a DETALLEVENTA
             $fetchTrabajo = mysqli_fetch_assoc($query);
