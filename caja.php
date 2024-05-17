@@ -193,6 +193,49 @@ session_start();
                 <!-- Seccion para cobrar trabajos -->
                 <h4 class="app-card-title">Servicios listo para cobro</h4>
 
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Folio</th>
+                      <th>Cliente</th>
+                      <th>Dispositivo</th>
+                      <th>Monto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      //consultaremos los trabajos que estan listos para su cobro
+                      $sqlTrab = "SELECT a.*,b.nombreCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
+                      ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND 
+                      a.empresaID = '$idEmpresaSesion' AND a.fechaTermino != '0000-00-00' AND a.estatusTrabajo = 'Finalizado'";
+                      try {
+                        $queryTrab = mysqli_query($conexion, $sqlTrab);
+                        if(mysqli_num_rows($queryTrab) > 0){
+                          while($fetchTrab = mysqli_fetch_assoc($queryTrab)){
+
+                            $nombreCliente = $fetchTrab['nombreCliente'];
+                            $folioTrabajo = $fetchTrab['numTrabajo'];
+                            $dispositivo = $fetchTrab['tipoDispositivo']." ".$fetchTrab['marca']." ".$fetchTrab['modelo'];
+                            $monto = $fetchTrab['costoFinal'];
+
+                            echo "<tr>
+                            <td>$folioTrabajo</td>
+                            <td>$nombreCliente</td>
+                            <td>$dispositivo</td>
+                            <td>$$monto</td>
+                            </tr>";
+                          }//fin del while
+                        }else{
+                          //sin trabajos disponibles de cobro
+                          echo "<tr><td colspan='4'>Sin Trabajos Disponibles</td></tr>";
+                        }
+                      } catch (\Throwable $th) {
+                        //error en la consulta de trabajos
+                        echo "<tr><td colspan='4'>Error en la consulta a la BD</td></tr>";
+                      }
+                    ?>
+                  </tbody>
+                </table>
 
                 <hr class="my-4">
 
