@@ -668,7 +668,7 @@ function addTrabajo(trabajo){
   let datos = new FormData();
   datos.append('addTrabajoCobro',trabajo);
 
-  let envio = new FormData();
+  let envio = new XMLHttpRequest();
   envio.open('POST','../includes/cajas.php',false);
   envio.send(datos);
 
