@@ -827,8 +827,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $fetch5 = mysqli_fetch_assoc($query5);
                     
                     $nombreProd = $fetch5['nombreArticulo'];
-                    $cantidadVenta = $fetch5['cantidadVenta'];
-                    $subTotal = $cantidadVenta * $fetch5['precioUnitario'];
+                    $cantidadVenta = $fetch4['cantidadVenta'];
+                    $subTotal = $cantidadVenta * $fetch4['precioUnitario'];
                     $total = $total + $subTotal;
                     $idProdVenta = $fetch4['idDetalleVenta'];
                     if (strlen($nombreProd) > 20) {
