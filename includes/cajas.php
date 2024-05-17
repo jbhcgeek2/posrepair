@@ -812,9 +812,14 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $contenido = "";
                 $total = 0;
                 $totalArticulos = 0;
+                $nombreProd;
+                $cantidadVenta;
+                $subTotal;
+                $idProdVenta;
+                $cadenaTruncada;
                 while($fetch4 = mysqli_fetch_assoc($query4)){
                   //recorreremos todos los registros
-                  if($fetch4['articuloID'] != NULL){
+                  if($fetch4['articuloID'] != NULL || $fetch4['articuloID']  > 0){
                     //se trata de un articulo
                     $idArti = $fetch4['articuloID'];
                     $sql5 = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idArti'";
@@ -845,6 +850,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $total = $total + $subTotal;
                     $idProdVenta = $fetch4['idDetalleVenta'];
                     $cadenaTruncada = $nombreProd;
+                    $totalArticulos = $totalArticulos + 1;
                   }
                   $contenido .= "
                   <tr class='p-1' style='height: 58px;'>
