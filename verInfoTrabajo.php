@@ -77,7 +77,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verSucursales.php">Ver Trabajos</a>
+									        <a href="verTrabajos.php">Ver Trabajos</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
@@ -433,6 +433,11 @@ session_start();
                             </div>
 
                           </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="btnTerminaTrabajo">Finalizar</button>
+                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>

@@ -263,3 +263,72 @@ costoFin.addEventListener('keyup', function(){
 
 
 });
+
+
+let btnTermina = document.getElementById('btnTerminaTrabajo');
+btnTermina.addEventListener('click', function(){
+  //metodo para finalizar el trabajo
+  //antes de confirmar, verificamos el costo total
+  let costoFinal = document.getElementById('costoFinal').value;
+  let costoIni = document.getElementById('costoIniFinal').value;
+
+  if(costoFinal > 0 && costoFinal >= costoIni){
+    Swal.fire({
+      title: 'Finalizar Trabajo?',
+      text: 'Estas seguro de terminar el trabajo?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Si, finalizar',
+      denyButtonText: 'Cancelar'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //enviamos los datos
+
+        let trabajo = document.getElementById('datoTrabajo').value;
+        let datos = new FormData();
+        datos.append('terminaTrabajo',trabajo);
+        datos.append('precioFinalTer',costoFinal);
+
+        let envio = new XMLHttpRequest();
+        envio.open('POST','../includes/trabajosOperaciones.php',false);
+        envio.send(datos);
+
+        if(envio.status == 200){
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            Swal.fire(
+              'Trabajo finalizado',
+              'Ya es posible cobrarlo en el area de caja',
+              'success'
+            ).then(function(){
+              window.location = 'verTrabajos.php';
+            })
+          }else{
+            //error al actualizar
+            let err = res.mensaje;
+            Swal.fire(
+              'Ha ocurrido un error',
+              'Verificar: '+err,
+              'error'
+            )
+          }
+        }else{
+          Swal.fire(
+            'Servidor inalcansable',
+            'Verifica tu conexion a internet',
+            'error'
+          )
+        }
+        
+      }else{
+        //no hacemos nada
+      }
+    })
+  }else{
+    Swal.fire(
+      'Datos faltantes',
+      'Asegurate de indicar un costo final valido',
+      'error'
+    )
+  }
+});

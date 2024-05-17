@@ -207,6 +207,23 @@
 
       
 
+    }elseif(!empty($_POST['terminaTrabajo'])){
+      $idTrabajo = $_POST['terminaTrabajo'];
+      $precioFinal = $_POST['precioFinalTer'];
+      $fecha = date('Y-m-d');
+      $hora = date('H:i:s');
+
+      $sql = "UPDATE TRABAJOS SET estatusTrabajo = 'Finalizado', fechaTermino = '$fecha', 
+      horaTermino = '$hora', usuarioTermino = '$usuario' WHERE idTrabajo = '$idTrabajo'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        //podemos dar por terminado
+        $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el trabajo: '.$th];
+        echo json_encode($res);
+      }
     }
   }
 ?>
