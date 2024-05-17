@@ -875,12 +875,12 @@ if(!empty($_SESSION['usuarioPOS'])){
                 echo $respuesta;
               } catch (\Throwable $th) {
                 //error al cosnultar las ventas
-                $respuesta = "DataError+-_-+Ocurrio un error al consultar las ventas";
+                $respuesta = "DataError+-_-+Ocurrio un error al consultar las ventas ".$th;
                 echo $respuesta;
               }
             } catch (\Throwable $th) {
               //error al insertar el traajo en DETALLEVENTA
-              $respuesta = "DataError+-_-+Ocurrio un error al registrar la venta";
+              $respuesta = "DataError+-_-+Ocurrio un error al registrar la venta ".$th;
               echo $respuesta;
             }
           }else{
@@ -890,7 +890,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           }
         } catch (\Throwable $th) {
           //error 
-          $respuesta = "DataError+-_-+Ocurrio un error al consultar la venta";
+          $respuesta = "DataError+-_-+Ocurrio un error al consultar la venta ".$th;
           echo $respuesta;
         }
       }else{
