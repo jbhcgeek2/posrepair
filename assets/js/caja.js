@@ -663,4 +663,40 @@ if(document.getElementById('modalAperturaDia')){
   })
 }
 
+function addTrabajo(trabajo){
+  //funcion para agregar al carrito un metodo de cobro
+  let datos = new FormData();
+  datos.append('addTrabajoCobro',trabajo);
 
+  let envio = new FormData();
+  envio.open('POST','../includes/cajas.php',false);
+  envio.send(datos);
+
+  if(envio.status == 200){
+    let res = envio.responseText.split("+-_-+");
+    if(res[0]== "operationSuccess"){
+      let contenido = res[1];
+      let totalVenta = res[2];
+      let totalArti = res[3];
+
+      document.getElementById('cantenidoProds').innerHTML = contenido;
+      document.getElementById('totalVentaProds').innerHTML = "Pagar $"+totalVenta;
+      document.getElementById('numArtiVenta').innerHTML = "("+totalArti+" Articulos)";
+      document.getElementById("totalCobroVenta").value = totalVenta;
+      document.getElementById("totalVentanaCobro").innerHTML = "<strong>$"+totalVenta+"</strong>";
+    }else{
+      let err = res[1];
+      Swal.fire(
+        'Ha ocurrido un error',
+        'verificar: '+err,
+        'error'
+      )
+    }
+  }else{
+    Swal.fire(
+      'Servidor Inalcansable',
+      'Verifica tu conexion a internet',
+      'error'
+    )
+  }
+}

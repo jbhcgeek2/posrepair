@@ -218,8 +218,9 @@ session_start();
                             $folioTrabajo = str_pad($folioTrabajo, 3, '0', STR_PAD_LEFT);
                             $dispositivo = $fetchTrab['tipoDispositivo']." ".$fetchTrab['marca']." ".$fetchTrab['modelo'];
                             $monto = $fetchTrab['costoFinal'];
+                            $idTrabajo = $fetchTrab['idTrabajo'];
 
-                            echo "<tr>
+                            echo "<tr onclick='addTrabajo($idTrabajo)'>
                             <td>$folioTrabajo</td>
                             <td>$nombreCliente</td>
                             <td>$dispositivo</td>

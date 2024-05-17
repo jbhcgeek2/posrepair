@@ -776,6 +776,131 @@ if(!empty($_SESSION['usuarioPOS'])){
       echo json_encode($res);
     }
 
+  }elseif(!empty($_POST['addTrabajoCobro'])){
+    // seccion para registar el cobro de un trabajo / servicio
+    $usuario = $_SESSION['usuarioPOS'];
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $idEmprersa = json_decode($empresa)->dato;
+    $datosUsuario = getDataUser($usuario,$idEmprersa);
+    $idSucursal = json_decode($datosUsuario)->sucursalID;
+    $idTrabajo = $_POST['addTrabajoCobro'];
+    //verificamos que exista el trabajo
+    $sql = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmprersa' AND 
+    sucursalID = '$idSucursal'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 1){
+        //antes de agregarlo a DETALLEVENTA verificamos que no este ya agregado al carrito
+        $sql2 = "SELECT * FROM DETALLEVENTA WHERE trabajoID = '$idTrabajo'";
+        try {
+          $query = mysqli_query($conexion, $sql2);
+          if(mysqli_num_rows($query2) == 0){
+            //no se encuentra agregado ahora lo agregamos a DETALLEVENTA
+            $fetchTrabajo = mysqli_fetch_assoc($query);
+            $precioFinal = $fetchTrabajo['costoFinal'];
+
+            $sql3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
+            sucursalID,trabajoID) VALUES ('1','$precioFinal','$precioFinal','$usuario','$idSucursal','$idTrabajo')";
+            try {
+              $query3 = mysqli_query($conexion, $sql3);
+              //se inserto correctamente, ahora, se dice que debemos consultar todos los registros de
+              //DETALLEVENTA que cuenten con el ventaID en nulo
+              $sql4 = "SELECT * FROM DETALLEVENTA WHERE usuarioVenta = '$usuario' AND ventaID IS NULL";
+              try {
+                $query4 = mysqli_query($conexion, $sql4);
+                //como es un metodo para agregar, deben de exisitir registros
+                $contenido = "";
+                $total = 0;
+                $totalArticulos = 0;
+                while($fetch4 = mysqli_fetch_assoc($query4)){
+                  //recorreremos todos los registros
+                  if($fetch4['articuloID'] != NULL){
+                    //se trata de un articulo
+                    $idArti = $fetch4['articuloID'];
+                    $sql5 = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idArti'";
+                    $query5 = mysqli_query($conexion, $sql5);
+                    $fetch5 = mysqli_fetch_assoc($query5);
+                    
+                    $nombreProd = $fetch5['nombreArticulo'];
+                    $cantidadVenta = $fetch5['cantidadVenta'];
+                    $subTotal = $cantidadVenta * $fetch5['precioUnitario'];
+                    $total = $total + $subTotal;
+                    $idProdVenta = $fetch4['idDetalleVenta'];
+                    if (strlen($nombreProd) > 20) {
+                      $cadenaTruncada = substr($nombreProd, 0, 20) . "...";
+                    } else {
+                        $cadenaTruncada = $nombreProd;
+                    }
+                    $totalArticulos = $totalArticulos + $cantidadVenta;
+                  }else{
+                    //se trata de un servicio
+                    $idTra = $fetch4['trabajoID'];
+                    $sql6 = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTra'";
+                    $query6 = mysqli_query($conexion, $sql6);
+                    $fetch6 = mysqli_fetch_assoc($query6);
+
+                    $nombreProd = "Cobro de Servicio";
+                    $cantidadVenta = '1';
+                    $subTotal = $fetch6['costoFinal'];
+                    $total = $total + $subTotal;
+                    $idProdVenta = $fetch4['idDetalleVenta'];
+                    $cadenaTruncada = $nombreProd;
+                  }
+                  $contenido .= "
+                  <tr class='p-1' style='height: 58px;'>
+                    <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
+
+                    <td class='d-flex ' style='height: 58px;'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delOneProd($idProdVenta)' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
+                        <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
+                      </svg>
+                      
+                      <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)'>
+
+                      <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='addMoreProd($idProdVenta)' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
+                        <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
+                      </svg>
+                    </td>
+
+                    <td style='height: 58px;' id='subTotVenta$idProdVenta'>$subTotal</td>
+
+                    <td class='text-center' style='height: 58px;'>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delProd($idProdVenta)' class='bi bi-trash-fill text-danger' viewBox='0 0 16 16'>
+                        <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/>
+                      </svg>
+                    </td>
+                  </tr>";
+                }//fin del while
+                $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".number_format($total,2)."+-_-+".$totalArticulos;
+                echo $respuesta;
+              } catch (\Throwable $th) {
+                //error al cosnultar las ventas
+                $respuesta = "DataError+-_-+Ocurrio un error al consultar las ventas";
+                echo $respuesta;
+              }
+            } catch (\Throwable $th) {
+              //error al insertar el traajo en DETALLEVENTA
+              $respuesta = "DataError+-_-+Ocurrio un error al registrar la venta";
+              echo $respuesta;
+            }
+          }else{
+            //ya se encuentra agregado, 
+            $respuesta = "DataError+-_-+El servicio ya se encuentra en el carrito";
+            echo $respuesta;
+          }
+        } catch (\Throwable $th) {
+          //error 
+          $respuesta = "DataError+-_-+Ocurrio un error al consultar la venta";
+          echo $respuesta;
+        }
+      }else{
+        //trabajo nho localizado
+        echo "No data";
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      echo "error";
+    }
   }
 }
 
