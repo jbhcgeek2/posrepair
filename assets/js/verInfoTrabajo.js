@@ -205,3 +205,20 @@ btnGuardar.addEventListener('click', function(){
   })
 })
 
+let btnFinaliza = document.getElementById('btnFinaliza');
+btnFinaliza.addEventListener('click', function(){
+  //seccion para validar el costo de los articulos utilizados y el cobro inicial
+  let totalTotal = document.getElementById('sumaTotalArtis').value;
+  let montoIni = document.getElementById('costoServicio').value;
+
+  if(montoIni >= totalTotal){
+
+  }else{
+    //se gasto de mas, solo lo notificamos
+    Swal.fire(
+      'Incongruencia en el costo',
+      'Se recomienda aumentar el costo del servicio',
+      'warning'
+    )
+  }
+})

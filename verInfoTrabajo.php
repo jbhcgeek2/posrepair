@@ -42,6 +42,8 @@ session_start();
       $costoFin = $trabajo->data->costoFinal;
       $estatusTrab = $trabajo->data->estatusTrabajo;
 
+      $restante = $costoIni - $anticipo;
+
        
 
 
@@ -250,7 +252,8 @@ session_start();
                           data-bs-target="#modalPieza">Registrar Pieza</a>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                          <a href="#!" class="btn btn-danger">Finalizar Trabajo</a>
+                          <a href="#!" class="btn btn-danger" id="btnFinaliza" data-bs-toggle="modal"
+                          data-bs-target="#modalFinaliza">Finalizar Trabajo</a>
                         </div>
                       </div>
                               
@@ -267,12 +270,15 @@ session_start();
                         ON a.articuloID = b.idArticulo WHERE a.trabajoID = '$idTicket'";
                         try {
                           $queryArtiExt = mysqli_query($conexion, $sqlArtiExt);
+                          $sumArti = 0;
                           if(mysqli_num_rows($queryArtiExt) > 0){
                             while($fetchArtiExt = mysqli_fetch_assoc($queryArtiExt)){
                               $nombreArti = $fetchArtiExt['nombreArticulo'];
                               $cantidad = $fetchArtiExt['cantidad'];
                               $precio = $fetchArtiExt['precioUnitario'];
                               $subtotal = $fetchArtiExt['subTotalArticulo'];
+
+                              $sumArti = $sumArti+$subtotal;
 
                               echo "<div class='col-sm-12 col-md-3 mb-3'>
                                 <label class='form-label' for='nombreArti'>Articulo</label>
@@ -293,6 +299,8 @@ session_start();
                               <hr class='my-4'>
                               ";
                             }//fin del while
+
+                            echo "<input type='hidden' id='sumaTotalArtis' value='$sumArti'>";
                           }else{
                             //no se tienen articulos registrados para este trabajo
 
@@ -372,6 +380,46 @@ session_start();
                           <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary" id="btnSave">Registrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="modal fade" id="modalFinaliza" tabindex="-1" data-bs-backdrop="static" 
+                      aria-labelledby="modalFinalizaLabel" data-bs-keyboard="false" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalPiezaLabel">Finalizar Trabajo</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <p>Antes de finalizar por completo el trabajo verifica la informacion</p>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="costoIniFinal" class="form-label">Costo Inicial</label>
+                                <input type="number" id="costoIniFinal" value="<?php echo $costoIni; ?>" 
+                                class="form-control" readonly>
+                              </div>
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="anticipoFinal" class="form-label">Anticipo</label>
+                                <input type="number" id="anticipoFinal" value="<?php echo $anticipo; ?>" 
+                                class="form-control" readonly>
+                              </div>
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="montoRestante" class="form-label">Restante</label>
+                                <input type="number" id="montoRestante" class="form-control" 
+                                value="<?php echo $restante; ?>" readonly>
+                              </div>
+                              <div class="col-sm-12 col-md-4 offset-md-4 mb-3">
+                                <label for="costoFinal" class="form-label">Costo Final</label>
+                                <input type="number" id="costoFinal" class="form-control">
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
