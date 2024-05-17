@@ -269,8 +269,8 @@ let btnTermina = document.getElementById('btnTerminaTrabajo');
 btnTermina.addEventListener('click', function(){
   //metodo para finalizar el trabajo
   //antes de confirmar, verificamos el costo total
-  let costoFinal = document.getElementById('costoFinal').value;
-  let costoIni = document.getElementById('costoIniFinal').value;
+  let costoFinal = parseFloat(document.getElementById('costoFinal').value);
+  let costoIni = parseFloat(document.getElementById('costoIniFinal').value);
 
   if(costoFinal > 0 && costoFinal >= costoIni){
     Swal.fire({

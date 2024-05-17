@@ -421,7 +421,7 @@ session_start();
                               </div>
 
                               <div class="col-sm-12 col-md-4 offset-md-4 mb-3">
-                                <label for="costoFinal" inputmode="decimal" pattern="\d+(\.\d{1,2})?" class="form-label">Costo Final</label>
+                                <label for="costoFinal" class="form-label">Costo Final</label>
                                 <input type="number" id="costoFinal" class="form-control">
                               </div>
                             </div>
