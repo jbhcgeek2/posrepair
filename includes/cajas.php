@@ -812,13 +812,13 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $contenido = "";
                 $total = 0;
                 $totalArticulos = 0;
-                $nombreProd;
-                $cantidadVenta;
-                $subTotal;
-                $idProdVenta;
-                $cadenaTruncada;
                 while($fetch4 = mysqli_fetch_assoc($query4)){
                   //recorreremos todos los registros
+                  $nombreProd;
+                  $cantidadVenta;
+                  $subTotal;
+                  $idProdVenta;
+                  $cadenaTruncada;
                   if($fetch4['articuloID'] != NULL || $fetch4['articuloID']  > 0){
                     //se trata de un articulo
                     $idArti = $fetch4['articuloID'];
