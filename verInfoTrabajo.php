@@ -426,8 +426,8 @@ session_start();
                               </div>
                             </div>
 
-                            <div class="row">
-                              <p>Se prevee obtener una ganancia aproximada de 
+                            <div class="row text-center">
+                              <p>Se prevé obtener una ganancia aproximada de 
                                 <span class="fw-bold text-primary" id="gananciaEstimada">$0</span> 
                               </p>
                             </div>
