@@ -214,7 +214,7 @@
       $hora = date('H:i:s');
 
       $sql = "UPDATE TRABAJOS SET estatusTrabajo = 'Finalizado', fechaTermino = '$fecha', 
-      horaTermino = '$hora', usuarioTermino = '$usuario' WHERE idTrabajo = '$idTrabajo'";
+      horaTermino = '$hora', usuarioTermino = '$usuario', costoFinal = '$precioFinal' WHERE idTrabajo = '$idTrabajo'";
       try {
         $query = mysqli_query($conexion, $sql);
         //podemos dar por terminado
