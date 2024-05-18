@@ -100,7 +100,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $cambioPago = $venta->venta->cambioPago;
                 for($x = 0; $x < count($venta->detalleVenta); $x++){
                   if($venta->detalleVenta[$x]->trabajoID > 0){
-                    $nombreArti = $venta->detalleVenta[$x]->"Cobro de Servicio";
+                    $nombreArti = "Cobro de Servicio";
                   }else{
                     $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
                   }
