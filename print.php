@@ -99,10 +99,15 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $montoPago = $venta->venta->montoPago;
                 $cambioPago = $venta->venta->cambioPago;
                 for($x = 0; $x < count($venta->detalleVenta); $x++){
+                  if($venta->detalleVenta[$x]->trabajoID > 0){
+                    $nombreArti = $venta->detalleVenta[$x]->"Cobro de Servicio";
+                  }else{
+                    $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
+                  }
                   $cantidad = $venta->detalleVenta[$x]->cantidadVenta;
                   $subtotal = $venta->detalleVenta[$x]->subtotalVenta;
                   $sumaTotal = $sumaTotal + $subtotal;
-                  $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
+                  
 
                   echo "<tr>
                     <td style='text-align:center;'>$cantidad</td>
