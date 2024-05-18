@@ -27,7 +27,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   //verificamos que la venta exista
   $venta = verTicket($ticket,$idUsuario);
   $venta = json_decode($venta);
-  // print_r($venta);718037884639
+  print_r($venta);
 
   if($venta->status == "ok"){
     // print_r($venta);
