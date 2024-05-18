@@ -63,7 +63,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Informacion de Trabajo</h1>
+			    <h1 class="app-page-title">Listado de Trabajos</h1>
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -77,7 +77,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verTrabajos.php">Ver Trabajos</a>
+									        <a href="verTrabajos.php">Registrar Trabajo</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
