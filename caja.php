@@ -364,7 +364,7 @@ session_start();
                   //buscamos articulos agregados
                   // $sqlVen = "SELECT * FROM DETALLEVENTA a  INNER JOIN ARTICULOS b ON a.articuloID = b.idArticulo 
                   // WHERE a.usuarioVenta = '$usuario' AND a.ventaID IS NULL";
-                  $sqlVen = "SELECT * FROM DETALLEVENTA WHERE a.usuarioVenta = '$usuario' AND a.ventaID IS NULL";
+                  $sqlVen = "SELECT * FROM DETALLEVENTA a WHERE a.usuarioVenta = '$usuario' AND a.ventaID IS NULL";
                   try {
                     $queryVen = mysqli_query($conexion, $sqlVen);
                     $nArti = mysqli_num_rows($queryVen);
