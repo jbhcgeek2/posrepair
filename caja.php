@@ -421,7 +421,7 @@ session_start();
                         // $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                         $cadenaTruncada = "Cobro de Servicio";
                         $cantidadVenta = "1";
-                        $subTotal = $cantidadVenta * $fetchVen['precioUnitario'];
+                        $subTotal = $fetchVen['subTotalVenta'];
                         $total = $total + $subTotal;
                         $idProdVenta = $fetchVen['idDetalleVenta'];
                         // 
@@ -489,6 +489,7 @@ session_start();
                     }//fin del while
                   } catch (Throwable $th) {
                     //ocurrio un error en la base de datos
+                    echo "Error ".$th;
                   }
                 ?>
                 <div class="row m-0">
