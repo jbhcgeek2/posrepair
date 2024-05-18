@@ -67,14 +67,29 @@ function verTicket($ticket,$idUsuario){
     $fetch = mysqli_fetch_assoc($query);
     if(mysqli_num_rows($query) > 0){
       $idVenta = $fetch['idVenta'];
-      $sql2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOS b ON a.articuloID = b.idArticulo  WHERE ventaID = '$idVenta'";
+      // $sql2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOS b ON a.articuloID = b.idArticulo  WHERE ventaID = '$idVenta'";
+      $sql2 = "SELECT * FROM DETALLEVENTA WHERE ventaID = '$idVenta'";
       try {
         $query2 = mysqli_query($conexion, $sql2);
         $data2 = [];
         $x = 0;
         $idSucursal = "";
         while($fetch2 = mysqli_fetch_assoc($query2)){
-          $data2[$x] = $fetch2;
+          //verificamos si el registro es articulo o servicio
+          if($fetch2['articuloID'] != NULL || $fetch2['articuloID'] > 0){
+            //es articulo
+            $idDetalle = $fetch2['idDetalleVenta'];
+            $sqlExt2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOS b 
+            ON a.articuloID = b.idArticulo  WHERE ventaID = '$idVenta' AND idDetalleVenta = '$idDetalle'";
+            $queryExt2 = mysqli_query($conexion, $sqlExt2);
+            $fetchExt2 = mysqli_fetch_assoc($queryExt2);
+            //
+            $data2[$x] = $fetchExt2;
+          }else{
+            //es trabajo/servicio
+            $data2[$x] = $fetch2;
+          }
+          // $data2[$x] = $fetch2;
           $idSucursal = $fetch2['sucursalID'];
           $x++;
         }//fin del while

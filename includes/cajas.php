@@ -717,9 +717,32 @@ if(!empty($_SESSION['usuarioPOS'])){
 
               
             }//fin del whileAux2
+
+            //antes de finalizar el proceso, consultamos si se cuenta con servicios
+            $sqlTra = "SELECT * FROM DETALLEVENTA WHERE ventaID = '$idVenta' AND trabajoID IS NOT NULL";
+            $queryTra = mysqli_query($conexion, $sqlTra);
+            if(mysqli_num_rows($queryTra) > 0){
+              //si se detectaron trabajos, los actualizamos la fecha de cobro
+              while($fetchTra = mysqli_fetch_assoc($queryTra)){
+                $idTrabajo = $fetchTra['trabajoID'];
+                $fechaTra = date('Y-m-d');
+                $horaTra = date('H:i:s');
+
+                $sqlUpdateTra = "UPDATE TRABAJOS SET fechaCobro = '$fechaTra', horaCobro = '$horaTra', 
+                usuarioCobro = '$usuario' WHERE idTrabajo = '$idTrabajo'";
+                $queryUpdateTra = mysqli_query($conexion, $sqlUpdateTra);
+              }//fin del while
+              //ahora si se completo el proceso de guardar la ficha
+              $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+              echo json_encode($res);
+            }else{
+              //no se localizaron trabajos en esta venta, podemos dar por terminado el proceso
+              $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+              echo json_encode($res);
+            }
             //ahora si se completo el proceso de guardar la ficha
-            $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
-            echo json_encode($res);
+            // $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+            // echo json_encode($res);
           } catch (\Throwable $th) {
             //error al actuaslizar el detalle de ficha
             $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al procesar el detalle de venta: ".$th];
