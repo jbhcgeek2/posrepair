@@ -21,7 +21,7 @@ estatus.addEventListener('change', function(){
         //si tiene resultados
         
         for (let z = 0; z < res.data.length; z++) {
-          console.log(res.data[z]);
+          console.log(res.data[z].numTrabajo);
           
         }
       }else{
