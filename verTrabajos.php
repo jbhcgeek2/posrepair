@@ -80,7 +80,7 @@ session_start();
                           <th>Ver</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="resBusqueda">
                         <?php
                           // consultamos los trabajos que esten activos
                           $sqlTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 

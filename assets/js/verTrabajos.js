@@ -46,13 +46,21 @@ estatus.addEventListener('change', function(){
               <a href='verInfoTrabajo.php?data=${trabId}' class='btn btn-primary'>Ver</a>
             </td>
           </tr>`;
-        }
+        }//fin del for
+        document.getElementById('resBusqueda').innerHTML = contenido;
       }else{
         //no se encontraron resultados
         contenido = '<tr><td colspan="6" style="text-align:center;">Sin Resultados</td></tr>';
+        document.getElementById('resBusqueda').innerHTML = contenido;
       }
     }else{
       //error
+      let err = res.mensaje;
+      Swal.fire(
+        'Ha ocurrido un error',
+        'Verificar: '+err,
+        'error'
+      )
     }
   }else{
     //error de comunicacion
