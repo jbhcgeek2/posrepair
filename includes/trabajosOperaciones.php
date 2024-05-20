@@ -224,6 +224,36 @@
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el trabajo: '.$th];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['estatusBusqueda'])){
+      //seccion para buscar trabajos por el estatus y nombre
+      $estatus = $_POST['estatusBusqueda'];
+      $cliente = $_POST['nombreCli'];
+
+      // $sql = "SELECT * FROM TRABAJOS WHERE estatusTrabajo = '$estatus' AND empresaID = '$idEmpresaSesion' 
+      // AND sucursalID = '$idSucursalN'";
+      $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
+      INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
+      a.empresaID = '$idEmpresaSesion' AND a.estatusTrabajo = '$estatus'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        if(mysqli_num_rows($query)> 0){
+          $datos = [];
+          $x = 0;
+          while($fetch = mysqli_fetch_assoc($query)){
+            $datos[$x] = $fetch;
+            $x++;
+          }//fin del while
+          $res = ['status'=>'ok','data'=>$datos,'mensaje'=>'dataOk'];
+          echo json_encode($res);
+        }else{
+          //sin resultados
+          $res = ['status'=>'ok','mensaje'=>'noData'];
+          echo json_encode($res);
+        }
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los trabajos: '.$th];
+        echo json_encode($res);
+      }
     }
   }
 ?>
