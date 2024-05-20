@@ -75,7 +75,7 @@ session_start();
                           
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
                           <select name="tipoServicio" id="tipoServicio" class="form-select" aria-describedby="tipoServicioFeedBack" required>
                             <option value="" selected>Seleccione...</option>
@@ -115,12 +115,12 @@ session_start();
                           <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="costoServicio" class="form-label">Costo Servicio</label>
                           <input type="number" name="costoServicio" id="costoServicio" class="form-control">
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                        <div class="col-sm-12 col-md-2 col-lg-2 mb-3">
                           <label for="anticipoServicio" class="form-label">Anticipo</label>
                           <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control">
                         </div>
@@ -165,7 +165,7 @@ session_start();
                           <div class="invalid-feedback">Indique un dato valido</div>
                         </div>
 
-                        <div class="col-sm-12 mb-3">
+                        <div class="col-sm-12 col-md-9 col-lg-7 mb-3">
                           <label for="accesorioServicio" class="form-label">Accesorios</label>
                           <input type="text" name="accesorioServicio" id="accesorioServicio" class="form-control">
                         </div>
