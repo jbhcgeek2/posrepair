@@ -75,6 +75,33 @@ session_start();
                           
                         </div>
 
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                          <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select" aria-describedby="tipoServicioFeedBack" required>
+                            <option value="" selected>Seleccione...</option>
+                            <?php 
+                              $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
+                              estatusCategoria = '1'";
+                              try {
+                                $queryTServ = mysqli_query($conexion, $sqlTServ);
+                                if(mysqli_num_rows($queryTServ) > 0){
+                                  while($fetchTServ = mysqli_fetch_assoc($queryTServ)){
+                                    $nombreServ = $fetchTServ['nombreServicio'];
+                                    $idServicio = $fetchTServ['idServicio'];
+                                    echo "<option value='$idServicio'>$nombreServ</option>";
+                                  }//fin del while
+                                }else{
+                                  //sin servicios registrados
+                                  echo "<option value='noData'>Registrar Servicio</option>";
+                                }
+                              } catch (\Throwable $th) {
+                                echo "<option value='error'>Error de consulta DB</option>";
+                              }
+                            ?>
+                          </select>
+                          <div id="tipoServicioFeedBack" class="invalid-feedback">Selecciona servicio valido</div>
+                        </div>
+
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="fechaEntrega" class="form-label">Fecha de Entrega a Cliente <span class='text-danger fw-bold'>*<span></label>
                           <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
@@ -120,32 +147,6 @@ session_start();
                           <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
-                          <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
-                          <select name="tipoServicio" id="tipoServicio" class="form-select" aria-describedby="tipoServicioFeedBack" required>
-                            <option value="" selected>Seleccione...</option>
-                            <?php 
-                              $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
-                              estatusCategoria = '1'";
-                              try {
-                                $queryTServ = mysqli_query($conexion, $sqlTServ);
-                                if(mysqli_num_rows($queryTServ) > 0){
-                                  while($fetchTServ = mysqli_fetch_assoc($queryTServ)){
-                                    $nombreServ = $fetchTServ['nombreServicio'];
-                                    $idServicio = $fetchTServ['idServicio'];
-                                    echo "<option value='$idServicio'>$nombreServ</option>";
-                                  }//fin del while
-                                }else{
-                                  //sin servicios registrados
-                                  echo "<option value='noData'>Registrar Servicio</option>";
-                                }
-                              } catch (\Throwable $th) {
-                                echo "<option value='error'>Error de consulta DB</option>";
-                              }
-                            ?>
-                          </select>
-                          <div id="tipoServicioFeedBack" class="invalid-feedback">Selecciona servicio valido</div>
-                        </div>
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="marcaServicio" class="form-label">Marca <span class='text-danger fw-bold'>*<span></label>
