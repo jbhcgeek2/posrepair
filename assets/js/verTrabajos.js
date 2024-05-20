@@ -1,5 +1,5 @@
 let estatus = document.getElementById('buscarEstatus');
-estatus.addEventListener('click', function(){
+estatus.addEventListener('change', function(){
   let estatusSel = estatus.value;
   let nombreCli = document.getElementById('clienteNombre').value;
 
