@@ -232,7 +232,7 @@ session_start();
                           }//fin del while
                         }else{
                           //sin trabajos disponibles de cobro
-                          echo "<tr><td colspan='4'>Sin Trabajos Disponibles</td></tr>";
+                          echo "<tr><td colspan='4' style='text-align:center'>Sin Trabajos Disponibles</td></tr>";
                         }
                       } catch (\Throwable $th) {
                         //error en la consulta de trabajos
