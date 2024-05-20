@@ -983,7 +983,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $costoFinal = $precioFinal-$anticipo;
 
             $sql3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
-            sucursalID,trabajoID) VALUES ('1','$precioFinal','$costoFinal','$usuario','$idSucursal','$idTrabajo')";
+            sucursalID,trabajoID) VALUES ('1','$costoFinal','$precioFinal','$usuario','$idSucursal','$idTrabajo')";
             try {
               $query3 = mysqli_query($conexion, $sql3);
               //se inserto correctamente, ahora, se dice que debemos consultar todos los registros de
