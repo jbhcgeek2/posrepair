@@ -37,7 +37,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verTrabajos.php">Ver Trabajos</a>
+									        <a href="altaTrabajo.php">Registrar Trabajo</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
@@ -47,7 +47,55 @@ session_start();
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoSucur">
       
-                    
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Cliente</th>
+                          <th>Tipo de Trabajo</th>
+                          <th>Fecha de Registro</th>
+                          <th>Fecha de Entrega</th>
+                          <th>Estatus</th>
+                          <th>Ver</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                          // consultamos los trabajos que esten activos
+                          $sqlTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
+                          INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
+                          a.empresaID = '$idEmpresaSesion' AND a.estatusTrabajo <> 'Finalizado'";
+                          try {
+                            $queryTra = mysqli_query($conexion, $sqlTra);
+                            if(mysqli_num_rows($queryTra) > 0){
+                              while($fetchTra = mysqli_fetch_assoc($queryTra)){
+
+                                $cliente = $fetchTra['nombreCliente'];
+                                $tipoTra = $fetchTra['nombreServicio'];
+                                $fechaTra = $fetchTra['fechaTrabajo'];
+                                $fechaEntrega = $fetchTra['fechaEntrega'];
+                                $estatus = $fetchTra['estatusTrabajo'];
+                                $idTra = $fetchTra['idTrabajo'];
+
+                                echo "<tr>
+                                  <td>$cliente</td>
+                                  <td>$tipoTra</td>
+                                  <td>$fechaTra</td>
+                                  <td>$fechaEntrega</td>
+                                  <td>$estatus</td>
+                                  <td>
+                                    <a href='verInfoTrabajo.php?data=$idTra' class='btn btn-primary'>Ver</a>
+                                  </td>
+                                </tr>";
+                              }//fin del while
+                            }else{
+                              //sin trabajos activos
+                            }
+                          } catch (\Throwable $th) {
+                            //throw $th;
+                          }
+                        ?>
+                      </tbody>
+                    </table>
 
                     
 					        </div><!--//app-card-body-->
