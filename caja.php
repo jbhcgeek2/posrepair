@@ -205,9 +205,12 @@ session_start();
                   <tbody>
                     <?php 
                       //consultaremos los trabajos que estan listos para su cobro
+                      // $sqlTrab = "SELECT a.*,b.nombreCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
+                      // ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND 
+                      // a.empresaID = '$idEmpresaSesion' AND a.fechaTermino != '0000-00-00' AND a.estatusTrabajo = 'Finalizado'";
                       $sqlTrab = "SELECT a.*,b.nombreCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
-                      ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND 
-                      a.empresaID = '$idEmpresaSesion' AND a.fechaTermino != '0000-00-00' AND a.estatusTrabajo = 'Finalizado'";
+                      ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND a.empresaID = '$idSucursal' 
+                      AND a.fechaTermino IS NOT NULL AND a.fechaCobro IS NULL AND a.estatusTrabajo = 'Finalizado'";
                       try {
                         $queryTrab = mysqli_query($conexion, $sqlTrab);
                         if(mysqli_num_rows($queryTrab) > 0){
