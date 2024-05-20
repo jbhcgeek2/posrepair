@@ -26,7 +26,7 @@ estatus.addEventListener('change', function(){
         "Cancelado":'badge rounded-pill text-bg-dark'};
 
         for (let z = 0; z < res.data.length; z++) {
-          console.log(res.data[z].numTrabajo);
+          // console.log(res.data[z].numTrabajo);
           let nombreCli = res.data[z].nombreCliente;
           let tipoTra = res.data[z].nombreServicio;
           let fechaReg = res.data[z].fechaTrabajo;

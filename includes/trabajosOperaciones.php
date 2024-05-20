@@ -231,9 +231,17 @@
 
       // $sql = "SELECT * FROM TRABAJOS WHERE estatusTrabajo = '$estatus' AND empresaID = '$idEmpresaSesion' 
       // AND sucursalID = '$idSucursalN'";
-      $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
-      INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
-      a.empresaID = '$idEmpresaSesion' AND a.estatusTrabajo = '$estatus'";
+      if(empty($cliente)){
+        $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
+        INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
+        a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND a.estatusTrabajo = '$estatus'";
+      }else{
+        $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
+        INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
+        a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND a.estatusTrabajo = '$estatus' 
+        AND b.nombreCliente LIKE '%$cliente%'";
+      }
+      
       try {
         $query = mysqli_query($conexion, $sql);
         if(mysqli_num_rows($query)> 0){
