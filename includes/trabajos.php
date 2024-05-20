@@ -27,7 +27,7 @@ $usuario,$sucursal,$empresa,$idUsuario){
     $sql2 = "INSERT INTO TRABAJOS (numTrabajo,estatusTrabajo,fechaTrabajo,fechaRegistro,horaRegistro,clienteID,
     sucursalID,usuarioID,empresaID,tipoDispositivo,servicioID,marca,modelo,imeiClave,
     accesorios,problema,observaciones,contraDispo,fechaEntrega,costoInicial,anticipo) 
-    VALUES ('$numServ','Activo','$fechAlta','$fechaActual','$horaActual','$cliente','$sucursal','$idUsuario','$empresa','$tipoDispo',
+    VALUES ('$numServ','En Espera','$fechAlta','$fechaActual','$horaActual','$cliente','$sucursal','$idUsuario','$empresa','$tipoDispo',
     '$tipoServ','$marca','$modeloServicio','$serieDispo','$accesorios','$problema','$observacion',
     '$contraDispo','$fechaEntrega','$costoServ','$anticipo')";
     try {
