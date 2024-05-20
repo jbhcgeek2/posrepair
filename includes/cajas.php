@@ -496,7 +496,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         $totVenta = getTotalVenta($usuario,$idSucursal);
         $totVenta = json_decode($totVenta);
         if($totVenta->status == 'ok'){
-          $totalVenta = number_format($totVenta->data,2);
+          $totalVenta = $totVenta->data;
           $totalArti = getTotalArti($usuario,$idSucursal);
           $totalArticulos = json_decode($totalArti)->data;
 
