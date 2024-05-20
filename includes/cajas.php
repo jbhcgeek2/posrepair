@@ -978,9 +978,12 @@ if(!empty($_SESSION['usuarioPOS'])){
             //no se encuentra agregado ahora lo agregamos a DETALLEVENTA
             $fetchTrabajo = mysqli_fetch_assoc($query);
             $precioFinal = $fetchTrabajo['costoFinal'];
+            $anticipo = $fetchTrabajo['anticipo'];
+
+            $costoFinal = $precioFinal-$anticipo;
 
             $sql3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
-            sucursalID,trabajoID) VALUES ('1','$precioFinal','$precioFinal','$usuario','$idSucursal','$idTrabajo')";
+            sucursalID,trabajoID) VALUES ('1','$precioFinal','$costoFinal','$usuario','$idSucursal','$idTrabajo')";
             try {
               $query3 = mysqli_query($conexion, $sql3);
               //se inserto correctamente, ahora, se dice que debemos consultar todos los registros de
