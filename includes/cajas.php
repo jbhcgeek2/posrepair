@@ -1038,7 +1038,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         </svg>
                       </td>
   
-                      <td style='height: 58px;' id='subTotVenta$idProdVenta'>$$subTotal</td>
+                      <td style='height: 58px;' id='subTotVenta$idProdVenta'>$$costoFinal</td>
   
                       <td class='text-center' style='height: 58px;'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delProd($idProdVenta)' class='bi bi-trash-fill text-danger' viewBox='0 0 16 16'>
