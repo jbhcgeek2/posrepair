@@ -47,7 +47,7 @@ session_start();
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoSucur">
       
-                    <table>
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th>Cliente</th>
@@ -64,6 +64,14 @@ session_start();
                           $sqlTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
                           INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
                           a.empresaID = '$idEmpresaSesion' AND a.estatusTrabajo <> 'Finalizado'";
+
+                          $estatus = ["Activo","En Proceso","En Espera","Finalizado","Cancelado"];
+                          $colorStatus = ["Activo"=>'badge rounded-pill text-bg-success',
+                          "En Proceso"=>'badge rounded-pill text-bg-warning',
+                          "En Espera"=>'badge rounded-pill text-bg-secondary',
+                          "Finalizado"=>'badge rounded-pill text-bg-danger',
+                          "Cancelado"=>'badge rounded-pill text-bg-dark'];
+
                           try {
                             $queryTra = mysqli_query($conexion, $sqlTra);
                             if(mysqli_num_rows($queryTra) > 0){
@@ -75,13 +83,14 @@ session_start();
                                 $fechaEntrega = $fetchTra['fechaEntrega'];
                                 $estatus = $fetchTra['estatusTrabajo'];
                                 $idTra = $fetchTra['idTrabajo'];
+                                $colorEstatus = $colorStatus[$estatus];
 
                                 echo "<tr>
                                   <td>$cliente</td>
                                   <td>$tipoTra</td>
                                   <td>$fechaTra</td>
                                   <td>$fechaEntrega</td>
-                                  <td>$estatus</td>
+                                  <td><span class='$colorEstatus'>$estatus</span></td>
                                   <td>
                                     <a href='verInfoTrabajo.php?data=$idTra' class='btn btn-primary'>Ver</a>
                                   </td>
