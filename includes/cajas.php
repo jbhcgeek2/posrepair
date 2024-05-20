@@ -1057,6 +1057,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $nombreProd = "Cobro de Servicio";
                     $cantidadVenta = '1';
                     $subTotal = $fetch6['costoFinal'];
+                    $anticipo = $fetch6['anticipo'];
+                    $subTotal = $subTotal-$anticipo;
                     $total = $total + $subTotal;
                     $idProdVenta = $fetch4['idDetalleVenta'];
                     $cadenaTruncada = $nombreProd;
