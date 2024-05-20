@@ -45,7 +45,7 @@ session_start();
 					        </div><!--//app-card-header-->
 
 
-                  <div class="col-sm-12 col-md-10 offset-m1">
+                  <div class="col-sm-12 col-md-10 offset-md-1">
                     <div class="row">
                       <div class="col-sm-12 col-md-3 mb-3">
                         <label for="buscarEstatus" class="form-label">Buscar Por Estatus</label>
