@@ -45,23 +45,26 @@ session_start();
 					        </div><!--//app-card-header-->
 
 
-                  <div class="row">
-                    <div class="col-sm-12 col-md-3 mb-3">
-                      <label for="buscarEstatus" class="form-label"></label>
-                      <select name="buscarEstatus" id="buscarEstatus" class="form-select">
-                        <option value="">Seleccione...</option>
-                        <option value="Activo">Activo</option>
-                        <option value="En Proceso">En Proceso</option>
-                        <option value="En Espera">En Espera</option>
-                        <option value="Finalizado">Finalizado</option>
-                        <option value="Cancelado">Cancelado</option>
-                      </select>
-                    </div>
-                    <div class="col-sm-12 col-md-6 mb-3">
-                      <label for="clienteNombre" class="form-label">Cliente</label>
-                      <input type="text" id="clienteNombre" class="form-control">
+                  <div class="col-sm-12 col-md-10 offset-m1">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-3 mb-3">
+                        <label for="buscarEstatus" class="form-label">Buscar Por Estatus</label>
+                        <select name="buscarEstatus" id="buscarEstatus" class="form-select">
+                          <option value="">Seleccione...</option>
+                          <option value="Activo">Activo</option>
+                          <option value="En Proceso">En Proceso</option>
+                          <option value="En Espera">En Espera</option>
+                          <option value="Finalizado">Finalizado</option>
+                          <option value="Cancelado">Cancelado</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-12 col-md-6 mb-3">
+                        <label for="clienteNombre" class="form-label">Cliente</label>
+                        <input type="text" id="clienteNombre" class="form-control">
+                      </div>
                     </div>
                   </div>
+                  
 
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoSucur">
