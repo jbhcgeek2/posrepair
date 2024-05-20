@@ -77,7 +77,7 @@ let nombreCli = document.getElementById('clienteNombre');
 nombreCli.addEventListener('change', function(){
   //metodo para buscar trabajos por nombre de clientes
   let nombreCliente = nombreCli.value;
-  let estatusTra = document.getElementById('buscarEstatus');
+  let estatusTra = document.getElementById('buscarEstatus').value;
 
   let datos = new FormData();
   datos.append('buscarByCliente',nombreCliente);
