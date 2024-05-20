@@ -50,7 +50,7 @@ session_start();
                       <div class="col-sm-12 col-md-3 mb-3">
                         <label for="buscarEstatus" class="form-label">Buscar Por Estatus</label>
                         <select name="buscarEstatus" id="buscarEstatus" class="form-select">
-                          <option value="" selected disabled>Seleccione...</option>
+                          <option value="" selected>Seleccione...</option>
                           <option value="Activo">Activo</option>
                           <option value="En Proceso">En Proceso</option>
                           <option value="En Espera">En Espera</option>

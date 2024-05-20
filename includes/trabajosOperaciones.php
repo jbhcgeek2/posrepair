@@ -262,6 +262,20 @@
         $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los trabajos: '.$th];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['buscarByCliente'])){
+      $nombreCliente = $_POST['buscarByCliente'];
+      $estatusTra = $_POST['estatusTraCli'];
+
+      if(empty($estatusTra)){
+        $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
+        INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
+        a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND  b.nombreCliente LIKE '%$nombreCliente%'";
+      }else{
+        $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
+        INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
+        a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND a.estatusTrabajo = '$estatusTra' 
+        AND b.nombreCliente LIKE '%$nombreCliente%'";
+      }
     }
   }
 ?>
