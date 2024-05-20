@@ -14,7 +14,23 @@ estatus.addEventListener('click', function(){
 
   if(envio.status == 200){
     let res = JSON.parse(envio.responseText);
-    console.log(res);
+    
+    if(res.status == "ok"){
+      let contenido = '';
+      if(res.mensaje == "dataOk"){
+        //si tiene resultados
+        
+        for (let z = 0; z < res.data.length; z++) {
+          console.log(res.data[z]);
+          
+        }
+      }else{
+        //no se encontraron resultados
+        contenido = '<tr><td colspan="6" style="text-align:center;">Sin Resultados</td></tr>';
+      }
+    }else{
+      //error
+    }
   }else{
     //error de comunicacion
     Swal.fire(
