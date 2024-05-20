@@ -124,25 +124,25 @@ if(!empty($_SESSION['usuarioPOS'])){
                 </tr>
                 <tr>
                   <td colspan='2' style='text-align: right;'>Subtotal</td>
-                  <td style='text-align: right;'>$$sumaTotal</td>
+                  <td style='text-align: right;'>$".number_format($sumaTotal,2)."</td>
                 </tr>
                 <tr>
                   <th colspan='3' style='border-top: 1px solid;'></th>
                 </tr>
                 <tr style='font-weight: bold; font-size:20px;'>
                   <td colspan='2' style='text-align: center;'>Total a Pagar</td>
-                  <td style='text-align: right;'>$$totalVenta</td
+                  <td style='text-align: right;'>$".number_format($totalVenta,2)."</td
                 </tr>
                 <tr>
                   <th colspan='3' style='border-top: 1px solid;'></th>
                 </tr>
                 <tr style='border-button: 1px solid;'>
                   <td colspan='2' style='text-align: right;'>Monto Recibido</td>
-                  <td style='text-align: right;'>$$montoPago</td>
+                  <td style='text-align: right;'>$".number_format($montoPago,2)."</td>
                 </tr>
                 <tr>
                   <td colspan='2' style='text-align: right;'>Cambio</td>
-                  <td style='text-align: right;'>$$cambioPago</td>
+                  <td style='text-align: right;'>$".number_format($cambioPago,2)."</td>
                 </tr>
                 ";
               ?>
