@@ -35,7 +35,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="altaProducto.php">Registrar Categoria</a>
+									        <a href="altaCategoria.php">Registrar Categoria</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
