@@ -76,13 +76,13 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="fechaEntrega" class="form-label">Fecha de Entrega <span class='text-danger fw-bold'>*<span></label>
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega a Cliente <span class='text-danger fw-bold'>*<span></label>
                           <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
                           <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="costoServicio" class="form-label">Costo</label>
+                          <label for="costoServicio" class="form-label">Costo Servicio</label>
                           <input type="number" name="costoServicio" id="costoServicio" class="form-control">
                         </div>
 
@@ -93,7 +93,7 @@ session_start();
 
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
-                          <label for="fechaServicio" class="form-label">Fecha <span class='text-danger fw-bold'>*<span></label>
+                          <label for="fechaServicio" class="form-label">Fecha Registro <span class='text-danger fw-bold'>*<span></label>
                           <input type="date" id="fechaServicio" name="fechaServicio" 
                           value="<?php echo date('Y-m-d'); ?>" class="form-control" required>
                           <div class="invalid-feedback">Indique una fecha valida</div>
