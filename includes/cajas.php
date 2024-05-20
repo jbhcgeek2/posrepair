@@ -432,7 +432,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             // $res = ["status"=>"ok","data"=>$datos];
 
             // echo json_encode($res);
-            $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".number_format($total,2)."+-_-+".$totalArticulos;
+            $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".$total."+-_-+".$totalArticulos;
             echo $respuesta;
           } catch (Throwable $th) {
             $respuesta = "DataError+-_-+Ocurrio un error al registrar la venta";
@@ -578,7 +578,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         // $res = ["status"=>"ok","data"=>$datos];
 
         // echo json_encode($res);
-        $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".number_format($total,2)."+-_-+".$totalArti;
+        $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".$total."+-_-+".$totalArti;
         echo $respuesta;
       } catch (\Throwable $th) {
         //throw $th;
@@ -1092,7 +1092,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }
                   
                 }//fin del while
-                $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".number_format($total,2)."+-_-+".$totalArticulos;
+                $respuesta = "operationSuccess+-_-+".$contenido."+-_-+".$total."+-_-+".$totalArticulos;
                 echo $respuesta;
               } catch (\Throwable $th) {
                 //error al cosnultar las ventas
