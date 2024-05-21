@@ -32,6 +32,7 @@ btnBuscar.addEventListener('click', function(){
             let usVenta = res.data[x].usuarioVenta;
             let sucName = res.data[x].nombreSuc;
             let totVenta = res.data[x].totalVenta;
+            let idVen = res.data[x].idVenta;
 
             sumaTotal = parseFloat(sumaTotal) + parseFloat(totVenta);
 
@@ -43,6 +44,9 @@ btnBuscar.addEventListener('click', function(){
             <td>$${totVenta}</td>
             <td>${usVenta}</td>
             <td>${sucName}</td>
+            <td>
+              <a href='../print.php?t=${idVen}' class='btn btn-success'>Ver Ticket</a>
+            </td>
             </tr>
             `;
           }//fin del for
