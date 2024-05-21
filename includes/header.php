@@ -74,14 +74,14 @@
               <input type="text" placeholder="Buscar pedido" name="search" class="form-control search-input">
               <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
             </form> -->
-						<select name="pedido" id="" class="form-select app-search-form">
+						<select name="pedido" id="selPedidoNav" class="form-select app-search-form">
 							<option value="">Trabajos Activos</option>
 							<?php
 								// consultaremos en un select los trabajos activos
 								$sqlBusTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON
 								a.clienteID = b.idClientes INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio 
-								WHERE a.empresaID  = '$idEmpresaSesion' 
-								AND a.estatusTrabajo IN ('En Espera','Activo','En Proceso')";
+								WHERE a.empresaID  = '$idEmpresaSesion' AND a.estatusTrabajo IN 
+								('En Espera','Activo','En Proceso') ORDER BY a.";
 								try {
 									$queryBusTra = mysqli_query($conexion, $sqlBusTra);
 									if(mysqli_num_rows($queryBusTra) > 0){
@@ -480,3 +480,12 @@
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
+
+		<script>
+			let selpedido = document.getElementById('selPedidoNav');
+			selpedido.addEventListenner('change',function(){
+				let trabajo = selpedido.value;
+
+				window.location = 'verInfoTrabajo.php?data='+trabajo;
+			})
+		</script>
