@@ -29,8 +29,8 @@ btnBuscar.addEventListener('click', function(){
             console.log(res.data[z]);
             let fecha = res.data[z].fechaVenta;
             let prod = res.data[z].nombreArticulo;
-            let cant = res.data[z].cantidadVenta;
-            let total = res.data[z].subtotalVenta;
+            let cant = parseInt(res.data[z].cantidadVenta);
+            let total = parseFloat(res.data[z].subtotalVenta);
             let sucursal = res.data[z].nombreSuc;
             suma = suma+total;
             totalArti = totalArti+cant;
