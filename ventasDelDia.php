@@ -125,7 +125,7 @@ session_start();
                                   <td>$usuarioVent</td>
                                   <td>$nombreSucVenta</td>
                                   <td>
-                                    <a href='print.php?t=$idVenta' class='btn btn-success'>Ver Ticket</a>
+                                    <a target='_blank' href='print.php?t=$idVenta' class='btn btn-success'>Ver Ticket</a>
                                   </td>
                                 </tr>";
                               }//fin del while
