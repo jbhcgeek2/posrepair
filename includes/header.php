@@ -74,10 +74,31 @@
               <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
             </form> -->
 						<select name="pedido" id="" class="form-select app-search-form">
-							<option value="">Ver Trabajo</option>
+							<option value="">Trabajos Activos</option>
 							<?php
 								// consultaremos en un select los trabajos activos
-								$sqlBusTra;
+								$sqlBusTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON
+								a.clienteID = b.idCliente INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio 
+								WHERE a.empresaID  = '$idEmpresaSesion' 
+								AND a.estatusTrabajo IN ('En Espera','Activo','En Proceso')";\
+								try {
+									$queryBusTra = mysqli_query($conexion, $sqlBusTra);
+									if(mysqli_num_rows($queryBusTra) > 0){
+										while($fetchBusTra = mysqli_fetch_assoc($queryBusTra)){
+											$nombreCliente = $fetchBusTra['nombreCliente'];
+											$idTra = $fetchBusTra['idTrabajo'];
+											$nombreServ = $fetchBusTra['nombreServicio'];
+
+											echo "<option value='$idTra'>$nombreCliente - $nombreServ</option>";
+										}//fin del while
+									}else{
+										//sin trabajos activos
+										echo "<option>Sin Trabajos Registrados</option>";
+									}
+								} catch (\Throwable $th) {
+									//throw $th;
+									echo "<option>Error de consulta a la BD.</option>";
+								}
 							?>
 						</select>
           </div><!--//app-search-box-->
