@@ -90,6 +90,23 @@ session_start();
 
                     <hr clas="my-4">
 
+                    <div class="row">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Fecha</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Sucursal</th>
+                          </tr>
+                        </thead>
+                        <tbody id="resultBusqueda">
+
+                        </tbody>
+                      </table>
+                    </div>
+
                     
 
 					        </div><!--//app-card-body-->
