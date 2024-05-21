@@ -59,6 +59,15 @@ session_start();
                       <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100" style="background-color:#e0f2f1;">
                           <div class="app-card-body p-3 p-lg-4">
+                            <h5 class="stats-type mb-1">Ventas por Usuario</h5>
+                          </div><!--//app-card-body-->
+                          <a class="app-card-link-mask" href="ventasUsuario.php"></a>
+                        </div><!--//app-card-->
+                      </div><!--//col-->
+
+                      <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100" style="background-color:#e0f2f1;">
+                          <div class="app-card-body p-3 p-lg-4">
                             <h5 class="stats-type mb-1">Salidas y Entradas de Efectivo</h5>
                           </div><!--//app-card-body-->
                           <a class="app-card-link-mask" href="salEntEfec.php"></a>
@@ -74,14 +83,7 @@ session_start();
                         </div><!--//app-card-->
                       </div><!--//col-->
 
-                      <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100" style="background-color:#e0f2f1;">
-                          <div class="app-card-body p-3 p-lg-4">
-                            <h5 class="stats-type mb-1">Ventas por Usuario</h5>
-                          </div><!--//app-card-body-->
-                          <a class="app-card-link-mask" href="ventasUsuario.php"></a>
-                        </div><!--//app-card-->
-                      </div><!--//col-->
+                      
 
                     </div>
 

@@ -90,6 +90,9 @@ session_start();
 
                     <hr clas="my-4">
 
+                    <h5>Articulos Vendidos:</h5>
+                    <h5>Total de Venta:</h5>
+
                     <div class="row" style="height:600px;overflow-y:scroll;">
                       <table class="table">
                         <thead>
