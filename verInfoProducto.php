@@ -208,8 +208,11 @@ session_start();
                       <?php 
                         if($rolUsuario == "Administrador"){
                           ?>
-                          <div class="row" style="text-align:center;">
-                            <a href="#!" type="button" class="btn btn-primary w-25" id="btnUpdateProd">Actualizar</a>
+                          <div class="row">
+                            <div class="col-sm-12" style="text-align:center;">
+                              <a href="#!" type="button" class="btn btn-primary w-25" id="btnUpdateProd">Actualizar</a>
+                            </div>
+                            
                           </div>
                           <?php
                         }
