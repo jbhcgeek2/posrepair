@@ -53,6 +53,8 @@ btnBuscar.addEventListener('click', function(){
             <td></td>
           </tr>`;
           document.getElementById('resultBusqueda').innerHTML = contenido;
+          document.getElementById('totArti').innerHTML = totalArti;
+          document.getElementById('totVenta').innerHTML = cantidadFormateada;
         }else{
           //sin datos
           contenido = `<tr><td colspan='5' style='text-align:center;'>Sin Datos</td></tr>`;

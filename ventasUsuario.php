@@ -90,8 +90,8 @@ session_start();
 
                     <hr clas="my-4">
 
-                    <h5>Articulos Vendidos:</h5>
-                    <h5>Total de Venta:</h5>
+                    <h5>Articulos Vendidos: <span class='success-text' id='totArti'></span> </h5>
+                    <h5>Total de Venta: <span class='success-text' id='totVenta'></span></h5>
 
                     <div class="row" style="height:600px;overflow-y:scroll;">
                       <table class="table">
