@@ -33,25 +33,7 @@ session_start();
 			    <h1 class="app-page-title">Saldos de la cuenta</h1>
 			    
 			    
-			        <div class="col-12 col-lg-12">
-				        <div class="app-card app-card-chart h-100 shadow-sm">
-					        <div class="app-card-header p-3">
-						        <div class="row justify-content-between align-items-center">
-
-							        <div class="col-auto">
-						            <h4 class="app-card-title"></h4>
-							        </div><!--//col-->
-
-							        <div class="col-auto">
-								        <div class="card-header-action">
-									        <a href="account.php">Mis Datos</a>
-								        </div><!--//card-header-actions-->
-							        </div><!--//col-->
-
-						        </div><!--//row-->
-					        </div><!--//app-card-header-->
-
-                  <div class="col-6 col-lg-3">
+          <div class="col-6 col-lg-3">
                     <div class="app-card app-card-stat shadow-sm h-100">
                       <div class="app-card-body p-3 p-lg-4">
                         <h4 class="stats-type mb-1">Saldo Actual</h4>
@@ -59,9 +41,6 @@ session_start();
                         <a class="app-card-link-mask" href="#"></a>
                     </div><!--//app-card-->
                   </div><!--//col-->
-					        
-				        </div><!--//app-card-->
-			        </div><!--//col-->
           <hr class="my-4">
         
 
