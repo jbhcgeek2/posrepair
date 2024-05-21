@@ -69,10 +69,17 @@
           </div><!--//col-->
 
           <div class="app-search-box col">
-            <form class="app-search-form">   
+            <!-- <form class="app-search-form">   
               <input type="text" placeholder="Buscar pedido" name="search" class="form-control search-input">
               <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
-            </form>
+            </form> -->
+						<select name="pedido" id="" class="form-select">
+							<option value="">Ver Trabajo</option>
+							<?php
+								// consultaremos en un select los trabajos activos
+								$sqlBusTra;
+							?>
+						</select>
           </div><!--//app-search-box-->
 		            
 		      <div class="app-utilities col-auto">

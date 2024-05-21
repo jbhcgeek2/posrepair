@@ -45,7 +45,7 @@ btnBuscar.addEventListener('click', function(){
             <td>${usVenta}</td>
             <td>${sucName}</td>
             <td>
-              <a href='../print.php?t=${idVen}' class='btn btn-success'>Ver Ticket</a>
+              <a href='../print.php?t=${idVen}' target='_blank' class='btn btn-success'>Ver Ticket</a>
             </td>
             </tr>
             `;
