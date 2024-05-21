@@ -85,7 +85,7 @@ session_start();
                             $sql = "SELECT *,(SELECT b.userName FROM USUARIOS b WHERE b.idUsuario = a.usuarioMov) AS usmov,
                             (SELECT c.nombreSuc FROM SUCURSALES c WHERE c.idSucursal = a.sucursalMovID) AS sucNameMov,
                             (SELECT d.nombreConcepto FROM CONCEPTOSMOV d WHERE d.idConcepto = a.conceptoMov) AS concepName
-                            FROM MOVCAJAS a WHERE empresaMovID = '$idEmpresaSesion' AND fechaMovimiento = '$fehca'";
+                            FROM MOVCAJAS a WHERE empresaMovID = '$idEmpresaSesion' AND fechaMovimiento = '$fecha'";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
