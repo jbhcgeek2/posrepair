@@ -45,13 +45,23 @@ session_start();
 					        <div class="app-card-body p-3 p-lg-4" id="reportes">
       
                     <div class="row">
-                      <div class="col-sm-12 col-md-3">
+                      <div class="col-sm-12 col-md-3 col-lg-2">
                         <label for="form-label">Fecha Inicio</label>
                         <input type="date" id="fechaIniMov" class="form-control">
                       </div>
-                      <div class="col-sm-12 col-md-3">
+                      <div class="col-sm-12 col-md-3 col-lg-2">
                         <label for="form-label">Fecha Fin</label>
                         <input type="date" id="fechaFinMov" class="form-control">
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-4">
+                        <label for="usuarioVenta" label="form-label">Usuario</label>
+                        <select name="usuarioVenta" id="usuarioVenta" class="form-select">
+                          <option value="" selected disabled>Seleccione</option>
+                          <?php 
+                            //consultamos los usuarios activos
+                            
+                          ?>
+                        </select>
                       </div>
                       
                       <div class="col-sm-12 col-md-3 mt-4">
