@@ -183,7 +183,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     $userVenta = $_POST['repUserVent'];
 
     $sql = "SELECT * FROM VENTAS a INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
-    INNER JOIN ARTICULOS c ON b.articuloID = c.idArticulo WHERE a.usuarioID = '$userVenta' AND
+    INNER JOIN ARTICULOS c ON b.articuloID = c.idArticulo INNER JOIN SUCURSALES d 
+    ON b.sucursalID = c.idSucursal WHERE a.usuarioID = '$userVenta' AND
     a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
     try {
       $query = mysqli_query($conexion, $sql);

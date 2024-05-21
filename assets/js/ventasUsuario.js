@@ -25,10 +25,28 @@ btnBuscar.addEventListener('click', function(){
         if(res.mensaje == "operationSuccess"){
           for (let z = 0; z < res.data.length; z++) {
             console.log(res.data[z]);
+            let fecha = res.data[z].fechaVenta;
+            let prod = res.data[z].nombreArticulo;
+            let cant = res.data[z].cantidadVenta;
+            let total = res.data[z].subtotalVenta;
+            let sucursal = res.data[z].nombreSuc;
+
+            contenido = contenido+`<tr>
+              <td>${fecha}</td>
+              <td>${prod}</td>
+              <td>${cant}</td>
+              <td>${total}</td>
+              <td>${sucursal}</td>
+            </tr>`;
           }
+          document.getElementById('resultBusqueda').innerHTML = contenido;
         }else{
           //sin datos
+          contenido = `<tr><td colspan='5' style='text-align:center;'>Sin Datos</td></tr>`;
+          document.getElementById('resultBusqueda').innerHTML = contenido;
         }
+        // insertamos el resultado
+        
       }else{
         //error
         let err = res.mensaje;
