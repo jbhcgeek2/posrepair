@@ -20,6 +20,24 @@ btnBuscar.addEventListener('click', function(){
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
       console.log(res);
+      if(res.status == 'ok'){
+        let contenido = '';
+        if(res.mensaje == "operationSuccess"){
+          for (let z = 0; z < res.data.length; z++) {
+            console.log(res.data[z]);
+          }
+        }else{
+          //sin datos
+        }
+      }else{
+        //error
+        let err = res.mensaje;
+        Swal.fire(
+          'Ha ocurrido un error',
+          'Verificar: '+err,
+          'error'
+        )
+      }
     }else{
       //error de comuniacion
       Swal.fire(

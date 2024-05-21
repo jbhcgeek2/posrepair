@@ -190,7 +190,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       if(mysqli_num_rows($query) > 0){
         $data = [];
         $x = 0;
-        while($fetch = mysqli_fetch_assoc($query) > 0){
+        while($fetch = mysqli_fetch_assoc($query)){
           $data[$x] = $fetch;
           $x++;
         }
