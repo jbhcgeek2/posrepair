@@ -84,6 +84,7 @@
         $anticipo = $_POST['anticipoServicio'];
         //verificamos que la fecha no sea pasada
         $fechaActual = date('Y-m-d');
+        $horaActual = date('H:i:s');
 
         if($fechaAlta <= $fechaActual){
           if($fechaEntrega >= $fechaActual){
@@ -92,7 +93,45 @@
             $serieDispo,$accesorios,$problema,$observacion,$contraDispo,$fechaEntrega,$costoServ,$anticipo,
             $usuario,$idSucursalN,$idEmpresaSesion,$idUsuario);
 
-            echo $nuevoTrabajo;
+            //verificamos la respuesta para registrar el ticket
+            if($anticipo > 0){
+              //el trabajo tiene anticipo, asi que registramos el movimiento en cajas
+              //vamos a ahcer las cosas al revez, primero insertaremos la venta y despues el detalle venta
+              $sqlAux1 = "SELECT COUNT(*) AS numVentasByUser FROM VENTAS WHERE usuarioID = '$idUsuario' AND empresaID = '$idEmpresaSesion'";
+              $queryAux1 = mysqli_query($conexion, $sqlAux1);
+              $fetchAux1 = mysqli_fetch_assoc($queryAux1);
+              $numT = $fetchAux1['numVentasByUser']+1;
+
+              $sqlAux2 = "INSERT INTO VENTAS (num_comprobante,fechaVenta,horaVenta,totalVenta,montoPago,cambioPago,
+              tipoPago,clienteID,empresaID,usuarioID) VALUES ('$numT','$fechaActual','$horaActual','$anticipo',
+              '$anticipo','0','Efectivo','$cliente','$idEmpresaSesion','$idUsuario')";
+              try {
+                $queryAux2 = mysqli_query($conexion, $sqlAux2);
+                $idVenta = mysqli_insert_id($conexion);
+                $datosTrab = json_decode($nuevoTrabajo);
+                $idTrabajo = $datosTrab->data;
+                //ahora insertamos el detalleventa
+                $sqlAux3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
+                sucursalID,trabajoID,ventaID) VALUES ('1','$anticipo','$anticipo','$usuario','$idSucursalN',
+                '$idTrabajo','$idVenta')";
+                try {
+                  $queryAux3 = mysqli_query($conexion, $sqlAux3);
+                  //hasta aqui podemos tar por terminado el alta del trabajo
+                  echo $nuevoTrabajo;
+                } catch (\Throwable $th) {
+                  //ocurrio un error al insertar el detalleventa
+                  $res =['status'=>'error','mensaje'=>'Ocurrio un error al insertar el detalle de venta: '.$th];
+                  echo json_encode($res);
+                }
+              } catch (\Throwable $th) {
+                //ocurrio un error al insertar la venta
+                $res =['status'=>'error','mensaje'=>'Ocurrio un error al insertar la venta: '.$th];
+                echo json_encode($res);
+              }
+            }else{
+              echo $nuevoTrabajo;
+            }
+            
           }else{
             //fecha de entrega incorrecta
             $res = ['status'=>'error','mensaje'=>'Asegurate de ingresar una fecha de entrega correcta.'];
