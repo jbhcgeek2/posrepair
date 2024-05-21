@@ -59,7 +59,25 @@ session_start();
                           <option value="" selected disabled>Seleccione</option>
                           <?php 
                             //consultamos los usuarios activos
-                            
+                            $sqlU = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion' AND 
+                            statusUsuario = '1'";
+                            try {
+                              $queryU = mysqli_query($conexion, $sqlU);
+                              if(mysqli_num_rows($queryU) > 0){
+                                while($fetchU = mysqli_fetch_assoc($queryU)){
+                                  $nombreUs = $fetchU['nombreUsuario']." ".$fetchU['apPaternoUsuario']." ".$fetchU['apMaternoUsuario'];
+                                  $idUs = $fetchU['idUsuario'];
+
+                                  echo "<option value='$idUs'>$nombreUs</option>";
+                                }//fin del while
+                              }else{
+                                //sin usuario registrados
+                                echo "<option value='' disabled>Sin Usuario</option>";
+                              }
+                            } catch (\Throwable $th) {
+                              //throw $th;
+                              echo "<option value='' disabled>Error de consulta</option>";
+                            }
                           ?>
                         </select>
                       </div>
