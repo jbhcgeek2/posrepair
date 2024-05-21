@@ -483,7 +483,7 @@
 
 		<script>
 			let selpedido = document.getElementById('selPedidoNav');
-			selpedido.addEventListenner('change',function(){
+			selpedido.addEventListener('change',function(){
 				let trabajo = selpedido.value;
 
 				window.location = 'verInfoTrabajo.php?data='+trabajo;
