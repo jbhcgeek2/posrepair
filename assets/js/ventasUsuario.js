@@ -23,6 +23,8 @@ btnBuscar.addEventListener('click', function(){
       if(res.status == 'ok'){
         let contenido = '';
         if(res.mensaje == "operationSuccess"){
+          let suma = 0;
+          let totalArti = 0;
           for (let z = 0; z < res.data.length; z++) {
             console.log(res.data[z]);
             let fecha = res.data[z].fechaVenta;
@@ -30,6 +32,8 @@ btnBuscar.addEventListener('click', function(){
             let cant = res.data[z].cantidadVenta;
             let total = res.data[z].subtotalVenta;
             let sucursal = res.data[z].nombreSuc;
+            suma = suma+total;
+            totalArti = totalArti+cant;
 
             contenido = contenido+`<tr>
               <td>${fecha}</td>
@@ -39,6 +43,12 @@ btnBuscar.addEventListener('click', function(){
               <td>${sucursal}</td>
             </tr>`;
           }
+          contenido = contenido+`<tr>
+            <td colspan='2'>Totales</td>
+            <td>${totalArti}</td>
+            <td>${suma}</td>
+            <td></td>
+          </tr>`;
           document.getElementById('resultBusqueda').innerHTML = contenido;
         }else{
           //sin datos
