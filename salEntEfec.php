@@ -13,6 +13,16 @@ session_start();
     include("includes/empresas.php");
     include("includes/conexion.php");
     include("includes/articulos.php");
+
+    if($rolUsuario == "Administrador" || $rolUsuario == "Encargado"){
+      
+    }else{
+      ?>
+      <script>
+        window.location = "reportesCaja.php";
+      </script>
+      <?php
+    }
     
   ?>
     
