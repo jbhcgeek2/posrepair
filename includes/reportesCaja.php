@@ -47,7 +47,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     }elseif($rolUsuario == "Vendedor"){
       //solo podra ver las ventas de su usuario y sucursal
       $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-      INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
+      INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo INNER JOIN SUCURSALES d ON a.sucursalID = d.idSucursal
       WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.usuarioVenta = '$usuario' 
       AND a.sucursalID = '$idSucursal'";
     }else{
