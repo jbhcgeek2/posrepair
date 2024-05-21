@@ -35,11 +35,13 @@ btnBuscar.addEventListener('click', function(){
             suma = suma+total;
             totalArti = totalArti+cant;
 
+            let auxMontoFormato = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
             contenido = contenido+`<tr>
               <td>${fecha}</td>
               <td>${prod}</td>
               <td>${cant}</td>
-              <td>${total}</td>
+              <td>${auxMontoFormato}</td>
               <td>${sucursal}</td>
             </tr>`;
           }
