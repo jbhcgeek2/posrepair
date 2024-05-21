@@ -2,6 +2,7 @@
 
 	session_start();
 	require_once("includes/usuarios.php");
+	require_once("includes/conexion.php");
 	//consultamos la empresa de la sesion
 
 	//verificaremos la existencia de la sesion del usuario
