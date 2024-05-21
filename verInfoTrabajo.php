@@ -16,15 +16,7 @@ session_start();
     include("includes/cliente.php");
 
     // Unicamente los vendedores no podran entrar a ver la informacion del trabajo
-    if($rolUsuario == "Administrador"){
-      
-    }else{
-      ?>
-      <script>
-        window.location = "reportesCaja.php";
-      </script>
-      <?php
-    }
+    
     
 
     //verificamos la existencia de la solicitud
