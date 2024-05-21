@@ -62,7 +62,7 @@ session_start();
                               if(count($productos->data) >= 1){
                                 //se detectaron productos podemos generar la tabla de datos
                                 ?> 
-                                  <table class="table-striped col-sm-12">
+                                  <table class="table table-striped col-sm-12">
                                     <thead>
                                       <tr>
                                         <th>Producto</th>
