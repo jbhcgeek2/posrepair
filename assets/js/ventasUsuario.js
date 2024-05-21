@@ -30,7 +30,7 @@ btnBuscar.addEventListener('click', function(){
             let fecha = res.data[z].fechaVenta;
             let prod = res.data[z].nombreArticulo;
             let cant = parseInt(res.data[z].cantidadVenta);
-            let total = parseFloat(res.data[z].subtotalVenta).toFixed(2);
+            let total = parseFloat(res.data[z].subtotalVenta);
             let sucursal = res.data[z].nombreSuc;
             suma = suma+total;
             totalArti = totalArti+cant;
@@ -43,10 +43,11 @@ btnBuscar.addEventListener('click', function(){
               <td>${sucursal}</td>
             </tr>`;
           }
+          var cantidadFormateada = suma.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
           contenido = contenido+`<tr class='fw-bold'>
             <td colspan='2' style='text-align:right'>Totales</td>
             <td>${totalArti}</td>
-            <td>${suma}</td>
+            <td>$${cantidadFormateada}</td>
             <td></td>
           </tr>`;
           document.getElementById('resultBusqueda').innerHTML = contenido;
