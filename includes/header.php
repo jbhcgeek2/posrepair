@@ -73,7 +73,7 @@
               <input type="text" placeholder="Buscar pedido" name="search" class="form-control search-input">
               <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fa-solid fa-magnifying-glass"></i></button> 
             </form> -->
-						<select name="pedido" id="" class="form-select">
+						<select name="pedido" id="" class="form-select app-search-form">
 							<option value="">Ver Trabajo</option>
 							<?php
 								// consultaremos en un select los trabajos activos
