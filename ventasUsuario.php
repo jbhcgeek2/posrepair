@@ -13,6 +13,15 @@ session_start();
     include("includes/empresas.php");
     include("includes/conexion.php");
     include("includes/articulos.php");
+
+    //unicamente el usuario administrador podra ver esta seccion
+    if($rolUsuario != "Administrador"){
+      ?>
+      <script>
+        window.location = "reportesCaja.php";
+      </script>
+      <?php
+    }
     
   ?>
     
