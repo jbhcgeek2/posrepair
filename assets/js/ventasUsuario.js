@@ -43,8 +43,8 @@ btnBuscar.addEventListener('click', function(){
               <td>${sucursal}</td>
             </tr>`;
           }
-          contenido = contenido+`<tr>
-            <td colspan='2'>Totales</td>
+          contenido = contenido+`<tr class='fw-bold'>
+            <td colspan='2' style='text-align:right'>Totales</td>
             <td>${totalArti}</td>
             <td>${suma}</td>
             <td></td>
