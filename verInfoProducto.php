@@ -205,9 +205,16 @@ session_start();
                         <label class="input-group-text" for="imagenProducto">Actualizar Imagen</label>
                       </div>
 
-                      <div class="row">
-                        <a href="#!" type="button" class="btn btn-primary w-25" id="btnUpdateProd">Actualizar</a>
-                      </div>
+                      <?php 
+                        if($rolUsuario == "Administrador"){
+                          ?>
+                          <div class="row" style="text-align:center;">
+                            <a href="#!" type="button" class="btn btn-primary w-25" id="btnUpdateProd">Actualizar</a>
+                          </div>
+                          <?php
+                        }
+                      ?>
+                      
 
                         
                         <hr class="my-4">
