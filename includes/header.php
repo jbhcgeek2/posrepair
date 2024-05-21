@@ -289,127 +289,139 @@
 									<div id="submenu-inventario" class="collapse submenu submenu-inventario" data-bs-parent="#menu-accordion">
 										<ul class="submenu-list list-unstyled">
 											<li class="submenu-item"><a class="submenu-link" href="verProductos.php">Ver Productos</a></li>
-											<!-- <li class="submenu-item"><a class="submenu-link" href="verArticulo.php">Ver Materiales</a></li> -->
-											<li class="submenu-item"><a class="submenu-link" href="altaProducto.php">Registrar Productos</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="entradaMercancia.php">Movimientos de Mercancia</a></li>
-											<!-- <li class="submenu-item"><a class="submenu-link" href="altaArticulo.php">Registrar Materiales</a></li> -->
-											<!-- <li class="submenu-item"><a class="submenu-link" href="altaArticulo.php">Entrada de Materiales</a></li> -->
+											<?php 
+												if($rolUsuario == "Administrador"){
+													?>
+													<li class="submenu-item"><a class="submenu-link" href="altaProducto.php">Registrar Productos</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="entradaMercancia.php">Movimientos de Mercancia</a></li>
+													<?php
+												}
+											?>
 										</ul>
 									</div>
 								</li>
 
-								<li class="nav-item has-submenu">
-									<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-servicio" aria-expanded="false" aria-controls="submenu-cliinventarioente">
-										<span class="nav-icon">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-usb-symbol" viewBox="0 0 16 16">
-											<path d="m7.792.312-1.533 2.3A.25.25 0 0 0 6.467 3H7.5v7.319a2.5 2.5 0 0 0-.515-.298L5.909 9.56A1.5 1.5 0 0 1 5 8.18v-.266a1.5 1.5 0 1 0-1 0v.266a2.5 2.5 0 0 0 1.515 2.298l1.076.461a1.5 1.5 0 0 1 .888 1.129 2.001 2.001 0 1 0 1.021-.006v-.902a1.5 1.5 0 0 1 .756-1.303l1.484-.848A2.5 2.5 0 0 0 11.995 7h.755a.25.25 0 0 0 .25-.25v-2.5a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h.741a1.5 1.5 0 0 1-.747 1.142L8.76 8.99a3 3 0 0 0-.26.17V3h1.033a.25.25 0 0 0 .208-.389L8.208.312a.25.25 0 0 0-.416 0"/>
-										</svg>
-										</span>
-										<span class="nav-link-text">Servicios</span>
-										<span class="submenu-arrow">
-											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-											</svg>
-	                	</span><!--//submenu-arrow-->
-									</a>
-									<div id="submenu-servicio" class="collapse submenu submenu-servicio" data-bs-parent="#menu-accordion">
-										<ul class="submenu-list list-unstyled">
-											<li class="submenu-item"><a class="submenu-link" href="verServicios.php">Ver Servicios</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaServicio.php">Registrar Servicio</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="verCatServicio.php">Ver Categorias de Servicio</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaCatServicio.php">Nueva Categoria de Servicios</a></li>
-										</ul>
-									</div>
-								</li>
+								
 
-								<li class="nav-item has-submenu">
-									<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-sucursales" aria-expanded="false" aria-controls="submenu-cliinventarioente">
-										<span class="nav-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
-												<path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022M6 8.694 1 10.36V15h5zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5z"/>
-												<path d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z"/>
-											</svg>
-										</span>
-										<span class="nav-link-text">Sucursales</span>
-										<span class="submenu-arrow">
-											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-											</svg>
-	                	</span><!--//submenu-arrow-->
-									</a>
-									<div id="submenu-sucursales" class="collapse submenu submenu-sucursales" data-bs-parent="#menu-accordion">
-										<ul class="submenu-list list-unstyled">
-											<li class="submenu-item"><a class="submenu-link" href="verSucursales.php">Ver Sucursales</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaSucursal.php">Registrar Sucursal</a></li>
-										</ul>
-									</div>
-								</li>
-
-								<li class="nav-item has-submenu">
-									<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-proveedores" aria-expanded="false" aria-controls="submenu-cliinventarioente">
-										<span class="nav-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bus-front-fill" viewBox="0 0 16 16">
-												<path d="M16 7a1 1 0 0 1-1 1v3.5c0 .818-.393 1.544-1 2v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5V14H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2a2.5 2.5 0 0 1-1-2V8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1V2.64C1 1.452 1.845.408 3.064.268A44 44 0 0 1 8 0c2.1 0 3.792.136 4.936.268C14.155.408 15 1.452 15 2.64V4a1 1 0 0 1 1 1zM3.552 3.22A43 43 0 0 1 8 3c1.837 0 3.353.107 4.448.22a.5.5 0 0 0 .104-.994A44 44 0 0 0 8 2c-1.876 0-3.426.109-4.552.226a.5.5 0 1 0 .104.994M8 4c-1.876 0-3.426.109-4.552.226A.5.5 0 0 0 3 4.723v3.554a.5.5 0 0 0 .448.497C4.574 8.891 6.124 9 8 9s3.426-.109 4.552-.226A.5.5 0 0 0 13 8.277V4.723a.5.5 0 0 0-.448-.497A44 44 0 0 0 8 4m-3 7a1 1 0 1 0-2 0 1 1 0 0 0 2 0m8 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m-7 0a1 1 0 0 0 1 1h2a1 1 0 1 0 0-2H7a1 1 0 0 0-1 1"/>
-											</svg>
-										</span>
-										<span class="nav-link-text">Proveedores</span>
-										<span class="submenu-arrow">
-											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-											</svg>
-	                	</span><!--//submenu-arrow-->
-									</a>
-									<div id="submenu-proveedores" class="collapse submenu submenu-proveedores" data-bs-parent="#menu-accordion">
-										<ul class="submenu-list list-unstyled">
-											<li class="submenu-item"><a class="submenu-link" href="verProveedores.php">Ver Proveedores</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaProveedor.php">Registrar Proveedores</a></li>
-										</ul>
-									</div>
-								</li>
-
-								<li class="nav-item has-submenu">
-									<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-categorias" aria-expanded="false" aria-controls="submenu-categorias">
-										<span class="nav-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-diagram-2" viewBox="0 0 16 16">
-												<path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 5 7h2.5V6A1.5 1.5 0 0 1 6 4.5zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5zM3 11.5A1.5 1.5 0 0 1 4.5 10h1A1.5 1.5 0 0 1 7 11.5v1A1.5 1.5 0 0 1 5.5 14h-1A1.5 1.5 0 0 1 3 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 9 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-											</svg>
-										</span>
-										<span class="nav-link-text">Categorias</span>
-										<span class="submenu-arrow">
-											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+								<?php 
+									if($rolUsuario == "Administrador"){
+										?>
+										<li class="nav-item has-submenu">
+											<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-servicio" aria-expanded="false" aria-controls="submenu-cliinventarioente">
+												<span class="nav-icon">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-usb-symbol" viewBox="0 0 16 16">
+													<path d="m7.792.312-1.533 2.3A.25.25 0 0 0 6.467 3H7.5v7.319a2.5 2.5 0 0 0-.515-.298L5.909 9.56A1.5 1.5 0 0 1 5 8.18v-.266a1.5 1.5 0 1 0-1 0v.266a2.5 2.5 0 0 0 1.515 2.298l1.076.461a1.5 1.5 0 0 1 .888 1.129 2.001 2.001 0 1 0 1.021-.006v-.902a1.5 1.5 0 0 1 .756-1.303l1.484-.848A2.5 2.5 0 0 0 11.995 7h.755a.25.25 0 0 0 .25-.25v-2.5a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h.741a1.5 1.5 0 0 1-.747 1.142L8.76 8.99a3 3 0 0 0-.26.17V3h1.033a.25.25 0 0 0 .208-.389L8.208.312a.25.25 0 0 0-.416 0"/>
 												</svg>
-	                	</span><!--//submenu-arrow-->
-									</a>
-									<div id="submenu-categorias" class="collapse submenu submenu-categorias" data-bs-parent="#menu-accordion">
-										<ul class="submenu-list list-unstyled">
-											<li class="submenu-item"><a class="submenu-link" href="verCategorias.php">Ver Categorias</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaCategoria.php">Registrar Categorias</a></li>
-										</ul>
-									</div>
-								</li>
+												</span>
+												<span class="nav-link-text">Servicios</span>
+												<span class="submenu-arrow">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+													</svg>
+												</span><!--//submenu-arrow-->
+											</a>
+											<div id="submenu-servicio" class="collapse submenu submenu-servicio" data-bs-parent="#menu-accordion">
+												<ul class="submenu-list list-unstyled">
+													<li class="submenu-item"><a class="submenu-link" href="verServicios.php">Ver Servicios</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="altaServicio.php">Registrar Servicio</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="verCatServicio.php">Ver Categorias de Servicio</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="altaCatServicio.php">Nueva Categoria de Servicios</a></li>
+												</ul>
+											</div>
+										</li>
 
-								<li class="nav-item has-submenu">
-									<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-usuarios" aria-expanded="false" aria-controls="submenu-cliinventarioente">
-										<span class="nav-icon">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
-												<path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
-											</svg>
-										</span>
-										<span class="nav-link-text">Usuarios</span>
-										<span class="submenu-arrow">
-											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-											</svg>
-	                	</span><!--//submenu-arrow-->
-									</a>
-									<div id="submenu-usuarios" class="collapse submenu submenu-usuarios" data-bs-parent="#menu-accordion">
-										<ul class="submenu-list list-unstyled">
-											<li class="submenu-item"><a class="submenu-link" href="verUsuarioEmpr.php">Ver Usuarios</a></li>
-											<li class="submenu-item"><a class="submenu-link" href="altaUsuariosEmpr.php">Registrar Usuarios</a></li>
-										</ul>
-									</div>
-								</li>
+										<li class="nav-item has-submenu">
+											<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-sucursales" aria-expanded="false" aria-controls="submenu-cliinventarioente">
+												<span class="nav-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+														<path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022M6 8.694 1 10.36V15h5zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5z"/>
+														<path d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z"/>
+													</svg>
+												</span>
+												<span class="nav-link-text">Sucursales</span>
+												<span class="submenu-arrow">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+													</svg>
+												</span><!--//submenu-arrow-->
+											</a>
+											<div id="submenu-sucursales" class="collapse submenu submenu-sucursales" data-bs-parent="#menu-accordion">
+												<ul class="submenu-list list-unstyled">
+													<li class="submenu-item"><a class="submenu-link" href="verSucursales.php">Ver Sucursales</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="altaSucursal.php">Registrar Sucursal</a></li>
+												</ul>
+											</div>
+										</li>
+
+										<li class="nav-item has-submenu">
+											<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-proveedores" aria-expanded="false" aria-controls="submenu-cliinventarioente">
+												<span class="nav-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bus-front-fill" viewBox="0 0 16 16">
+														<path d="M16 7a1 1 0 0 1-1 1v3.5c0 .818-.393 1.544-1 2v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5V14H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2a2.5 2.5 0 0 1-1-2V8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1V2.64C1 1.452 1.845.408 3.064.268A44 44 0 0 1 8 0c2.1 0 3.792.136 4.936.268C14.155.408 15 1.452 15 2.64V4a1 1 0 0 1 1 1zM3.552 3.22A43 43 0 0 1 8 3c1.837 0 3.353.107 4.448.22a.5.5 0 0 0 .104-.994A44 44 0 0 0 8 2c-1.876 0-3.426.109-4.552.226a.5.5 0 1 0 .104.994M8 4c-1.876 0-3.426.109-4.552.226A.5.5 0 0 0 3 4.723v3.554a.5.5 0 0 0 .448.497C4.574 8.891 6.124 9 8 9s3.426-.109 4.552-.226A.5.5 0 0 0 13 8.277V4.723a.5.5 0 0 0-.448-.497A44 44 0 0 0 8 4m-3 7a1 1 0 1 0-2 0 1 1 0 0 0 2 0m8 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m-7 0a1 1 0 0 0 1 1h2a1 1 0 1 0 0-2H7a1 1 0 0 0-1 1"/>
+													</svg>
+												</span>
+												<span class="nav-link-text">Proveedores</span>
+												<span class="submenu-arrow">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+													</svg>
+												</span><!--//submenu-arrow-->
+											</a>
+											<div id="submenu-proveedores" class="collapse submenu submenu-proveedores" data-bs-parent="#menu-accordion">
+												<ul class="submenu-list list-unstyled">
+													<li class="submenu-item"><a class="submenu-link" href="verProveedores.php">Ver Proveedores</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="altaProveedor.php">Registrar Proveedores</a></li>
+												</ul>
+											</div>
+										</li>
+
+										<li class="nav-item has-submenu">
+											<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-categorias" aria-expanded="false" aria-controls="submenu-categorias">
+												<span class="nav-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-diagram-2" viewBox="0 0 16 16">
+														<path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 5 7h2.5V6A1.5 1.5 0 0 1 6 4.5zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5zM3 11.5A1.5 1.5 0 0 1 4.5 10h1A1.5 1.5 0 0 1 7 11.5v1A1.5 1.5 0 0 1 5.5 14h-1A1.5 1.5 0 0 1 3 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 9 12.5zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+													</svg>
+												</span>
+												<span class="nav-link-text">Categorias</span>
+												<span class="submenu-arrow">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+															<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+														</svg>
+												</span><!--//submenu-arrow-->
+											</a>
+											<div id="submenu-categorias" class="collapse submenu submenu-categorias" data-bs-parent="#menu-accordion">
+												<ul class="submenu-list list-unstyled">
+													<li class="submenu-item"><a class="submenu-link" href="verCategorias.php">Ver Categorias</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="altaCategoria.php">Registrar Categorias</a></li>
+												</ul>
+											</div>
+										</li>
+
+										<li class="nav-item has-submenu">
+											<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-usuarios" aria-expanded="false" aria-controls="submenu-cliinventarioente">
+												<span class="nav-icon">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-gear" viewBox="0 0 16 16">
+														<path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+													</svg>
+												</span>
+												<span class="nav-link-text">Usuarios</span>
+												<span class="submenu-arrow">
+													<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+													</svg>
+												</span><!--//submenu-arrow-->
+											</a>
+											<div id="submenu-usuarios" class="collapse submenu submenu-usuarios" data-bs-parent="#menu-accordion">
+												<ul class="submenu-list list-unstyled">
+													<li class="submenu-item"><a class="submenu-link" href="verUsuarioEmpr.php">Ver Usuarios</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="altaUsuariosEmpr.php">Registrar Usuarios</a></li>
+												</ul>
+											</div>
+										</li>
+										<?php
+									}
+								?>
+								
 
 					    		    
 				    </ul><!--//app-menu-->
