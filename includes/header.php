@@ -79,7 +79,7 @@
 							<?php
 								// consultaremos en un select los trabajos activos
 								$sqlBusTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON
-								a.clienteID = b.idCliente INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio 
+								a.clienteID = b.idClientes INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio 
 								WHERE a.empresaID  = '$idEmpresaSesion' 
 								AND a.estatusTrabajo IN ('En Espera','Activo','En Proceso')";
 								try {
