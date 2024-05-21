@@ -30,7 +30,7 @@ btnBuscar.addEventListener('click', function(){
             let fecha = res.data[z].fechaVenta;
             let prod = res.data[z].nombreArticulo;
             let cant = parseInt(res.data[z].cantidadVenta);
-            let total = parseFloat(res.data[z].subtotalVenta);
+            let total = parseFloat(res.data[z].subtotalVenta).toFixed(2);
             let sucursal = res.data[z].nombreSuc;
             suma = suma+total;
             totalArti = totalArti+cant;
