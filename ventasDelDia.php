@@ -72,6 +72,7 @@ session_start();
                           <th>Total</th>
                           <th>Usuario</th>
                           <th>Sucursal</th>
+                          <th>Ticket</th>
                         </tr>
                       </thead>
                       <tbody id="bodyTableReport">
@@ -110,6 +111,7 @@ session_start();
                                 $total = $fetch['subtotalVenta'];
                                 $usuarioVent = $fetch['usuarioVenta'];
                                 $sucVenta = $fetch['sucursalID'];
+                                $idVenta = $fetch['idVenta'];
 
                                 $totalVenta = $totalVenta + $total;
 
@@ -122,6 +124,9 @@ session_start();
                                   <td>$$total</td>
                                   <td>$usuarioVent</td>
                                   <td>$nombreSucVenta</td>
+                                  <td>
+                                    <a href='print.php?t=$idVenta' class='btn btn-success'>Ver Ticket</a>
+                                  </td>
                                 </tr>";
                               }//fin del while
                               echo "<tr>
