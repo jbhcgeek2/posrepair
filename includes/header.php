@@ -81,7 +81,7 @@
 								$sqlBusTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON
 								a.clienteID = b.idCliente INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio 
 								WHERE a.empresaID  = '$idEmpresaSesion' 
-								AND a.estatusTrabajo IN ('En Espera','Activo','En Proceso')";\
+								AND a.estatusTrabajo IN ('En Espera','Activo','En Proceso')";
 								try {
 									$queryBusTra = mysqli_query($conexion, $sqlBusTra);
 									if(mysqli_num_rows($queryBusTra) > 0){
