@@ -175,6 +175,37 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al consultar los movimientos de mercancia: ".$th];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['fecIniUser'])){
+    // seccion para realizar la busqueda de ventas por usuario y fechas
+
+    $fechaIni = $_POST['fecIniUser'];
+    $fechaFin = $_POST['fecFinUSer'];
+    $userVenta = $_POST['repUserVent'];
+
+    $sql = "SELECT * FROM VENTAS a INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+    INNER JOIN ARTICULOS c ON b.articuloID = c.idArticulo WHERE a.usuarioID = '$userVenta' AND
+    a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) > 0){
+        $data = [];
+        $x = 0;
+        while($fetch = mysqli_fetch_assoc($query) > 0){
+          $data[$x] = $fetch;
+          $x++;
+        }
+        $res = ['status'=>'ok','data'=>$data,'mensaje'=>'operationSuccess'];
+        echo json_encode($res);
+      }else{
+        //sin datos
+        $res = ['status'=>'ok','data'=>'noData','mensaje'=>'noData'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar el reporte: '.$th];
+      echo json_encode($res);
+    }
   }
 }else{
   //sin sesion
