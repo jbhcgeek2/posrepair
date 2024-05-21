@@ -111,6 +111,11 @@ session_start();
                                 $tipoMov = $fetch['tipoMov'];
                                 $usuarioMov = $fetch['usmov'];
                                 $sucursalMov = $fetch['sucNameMov'];
+                                if($tipoMov == "E"){
+                                  $tipoMov = "Entrada";
+                                }else{
+                                  $tipoMov = "Salida";
+                                }
 
                                 $totalVenta = $totalVenta + $total;
 
