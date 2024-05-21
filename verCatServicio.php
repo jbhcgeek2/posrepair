@@ -18,7 +18,7 @@ session_start();
     }else{
       ?>
       <script>
-        window.location = "reportesCaja.php";
+        window.location = "../";
       </script>
       <?php
     }
