@@ -47,7 +47,7 @@ btnBuscar.addEventListener('click', function(){
           contenido = contenido+`<tr class='fw-bold'>
             <td colspan='2' style='text-align:right'>Totales</td>
             <td>${totalArti}</td>
-            <td>$${cantidadFormateada}</td>
+            <td>${cantidadFormateada}</td>
             <td></td>
           </tr>`;
           document.getElementById('resultBusqueda').innerHTML = contenido;
