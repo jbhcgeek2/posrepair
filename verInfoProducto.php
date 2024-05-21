@@ -212,7 +212,6 @@ session_start();
                             <div class="col-sm-12" style="text-align:center;">
                               <a href="#!" type="button" class="btn btn-primary w-25" id="btnUpdateProd">Actualizar</a>
                             </div>
-                            
                           </div>
                           <?php
                         }

@@ -98,7 +98,7 @@ session_start();
                                             <td>$ $precio</td>
                                             <td class='text-center'>$existencia</td>
                                             <td class='text-center'>
-                                              <a href='verInfoProducto.php?infoProd=$idProducto'>Ver</a>
+                                              <a class='btn btn-success' href='verInfoProducto.php?infoProd=$idProducto'>Ver</a>
                                             </td>
                                           </tr>";
                                         }//fin del for de datos
