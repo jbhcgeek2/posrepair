@@ -132,7 +132,7 @@ session_start();
                               echo "<tr>
                               <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
                               <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
-                              <td colpan='2'> </td>
+                              <td colpan='3'> </td>
                               </tr>";
                             }else{
                               //sin resultados
