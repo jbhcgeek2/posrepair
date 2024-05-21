@@ -90,7 +90,7 @@ session_start();
 
                     <hr clas="my-4">
 
-                    <div class="row" style="height:200px;overflow-y:scroll;">
+                    <div class="row" style="max-height:600px;overflow-y:scroll;">
                       <table class="table">
                         <thead>
                           <tr>
