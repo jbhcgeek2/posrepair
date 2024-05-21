@@ -14,6 +14,15 @@ session_start();
     include("includes/conexion.php");
     include("includes/articulos.php");
     
+    if($rolUsuario == "Administrador"){
+      
+    }else{
+      ?>
+      <script>
+        window.location = "reportesCaja.php";
+      </script>
+      <?php
+    }
   ?>
     
     <div class="app-wrapper">

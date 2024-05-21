@@ -14,6 +14,17 @@ session_start();
     include("includes/conexion.php");
     include("includes/ventas.php");
     include("includes/cliente.php");
+
+    // Unicamente los vendedores no podran entrar a ver la informacion del trabajo
+    if($rolUsuario == "Administrador"){
+      
+    }else{
+      ?>
+      <script>
+        window.location = "reportesCaja.php";
+      </script>
+      <?php
+    }
     
 
     //verificamos la existencia de la solicitud
@@ -125,7 +136,12 @@ session_start();
                                 if($estatus[$i] == $estatusTrab){
                                   echo "<option value='".$estatus[$i]."' selected>".$estatus[$i]."</option>";
                                 }else{
-                                  echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
+                                  if($estatus[$i] == "Finalizado"){
+                                    echo "<option value='".$estatus[$i]."' disabled>".$estatus[$i]."</option>";
+                                  }else{
+                                    echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
+                                  }
+                                  
                                 }
                               }//fin del for
                             ?>

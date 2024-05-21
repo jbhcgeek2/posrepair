@@ -27,7 +27,7 @@ session_start();
       //acceso denegado
       ?>
         <script>
-          window.location = '../verUsuarioEmpr.php';
+          window.location = '../';
         </script>
       <?php
     }
