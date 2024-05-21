@@ -117,21 +117,21 @@ session_start();
                                   $tipoMov = "Salida";
                                 }
 
-                                $totalVenta = $totalVenta + $total;
+                                $totalVenta = $totalVenta + $montoMov;
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
                                   <td>$fechaMov</td>
                                   <td>$concep</td>
-                                  <td>$$montoMov</td>
+                                  <td>$".number_format($montoMov,2)."</td>
                                   <td>$tipoMov</td>
                                   <td>$usuarioMov</td>
                                   <td>$sucursalMov</td>
                                 </tr>";
                               }//fin del while
                               echo "<tr>
-                              <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
+                              <td colspan='2' class='fw-bold' style='text-align:right'>Total</td>
                               <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
                               <td colpan='2'> </td>
                               </tr>";
