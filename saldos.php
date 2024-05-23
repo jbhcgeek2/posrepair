@@ -148,8 +148,8 @@ session_start();
               </div>
               <div class="modal-body">
                 <div class="row">
-                  <form id="regMov">
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <form id="regMov" class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                       <label for="tipoMovReg" class="form-label">Tipo de Movimiento</label>
                       <select name="tipoMovReg" id="tipoMovReg" class="form-select">
                         <option value="">Seleccione...</option>
@@ -158,7 +158,7 @@ session_start();
                       </select>
                     </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                       <label for="concepMovReg" class="form-label">Concepto de Movimiento</label>
                       <select name="concepMovReg" id="concepMovReg" class="form-select">
                         <option value="">Seleccione</option>
@@ -176,7 +176,7 @@ session_start();
                       </select>
                     </div>
 
-                    <div class="col-sm-12 col-md-8 col-lg-6 mb-3">
+                    <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
                       <label for="observMov" class="form-label">Observacion de Movimiento</label>
                       <input type="text" id="observMov" name="observMov" class="form-control">
                     </div>
