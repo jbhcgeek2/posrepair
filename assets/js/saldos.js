@@ -1,4 +1,4 @@
-let bntMov = document.getElementById('btnRegMov');
+let bntMov = document.getElementById('btnSendMov');
 bntMov.addEventListener('click', function(){
   let dato = new FormData();
 
