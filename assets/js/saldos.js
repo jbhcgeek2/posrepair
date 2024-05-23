@@ -2,11 +2,11 @@ let bntMov = document.getElementById('btnSendMov');
 bntMov.addEventListener('click', function(){
   let dato = new FormData();
 
-  let tipoMov = document.getElementById('tipoMovReg');
-  let concep = document.getElementById('concepMovReg');
-  let observ = document.getElementById('observMov');
-  let montoMov = document.getElementById('montoMovReg');
-  let metodoMov = document.getElementById('metodoMovReg');
+  let tipoMov = document.getElementById('tipoMovReg').value;
+  let concep = document.getElementById('concepMovReg').value;
+  let observ = document.getElementById('observMov').value;
+  let montoMov = document.getElementById('montoMovReg').value;
+  let metodoMov = document.getElementById('metodoMovReg').value;
 
   if(tipoMov != "" && concep != "" && observ != "" && montoMov != "" && metodoMov != ""){
     //preguntamos si desea enviar el dato
