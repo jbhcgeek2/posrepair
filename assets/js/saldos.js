@@ -15,7 +15,7 @@ bntMov.addEventListener('click', function(){
       text: 'Estas seguro de procesar el movimiento?',
       icon: 'warning',
       showDenyButton: true,
-      confrimButtonText: 'Procesar',
+      confirmButtonText: 'Procesar',
       denyButtonText: 'Cancelar'
     }).then((result)=>{
       if(result.isConfirmed){
