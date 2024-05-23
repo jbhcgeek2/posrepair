@@ -149,12 +149,20 @@ session_start();
               <div class="modal-body">
                 <div class="row">
                   <form id="regMov" class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                       <label for="tipoMovReg" class="form-label">Tipo de Movimiento</label>
                       <select name="tipoMovReg" id="tipoMovReg" class="form-select">
                         <option value="">Seleccione...</option>
                         <option value="Entrada">Entrada</option>
                         <option value="Salida">Salida</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <label for="metodoMovReg" class="form-label">Metodo de Movimiento</label>
+                      <select name="metodoMovReg" id="metodoMovReg" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Digitales">Medios Digitales</option>
                       </select>
                     </div>
 
