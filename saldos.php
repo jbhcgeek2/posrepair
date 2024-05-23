@@ -65,7 +65,52 @@ session_start();
           <div class="col-sm-12">
             <div class="app-card app-card-stat shadow-sm h-100">
               <div class="app-card-body p-3">
-                <h1>hola</h1>
+                <h1>Movimientos de Cuenta</h1>
+
+                <div class="row">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Monto</th>
+                        <th>Descripcion</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php 
+                        //consultamos los movimientos de caja
+                        $sqlMovs = "SELECT * FROM MOVCAJAS a INNER JOIN CONCEPTOSMOV b 
+                        ON a.conceptoMov = b.idConcepto WHERE a.empresaMovID = '$idEmpresaSesion'";
+                        try {
+                          $queryMovs = mysqli_query($conexion,$sqlMovs);
+                          if(mysqli_num_rows($queryMovs) > 0){
+                            while($fetchMov = mysqli_fetch_assoc($queryMovs)){
+                              $montoMov = $fetchMov['montoMov'];
+                              $fechaMov = $fetchMov['fechaMovimiento'];
+                              $tipo = $fetchMov['tipoMov'];
+                              $usuario = $fetchMov['usuarioMov'];
+                              $desc = $fetchMov['observacionMov'];
+
+                              echo "<tr>
+                                <td>$fechaMov</td>
+                                <td>$usuario</td>
+                                <td>$montoMov</td>
+                                <td>$desc</td>
+                              </tr>";
+
+                            }//fin del while
+                          }else{
+                            //no se tienen movim8ientos
+                          }
+                        } catch (\Throwable $th) {
+                          //throw $th;
+                        }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
