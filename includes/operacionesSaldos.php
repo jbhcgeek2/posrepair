@@ -79,7 +79,41 @@ if(!empty($_SESSION['usuarioPOS'])){
         echo json_encode($res);
       }
     }else{
-      //se trata de una entrada
+      //se trata de una entrada, aqui no importa la validacion del saldo
+      //simplemente lo sumamos
+      $sqlEmp = "SELECT $campo FROM EMPRESAS WHERE idEmpresa = '$idEmpresaSesion'";
+      try {
+        $queryEmp = mysqli_query($conexion, $sqlEmp);
+        $fetchEmp = mysqli_fetch_assoc($queryEmp);
+        $saldoCuenta = $fetchEmp[$campo];
+
+        $nuevoSaldo = $saldoCuenta+$montoMov;
+        //realizamos la insercion del movimiento
+        $sql1 = "INSERT INTO MOVCAJAS (fechaMovimiento,horaMovimiento,usuarioMov,montoMov,conceptoMov,
+        observacionMov,sucursalMovID,tipoMov,empresaMovID) VALUES ('$fecha','$hora','$idUsuario',
+        '$montoMov','$concepto','$observ','$idSucursalN','E','$idEmpresaSesion')";
+        try {
+          $query1 = mysqli_query($conexion, $sql1);
+          //ahora actualizamos el datos
+          $sql2 = "UPDATE EMPRESAS SET $campo = '$nuevoSaldo', $campoAnt = '$saldoCuenta' WHERE 
+          idEmpresa = '$idEmpresaSesion'";
+          try {
+            $query2 = mysqli_query($conexion, $sql2);
+            //podemos dar por concluiodo
+            $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+            echo json_encode($res);
+          } catch (\Throwable $th) {
+            $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error, contacte a soporte tecnico.'];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al procesar el movimiento.'];
+          echo json_encode($res);
+        }
+      }catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los saldos'];
+        echo json_encode($res);
+      }
     }
   }
 
