@@ -150,7 +150,7 @@ session_start();
                 <div class="row">
                   <form id="regMov">
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                      <label for="tipoMovReg" class="form-label"></label>
+                      <label for="tipoMovReg" class="form-label">Tipo de Movimiento</label>
                       <select name="tipoMovReg" id="tipoMovReg" class="form-select">
                         <option value="">Seleccione...</option>
                         <option value="Entrada">Entrada</option>
@@ -159,8 +159,8 @@ session_start();
                     </div>
 
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                      <label for="concepMovReg" class="form-label"></label>
-                      <select name="concepMovReg" id="concepMovReg" clas="form-select">
+                      <label for="concepMovReg" class="form-label">Concepto de Movimiento</label>
+                      <select name="concepMovReg" id="concepMovReg" class="form-select">
                         <option value="">Seleccione</option>
                         <?php 
                           // consultamos los tipos de movimiento
