@@ -194,18 +194,18 @@ session_start();
                       <input type="number" id="montoMovReg" name="montoMovReg" class="form-control">
                     </div> 
 
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-sm-12 col-md-4 offset-md-4" style="text-align:center">
                         <a href="#!" class="btn btn-primary" id="btnRegMov">Registrar</a>
                       </div>
-                    </div>
+                    </div> -->
 
                   </form>
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-primary" id="btnRegMov">Registrar</button>
               </div>
             </div>
           </div>
