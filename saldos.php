@@ -22,6 +22,24 @@ session_start();
           window.location = 'index.php';
         </script>
       <?php
+    }else{
+      //consultamos los datos de la empresa
+      $sqlEmp = "SELECT * FROM EMPRESAS WHERE idEmpresa = '$idEmpresaSesion'";
+      try {
+        $queryEmp = mysqli_query($conexion, $sqlEmp);
+        if(mysqli_num_rows($queryEmp) == 1){
+          $fetchEmp = mysqli_fetch_assoc($queryEmp);
+
+          $saldoEfe = $fetchEmp['saldoEfectivo'];
+          $saldoTrans = $fetchEmp['saldoTransferencia'];
+
+          $saldoTotal = $saldoEfe+$saldoTrans;
+        }else{
+          //empresa no locolizada
+        }
+      } catch (\Throwable $th) {
+        //throw $th;
+      }
     }
   ?>
     
@@ -37,16 +55,13 @@ session_start();
             <div class="app-card app-card-stat shadow-sm h-100">
               <div class="app-card-body p-3 p-lg-4">
                 <h4 class="stats-type mb-1">Saldo Actual</h4>
-                <div class="stats-figure">$0.00</div>
+                <div class="stats-figure fw-bold">$<?php echo $saldoTotal; ?></div>
                 <a class="app-card-link-mask" href="#"></a>
             </div><!--//app-card-->
           </div><!--//col-->
         </div>
           
         
-
-
-			    
 	    
 	    <?php 
         include("includes/footer.php");
