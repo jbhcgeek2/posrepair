@@ -54,7 +54,7 @@ session_start();
             <div class="col-6 col-lg-3 mb-3">
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
-                  <h4 class="stats-type mb-1">Saldo Actual</h4>
+                  <h4 class="stats-type mb-1">Saldo Total</h4>
                   <div class="stats-figure fw-bold">$<?php echo number_format($saldoTotal,2); ?></div>
                   <a class="app-card-link-mask" href="#"></a>
                 </div><!--//app-card-->
@@ -64,8 +64,18 @@ session_start();
             <div class="col-6 col-lg-3 mb-3">
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
-                  <h4 class="stats-type mb-1">Saldo Sucursales</h4>
-                  <div class="stats-figure fw-bold">$<?php echo number_format($saldoTotal,2); ?></div>
+                  <h4 class="stats-type mb-1">Saldo Efectivo</h4>
+                  <div class="stats-figure fw-bold">$<?php echo number_format($saldoEfe,2); ?></div>
+                  <a class="app-card-link-mask" href="#"></a>
+                </div><!--//app-card-->
+              </div><!--//col-->
+            </div>
+
+            <div class="col-6 col-lg-3 mb-3">
+              <div class="app-card app-card-stat shadow-sm h-100">
+                <div class="app-card-body p-3 p-lg-4">
+                  <h4 class="stats-type mb-1">Saldo Bancos</h4>
+                  <div class="stats-figure fw-bold">$<?php echo number_format($saldoTrans,2); ?></div>
                   <a class="app-card-link-mask" href="#"></a>
                 </div><!--//app-card-->
               </div><!--//col-->
@@ -157,7 +167,7 @@ session_start();
                         <option value="Salida">Salida</option>
                       </select>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                       <label for="metodoMovReg" class="form-label">Metodo de Movimiento</label>
                       <select name="metodoMovReg" id="metodoMovReg" class="form-select">
                         <option value="">Seleccione...</option>
@@ -166,7 +176,7 @@ session_start();
                       </select>
                     </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
                       <label for="concepMovReg" class="form-label">Concepto de Movimiento</label>
                       <select name="concepMovReg" id="concepMovReg" class="form-select">
                         <option value="">Seleccione</option>
