@@ -70,6 +70,9 @@ session_start();
                 </div><!--//app-card-->
               </div><!--//col-->
             </div>
+
+            
+
           </div>
           
 
@@ -78,6 +81,13 @@ session_start();
             <div class="app-card app-card-stat shadow-sm h-100">
               <div class="app-card-body p-3">
                 <h1>Movimientos de Cuenta</h1>
+
+                <div class="row">
+                  <div class="col-sm-12 col-md-4">
+                    <a href="#!" class="btn btn-primary" id="btnRegMov" 
+                    data-bs-toggle="modal" data-bs-target="#modalMov">Registrar Movimiento</a>
+                  </div>
+                </div>
 
                 <div class="row">
                   <table>
@@ -127,7 +137,71 @@ session_start();
             </div>
           </div>
         </div>
-          
+
+        
+        <div class="modal fade" id="modalMov">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Registrar Movimiento de Cuenta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <form id="regMov">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                      <label for="tipoMovReg" class="form-label"></label>
+                      <select name="tipoMovReg" id="tipoMovReg" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Entrada">Entrada</option>
+                        <option value="Salida">Salida</option>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                      <label for="concepMovReg" class="form-label"></label>
+                      <select name="concepMovReg" id="concepMovReg" clas="form-select">
+                        <option value="">Seleccione</option>
+                        <?php 
+                          // consultamos los tipos de movimiento
+                          $sqlTiMov = "SELECT * FROM CONCEPTOSMOV WHERE estatusConcepto = '1'";
+                          $queryTiMo = mysqli_query($conexion, $sqlTiMov);
+                          while($fetchTiMov = mysqli_fetch_assoc($queryTiMo)){
+                            $nombreTiMov = $fetchTiMov['nombreConcepto'];
+                            $idTiMov = $fetchTiMov['idConcepto'];
+
+                            echo "<option value='$idTiMov'>$nombreTiMov</option>";
+                          }//fin del while
+                        ?>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-12 col-md-8 col-lg-6 mb-3">
+                      <label for="observMov" class="form-label">Observacion de Movimiento</label>
+                      <input type="text" id="observMov" name="observMov" class="form-control">
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                      <label for="montoMovReg" class="form-label">Monto de Movimiento</label>
+                      <input type="number" id="montoMovReg" name="montoMovReg" class="form-control">
+                    </div> 
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4 offset-md-4" style="text-align:center">
+                        <a href="#!" class="btn btn-primary" id="btnRegMov">Registrar</a>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Registrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
         
 	    
 	    <?php 
