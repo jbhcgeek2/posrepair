@@ -138,7 +138,8 @@ session_start();
                       <?php 
                         //consultamos los movimientos de caja
                         $sqlMovs = "SELECT * FROM MOVCAJAS a INNER JOIN CONCEPTOSMOV b 
-                        ON a.conceptoMov = b.idConcepto WHERE a.empresaMovID = '$idEmpresaSesion'";
+                        ON a.conceptoMov = b.idConcepto INNER JOIN USUARIOS c 
+                        ON a.usuarioMov = c.idUsuario WHERE a.empresaMovID = '$idEmpresaSesion'";
                         try {
                           $queryMovs = mysqli_query($conexion,$sqlMovs);
                           if(mysqli_num_rows($queryMovs) > 0){
@@ -148,11 +149,12 @@ session_start();
                               $tipo = $fetchMov['tipoMov'];
                               $usuario = $fetchMov['usuarioMov'];
                               $desc = $fetchMov['observacionMov'];
+                              $nombreUser = $fetchMov['nombreUsuario']." ".$fetchMov['apPaternoUsuario'];
 
                               echo "<tr>
                                 <td>$fechaMov</td>
-                                <td>$usuario</td>
-                                <td>$montoMov</td>
+                                <td>$nombreUser</td>
+                                <td>$$montoMov</td>
                                 <td>$desc</td>
                               </tr>";
 
