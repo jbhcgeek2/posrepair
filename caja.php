@@ -90,13 +90,13 @@ session_start();
                           <input type="number" pattern="^\d*\.?\d*$" title="Ingresa un numero valido" id="montoMovAnterior" name="montoMovAnterior" class="form-control" readonly>
                         </div> -->
 
-                        <div class="col-sm-12 col-md-4 mb-3">
+                        <div class="col-sm-12 col-md-4 offset-md-2 mb-3">
                           <label for="montoCierreEnt" class="form-label">Monto Cierre Anterior</label>
                           <input type="number" id="montoCierreEnt" name="montoCierreEnt" value="<?php echo $saldoCierre; ?>" 
                           class="form-control" readonly>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 offset-md-4">
+                        <div class="col-sm-12 col-md-4">
                           <label for="montoMov" class="form-label">Monto Inicio</label>
                           <input type="number" pattern="^\d*\.?\d*$" title="Ingresa un numero valido" id="montoMov" name="montoMov" class="form-control">
                         </div>
