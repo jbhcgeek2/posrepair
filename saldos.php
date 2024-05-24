@@ -123,7 +123,7 @@ session_start();
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="height:400px; overflow-y:scroll;">
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -134,7 +134,7 @@ session_start();
 
                       </tr>
                     </thead>
-                    <tbody style="height:400px; overflow-y:scroll;">
+                    <tbody>
                       <?php 
                         //consultamos los movimientos de caja
                         $sqlMovs = "SELECT * FROM MOVCAJAS a INNER JOIN CONCEPTOSMOV b 
