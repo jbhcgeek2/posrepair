@@ -124,7 +124,7 @@ session_start();
                 </div>
 
                 <div class="row">
-                  <table>
+                  <table class="table table-stripped">
                     <thead>
                       <tr>
                         <th>Fecha</th>
