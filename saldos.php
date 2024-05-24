@@ -154,7 +154,7 @@ session_start();
                               echo "<tr>
                                 <td>$fechaMov</td>
                                 <td>$nombreUser</td>
-                                <td>$$montoMov</td>
+                                <td>$".number_format($montoMov,2)."</td>
                                 <td>$desc</td>
                               </tr>";
 
