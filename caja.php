@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <?php
 session_start();
 
@@ -30,6 +30,14 @@ session_start();
       if($datoApertura->mensaje == "noData"){
         //no existe la apertura del dia, por lo que mostraremos un modal
         //para que pueda realizar su apertura del dia
+        $sqlCi = "SELECT * FROM MOVCAJAS WHERE empresaMovID = '$idEmprersa' AND sucursalMovID = '$idSucursal' 
+        AND conceptoMov = '4'ORDER BY fechaMovimiento DESC LIMIT 1";
+        $queryCi = mysqli_query($conexion, $sqlCi);
+        $saldoCierre = 0;
+        if(mysqli_num_rows($queryCi) == 1){
+          $fetchCi = mysqli_fetch_assoc($queryCi);
+          $saldoCierre = $fetchCi['montoMov'];
+        }
         ?>
           <div class="modal fade" tabindex="-1" id="modalAperturaDia" data-bs-backdrop="static">
             <div class="modal-dialog modal-lg">
@@ -81,6 +89,12 @@ session_start();
                           <label for="montoMovAnterior" class="form-label">Cierre del dia anterior</label>
                           <input type="number" pattern="^\d*\.?\d*$" title="Ingresa un numero valido" id="montoMovAnterior" name="montoMovAnterior" class="form-control" readonly>
                         </div> -->
+
+                        <div class="col-sm-12 col-md-4 mb-3">
+                          <label for="montoCierreEnt" class="form-label">Monto Cierre Anterior</label>
+                          <input type="number" id="montoCierreEnt" name="montoCierreEnt" value="<?php echo $saldoCierre; ?>" 
+                          class="form-control" readonly>
+                        </div>
 
                         <div class="col-sm-12 col-md-4 offset-md-4">
                           <label for="montoMov" class="form-label">Monto Inicio</label>

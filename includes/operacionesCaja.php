@@ -46,7 +46,7 @@ function setApertura($fecha,$monto,$usuario,$sucural,$empresa,$concepto,$observ)
 
   //antes de insertar consultamos si existe una apertura del dia ya registrada
   $sqlX = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND usuarioMov = '$usuario' AND 
-  SucursalMovID = '$sucural'";
+  SucursalMovID = '$sucural' AND conceptoMov = '1'";
   try {
     $queryX = mysqli_query($conexion, $sqlX);
     if(mysqli_num_rows($queryX) == 0){
