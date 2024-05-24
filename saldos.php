@@ -117,7 +117,7 @@ session_start();
                 <h1>Movimientos de Cuenta</h1>
 
                 <div class="row">
-                  <div class="col-sm-12 col-md-4">
+                  <div class="col-sm-12 col-md-4 offset-md-4 mb-4" style="text-align:center;">
                     <a href="#!" class="btn btn-primary" id="btnRegMov" 
                     data-bs-toggle="modal" data-bs-target="#modalMov">Registrar Movimiento</a>
                   </div>
