@@ -40,6 +40,20 @@ session_start();
       } catch (\Throwable $th) {
         //throw $th;
       }
+
+      $fecha = date('Y-m-d');
+      // Ahora consultamois los saldos de las sucursales
+      $sqlSuc = "SELECT * FROM MOVCAJAS WHERE conceptoMov = '1' AND fechaMovimiento = '$fecha'";
+      $querySuc = mysqli_query($conexion, $sqlSuc);
+      $saldoSuc = 0;
+      if(mysqli_num_rows($querySuc) > 0){
+        while($fetchSuc = mysqli_fetch_assoc($querySuc)){
+          $dinero = $fetchSuc['montoMov'];
+          $saldoSuc = $saldoSuc+$dinero;
+        }//fin del while
+      }else{
+        //definimos los saldo en 0, no hacemos nada
+      }
     }
   ?>
     
@@ -65,7 +79,7 @@ session_start();
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
                   <h4 class="stats-type mb-1">Saldo Efectivo</h4>
-                  <div class="stats-figure fw-bold">$<?php echo number_format($saldoEfe,2); ?></div>
+                  <div class="stats-figure">$<?php echo number_format($saldoEfe,2); ?></div>
                   <a class="app-card-link-mask" href="#"></a>
                 </div><!--//app-card-->
               </div><!--//col-->
@@ -75,7 +89,17 @@ session_start();
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
                   <h4 class="stats-type mb-1">Saldo Bancos</h4>
-                  <div class="stats-figure fw-bold">$<?php echo number_format($saldoTrans,2); ?></div>
+                  <div class="stats-figure">$<?php echo number_format($saldoTrans,2); ?></div>
+                  <a class="app-card-link-mask" href="#"></a>
+                </div><!--//app-card-->
+              </div><!--//col-->
+            </div>
+
+            <div class="col-6 col-lg-3 mb-3">
+              <div class="app-card app-card-stat shadow-sm h-100">
+                <div class="app-card-body p-3 p-lg-4">
+                  <h4 class="stats-type mb-1">Saldo Sucursales</h4>
+                  <div class="stats-figure">$<?php echo number_format($saldoSuc,2); ?></div>
                   <a class="app-card-link-mask" href="#"></a>
                 </div><!--//app-card-->
               </div><!--//col-->
