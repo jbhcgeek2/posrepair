@@ -134,7 +134,7 @@ session_start();
 
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height:400px; overflow-y:scroll;">
                       <?php 
                         //consultamos los movimientos de caja
                         $sqlMovs = "SELECT * FROM MOVCAJAS a INNER JOIN CONCEPTOSMOV b 
