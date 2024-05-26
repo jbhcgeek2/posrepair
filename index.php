@@ -489,7 +489,7 @@
 														$sqlVentas2 = "SELECT *,
 														(SELECT d.nombreSuc FROM DETALLEVENTA c INNER JOIN SUCURSALES d ON c.sucursalID = d.idSucursal 
 														WHERE c.ventaID = a.idVenta LIMIT 1) AS sucVenta FROM VENTAS a INNER JOIN USUARIOS b 
-														ON a.usuarioID = b.idUsuario WHERE a.empresaID = '1' ORDER BY a.idVenta DESC LIMIT 6";
+														ON a.usuarioID = b.idUsuario WHERE a.empresaID = '$idEmpresaSesion' ORDER BY a.idVenta DESC LIMIT 6";
 														try {
 															$queryVentas2 = mysqli_query($conexion, $sqlVentas2);
 															if(mysqli_num_rows($queryVentas2) > 0){
