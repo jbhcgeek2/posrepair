@@ -10,7 +10,7 @@
 		include("includes/conexion.php");
 		//este resumen solo estara habilitado para administradores
 		// echo $rolUsuario;
-		echo $idEmpresaSesion;
+		// echo $idEmpresaSesion;
 		if($rolUsuario == "Vendedor"){
 			header("Location: caja.php");
 			?>
