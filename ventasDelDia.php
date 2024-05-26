@@ -139,7 +139,7 @@ session_start();
                                 $descuento = floatval($fetch['descuentoVenta']);
                                 if($descuento != "0.00"){
                                   //tiene descuento y consultraremos el total
-                                  $descu = ($descuento / $subtotal) * 100;
+                                  $descu = ($descuento / $subtotal) / 100;
                                   $total = $subtotal - $descu;
                                 }else{
                                   //sin descuento
