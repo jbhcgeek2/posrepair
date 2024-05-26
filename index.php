@@ -49,6 +49,7 @@
 		$porcentageVentas = number_format($porcentageVentas,2);
 		$iconoVentas = "";
 		$colorVentas = "";
+		echo "1.2";
 		if($diferenciaVentas > 0){
 			//incrementaron las ventas
 			$iconoVentas = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
