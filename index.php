@@ -9,7 +9,7 @@
     include("includes/header.php");
 		include("includes/conexion.php");
 		//este resumen solo estara habilitado para administradores
-		echo $rolUsuario;
+		// echo $rolUsuario;
 		if($rolUsuario == "Vendedor"){
 			header("Location: caja.php");
 			?>
@@ -40,7 +40,7 @@
 		} catch (\Throwable $th) {
 			$totalVentas = "1";	
 		}
-
+		echo "1";
 		$diferenciaVentas = $totVentas - $totVentasAnt;
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
 		$porcentageVentas = number_format($porcentageVentas,2);
@@ -59,7 +59,7 @@
 			</svg>';
 			$colorVentas = "text-danger";
 		}
-
+		echo "2";
 		//para consultar los gatros mensuales, consultaremos la tabla de movimientos caja
 		//aquellos que tengan el concepto de salida y adquisicion de mercancia (9 y 10)
 		$sqlGasto = "SELECT SUM(montoMov) AS gastoMensual FROM MOVCAJAS WHERE empresaMovID = '$idEmpresaSesion' 
@@ -73,7 +73,7 @@
 			//error en la consulta
 			$montoGasto = '1.00';
 		}
-		
+		echo "3";
 		$sqlGasAnt = "SELECT SUM(montoMov) AS gastoMesAnt FROM MOVCAJAS
 		WHERE empresaMovID = '$idEmpresaSesion' AND conceptoMov IN (9,10) AND MONTH(fechaMovimiento) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
 		AND YEAR(fechaMovimiento) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
@@ -103,7 +103,7 @@
 		} catch (\Throwable $th) {
 			//
 		}
-
+		echo "4";
 		$sqlVentasDia = "SELECT SUM(totalVenta) AS ventasDia FROM VENTAS WHERE 
 		empresaID = '$idEmpresaSesion' AND fechaVenta = '$fechaHoy'";
 		try {
