@@ -140,10 +140,10 @@ session_start();
                                 if($descuento != "0.00"){
                                   //tiene descuento y consultraremos el total
                                   $descu = ($descuento * $subtotal) / 100;
-                                  $total = $subtotal - $descu;
+                                  $total = number_format($subtotal - $descu,2);
                                 }else{
                                   //sin descuento
-                                  $total = $subtotal;
+                                  $total = number_format($subtotal,2);
                                 }
 
                                 
