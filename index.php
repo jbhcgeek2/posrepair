@@ -47,6 +47,7 @@
 		$diferenciaVentas = $totVentas - $totVentasAnt;
 		echo $diferenciaVentas;
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
+		echo $porcentageVentas;
 		$porcentageVentas = number_format($porcentageVentas,2);
 		$iconoVentas = "";
 		$colorVentas = "";
