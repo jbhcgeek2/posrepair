@@ -41,7 +41,7 @@
 			$fetchVentasAnt = mysqli_fetch_assoc($queryVentasAnt);
 			$totVentasAnt = $fetchVentasAnt['ventasMesAnt'];
 		} catch (\Throwable $th) {
-			$totVentasAnt = "1";	
+			$totVentasAnt = "2";	
 		}
 		echo "1";
 		$diferenciaVentas = $totVentas - $totVentasAnt;
