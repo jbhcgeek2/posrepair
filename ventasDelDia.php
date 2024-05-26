@@ -81,9 +81,7 @@ session_start();
                           //las sucursales pero si no tiene persmisos de admin
                           //solo podra ver las ventas de su usuario y sucursal
                           $fecha = date('Y-m-d');
-                          $fecha = '2024-05-25';
-
-
+                          // $fecha = '2024-05-25';
                           $sql = "";
                           if($rolUsuario == "Administrador"){
                             $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 

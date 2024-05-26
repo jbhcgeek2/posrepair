@@ -40,22 +40,31 @@ if(!empty($_SESSION['usuarioPOS'])){
     $sql = "";
 
     if($rolUsuario == "Administrador"){
-      $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-      INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo 
-      INNER JOIN SUCURSALES d ON a.sucursalID = d.idSucursal
-      WHERE b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
+      // $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+      // INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo 
+      // INNER JOIN SUCURSALES d ON a.sucursalID = d.idSucursal
+      // WHERE b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
+      $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+      WHERE a.fechaVenta = '$fecha' AND a.empresaID = '$idEmpresaSesion' AND 
+      (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
     }elseif($rolUsuario == "Vendedor"){
       //solo podra ver las ventas de su usuario y sucursal
-      $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-      INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo INNER JOIN SUCURSALES d ON a.sucursalID = d.idSucursal
-      WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.usuarioVenta = '$usuario' 
-      AND a.sucursalID = '$idSucursal'";
-    }else{
+      // $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+      // INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo INNER JOIN SUCURSALES d ON a.sucursalID = d.idSucursal
+      // WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.usuarioVenta = '$usuario' 
+      // AND a.sucursalID = '$idSucursal'";
+      $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+      INNER JOIN SUCURSALES c ON b.sucursalID = c.idSucursal WHERE a.fechaVenta = '$fecha' 
+      AND a.empresaID = '$idEmpresaSesion' AND a.usuarioID = '$idUsuario' AND (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+    }elseif($rolUsuario == "Encargado"){
       //el usuario encargado podra ver las ventas de todos
       //los usuarios, pero solo de su susucrsal
-      $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-      INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-      WHERE(b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$idSucursal'";
+      // $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+      // INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
+      // WHERE(b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$idSucursal'";
+      $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+      INNER JOIN SUCURSALES c ON b.sucursalID = c.idSucursal WHERE a.fechaVenta = '$fecha' 
+      AND a.empresaID = '$idEmpresaSesion' AND (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
     }
 
     try {
