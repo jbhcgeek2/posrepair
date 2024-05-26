@@ -354,6 +354,7 @@
 															}//fin del while
 														} catch (\Throwable $th) {
 															//error de consulta
+															echo "error";
 														}
 													?>
 												</tbody>
