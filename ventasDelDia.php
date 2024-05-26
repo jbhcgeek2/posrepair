@@ -136,7 +136,7 @@ session_start();
                                 //Verificamos si tiene descuento para mostrar el p[resupuesto total]
                                 $subtotal = floatval($fetch['subtotalVenta']);
                                 $total = "0";
-                                $descuento = $fetch['descuentoVenta'];
+                                $descuento = floatval($fetch['descuentoVenta']);
                                 if($descuento != "0.00"){
                                   //tiene descuento y consultraremos el total
                                   $descu = ($descuento / $subtotal) * 100;
