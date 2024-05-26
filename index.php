@@ -41,11 +41,11 @@
 			$fetchVentasAnt = mysqli_fetch_assoc($queryVentasAnt);
 			$totVentasAnt = $fetchVentasAnt['ventasMesAnt'];
 		} catch (\Throwable $th) {
-			$totVentasAnt = "2";	
+			$totVentasAnt = "1";	
 		}
 		//aqui esta el error del index
 		$diferenciaVentas = $totVentas - $totVentasAnt;
-		echo $diferenciaVentas;
+		echo $diferenciaVentas."-";
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
 		echo $porcentageVentas;
 		$porcentageVentas = number_format($porcentageVentas,2);
