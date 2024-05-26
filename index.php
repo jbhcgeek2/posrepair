@@ -9,7 +9,7 @@
     include("includes/header.php");
 		include("includes/conexion.php");
 		//este resumen solo estara habilitado para administradores
-		// echo $rolUsuario;
+		echo $rolUsuario;
 		if($rolUsuario == "Vendedor"){
 			header("Location: caja.php");
 			?>
