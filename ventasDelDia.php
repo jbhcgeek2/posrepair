@@ -82,6 +82,7 @@ session_start();
                           //solo podra ver las ventas de su usuario y sucursal
                           $fecha = date('Y-m-d');
                           $fecha = '2024-05-25';
+                          
 
                           $sql = "";
                           if($rolUsuario == "Administrador"){
