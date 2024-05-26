@@ -83,14 +83,11 @@ session_start();
                           $fecha = date('Y-m-d');
                           $fecha = '2024-05-25';
 
-                          echo "Hola mudno";
-
 
                           $sql = "";
                           if($rolUsuario == "Administrador"){
-                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-                            WHERE b.fechaVenta = '$fecha'";
+                            $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+                            WHERE a.fechaVenta = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
@@ -110,10 +107,31 @@ session_start();
                             $totalVenta = 0;
                             if(mysqli_num_rows($query) > 0){
                               while($fetch = mysqli_fetch_assoc($query)){
+                                $nombreCosa = "";
                                 $fechaVenta = $fetch['fechaVenta'];
-                                $nombreprod = $fetch['nombreArticulo'];
+                                //verificamos si la venta es un producto o servicio
+                                if(!empty($fetch['articuloID'])){
+                                  //se trata de un articulo
+                                  $idProd = $fetch['articuloID'];
+                                  $sqlExt = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idProd' AND empresaID = '$idEmpresaSesion'";
+                                  $queryExt = mysqli_query($conexion, $sqlExt);
+                                  $fetchExt = mysqli_fetch_assoc($queryExt);
+                                  $nombreCosa =  $fetchExt['nombreArticulo'];
+                                }else{
+                                  //es un servicio
+                                  $idServ = $fetch['trabajoID'];
+                                  $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio FROM TRABAJOS a INNER JOIN SERVICIOS b ON a.servicioID = b.idServicio 
+                                  WHERE a.idTrabajo = '$idServ'";
+                                  $queryExt2 = mysqli_query($conexion, $sqlExt2);
+                                  $fetchExt2 = mysqli_fetch_assoc($queryExt2);
+                                  $nombreCosa = $fetchExt2['nombreServicio'];
+
+
+                                }
+
+                                // $nombreprod = $fetch['nombreArticulo'];
                                 $cantVenta = $fetch['cantidadVenta'];
-                                $total = $fetch['subtotalVenta'];
+                                $subtotal = $fetch['subtotalVenta'];
                                 $usuarioVent = $fetch['usuarioVenta'];
                                 $sucVenta = $fetch['sucursalID'];
                                 $idVenta = $fetch['idVenta'];
@@ -124,7 +142,7 @@ session_start();
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
                                   <td>$fechaVenta</td>
-                                  <td>$nombreprod</td>
+                                  <td>$nombreCosa</td>
                                   <td>$cantVenta</td>
                                   <td>$$total</td>
                                   <td>$usuarioVent</td>
