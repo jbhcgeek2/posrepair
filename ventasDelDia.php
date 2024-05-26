@@ -134,7 +134,7 @@ session_start();
                                 $cantVenta = $fetch['cantidadVenta'];
 
                                 //Verificamos si tiene descuento para mostrar el p[resupuesto total]
-                                $subtotal = $fetch['subtotalVenta'];
+                                $subtotal = floatval($fetch['subtotalVenta']);
                                 $total = "0";
                                 $descuento = $fetch['descuentoVenta'];
                                 if($descuento != "0.00"){
