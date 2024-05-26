@@ -30,9 +30,9 @@
 			$totVentas = $fetchVentas['ventasEnMes'];
 		} catch (\Throwable $th) {
 			//error de consulta
-			$totalVentas = "1";
+			$totVentas = "1";
 		}
-		echo "e";
+		
 		$sqlVentasAnt = "SELECT SUM(totalVenta) AS ventasMesAnt FROM VENTAS
 		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
 		AND YEAR(fechaVenta) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
