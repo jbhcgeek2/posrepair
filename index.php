@@ -40,6 +40,11 @@
 			$queryVentasAnt = mysqli_query($conexion, $sqlVentasAnt);
 			$fetchVentasAnt = mysqli_fetch_assoc($queryVentasAnt);
 			$totVentasAnt = $fetchVentasAnt['ventasMesAnt'];
+			if($totVentasAnt >0){
+				$totVentasAnt = $totVentasAnt;
+			}else{
+				$totVentasAnt = "1";
+			}
 		} catch (\Throwable $th) {
 			$totVentasAnt = "1";	
 		}
