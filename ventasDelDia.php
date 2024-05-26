@@ -125,16 +125,28 @@ session_start();
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                                   $nombreCosa = $fetchExt2['nombreServicio'];
-
-
                                 }
 
                                 // $nombreprod = $fetch['nombreArticulo'];
-                                $cantVenta = $fetch['cantidadVenta'];
-                                $subtotal = $fetch['subtotalVenta'];
                                 $usuarioVent = $fetch['usuarioVenta'];
                                 $sucVenta = $fetch['sucursalID'];
                                 $idVenta = $fetch['idVenta'];
+                                $cantVenta = $fetch['cantidadVenta'];
+
+                                //Verificamos si tiene descuento para mostrar el p[resupuesto total]
+                                $subtotal = $fetch['subtotalVenta'];
+                                $total = "0";
+                                $descuento = $fetch['descuentoVenta'];
+                                if($descuento != "0.00"){
+                                  //tiene descuento y consultraremos el total
+                                  $descu = ($descuento / $subtotal) * 100;
+                                  $total = $subtotal - $descu;
+                                }else{
+                                  //sin descuento
+                                  $total = $subtotal;
+                                }
+
+                                
 
                                 $totalVenta = $totalVenta + $total;
 
