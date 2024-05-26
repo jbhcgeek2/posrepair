@@ -50,9 +50,7 @@
 		}
 		//aqui esta el error del index
 		$diferenciaVentas = $totVentas - $totVentasAnt;
-		echo $diferenciaVentas."-".$totVentasAnt;
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
-		echo $porcentageVentas;
 		$porcentageVentas = number_format($porcentageVentas,2);
 		$iconoVentas = "";
 		$colorVentas = "";
