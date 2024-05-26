@@ -116,7 +116,7 @@
 		}
 
 		$sqlArti = "SELECT SUM(b.existenciaSucursal) AS totArti FROM SUCURSALES a  INNER JOIN 
-		ARTICULOSUCURSAL b ON a.idSucursal = b.sucursalID WHERE a.empresaSucID = '1' AND b.existenciaSucursal > 0";
+		ARTICULOSUCURSAL b ON a.idSucursal = b.sucursalID WHERE a.empresaSucID = '$idEmpresaSesion' AND b.existenciaSucursal > 0";
 		try {
 			$queryArti = mysqli_query($conexion, $sqlArti);
 			$fetchArti = mysqli_fetch_assoc($queryArti);
