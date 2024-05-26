@@ -73,7 +73,49 @@ if(!empty($_SESSION['usuarioPOS'])){
         $datos = [];
         $i = 0;
         while($fetch = mysqli_fetch_assoc($query)){
-          $datos[$i] = $fetch;
+          //verificamos si la venta fue producto o servicio
+          $nombreCosa = "";
+          if(!empty($fetch['articuloID'])){
+            //se trata de un articulo
+            $idProd = $fetch['articuloID'];
+            $sqlExt = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idProd' AND 
+            empresaID = '$idEmpresaSesion'";
+            $queryExt = mysqli_query($conexion, $sqlExt);
+            $fetchExt = mysqli_fetch_assoc($queryExt);
+            $nombreCosa =  $fetchExt['nombreArticulo'];
+          }else{
+            //se trata de un servicio
+            $idServ = $fetch['trabajoID'];
+            $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio FROM TRABAJOS a 
+            INNER JOIN SERVICIOS b ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idServ' ";
+            $queryExt2 = mysqli_query($conexion, $sqlExt2);
+            $fetchExt2 = mysqli_fetch_assoc($queryExt2);
+            $nombreCosa = $fetchExt2['nombreServicio'];
+          }
+          $idVenta = $fetch['idVenta'];
+          $fechaVenta = $fetch['fechaVenta'];
+          $cantidad = $fetch['cantidadVenta'];
+          $subtotal = $fetch['subtotalVenta'];
+          $usuarioVen = $fetch['usuarioVenta'];
+          $sucursalVen = $fetch['nombreSuc'];
+          $descuento = $fetch['descuentoVenta'];
+          $total = 0;
+
+          //Verificamos si la venta tiene descuento
+          if($descuento != "0.00"){
+            //tiene descuento
+            $descu = ($descuento * $subtotal) / 100;
+            $total = $subtotal - $descu;
+          }else{
+            //no tiene descuento
+            $total = $subtotal;
+          }
+          
+          
+          $cuerpo = ['venta'=>$idVenta,'producto'=>$nombreCosa,'cantidad'=>$cantidad,
+          'totalVenta'=>$total,'usuario'=>$usuarioVen,'sucursalVenta'=>$sucursalVen,
+          'fechaVenta'=>$fechaVenta];
+          $datos[$i] = $cuerpo;
           $i++;
         }//fin del while
         $res = ["status"=>"ok","data"=>$datos];
