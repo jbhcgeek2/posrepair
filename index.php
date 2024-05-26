@@ -71,7 +71,7 @@
 
 		} catch (\Throwable $th) {
 			//error en la consulta
-			$montoGasto = '0.00';
+			$montoGasto = '1.00';
 		}
 		
 		$sqlGasAnt = "SELECT SUM(montoMov) AS gastoMesAnt FROM MOVCAJAS
