@@ -10,6 +10,7 @@
 		include("includes/conexion.php");
 		//este resumen solo estara habilitado para administradores
 		// echo $rolUsuario;
+		// echo $idEmpresaSesion;
 		if($rolUsuario == "Vendedor"){
 			header("Location: caja.php");
 			?>
@@ -18,6 +19,7 @@
 			</script>
 			<?php
 		}
+		
 		$fechaHoy = date('Y-m-d');
 		//realizamos las consultas para ver las ventas totales en el mes
 		$sqlVentas = "SELECT SUM(totalVenta) AS ventasEnMes FROM VENTAS 
@@ -28,8 +30,9 @@
 			$totVentas = $fetchVentas['ventasEnMes'];
 		} catch (\Throwable $th) {
 			//error de consulta
-			$totalVentas = "1";
+			$totVentas = "1";
 		}
+		
 		$sqlVentasAnt = "SELECT SUM(totalVenta) AS ventasMesAnt FROM VENTAS
 		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
 		AND YEAR(fechaVenta) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
@@ -37,15 +40,21 @@
 			$queryVentasAnt = mysqli_query($conexion, $sqlVentasAnt);
 			$fetchVentasAnt = mysqli_fetch_assoc($queryVentasAnt);
 			$totVentasAnt = $fetchVentasAnt['ventasMesAnt'];
+			if($totVentasAnt >0){
+				$totVentasAnt = $totVentasAnt;
+			}else{
+				$totVentasAnt = "1";
+			}
 		} catch (\Throwable $th) {
-			$totalVentas = "1";	
+			$totVentasAnt = "1";	
 		}
-
+		//aqui esta el error del index
 		$diferenciaVentas = $totVentas - $totVentasAnt;
 		$porcentageVentas = ($diferenciaVentas / $totVentasAnt) * 100;
 		$porcentageVentas = number_format($porcentageVentas,2);
 		$iconoVentas = "";
 		$colorVentas = "";
+		
 		if($diferenciaVentas > 0){
 			//incrementaron las ventas
 			$iconoVentas = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
@@ -59,7 +68,7 @@
 			</svg>';
 			$colorVentas = "text-danger";
 		}
-
+		
 		//para consultar los gatros mensuales, consultaremos la tabla de movimientos caja
 		//aquellos que tengan el concepto de salida y adquisicion de mercancia (9 y 10)
 		$sqlGasto = "SELECT SUM(montoMov) AS gastoMensual FROM MOVCAJAS WHERE empresaMovID = '$idEmpresaSesion' 
@@ -71,7 +80,7 @@
 
 		} catch (\Throwable $th) {
 			//error en la consulta
-			$montoGasto = '0.00';
+			$montoGasto = '1.00';
 		}
 		
 		$sqlGasAnt = "SELECT SUM(montoMov) AS gastoMesAnt FROM MOVCAJAS
@@ -103,7 +112,7 @@
 		} catch (\Throwable $th) {
 			//
 		}
-
+		
 		$sqlVentasDia = "SELECT SUM(totalVenta) AS ventasDia FROM VENTAS WHERE 
 		empresaID = '$idEmpresaSesion' AND fechaVenta = '$fechaHoy'";
 		try {
@@ -116,7 +125,7 @@
 		}
 
 		$sqlArti = "SELECT SUM(b.existenciaSucursal) AS totArti FROM SUCURSALES a  INNER JOIN 
-		ARTICULOSUCURSAL b ON a.idSucursal = b.sucursalID WHERE a.empresaSucID = '1' AND b.existenciaSucursal > 0";
+		ARTICULOSUCURSAL b ON a.idSucursal = b.sucursalID WHERE a.empresaSucID = '$idEmpresaSesion' AND b.existenciaSucursal > 0";
 		try {
 			$queryArti = mysqli_query($conexion, $sqlArti);
 			$fetchArti = mysqli_fetch_assoc($queryArti);
@@ -354,6 +363,7 @@
 															}//fin del while
 														} catch (\Throwable $th) {
 															//error de consulta
+															echo "error";
 														}
 													?>
 												</tbody>
@@ -489,7 +499,7 @@
 														$sqlVentas2 = "SELECT *,
 														(SELECT d.nombreSuc FROM DETALLEVENTA c INNER JOIN SUCURSALES d ON c.sucursalID = d.idSucursal 
 														WHERE c.ventaID = a.idVenta LIMIT 1) AS sucVenta FROM VENTAS a INNER JOIN USUARIOS b 
-														ON a.usuarioID = b.idUsuario WHERE a.empresaID = '1' ORDER BY a.idVenta DESC LIMIT 6";
+														ON a.usuarioID = b.idUsuario WHERE a.empresaID = '$idEmpresaSesion' ORDER BY a.idVenta DESC LIMIT 6";
 														try {
 															$queryVentas2 = mysqli_query($conexion, $sqlVentas2);
 															if(mysqli_num_rows($queryVentas2) > 0){
