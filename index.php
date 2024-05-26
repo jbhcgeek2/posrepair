@@ -18,6 +18,7 @@
 			</script>
 			<?php
 		}
+		echo "ext 2";
 		$fechaHoy = date('Y-m-d');
 		//realizamos las consultas para ver las ventas totales en el mes
 		$sqlVentas = "SELECT SUM(totalVenta) AS ventasEnMes FROM VENTAS 
