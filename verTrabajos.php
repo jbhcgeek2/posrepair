@@ -37,7 +37,6 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-                          <a href="printTrabajo.php?t='<?php echo $idTra; ?>'" target='_blank' class="btn btn-danger">Ver Ticket</a>
 									        <a href="altaTrabajo.php">Registrar Trabajo</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
