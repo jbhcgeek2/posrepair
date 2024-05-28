@@ -85,7 +85,7 @@ session_start();
                           // consultamos los trabajos que esten activos
                           $sqlTra = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
                           INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
-                          a.empresaID = '$idEmpresaSesion' AND a.estatusTrabajo <> 'Finalizado'";
+                          a.empresaID = '$idEmpresaSesion' AND a.estatusTrabajo <> 'Finalizado' OR a.estatusTrabajo <> 'Cancelado'";
 
                           $estatus = ["Activo","En Proceso","En Espera","Finalizado","Cancelado"];
                           $colorStatus = ["Activo"=>'badge rounded-pill text-bg-success',
