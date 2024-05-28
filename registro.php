@@ -29,7 +29,6 @@ header('Location:login.php');
 			        <div class="auth-form-container text-start">
 						
               <form class="auth-form login-form" id="formRegistro">
-
 							<div class="nombreEmpresa mb-3">
 								<label class="" for="nombreEmpresa">Nombre de Empresa</label>
 								<input id="nombreEmpresa" name="nombreEmpresa" type="email" class="form-control nombreEmpresa" placeholder="Nombre de Empresa" required="required">
