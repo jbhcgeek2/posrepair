@@ -45,7 +45,7 @@
 						<!-- <p class="text-center">
 							Aun no tiene una cuenta? <a href="registro.php"><strong>Registrate</strong></a>
 						</p> -->
-						<div class="auth-option text-center pt-5">Aun no tienes cuenta? Registrate <a class="text-link" href="registro.php" >Aqui</a>.</div>
+						
 						
 						
 						
