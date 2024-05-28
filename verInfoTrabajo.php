@@ -46,7 +46,11 @@ session_start();
       $estatusTrab = $trabajo->data->estatusTrabajo;
 
       $restante = $costoIni - $anticipo;
-       
+      $claseFinalizado = '';
+      if($estatusTrab == "Finalizado" || $estatusTrab == "Cancelado"){
+        //si esta finalizado o cancelado, ya no se podra modificar
+        $claseFinalizado = 'disabled';
+      }
 
 
     }else{
@@ -119,7 +123,7 @@ session_start();
 
                         <div class="col-sm-12 col-md-4 offset-md-4">
                           <label for="estatusTrabajo" class="form-label">Estatus Trabajo</label>
-                          <select name="estatusTrabajo" id="estatusTrabajo" class="form-select">
+                          <select name="estatusTrabajo" id="estatusTrabajo" class="form-select" <?php echo $claseFinalizado; ?>>
                             <option value="">Seleccione</option>
                             <?php 
                               //

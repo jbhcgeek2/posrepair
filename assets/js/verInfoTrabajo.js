@@ -205,37 +205,47 @@ btnGuardar.addEventListener('click', function(){
   })
 })
 
+
 let btnFinaliza = document.getElementById('btnFinaliza');
 btnFinaliza.addEventListener('click', function(){
   //seccion para validar el costo de los articulos utilizados y el cobro inicial
-  let totalTotal = document.getElementById('sumaTotalArtis').value;
-  let montoIni = document.getElementById('costoServicio').value;
-
-  let costoFinal = document.getElementById('costoFinal').value;
-  let costoInicial = document.getElementById('costoIniFinal').value;
-  let costoProd = document.getElementById('montoArticulos').value;
-
-  let ganEstimada = costoInicial - costoProd;
-  if(ganEstimada > 0){
-    document.getElementById('gananciaEstimada').classList.add('text-primary');
+  let estatusTrabajo = document.getAnimations('estatusTrabajo').value;
+  if(estatusTrabajo != "Finalizado" || estatusTrabajo != "Cancelado"){
+    let totalTotal = document.getElementById('sumaTotalArtis').value;
+    let montoIni = document.getElementById('costoServicio').value;
+  
+    let costoFinal = document.getElementById('costoFinal').value;
+    let costoInicial = document.getElementById('costoIniFinal').value;
+    let costoProd = document.getElementById('montoArticulos').value;
+  
+    let ganEstimada = costoInicial - costoProd;
+    if(ganEstimada > 0){
+      document.getElementById('gananciaEstimada').classList.add('text-primary');
+    }else{
+      document.getElementById('gananciaEstimada').classList.remove('text-primary');
+      document.getElementById('gananciaEstimada').classList.add('text-danger');
+    }
+    document.getElementById('gananciaEstimada').innerHTML = '$'+ganEstimada;
+  
+    if(montoIni >= totalTotal){
+      //el servicio generara ganancia
+    }else{
+      //se gasto de mas, solo lo notificamos
+      Swal.fire(
+        'Incongruencia en el costo',
+        'Se recomienda aumentar el costo del servicio',
+        'warning'
+      )
+    }
   }else{
-    document.getElementById('gananciaEstimada').classList.remove('text-primary');
-    document.getElementById('gananciaEstimada').classList.add('text-danger');
-  }
-  document.getElementById('gananciaEstimada').innerHTML = '$'+ganEstimada;
-
-  if(montoIni >= totalTotal){
-    //el servicio generara ganancia
-    
-
-  }else{
-    //se gasto de mas, solo lo notificamos
+    //trabajo finalizao o cancelado
     Swal.fire(
-      'Incongruencia en el costo',
-      'Se recomienda aumentar el costo del servicio',
+      'Trabajo Finalizado o Cancelado',
+      'No es posible realizar cambios al trabajo actual',
       'warning'
     )
   }
+  
 })
 
 let costoFin = document.getElementById('costoFinal');
