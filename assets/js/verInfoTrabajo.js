@@ -210,7 +210,7 @@ let btnFinaliza = document.getElementById('btnFinaliza');
 btnFinaliza.addEventListener('click', function(){
   //seccion para validar el costo de los articulos utilizados y el cobro inicial
   let estatusTrabajo = document.getElementById('estatusValue').value;
-  if(estatusTrabajo != "Finalizado" || estatusTrabajo != "Cancelado"){
+  
     let totalTotal = document.getElementById('sumaTotalArtis').value;
     let montoIni = document.getElementById('costoServicio').value;
   
@@ -237,14 +237,7 @@ btnFinaliza.addEventListener('click', function(){
         'warning'
       )
     }
-  }else{
-    //trabajo finalizao o cancelado
-    Swal.fire(
-      'Trabajo Finalizado o Cancelado',
-      'No es posible realizar cambios al trabajo actual',
-      'warning'
-    )
-  }
+  
   
 })
 

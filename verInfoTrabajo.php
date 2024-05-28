@@ -47,9 +47,11 @@ session_start();
 
       $restante = $costoIni - $anticipo;
       $claseFinalizado = '';
+      $claseFinalizado2 = '';
       if($estatusTrab == "Finalizado" || $estatusTrab == "Cancelado"){
         //si esta finalizado o cancelado, ya no se podra modificar
         $claseFinalizado = 'disabled';
+        $claseFinalizado2 = 'style="display:none;"';
       }
 
 
@@ -258,7 +260,7 @@ session_start();
                         
                       </form>
 
-                      <div class="row text-center">
+                      <div class="row text-center" <?php echo $claseFinalizado2; ?>>
                         <div class="col-sm-12 col-md-6">
                           <a href="#!" class="btn btn-primary" id="btnAddPieza" data-bs-toggle="modal" 
                           data-bs-target="#modalPieza">Registrar Pieza</a>
