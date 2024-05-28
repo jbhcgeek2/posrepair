@@ -209,7 +209,7 @@ btnGuardar.addEventListener('click', function(){
 let btnFinaliza = document.getElementById('btnFinaliza');
 btnFinaliza.addEventListener('click', function(){
   //seccion para validar el costo de los articulos utilizados y el cobro inicial
-  let estatusTrabajo = document.getElementById('estatusTrabajo').value;
+  let estatusTrabajo = document.getElementById('estatusValue').value;
   if(estatusTrabajo != "Finalizado" || estatusTrabajo != "Cancelado"){
     let totalTotal = document.getElementById('sumaTotalArtis').value;
     let montoIni = document.getElementById('costoServicio').value;

@@ -97,6 +97,7 @@ session_start();
                     <div class="row">
                       
                       <form id="dataAltaTrab" class="row">
+                        <input type="hidden" name="estatusValue" id="estatusValue" value="<?php echo $estatusTrab; ?>">
                         <input type="hidden" id="datoTrabajo" value="<?php echo $idTicket; ?>">
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="clienteTrabajo" class="form-label">Cliente</label>
