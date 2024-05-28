@@ -53,8 +53,8 @@ session_start();
         $claseFinalizado = 'disabled';
         $claseFinalizado2 = 'style="display:none;"';
         ?>
+        <script src="assets/js/swetAlert.js"></script>
         <script>
-          <script src="assets/js/swetAlert.js"></script>
           Swal.fire(
             'Trabajo Finalizado o Cancelado',
             'Ya no es posible realizar cambios a este trabajo',
