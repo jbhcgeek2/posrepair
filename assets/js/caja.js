@@ -711,12 +711,13 @@ function modPreUnit(detalleVenta){
     denyButtonText: 'Cancelar',
     preConfirm: async(montoNuevo) => {
       let montoUnitario = montoNuevo;
+      console.log(montoNuevo);
     },
     allowOutsideClick: () => !Swal.isLoading()
   }).then((result)=>{
     if(result.isConfirmed){
       //se manda la modificacion
-      console.log("Se modifica: "+detalleVen+" - "+montoUnitario);
+      console.log("Se modifica: "+detalleVen+" - "+montoNuevo);
     }
   })
 }
