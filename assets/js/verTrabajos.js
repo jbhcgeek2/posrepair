@@ -33,13 +33,11 @@ estatus.addEventListener('change', function(){
           let fechaEnt = res.data[z].fechaEntrega;
           let estatusTra = res.data[z].estatusTrabajo;
           let trabId = res.data[z].idTrabajo;
-          let telCli = res.data[z].telefonoCliente;
 
           let colorEstatus = colorStatus[estatusTra];
 
           contenido = contenido+`<tr>
             <td>${nombreCli}</td>
-            <td>${telCli}</td>
             <td>${tipoTra}</td>
             <td>${fechaReg}</td>
             <td>${fechaEnt}</td>
