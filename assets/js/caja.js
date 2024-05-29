@@ -703,6 +703,7 @@ function addTrabajo(trabajo){
 
 function modPreUnit(detalleVenta){
   let detalleVen = detalleVenta;
+  let montoNuevo = 0;
   Swal.fire({
     title: 'Modificar Precio Unitario',
     input: 'number',
