@@ -700,3 +700,22 @@ function addTrabajo(trabajo){
     )
   }
 }
+
+function modPreUnit(detalleVenta){
+  let detalleVen = detalleVenta;
+  Swal.fire({
+    title: 'Modificar Precio Unitario',
+    input: 'number',
+    showDenyButton: true,
+    confirmButtonText: 'Modificar',
+    denyButtonText: 'Cancelar',
+    preConfirm: async(montoNuevo) => {
+      //no pasa nada?
+    },
+  }).then((result)=>{
+    if(result.isConfirmed){
+      //se manda la modificacion
+      console.log("Se modifica: "+detalleVen+" - "+montoNuevo);
+    }
+  })
+}
