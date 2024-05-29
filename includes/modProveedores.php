@@ -23,7 +23,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $fecha = date('Y-m-d');
 
     //verificamos si los datros del proveddor ya estan registrados
-    $sql1 = "SELECT * FROM PROVEEDORES WHERE (telProveedor = '$telProvAlta' OR mailProveedor = '$mailProvAlta') 
+    $sql1 = "SELECT * FROM PROVEEDORES WHERE nombreProveedor = '$nombreProv'
     AND provEmpresaID = '$idEmpresaSesion'";
     try {
       $query1 = mysqli_query($conexion, $sql1);
