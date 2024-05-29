@@ -358,7 +358,7 @@ changeTipoServ.addEventListener('change', function(){
       datos.append('trabajoServUpdate',datoTrabajo);
 
       let envio = new XMLHttpRequest();
-      envio.open('POST','../includes/trabajosOperaciones.php');
+      envio.open('POST','../includes/trabajosOperaciones.php',false);
       envio.send(datos);
 
       if(envio.status == 200){

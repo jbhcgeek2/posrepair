@@ -351,7 +351,7 @@
         echo json_encode($res);
       } catch (\Throwable $th) {
         //fallo
-        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el trabajo: '];
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el trabajo'];
         echo json_encode($res);
       }
     }
