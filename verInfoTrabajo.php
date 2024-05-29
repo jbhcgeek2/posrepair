@@ -268,6 +268,11 @@ session_start();
                           <textarea name="observServicio" id="observServicio" style="height:70px;"
                           class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
+
+                        <div class="col-sm-12">
+                          <label for="solucionTrabajo" class="form-label">Solucion</label>
+                          <input type="text" id="solucionTrabajo" name="solucionTrabajo" value="" class="form-control">
+                        </div>
                         
                       </form>
 

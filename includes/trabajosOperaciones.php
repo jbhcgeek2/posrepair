@@ -343,7 +343,7 @@
       //comenzamos a actualizar
 
       $sql = "UPDATE TRABAJOS SET servicioID = '$tipoServicio' 
-      WHERE idTrabajo = '$idTrabajo'";
+      WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmpresaSesion'";
       try {
         $query = mysqli_query($conexion, $sql);
         //podemos dar por terminado la modificacion
@@ -352,6 +352,22 @@
       } catch (\Throwable $th) {
         //fallo
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el trabajo'];
+        echo json_encode($res);
+      }
+    }elseif(!empty($_POST['solucionUpdate'])){
+      $solucion = $_POST['solucionUpdate'];
+      $idTrabajo = $_POST['datoTrabajoSol'];
+
+      $sql = "UPDATE TRABAJOS SET solucionTrabajo = '$solucion' WHERE 
+      idTrabajo = '$idTrabajo' AND empresaID = '$idEmpresaSesion'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        //se completo el proceso
+        $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        //ocurrio un error al actualizar
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar la solucion'];
         echo json_encode($res);
       }
     }

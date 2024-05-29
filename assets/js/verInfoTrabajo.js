@@ -390,3 +390,60 @@ changeTipoServ.addEventListener('change', function(){
     }
   })
 });
+
+let solucionTrabajo = document.getElementById(solucionTrabajo);
+solucionTrabajo.addEventListener('change', function(){
+  //metodo para actualizar la solucion del trabajo
+
+  Swal.fire({
+    title: 'Actualizar Solucion',
+    text: 'Deseas actualizar la solucion del trabajo?',
+    icon: 'warning',
+    showDenyButton: true,
+    confirmButtonText: 'Si, Actualizar',
+    denyButtonText: 'No, Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      let solucion = solucionTrabajo.value;
+      let trabajoSolucion = document.getElementById('datoTrabajo').value;
+
+      let datos = new FormData();
+      datos.append('solucionUpdate',solucion);
+      datos.append('datoTrabajoSol',trabajoSolucion);
+
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/trabajosOperaciones.php', false);
+      envio.send(datos);
+
+      if(envio.status == 200){
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          Swal.fire(
+            'Solucion Actualizada',
+            '',
+            'success'
+          )
+        }else{
+          //error de proceso
+          let err = res.mensaje;
+          Swal.fire(
+            'No fue posible actualizar',
+            'Verificar: '+err,
+            'error'
+          )
+        }
+      }else{
+        //error de comunicacion
+        Swal.fire(
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
+    }
+  })
+  
+
+  
+  
+})
