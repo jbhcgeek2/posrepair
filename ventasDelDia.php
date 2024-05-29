@@ -138,10 +138,10 @@ session_start();
                                 if($descuento != "0.00"){
                                   //tiene descuento y consultraremos el total
                                   $descu = ($descuento * $subtotal) / 100;
-                                  $total = number_format($subtotal - $descu,2);
+                                  $total = $subtotal - $descu;
                                 }else{
                                   //sin descuento
-                                  $total = number_format($subtotal,2);
+                                  $total = $subtotal;
                                 }
 
                                 
@@ -154,7 +154,7 @@ session_start();
                                   <td>$fechaVenta</td>
                                   <td>$nombreCosa</td>
                                   <td>$cantVenta</td>
-                                  <td>$$total</td>
+                                  <td>$".number_format($total,2)."</td>
                                   <td>$usuarioVent</td>
                                   <td>$nombreSucVenta</td>
                                   <td>
