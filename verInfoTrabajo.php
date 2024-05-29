@@ -163,7 +163,7 @@ session_start();
 
                         <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio</label>
-                          <select name="tipoServicio" id="tipoServicio" class="form-select" readonly>
+                          <select name="tipoServicio" id="tipoServicio" class="form-select">
                             <option value="" disabled>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
@@ -177,7 +177,7 @@ session_start();
                                     if($idServicio == $tipoServicio){
                                       echo "<option value='$idServicio' selected>$nombreServ</option>";
                                     }else{
-                                      echo "<option value='$idServicio' disabled>$nombreServ</option>";
+                                      echo "<option value='$idServicio'>$nombreServ</option>";
                                     }
                                   }//fin del while
                                 }else{
@@ -328,7 +328,6 @@ session_start();
                             echo "<input type='hidden' id='sumaTotalArtis' value='$sumArti'>";
                           }else{
                             //no se tienen articulos registrados para este trabajo
-
                           }
                         } catch (\Throwable $th) {
                           //throw $th;

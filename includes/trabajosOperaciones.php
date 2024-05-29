@@ -335,6 +335,25 @@
         $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los trabajos: '.$th];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['tipoServUpdate'])){
+      //seccion para actualizar el tipo de servicio
+      $tipoServicio = $_POST['tipoServUpdate'];
+      $idTrabajo = $_POST['trabajoServUpdate'];
+
+      //comenzamos a actualizar
+
+      $sql = "UPDATE TRABAJOS SET servicioID = '$tipoServicio' 
+      WHERE idTrabajo = '$idTrabajo'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        //podemos dar por terminado la modificacion
+        $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        //fallo
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el trabajo: '];
+        echo json_encode($res);
+      }
     }
   }
 ?>

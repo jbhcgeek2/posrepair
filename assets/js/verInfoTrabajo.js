@@ -335,3 +335,58 @@ btnTermina.addEventListener('click', function(){
     )
   }
 });
+
+
+let changeTipoServ = document.getElementById('tipoServicio');
+changeTipoServ.addEventListener('hcnage', function(){
+  //antes de continuar preguntamos si desea hacer la modificacion
+  Swal.fire({
+    title: 'Modificar Tipo de Servicio?',
+    text: 'Deseas modificar el tipo de servicio?',
+    icon: 'warning',
+    showDenyButton: true,
+    confirmButtonText: 'Si, Actualizar',
+    denyButtonText: 'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      //acepto modificar el tipo de servicio
+      let tipoServNew = changeTipoServ.value;
+      let datoTrabajo = document.getElementById('datoTrabajo').value;
+
+      let datos = new FormData();
+      datos.append('tipoServUpdate',tipoServNew);
+      datos.append('trabajoServUpdate',datoTrabajo);
+
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/trabajosOperaciones.php');
+      envio.send(datos);
+
+      if(envio.status == 200){
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          //se actualizo correctamente
+          Swal.fire(
+            'Actualizacion Realizada',
+            '',
+            'success'
+          )
+        }else{
+          //ocurrio algun error
+          let err = res.mensaje;
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+err,
+            'error'
+          )
+        }
+      }else{
+        // error de comunicaicon
+        Swal.fire(
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
+    }
+  })
+});
