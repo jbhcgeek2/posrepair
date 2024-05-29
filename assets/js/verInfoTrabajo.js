@@ -391,7 +391,7 @@ changeTipoServ.addEventListener('change', function(){
   })
 });
 
-let solucionTrabajo = document.getElementById(solucionTrabajo);
+let solucionTrabajo = document.getElementById('solucionTrabajo');
 solucionTrabajo.addEventListener('change', function(){
   //metodo para actualizar la solucion del trabajo
 
