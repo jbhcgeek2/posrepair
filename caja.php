@@ -425,7 +425,7 @@ session_start();
                             </svg>
                           </td>
   
-                          <td style='height: 58px;' id='subTotVenta$idProdVenta' onclick='modPreUnit(this.id)'>$$subTotal</td>
+                          <td style='height: 58px;' id='subTotVenta$idProdVenta' onclick='modPreUnit(this.id)' data-bs-toggle='tooltip' data-bs-placement='bottom' data-bs-title='Cambiar Precio Unitario'>$$subTotal</td>
   
                           <td class='text-center' style='height: 58px;'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delProd($idProdVenta)' class='bi bi-trash-fill text-danger' viewBox='0 0 16 16'>
