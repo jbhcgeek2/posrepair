@@ -338,7 +338,7 @@ btnTermina.addEventListener('click', function(){
 
 
 let changeTipoServ = document.getElementById('tipoServicio');
-changeTipoServ.addEventListener('hcnage', function(){
+changeTipoServ.addEventListener('change', function(){
   //antes de continuar preguntamos si desea hacer la modificacion
   Swal.fire({
     title: 'Modificar Tipo de Servicio?',
