@@ -212,6 +212,7 @@ session_start();
                     <tr>
                       <th scope="col">Folio</th>
                       <th scope="col">Cliente</th>
+                      <th scope="col">Telefono</th>
                       <th scope="col">Dispositivo</th>
                       <th scope="col">Monto</th>
                     </tr>
@@ -222,7 +223,7 @@ session_start();
                       // $sqlTrab = "SELECT a.*,b.nombreCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
                       // ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND 
                       // a.empresaID = '$idEmpresaSesion' AND a.fechaTermino != '0000-00-00' AND a.estatusTrabajo = 'Finalizado'";
-                      $sqlTrab = "SELECT a.*,b.nombreCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
+                      $sqlTrab = "SELECT a.*,b.nombreCliente,b.telefonoCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
                       ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND a.empresaID = '$idSucursal' 
                       AND a.fechaTermino IS NOT NULL AND a.fechaCobro IS NULL AND a.estatusTrabajo = 'Finalizado'";
                       try {
@@ -236,6 +237,7 @@ session_start();
                             $dispositivo = $fetchTrab['tipoDispositivo']." ".$fetchTrab['marca']." ".$fetchTrab['modelo'];
                             $monto = $fetchTrab['costoFinal'];
                             $anticipo = $fetchTrab['anticipo'];
+                            $telCliente = $fetchTrab['telefonoCliente'];
 
                             $costoFinal = $monto - $anticipo;
                             $idTrabajo = $fetchTrab['idTrabajo'];
@@ -243,6 +245,7 @@ session_start();
                             echo "<tr onclick='addTrabajo($idTrabajo)'>
                             <td>$folioTrabajo</td>
                             <td>$nombreCliente</td>
+                            <td>$telCliente</td>
                             <td>$dispositivo</td>
                             <td>$$costoFinal</td>
                             </tr>";
