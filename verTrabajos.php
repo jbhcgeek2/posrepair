@@ -73,6 +73,7 @@ session_start();
                       <thead>
                         <tr>
                           <th>Cliente</th>
+                          <th>Telefono</th>
                           <th>Tipo de Trabajo</th>
                           <th>Fecha de Registro</th>
                           <th>Fecha de Entrega</th>
@@ -106,9 +107,11 @@ session_start();
                                 $estatus = $fetchTra['estatusTrabajo'];
                                 $idTra = $fetchTra['idTrabajo'];
                                 $colorEstatus = $colorStatus[$estatus];
+                                $telCliente = $fetchTra['telefonoCliente'];
 
                                 echo "<tr>
                                   <td>$cliente</td>
+                                  <td>$telCliente</td>
                                   <td>$tipoTra</td>
                                   <td>$fechaTra</td>
                                   <td>$fechaEntrega</td>
