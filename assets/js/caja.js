@@ -710,12 +710,12 @@ function modPreUnit(detalleVenta){
     confirmButtonText: 'Modificar',
     denyButtonText: 'Cancelar',
     preConfirm: async(montoNuevo) => {
-      //no pasa nada?
+      let montoUnitario = montoNuevo;
     },
   }).then((result)=>{
     if(result.isConfirmed){
       //se manda la modificacion
-      console.log("Se modifica: "+detalleVen+" - "+montoNuevo);
+      console.log("Se modifica: "+detalleVen+" - "+montoUnitario);
     }
   })
 }
