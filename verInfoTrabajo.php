@@ -269,7 +269,7 @@ session_start();
                           class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
 
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 mb-4">
                           <label for="solucionTrabajo" class="form-label">Solucion</label>
                           <input type="text" id="solucionTrabajo" name="solucionTrabajo" value="" class="form-control">
                         </div>
