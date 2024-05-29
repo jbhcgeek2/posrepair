@@ -306,7 +306,7 @@ session_start();
                             $clr = "";
                           }
                           
-                          echo "<div class='col-sm-12 col-md-6 col-lg-4'>
+                          echo "<div class='col-sm-12 col-md-6'>
                             <div class='card mb-3 $clr' style='min-height:75px; !important' onclick='addCarrito($arti)'>
 
                               <div class='row g-0'>
