@@ -712,6 +712,7 @@ function modPreUnit(detalleVenta){
     preConfirm: async(montoNuevo) => {
       let montoUnitario = montoNuevo;
     },
+    allowOutsideClick: () => !Swal.isLoading()
   }).then((result)=>{
     if(result.isConfirmed){
       //se manda la modificacion
