@@ -710,9 +710,9 @@ function modPreUnit(detalleVenta){
     showDenyButton: true,
     confirmButtonText: 'Modificar',
     denyButtonText: 'Cancelar',
-    preConfirm: async(montoNuevo) => {
-      let montoUnitario = montoNuevo;
-      console.log(montoNuevo);
+    preConfirm: async(montoNuevoInput) => {
+      montoNuevo = montoNuevoInput;
+      // console.log(montoNuevo);
     },
     allowOutsideClick: () => !Swal.isLoading()
   }).then((result)=>{
