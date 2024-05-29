@@ -718,7 +718,36 @@ function modPreUnit(detalleVenta){
   }).then((result)=>{
     if(result.isConfirmed){
       //se manda la modificacion
-      console.log("Se modifica: "+detalleVen+" - "+montoNuevo);
+      let datos = new FormData;
+      datos.append('detalleUpdateCaja',detalleVen);
+      datos.append('montoUpdateDetalle',montoNuevo);
+
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/cajas.php',false);
+      envio.send(datos);
+
+      if(envio.status == 200){
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          //proceso completo
+          location.reload();
+        }else{
+          //ocurrio algun error
+          let err = res.mensaje;
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+mensaje,
+            'error'
+          )
+        }
+      }else{
+        //error de comunicacion
+        Swal.fire(
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
     }
   })
 }

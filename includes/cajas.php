@@ -1122,6 +1122,56 @@ if(!empty($_SESSION['usuarioPOS'])){
       //throw $th;
       echo "error";
     }
+  }elseif(!empty($_POST['detalleUpdateCaja'])){
+    // seccion para actualizart el precio unitario del articulo
+    $auxDetalle = $_POST['detalleUpdateCaja'];
+    $montoNuevo = floatval($_POST['montoUpdateDetalle']);
+    $usuario = $_SESSION['usuarioPOS'];
+
+    $detalle = explode("subTotVenta",$auxDetalle);
+    $idDetalle = $detalle[1];
+
+    $sql = "SELECT * FROM DETALLEVENTA WHERE idDetalleVenta = '$idDetalle' AND 
+    usuarioVenta = '$usuario'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 1){
+        $fetch = mysqli_fetch_assoc($query);
+        $cantidadActual = $fetch['cantidadVenta'];
+        $montoActual = $fetch['precioUnitario'];
+
+        $nuevoSubtotal = $cantidadActual * $montoNuevo;
+        $porceDesc = "0.00";
+
+        if($montoNuevo < $montoActual){
+          //tiene descuento
+          $porce = (($montoActual - $montoNuevo) / $montoActual) * 100;
+          $porceDesc = floatval($porce);
+        }
+
+        $sql2 = "UPDATE DETALLEVENTA SET precioUnitario = '$montoNuevo', 
+        subtotalVenta = '$nuevoSubtotal', descuento = '$porceDesc' WHERE 
+        idDetalleVenta = '$idDetalle' AND usuarioVenta = '$usuario'";
+        try {
+          $query2 = mysqli_query($conexion, $sql2);
+          //si llega aqui se completo
+          $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+          echo json_encode($res);
+        } catch (\Throwable $th) {
+          //throw $th;
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al actualizar el precio unitario'];
+          echo json_encode($res);
+        }
+      }else{
+        //venta no localizada
+        $res = ['status'=>'error','mensaje'=>'No fue posible localizar la venta'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la venta'];
+      echo json_encode($res);
+    }
   }
 }
 
