@@ -164,6 +164,14 @@ session_start();
                           </select>
                         </div>
 
+                        <div class="col-sm-12 col-md-4 mb-3">
+                          <label for="">Precio Final</label>
+                          <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control">
+                          </div>
+                        </div>
+
                         <hr class="my-4">
                         <h4 class="fw-bold">Informacion Tecnica</h4>
 
