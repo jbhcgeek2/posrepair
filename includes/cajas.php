@@ -797,7 +797,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ["status"=>"error","mensaje"=>"Incongruencia en el usuario"];
       echo json_encode($res);
     }
-  }elseif(!empty($_POST['observCierre'])){
+  }elseif(!empty($_POST['efectivoTotCaja'])){
     //seccion para realizar el cierre de un cajero
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
