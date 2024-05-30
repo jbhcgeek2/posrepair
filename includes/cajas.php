@@ -974,7 +974,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         $sql2 = "SELECT * FROM DETALLEVENTA WHERE trabajoID = '$idTrabajo'";
         try {
           $query2 = mysqli_query($conexion, $sql2);
-          if(mysqli_num_rows($query2) == 0){
+          if(mysqli_num_rows($query2) == 0 || mysqli_num_rows($query2) == 1){
             //no se encuentra agregado ahora lo agregamos a DETALLEVENTA
             $fetchTrabajo = mysqli_fetch_assoc($query);
             $precioFinal = $fetchTrabajo['costoFinal'];
