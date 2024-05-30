@@ -45,6 +45,10 @@ session_start();
       $costoFin = $trabajo->data->costoFinal;
       $estatusTrab = $trabajo->data->estatusTrabajo;
       $telCliente = $trabajo->data->telefonoCliente;
+      $montoFinal = $trabajo->data->costoFinal;
+      if(empty($montoFinal)){
+        $montoFinal = "No Establecido";
+      }
 
       $restante = $costoIni - $anticipo;
       $claseFinalizado = '';
@@ -168,7 +172,7 @@ session_start();
                           <label for="">Precio Final</label>
                           <div class="input-group">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" value="<?php echo $montoFinal; ?>" readonly>
                           </div>
                         </div>
 
