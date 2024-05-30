@@ -460,11 +460,13 @@ btnAddGasto.addEventListener('click', function(){
       //verificamos que los campos esten capturados
       let motivoGasto = document.getElementById('nombreGasto').value;
       let montoGasto = document.getElementById('montoGasto').value;
+      let trabajo = document.getElementById('datoTrabajo').value;
 
       if(motivoGasto != "" && montoGasto > 0){
         let datos = new FormData();
         datos.append('motivoGastoAdd',motivoGasto);
         datos.append('montoGastioAdd',montoGasto);
+        datos.append('trabajoGastoAdd',trabajo);
 
         let envio = new XMLHttpRequest();
         envio.open('POST','../includes/trabajosOperaciones.php',false);

@@ -370,6 +370,27 @@
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar la solucion'];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['motivoGastoAdd'])){
+      $motivoGasto = $_POST['motivoGastoAdd'];
+      $montoGasto = $_POST['montoGastioAdd'];
+      $trabajoGasto = $_POST['trabajoGastoAdd'];
+      $fecha = date('Y-m-d');
+      $hora = date('H:i:s');
+
+      $sql = "INSERT INTO DETALLETRABAJO (nombreDetalle,cantidad,precioUnitario,subTotalArticulo,
+      sucursalID,empresaID,trabajoID,usuarioUtiliza,fechaMovimiento,horaMovimiento) VALUES 
+      ('$motivoGasto','1','$montoGasto','$montoGasto','$idSucursalN','$idEmpresaSesion',
+      '$trabajoGasto','$usuario','$fecha','$hora')";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        //podemos decir que se inserto correctamente
+        $res = ['status'=>'ok','mensaje'=>'operationSuccess'];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        //throw $th;
+        $res = ['status'=>'error','mensaje'=>'Ocurrio un error al registrar el gasto.'];
+        echo json_encode($res);
+      }
     }
   }
 ?>
