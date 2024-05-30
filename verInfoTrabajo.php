@@ -425,6 +425,37 @@ session_start();
                     </div>
 
 
+                    <div class="modal fade" id="modalGasto" tabindex="-1" data-bs-backdrop="static" 
+                      aria-labelledby="modalGastoLabel" data-bs-keyboard="false" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalGastoLabel">Registrar Gasto</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+
+                            <div class="row">
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="nombreGasto" class="form-lable">Motivo de Gasto</label>
+                                <input type="text" id="nombreGasto" class="form-control" placeholder="Ej: Compra de Pantalla">
+                              </div>
+                              <div class="col-sm-12 col-md-4 mb-3">
+                                <label for="montoGasto" class="form-label">Monto Gasto</label>
+                                <input type="text" id="montoGasto" class="form-control">
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="btnAddGasto">Registrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <div class="modal fade" id="modalFinaliza" tabindex="-1" data-bs-backdrop="static" 
                       aria-labelledby="modalFinalizaLabel" data-bs-keyboard="false" aria-hidden="true">
                       <div class="modal-dialog">

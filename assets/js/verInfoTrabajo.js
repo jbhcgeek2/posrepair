@@ -443,7 +443,72 @@ solucionTrabajo.addEventListener('change', function(){
     }
   })
   
+})
 
-  
-  
+let btnAddGasto = document.getElementById('btnAddGasto');
+btnAddGasto.addEventListener('click', function(){
+  //pregfuntamos si desea registrar el gasto
+  Swal.fire({
+    title: 'Esta Seguro de Registrar el Gasto?',
+    text: 'Una vez procesado no podra eliminarse',
+    icon: 'warning',
+    showDenyButton: true,
+    confirmButtonText: 'Si, Registrar',
+    denyButtonText: 'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      //verificamos que los campos esten capturados
+      let motivoGasto = document.getElementById('nombreGasto').value;
+      let montoGasto = document.getElementById('montoGasto').value;
+
+      if(motivoGasto != "" && montoGasto > 0){
+        let datos = new FormData();
+        datos.append('motivoGastoAdd',motivoGasto);
+        datos.append('montoGastioAdd',montoGasto);
+
+        let envio = new XMLHttpRequest();
+        envio.open('POST','../includes/trabajosOperaciones.php',false);
+        envio.send(datos);
+
+        if(envio.status == 200){
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            //se proceso correcto el cobro
+            Swal.fire(
+              'Gasto Registrado',
+              '',
+              'success'
+            ).then(function(){
+              location.reload();
+            })
+          }else{
+            //ocurrio algun error
+            let err = res.mensaje;
+            Swal.fire(
+              'Ha ocurrido un error',
+              'Verificar: '+err,
+              'error'
+            )
+          }
+        }else{
+          //error de comunicacion
+          Swal.fire(
+            'Servidor Inalcansable',
+            'Verifica tu conexion a internet',
+            'error'
+          )
+        }
+
+      }else{
+        //no se tienen capturados datos
+        Swal.fire(
+          'Campos Incompletos',
+          'Capture un motivo y monto validos',
+          'error'
+        )
+      }
+    }else{
+      //no hacemos nada
+    }
+  })
 })
