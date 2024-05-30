@@ -494,7 +494,7 @@ session_start();
                                 value="<?php echo $restante; ?>" readonly>
                               </div>
                               <div class="col-sm-12 col-md-4 mb-3">
-                                <label for="montoArticulos" class="form-label">Gasto Final</label>
+                                <label for="montoArticulos" class="form-label">Gasto en Servicios</label>
                                 <input type="number" id="montoArticulos" class="form-control" 
                                 value="<?php echo $sumArti; ?>" readonly>
                               </div>
@@ -505,11 +505,11 @@ session_start();
                               </div>
                             </div>
 
-                            <div class="row text-center">
+                            <!-- <div class="row text-center">
                               <p>Se prevé obtener una ganancia aproximada de 
                                 <span class="fw-bold text-primary" id="gananciaEstimada">$0</span> 
                               </p>
-                            </div>
+                            </div> -->
 
                           </div>
                           <div class="modal-footer">
