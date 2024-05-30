@@ -34,10 +34,12 @@ estatus.addEventListener('change', function(){
           let estatusTra = res.data[z].estatusTrabajo;
           let trabId = res.data[z].idTrabajo;
           let telCli = res.data[z].telefonoCliente;
+          let folioTra = res.data[z].numTrabajo;
 
           let colorEstatus = colorStatus[estatusTra];
 
           contenido = contenido+`<tr>
+            <td>${folioTra}</td>
             <td>${nombreCli}</td>
             <td>${telCli}</td>
             <td>${tipoTra}</td>
@@ -52,7 +54,7 @@ estatus.addEventListener('change', function(){
         document.getElementById('resBusqueda').innerHTML = contenido;
       }else{
         //no se encontraron resultados
-        contenido = '<tr><td colspan="6" style="text-align:center;">Sin Resultados</td></tr>';
+        contenido = '<tr><td colspan="7" style="text-align:center;">Sin Resultados</td></tr>';
         document.getElementById('resBusqueda').innerHTML = contenido;
       }
     }else{
@@ -111,10 +113,12 @@ nombreCli.addEventListener('change', function(){
           let estatusTra = res.data[z].estatusTrabajo;
           let trabId = res.data[z].idTrabajo;
           let telCli = res.data[z].telefonoCliente;
+          let folioTra = res.data[z].numTrabajo;
 
           let colorEstatus = colorStatus[estatusTra];
 
           contenido = contenido+`<tr>
+            <td>${folioTra}</td>
             <td>${nombreCli}</td>
             <td>${telCli}</td>
             <td>${tipoTra}</td>
@@ -129,7 +133,7 @@ nombreCli.addEventListener('change', function(){
         document.getElementById('resBusqueda').innerHTML = contenido;
       }else{
         //no se encontraron resultados
-        contenido = '<tr><td colspan="6" style="text-align:center;">Sin Resultados</td></tr>';
+        contenido = '<tr><td colspan="7" style="text-align:center;">Sin Resultados</td></tr>';
         document.getElementById('resBusqueda').innerHTML = contenido;
       }
     }else{

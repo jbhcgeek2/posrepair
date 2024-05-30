@@ -72,11 +72,11 @@ session_start();
                     <table class="table table-striped">
                       <thead>
                         <tr>
+                          <th>Folio</th>
                           <th>Cliente</th>
                           <th>Telefono</th>
                           <th>Tipo de Trabajo</th>
                           <th>Fecha de Registro</th>
-                          <th>Fecha de Entrega</th>
                           <th>Estatus</th>
                           <th>Ver</th>
                         </tr>
@@ -101,6 +101,7 @@ session_start();
                               while($fetchTra = mysqli_fetch_assoc($queryTra)){
 
                                 $cliente = $fetchTra['nombreCliente'];
+                                $folio = $fetchTra['numTrabajo']
                                 $tipoTra = $fetchTra['nombreServicio'];
                                 $fechaTra = $fetchTra['fechaTrabajo'];
                                 $fechaEntrega = $fetchTra['fechaEntrega'];
@@ -110,6 +111,7 @@ session_start();
                                 $telCliente = $fetchTra['telefonoCliente'];
 
                                 echo "<tr>
+                                  <td>$folio</td>
                                   <td>$cliente</td>
                                   <td>$telCliente</td>
                                   <td>$tipoTra</td>
