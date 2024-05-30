@@ -201,17 +201,20 @@
       $trabajo = $_POST['trabajoArtiServ'];
       $fecha = date('Y-m-d');
       $hora = date('H:i:s');
+      $nombreArti = getNameProd($articulo,$idEmpresaSesion);
+      $nombreArti = json_decode($nombreArti)->data;
 
       $existenciaActual = getArtiSucursal($idSucursalN,$articulo);
       $existenciaActual = json_decode($existenciaActual);
       if($existenciaActual->status == "ok" && $existenciaActual->mensaje == "operationSuccess"){
         //verificamos si cuenta con la cantidad necesaria
         if($existenciaActual->data >= $cantidadArti){
-          //si se cuenta con el inventario suficiente
+          //si se cuenta con el inventario suficiente, consultramos el nombre
+
           //primero insertaremos y despues descontaremos la pieza
-          $sql = "INSERT INTO DETALLETRABAJO (articuloID,cantidad,precioUnitario,subTotalArticulo,
+          $sql = "INSERT INTO DETALLETRABAJO (nombreDetalle,articuloID,cantidad,precioUnitario,subTotalArticulo,
           sucursalID,empresaID,trabajoID,usuarioUtiliza,fechaMovimiento,horaMovimiento) VALUES 
-          ('$articulo','$cantidadArti','$precioArticulo','$totalArti','$idSucursalN','$idEmpresaSesion',
+          ('$nombreArti','$articulo','$cantidadArti','$precioArticulo','$totalArti','$idSucursalN','$idEmpresaSesion',
           '$trabajo','$usuario','$fecha','$hora')";
           try {
             $query = mysqli_query($conexion,$sql);
@@ -387,7 +390,7 @@
         $res = ['status'=>'ok','mensaje'=>'operationSuccess'];
         echo json_encode($res);
       } catch (\Throwable $th) {
-        //throw $th;
+        //throw $th; 
         $res = ['status'=>'error','mensaje'=>'Ocurrio un error al registrar el gasto.'];
         echo json_encode($res);
       }

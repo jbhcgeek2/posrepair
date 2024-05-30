@@ -301,19 +301,18 @@ session_start();
 
                     <div class="row">
                       <hr class="my-4">
-                      <h4 class="fw-bold">Articulos utilizados</h4>
+                      <h4 class="fw-bold">Articulos y Gastos utilizados</h4>
                       <br>
 
                       <?php 
                         //consultaremos las piezas utilizadas en la reparacion
-                        $sqlArtiExt = "SELECT a.*,b.nombreArticulo FROM DETALLETRABAJO a INNER JOIN ARTICULOS b 
-                        ON a.articuloID = b.idArticulo WHERE a.trabajoID = '$idTicket'";
+                        $sqlArtiExt = "SELECT * FROM DETALLETRABAJO a WHERE a.trabajoID = '$idTicket'";
                         try {
                           $queryArtiExt = mysqli_query($conexion, $sqlArtiExt);
                           $sumArti = 0;
                           if(mysqli_num_rows($queryArtiExt) > 0){
                             while($fetchArtiExt = mysqli_fetch_assoc($queryArtiExt)){
-                              $nombreArti = $fetchArtiExt['nombreArticulo'];
+                              $nombreArti = $fetchArtiExt['nombreDetalle'];
                               $cantidad = $fetchArtiExt['cantidad'];
                               $precio = $fetchArtiExt['precioUnitario'];
                               $subtotal = $fetchArtiExt['subTotalArticulo'];

@@ -343,6 +343,36 @@ function procesaMovsProd($cambia,$nuevoPre,$precioCompra,$idProd,$idEmpresa){
   }
 
 }
+
+function getNameProd($idProd,$empresa){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+
+  $sql = "SELECT nombreArticulo FROM ARTICULOS WHERE idArticulo = '$idProd' AND empresaID = '$empresa'";
+  try {
+    $query = mysqli_query($conexion, $sql);
+    if(mysqli_num_rows($query) == 1){
+      //si se encontro
+      $fetch = mysqli_fetch_assoc($query);
+      $nombreArti = $fetch['nombreArticulo'];
+      $res = ['status'=>'ok','data'=>$nombreArti];
+      return json_encode($res);
+    }else{
+      //producto no localizado
+      $res = ['status'=>'error','mensaje'=>'noData'];
+      return json_encode($res);
+    }
+  } catch (\Throwable $th) {
+    $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar el articulo'];
+    return json_encode($res);
+  }
+}
 // precioUnitario = 17
 // precioCOmpra = 12.20
 // existencia = 150
