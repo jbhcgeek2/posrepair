@@ -44,6 +44,7 @@ session_start();
       $anticipo = $trabajo->data->anticipo;
       $costoFin = $trabajo->data->costoFinal;
       $estatusTrab = $trabajo->data->estatusTrabajo;
+      $telCliente = $trabajo->data->telefonoCliente;
 
       $restante = $costoIni - $anticipo;
       $claseFinalizado = '';
@@ -133,6 +134,11 @@ session_start();
                           <label for="anticipoServicio" class="form-label">Anticipo</label>
                           <input type="number" name="anticipoServicio" id="anticipoServicio" class="form-control" 
                           value="<?php echo $anticipo; ?>" readonly>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                          <label for="telCliente" class="form-label">Telefono Cliente</label>
+                          <input type="text" class="form-control" value="<?php echo $telCliente; ?>" readonly>
                         </div>
 
                         <div class="col-sm-12 col-md-4 offset-md-4">
