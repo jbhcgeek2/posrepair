@@ -436,10 +436,12 @@ session_start();
                           <div class="modal-body">
 
                           <div class="row">
-                            <p>
-                              Utilice esta seccion para registrar gastos utilizados en el trabajo, 
-                              como compras de refacciones y/o servicios que no se tengan en inventario.
-                            </p>
+                            <div class="col-sm-12 col-md-8 offset-md-2">
+                              <p class="fw-bold text-center">
+                                Utilice esta seccion para registrar gastos utilizados en el trabajo, 
+                                como compras de refacciones y/o servicios que no se tengan en inventario.
+                              </p>
+                            </div>
                           </div>
 
                             <div class="row">
