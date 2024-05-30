@@ -86,8 +86,14 @@ function verTicket($ticket,$idUsuario){
             //
             $data2[$x] = $fetchExt2;
           }else{
-            //es trabajo/servicio
-            $data2[$x] = $fetch2;
+            //es trabajo/servicio, consultamos el nombre del servicio para agregarlo al ticket
+            $sqlExt3 = "SELECT a.*,c.nombreServicio FROM DETALLEVENTA a INNER JOIN TRABAJOS b ON a.trabajoID = b.idTrabajo 
+            INNER JOIN SERVICIOS c ON b.servicioID = c.idServicio 
+            WHERE a.ventaID = '$ticket'";
+            $queryExt3 = mysqli_query($conexion, $sqlExt3);
+            $fetchExt3 = mysqli_fetch_assoc($queryExt3);
+
+            $data2[$x] = $fetchExt3;
           }
           // $data2[$x] = $fetch2;
           $idSucursal = $fetch2['sucursalID'];
