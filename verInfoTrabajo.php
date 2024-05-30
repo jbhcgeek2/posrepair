@@ -499,9 +499,12 @@ session_start();
                                 value="<?php echo $sumArti; ?>" readonly>
                               </div>
 
-                              <div class="col-sm-12 col-md-4 offset-md-4 mb-3">
-                                <label for="costoFinal" class="form-label">Costo Final</label>
-                                <input type="number" id="costoFinal" class="form-control">
+                              <div class="col-sm-12 col-md-6 offset-md-2 mb-3">
+                                <div class="input-group">
+                                  <span class="input-group-text">$</span>
+                                  <label for="costoFinal" class="form-label">Costo Final</label>
+                                  <input type="number" id="costoFinal" class="form-control">
+                                </div>
                               </div>
                             </div>
 
