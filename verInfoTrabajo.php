@@ -501,8 +501,8 @@ session_start();
 
                               <div class="col-sm-12 col-md-6 offset-md-2 mb-3">
                                 <div class="input-group">
-                                  <span class="input-group-text">$</span>
                                   <label for="costoFinal" class="form-label">Costo Final</label>
+                                  <span class="input-group-text">$</span>
                                   <input type="number" id="costoFinal" class="form-control">
                                 </div>
                               </div>
