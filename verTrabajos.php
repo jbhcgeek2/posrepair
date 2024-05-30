@@ -101,7 +101,7 @@ session_start();
                               while($fetchTra = mysqli_fetch_assoc($queryTra)){
 
                                 $cliente = $fetchTra['nombreCliente'];
-                                $folio = $fetchTra['numTrabajo']
+                                $folio = $fetchTra['numTrabajo'];
                                 $tipoTra = $fetchTra['nombreServicio'];
                                 $fechaTra = $fetchTra['fechaTrabajo'];
                                 $fechaEntrega = $fetchTra['fechaEntrega'];
