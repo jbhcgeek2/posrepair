@@ -500,8 +500,8 @@ session_start();
                               </div>
 
                               <div class="col-sm-12 col-md-6 offset-md-2 mb-3">
+                                <label for="costoFinal" class="form-label">Costo Final</label>
                                 <div class="input-group">
-                                  <label for="costoFinal" class="form-label">Costo Final</label>
                                   <span class="input-group-text">$</span>
                                   <input type="number" id="costoFinal" class="form-control">
                                 </div>
