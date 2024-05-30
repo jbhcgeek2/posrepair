@@ -436,7 +436,7 @@ session_start();
                           <div class="modal-body">
 
                           <div class="row">
-                            <div class="col-sm-12 col-md-8 offset-md-2 mb-4">
+                            <div class="col-sm-12 col-md-10 offset-md-1 mb-4">
                               <p class="fw-bold text-center">
                                 Utilice esta seccion para registrar gastos utilizados en el trabajo, 
                                 como compras de refacciones y/o servicios que no se tengan en inventario.
@@ -446,12 +446,12 @@ session_start();
 
                             <div class="row">
                               <div class="col-sm-12 col-md-8 col-lg-6 mb-3">
-                                <label for="nombreGasto" class="form-lable">Motivo de Gasto</label>
-                                <input type="text" id="nombreGasto" class="form-control" placeholder="Ej: Compra de Pantalla">
+                                <label for="nombreGasto" class="form-label">Motivo de Gasto</label>
+                                <input type="text" id="nombreGasto" class="form-control" placeholder="Ej: Pantalla Samsung A50">
                               </div>
                               <div class="col-sm-12 col-md-4 col-lg mb-3">
                                 <label for="montoGasto" class="form-label">Monto Gasto</label>
-                                <input type="text" id="montoGasto" class="form-control">
+                                <input type="number" id="montoGasto" class="form-control">
                               </div>
                             </div>
 
