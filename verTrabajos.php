@@ -116,7 +116,6 @@ session_start();
                                   <td>$telCliente</td>
                                   <td>$tipoTra</td>
                                   <td>$fechaTra</td>
-                                  <td>$fechaEntrega</td>
                                   <td><span class='$colorEstatus'>$estatus</span></td>
                                   <td>
                                     <a href='verInfoTrabajo.php?data=$idTra' class='btn btn-primary'>Ver</a>

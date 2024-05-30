@@ -44,7 +44,6 @@ estatus.addEventListener('change', function(){
             <td>${telCli}</td>
             <td>${tipoTra}</td>
             <td>${fechaReg}</td>
-            <td>${fechaEnt}</td>
             <td><span class='${colorEstatus}'>${estatusTra}</span></td>
             <td>
               <a href='verInfoTrabajo.php?data=${trabId}' class='btn btn-primary'>Ver</a>
@@ -123,7 +122,6 @@ nombreCli.addEventListener('change', function(){
             <td>${telCli}</td>
             <td>${tipoTra}</td>
             <td>${fechaReg}</td>
-            <td>${fechaEnt}</td>
             <td><span class='${colorEstatus}'>${estatusTra}</span></td>
             <td>
               <a href='verInfoTrabajo.php?data=${trabId}' class='btn btn-primary'>Ver</a>
