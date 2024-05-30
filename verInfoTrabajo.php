@@ -141,7 +141,7 @@ session_start();
                           <input type="text" class="form-control" value="<?php echo $telCliente; ?>" readonly>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 offset-md-4">
+                        <div class="col-sm-12 col-md-4">
                           <label for="estatusTrabajo" class="form-label">Estatus Trabajo</label>
                           <select name="estatusTrabajo" id="estatusTrabajo" class="form-select" <?php echo $claseFinalizado; ?>>
                             <option value="">Seleccione</option>
@@ -283,11 +283,15 @@ session_start();
                       </form>
 
                       <div class="row text-center" <?php echo $claseFinalizado2; ?>>
-                        <div class="col-sm-12 col-md-6">
+                        <div class="col-sm-12 col-md-4">
                           <a href="#!" class="btn btn-primary" id="btnAddPieza" data-bs-toggle="modal" 
                           data-bs-target="#modalPieza">Registrar Pieza</a>
                         </div>
-                        <div class="col-sm-12 col-md-6">
+                        <div class="col-sm-12 col-md-4">
+                          <a href="#!" class="btn btn-secondary" id="btnGasto" data-bs-toggle="modal"
+                          data-bs-target="#modalGasto">Registrar Gasto</a>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
                           <a href="#!" class="btn btn-danger" id="btnFinaliza" data-bs-toggle="modal"
                           data-bs-target="#modalFinaliza">Finalizar Trabajo</a>
                         </div>
