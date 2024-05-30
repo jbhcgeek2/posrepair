@@ -241,31 +241,30 @@ btnGuardar.addEventListener('click', function(){
   
 // })
 
-let costoFin = document.getElementById('costoFinal');
-costoFin.addEventListener('keyup', function(){
-  let costoFinal = document.getElementById('costoFinal').value;
-  let costoInicial = document.getElementById('costoIniFinal').value;
-  let costoProd = document.getElementById('montoArticulos').value;
-  let gananciaEst;
-  if(costoFinal > 0){
-    gananciaEst = costoFinal - costoProd;
+// let costoFin = document.getElementById('costoFinal');
+// costoFin.addEventListener('keyup', function(){
+//   let costoFinal = document.getElementById('costoFinal').value;
+//   let costoInicial = document.getElementById('costoIniFinal').value;
+//   let costoProd = document.getElementById('montoArticulos').value;
+//   let gananciaEst;
+//   if(costoFinal > 0){
+//     gananciaEst = costoFinal - costoProd;
+//   }else{
+//     gananciaEst = costoInicial - costoProd;
+//   }
 
-  }else{
-    gananciaEst = costoInicial - costoProd;
-  }
-
-  if(gananciaEst > 0){
-    document.getElementById('gananciaEstimada').classList.remove('text-danger');
-    document.getElementById('gananciaEstimada').classList.add('text-primary');
-  }else{
-    document.getElementById('gananciaEstimada').classList.remove('text-primary');
-    document.getElementById('gananciaEstimada').classList.add('text-danger');
-  }
-  document.getElementById('gananciaEstimada').innerHTML = '$'+gananciaEst;
+//   if(gananciaEst > 0){
+//     document.getElementById('gananciaEstimada').classList.remove('text-danger');
+//     document.getElementById('gananciaEstimada').classList.add('text-primary');
+//   }else{
+//     document.getElementById('gananciaEstimada').classList.remove('text-primary');
+//     document.getElementById('gananciaEstimada').classList.add('text-danger');
+//   }
+//   document.getElementById('gananciaEstimada').innerHTML = '$'+gananciaEst;
   
 
 
-});
+// });
 
 
 let btnTermina = document.getElementById('btnTerminaTrabajo');
