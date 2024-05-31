@@ -832,6 +832,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         $queryExt1 = mysqli_query($conexion, $sqlExt1);
         $fetchExt1 = mysqli_fetch_assoc($queryExt1);
         $montoVentaEfectivo = $fetchExt1['montoVenta'];
+        $montoTotalCajeroReal = $montoVentaEfectivo + $montoApertura;
 
         $paso1 = 0;
 
@@ -944,9 +945,9 @@ if(!empty($_SESSION['usuarioPOS'])){
 
         // se agrega un paso extra por si se detecta una diferencia en los cierres
         $paso3 = 0;
-        if($efecTivoTot < $montoVentaEfectivo){
+        if($efecTivoTot < $montoTotalCajeroReal){
           //el cajero tiene faltante
-          $diferencia = $montoVentaEfectivo - $efecTivoTot;
+          $diferencia = $montoTotalCajeroReal - $efecTivoTot;
           $concep6 = "Faltante de caja ".$usuario;
           $mov6 = guardaMovCaja($diferencia,$fecha,$hora,$idUsuario,'14',$concep6,$idSucursal,'S',$idEmprersa);
           $mov6 = json_decode($mov6);
@@ -963,9 +964,9 @@ if(!empty($_SESSION['usuarioPOS'])){
               $error = "Error al cuadrar la diferencia 6";
             }
           }
-        }elseif($efecTivoTot > $montoVentaEfectivo){
+        }elseif($efecTivoTot > $montoTotalCajeroReal){
           //el cajero tiene de mas
-          $diferencia = $efecTivoTot - $montoVentaEfectivo;
+          $diferencia = $efecTivoTot - $montoTotalCajeroReal;
           $concep7 = "Sobrante de Caja ".$usuario;
           $mov7 = guardaMovCaja($diferencia,$fecha,$hora,$idUsuario,'3',$concep7,$idSucursal,'E',$idEmprersa);
           $mov7 = json_decode($mov7);
