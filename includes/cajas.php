@@ -975,7 +975,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $saldoEfe7 = json_decode($saldoEfe7)->dato;
             $nuevoSaldo7 = $saldoEfe7 + $diferencia;
             $updateSaldo7 = sumaSaldo($nuevoSaldo7,$saldoEfe7,$idEmprersa,"saldoEfectivo");
-            $updateSaldo7 = json_decode($updateSaldo6);
+            $updateSaldo7 = json_decode($updateSaldo7);
             if($updateSaldo7->status == "ok"){
               $paso3 = 1;
             }else{
