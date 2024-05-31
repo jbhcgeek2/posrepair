@@ -825,6 +825,14 @@ if(!empty($_SESSION['usuarioPOS'])){
         $fetchAper = mysqli_fetch_assoc($queryAper);
         $montoApertura = $fetchAper['montoMov'];
         //comenzamos con las validaciones para aplicar el cierre
+        //comenzamos consultando las ventas del dia
+        $sqlExt1 = "SELECT SUM(totalVenta) AS montoVenta FROM VENTAS 
+        WHERE fechaVenta = '$fecha' AND empresaID = '$idEmprersa' AND 
+        usuarioID = '$idUsuario' AND tipoPago = 'Efectivo'";
+        $queryExt1 = mysqli_query($conexion, $sqlExt1);
+        $fetchExt1 = mysqli_fetch_assoc($queryExt1);
+        $montoVentaEfectivo = $fetchExt1['montoVenta'];
+
         $paso1 = 0;
 
         $error = "";
@@ -934,8 +942,52 @@ if(!empty($_SESSION['usuarioPOS'])){
           
         }
 
+        // se agrega un paso extra por si se detecta una diferencia en los cierres
+        $paso3 = 0;
+        if($efecTivoTot < $montoVentaEfectivo){
+          //el cajero tiene faltante
+          $diferencia = $montoVentaEfectivo - $efecTivoTot;
+          $concep6 = "Faltante de caja ".$usuario;
+          $mov6 = guardaMovCaja($diferencia,$fecha,$hora,$idUsuario,'14',$concep6,$idSucursal,'S',$idEmprersa);
+          $mov6 = json_decode($mov6);
+          if($mov6->status == "ok"){
+            //descontamos esa diferencia del global de cajas
+            $saldoEfe6 = datoEmpresaSesion($usuario,"saldoEfectivo");
+            $saldoEfe6 = json_decode($saldoEfe6)->dato;
+            $nuevoSaldo6 = $saldoEfe6 - $diferencia;
+            $updateSaldo6 = sumaSaldo($nuevoSaldo6,$saldoEfe6,$idEmprersa,"saldoEfectivo");
+            $updateSaldo6 = json_decode($updateSaldo6);
+            if($updateSaldo6->status == "ok"){
+              $paso3 = 1;
+            }else{
+              $error = "Error al cuadrar la diferencia 6";
+            }
+          }
+        }elseif($efecTivoTot > $montoVentaEfectivo){
+          //el cajero tiene de mas
+          $diferencia = $efecTivoTot - $montoVentaEfectivo;
+          $concep7 = "Sobrante de Caja ".$usuario;
+          $mov7 = guardaMovCaja($diferencia,$fecha,$hora,$idUsuario,'3',$concep7,$idSucursal,'E',$idEmprersa);
+          $mov7 = json_decode($mov7);
+          if($mov7->status == "ok"){
+            $saldoEfe7 = datoEmpresaSesion($usuario,"saldoEfectivo");
+            $saldoEfe7 = json_decode($saldoEfe7)->dato;
+            $nuevoSaldo7 = $saldoEfe7 + $diferencia;
+            $updateSaldo7 = sumaSaldo($nuevoSaldo7,$saldoEfe7,$idEmprersa,"saldoEfectivo");
+            $updateSaldo7 = json_decode($updateSaldo6);
+            if($updateSaldo7->status == "ok"){
+              $paso3 = 1;
+            }else{
+              $error = "Error al cuadrar la diferencia 7";
+            }
+          }
+        }else{
+          //el cierre de caja si cuadra, por lo que damos pase libre
+          $paso3 = 1;
+        }
 
-        if($paso1 == 1 && $paso2 == 1){
+
+        if($paso1 == 1 && $paso2 == 1 && $paso3 == 1){
           $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
           echo json_encode($res);
         }else{
