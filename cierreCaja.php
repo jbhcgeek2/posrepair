@@ -262,7 +262,7 @@ session_start();
                       }//fin del while
                     }
                   } catch (\Throwable $th) {
-                    //throw $th;
+                    echo "mal";
                   }
 
                   
