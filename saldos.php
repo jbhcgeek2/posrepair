@@ -117,9 +117,14 @@ session_start();
                 <h4>Movimientos de Cuenta</h4>
 
                 <div class="row">
-                  <div class="col-sm-12 col-md-4 offset-md-4 mb-4" style="text-align:center;">
+                  <div class="col-sm-12 col-md-3 offset-md-3 mb-4" style="text-align:center;">
                     <a href="#!" class="btn btn-primary" id="btnRegMov" 
                     data-bs-toggle="modal" data-bs-target="#modalMov">Registrar Movimiento</a>
+                  </div>
+
+                  <div class="col-sm-12 col-md-3mb-4" style="text-align:center;">
+                    <a href="#!" class="btn btn-secundary" id="btnRegGasto" 
+                    data-bs-toggle="modal" data-bs-target="#modalGasto">Registrar Gasto de Caja</a>
                   </div>
                 </div>
 
@@ -228,6 +233,93 @@ session_start();
                     <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                       <label for="montoMovReg" class="form-label">Monto de Movimiento</label>
                       <input type="number" id="montoMovReg" name="montoMovReg" class="form-control">
+                    </div> 
+
+                    <!-- <div class="row">
+                      <div class="col-sm-12 col-md-4 offset-md-4" style="text-align:center">
+                        <a href="#!" class="btn btn-primary" id="btnRegMov">Registrar</a>
+                      </div>
+                    </div> -->
+
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnSendMov">Registrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--  -->
+
+        <div class="modal fade" id="modalGasto">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Registrar Gasto de Caja</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <form id="regMov" class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
+                      <label for="tipoMovRegGasto" class="form-label">Tipo de Movimiento</label>
+                      <select name="tipoMovRegGasto" id="tipoMovRegGasto" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Gasto">Gasto</option>
+                        <option value="Deposito">Deposito</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                      <label for="usuarioGasto" class="form-label">Metodo de Movimiento</label>
+                      <select name="usuarioGasto" id="usuarioGasto" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <?php 
+                          // consultamos los usuarios activos
+                          $sqlUsers = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion' AND statusUsuario = '1'";
+                          try {
+                            $queryUsers = mysqli_query($conexion, $sqlUsers);
+                            while($fetchUsers = mysqli_fetch_assoc($queryUsers)){
+                              $nombreUsuarioGasto = $fetchUsers['nombreUsuario']." ".$fetchUsers['apPaternoUsuario']." ".$fetchUsers['apMaternoUsuario'];
+                              $idUsuarioGasto = $fetchUsers['idUsuario'];
+
+                              echo "<option value='$idUsuarioGasto'>$nombreUsuarioGasto</option>";
+                            }//fin del while
+                          } catch (\Throwable $th) {
+                            //throw $th;
+                          }
+                        ?>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
+                      <label for="concepMovRegGasto" class="form-label">Concepto de Movimiento</label>
+                      <select name="concepMovRegGasto" id="concepMovRegGasto" class="form-select">
+                        <option value="">Seleccione</option>
+                        <?php 
+                          // consultamos los tipos de movimiento
+                          $sqlTiMov = "SELECT * FROM CONCEPTOSMOV WHERE estatusConcepto = '1'";
+                          $queryTiMo = mysqli_query($conexion, $sqlTiMov);
+                          while($fetchTiMov = mysqli_fetch_assoc($queryTiMo)){
+                            $nombreTiMov = $fetchTiMov['nombreConcepto'];
+                            $idTiMov = $fetchTiMov['idConcepto'];
+
+                            echo "<option value='$idTiMov'>$nombreTiMov</option>";
+                          }//fin del while
+                        ?>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
+                      <label for="observMovGasto" class="form-label">Observacion de Movimiento</label>
+                      <input type="text" id="observMovGasto" name="observMovGasto" class="form-control">
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                      <label for="montoMovRegGasto" class="form-label">Monto de Movimiento</label>
+                      <input type="number" id="montoMovRegGasto" name="montoMovRegGasto" class="form-control">
                     </div> 
 
                     <!-- <div class="row">
