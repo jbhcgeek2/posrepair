@@ -256,6 +256,7 @@ session_start();
                           $gastoCaja = $gastoCaja + $montoGas;
                         }else{
                           $totalCaja = $totalCaja + $montoGas;
+                          $entradaCaja = $entradaCaja + $montoGas;
                         }
 
 
@@ -272,6 +273,8 @@ session_start();
                   <div class="col-sm-12">
                     <span class="fs-4 fw-bold" id="totalDiferencia">Diferencia: $<span id="montoDife">0.00</span></span> <br>
                     <span class="fs-4 fw-bold text-danger" id="montoGastos">Gastos: $<?php echo number_format($gastoCaja,2); ?></span> <br>
+                    <input type="hidden" id="gastoCaja" value="<?php echo $gastoCaja; ?>">
+                    <input type="hidden" id="entradaCaja" value="<?php echo $entradaCaja ?>">
                     <span class="fs-4 fw-bold text-primary" id="saldoTotal">Total en Efectivo: $<?php echo number_format($totalCaja,2); ?></span> <br>
                     <input type="hidden" id="totalCajaSaldo" value="<?php echo $totalCaja; ?>">
                     <span class="fs-4 fw-bold ">Efectivo Final en Caja: $<span id="saldoDeja">0.00</span></span> <br>

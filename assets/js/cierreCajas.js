@@ -4,6 +4,8 @@ function calculaTotal(dato){
   if(dato > 0){
     let inicial = document.getElementById('montoEfectivoIni').value;
     let montoEfe = document.getElementById('ventaEfectivo').value;
+    let montoGas = document.getElementById('gastoCaja').value;
+    let montoEnt = document.getElementById('entradaCaja').value;
     if(montoEfe == ""){
       montoEfe = 0;
     }
@@ -12,9 +14,12 @@ function calculaTotal(dato){
 
     inicial = parseFloat(inicial);
     montoEfe = parseFloat(montoEfe);
+    montoGas = parseFloat(montoGas);
+    montoEnt = parseFloat(montoEnt);
+
     dato = parseFloat(dato);
 
-    let montoTotal = inicial+montoEfe;
+    let montoTotal = (inicial+montoEfe) - montoGas + montoEnt;
     let diferencia = parseFloat(montoTotal - dato);
 
     // let suma = dato + inicial;
