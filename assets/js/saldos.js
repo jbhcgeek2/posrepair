@@ -80,7 +80,7 @@ btnSendGasto.addEventListener('click', function(){
   if(tipoGasto != "" && usuarioGasto != "" && observGasto != "" && montoGasto > 0){
     //estan completos los campos
     //por ultimo preguntamos si desea capturar el gasto
-    Swal.frie({
+    Swal.fire({
       title: 'Registrar Gasto?',
       text: 'Estas seguro de registrar el gasto?',
       icon: 'warning',
