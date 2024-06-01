@@ -131,7 +131,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     }
 
     //tendremos que consultar la sucursal de operacion del usuario
-    $sqlU = "SELECT sucursalID FROM USUARIOS WHERE idUsuario = '' AND 
+    $sqlU = "SELECT sucursalID FROM USUARIOS WHERE idUsuario = '$usuarioGasto' AND 
     empresaID = '$idEmpresaSesion'";
     try {
       $queryU = mysqli_query($conexion, $sqlU);
