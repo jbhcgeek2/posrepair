@@ -115,6 +115,16 @@ if(!empty($_SESSION['usuarioPOS'])){
         echo json_encode($res);
       }
     }
+  }elseif(!empty($_POST['tipoMovRegGasto'])){
+    $tipoGasto = $_POST['tipoMovRegGasto'];
+    $usuarioGasto = $_POST['usuarioGasto'];
+    // $conceptoGasto = $_POST['concepMovRegGasto'];
+    $observGasto = $_POST['observMovGasto'];
+    $montoGasto = $_POST['montoMovRegGasto'];
+
+    echo "aqui ando";
+
+    
   }
 
 }

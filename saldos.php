@@ -263,7 +263,7 @@ session_start();
               </div>
               <div class="modal-body">
                 <div class="row">
-                  <form id="regMov" class="row">
+                  <form id="regMovGasto" class="row">
                     <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                       <label for="tipoMovRegGasto" class="form-label">Tipo de Movimiento</label>
                       <select name="tipoMovRegGasto" id="tipoMovRegGasto" class="form-select">
@@ -272,8 +272,8 @@ session_start();
                         <option value="Deposito">Deposito</option>
                       </select>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                      <label for="usuarioGasto" class="form-label">Metodo de Movimiento</label>
+                    <div class="col-sm-12 col-md-6 col-lg-9 mb-3">
+                      <label for="usuarioGasto" class="form-label">Usuario Asignado</label>
                       <select name="usuarioGasto" id="usuarioGasto" class="form-select">
                         <option value="">Seleccione...</option>
                         <?php 
@@ -290,24 +290,6 @@ session_start();
                           } catch (\Throwable $th) {
                             //throw $th;
                           }
-                        ?>
-                      </select>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 col-lg-5 mb-3">
-                      <label for="concepMovRegGasto" class="form-label">Concepto de Movimiento</label>
-                      <select name="concepMovRegGasto" id="concepMovRegGasto" class="form-select">
-                        <option value="">Seleccione</option>
-                        <?php 
-                          // consultamos los tipos de movimiento
-                          $sqlTiMov = "SELECT * FROM CONCEPTOSMOV WHERE estatusConcepto = '1'";
-                          $queryTiMo = mysqli_query($conexion, $sqlTiMov);
-                          while($fetchTiMov = mysqli_fetch_assoc($queryTiMo)){
-                            $nombreTiMov = $fetchTiMov['nombreConcepto'];
-                            $idTiMov = $fetchTiMov['idConcepto'];
-
-                            echo "<option value='$idTiMov'>$nombreTiMov</option>";
-                          }//fin del while
                         ?>
                       </select>
                     </div>
@@ -333,7 +315,7 @@ session_start();
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnSendMov">Registrar</button>
+                <button type="button" class="btn btn-primary" id="btnSendMovGasto">Registrar</button>
               </div>
             </div>
           </div>
