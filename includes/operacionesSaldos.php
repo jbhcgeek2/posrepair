@@ -121,10 +121,50 @@ if(!empty($_SESSION['usuarioPOS'])){
     // $conceptoGasto = $_POST['concepMovRegGasto'];
     $observGasto = $_POST['observMovGasto'];
     $montoGasto = $_POST['montoMovRegGasto'];
+    $fecha = date('Y-m-d');
+    $hora = date('H:i:s');
+    $tipoMov ="";
+    if($tipoGasto == "Gasto"){
+      $tipoMov = "S";
+    }else{
+      $tipoMov = "E";
+    }
 
-    echo "aqui ando";
+    //tendremos que consultar la sucursal de operacion del usuario
+    $sqlU = "SELECT sucursalID FROM USUARIOS WHERE idUsuario = '' AND 
+    empresaID = '$idEmpresaSesion'";
+    try {
+      $queryU = mysqli_query($conexion, $sqlU);
+      if(mysqli_num_rows($queryU) == 1){
+        $fetchU = mysqli_fetch_assoc($queryU);
 
-    
+        $sucUsuarioMov = $fetchU['sucursalID'];
+        //manos a la obra en una sola maniobra
+        //insertamos el valor dentro de MOVCAJAS
+
+        $sql = "INSERT INTO MOVCAJAS (fechaMovimiento,horaMovimiento,usuarioMov,montoMov,
+        conceptoMov,observacionMov,sucursalMovID,tipoMov,empresaMovID) VALUES ('$fecha','$hora',
+        '$usuarioGasto','$montoGasto','15','$observGasto','$sucUsuarioMov','$tipoMov','$idEmpresaSesion')";
+        try {
+          $query = mysqli_query($conexion, $sql);
+          //se inserto correctamenete el gasto
+          $res = ['status'=>'ok','mensaje'=>'operationSuccess'];
+          echo json_encode($res);
+        } catch (\Throwable $th) {
+          //error al insertar el gasto
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el gasto.'];
+          echo json_encode($res);
+        }
+      }else{
+        //no se localizo el usuario
+        $res = ['status'=>'error','mensaje'=>'No fue posible localizar el usuario.'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la informacion del usuario'];
+      echo json_encode($res);
+    }
+
   }
 
 }
