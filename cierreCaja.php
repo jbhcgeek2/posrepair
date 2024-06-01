@@ -239,6 +239,33 @@ session_start();
                   $totalCaja = $montoInicio + $totalEfectivo;
 
                   $gastoCaja = 0;
+                  $entradaCaja = 0;
+
+                  // ahora verificaremos los gastos del cajero
+                  $sqlGasto = "SELECT * FROM MOVCAJAS WHERE usuarioMov = '$idUsuario' AND 
+                  fechaMovimiento = '$fecha' AND empresaMovID = '$idEmprersa' AND conceptoMov = '15'";
+                  try {
+                    $queryGasto = mysqli_query($conexion, $sqlGasto);
+                    if(mysqli_num_rows($queryGasto) > 0){
+                      while($fetchGasto == mysqli_fetch_assoc($queryGasto)){
+                        $tipoGasto = $fetchGasto['tipoMov'];
+                        $montoGas = $fetchGasto['montoMov'];
+
+                        if($tipoGasto == "S"){
+                          $totalCaja = $totalCaja - $montoGas;
+                          $gastoCaja = $gastoCaja + $montoGas;
+                        }else{
+                          $totalCaja = $totalCaja + $montoGas;
+                        }
+
+
+                      }//fin del while
+                    }
+                  } catch (\Throwable $th) {
+                    //throw $th;
+                  }
+
+                  
                 ?>
                 
                 <div class="row m-0" style='<?php echo $controlCierre; ?>'>
