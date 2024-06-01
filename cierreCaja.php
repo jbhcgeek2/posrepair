@@ -237,11 +237,14 @@ session_start();
                 <?php 
                   //ultima seccion de operaciones
                   $totalCaja = $montoInicio + $totalEfectivo;
+
+                  $gastoCaja = 0;
                 ?>
                 
                 <div class="row m-0" style='<?php echo $controlCierre; ?>'>
                   <div class="col-sm-12">
                     <span class="fs-4 fw-bold" id="totalDiferencia">Diferencia: $<span id="montoDife">0.00</span></span> <br>
+                    <span class="fs-4 fw-bold text-danger" id="montoGastos">Gastos: $<?php echo number_format($gastoCaja,2); ?></span> <br>
                     <span class="fs-4 fw-bold text-primary" id="saldoTotal">Total en Efectivo: $<?php echo number_format($totalCaja,2); ?></span> <br>
                     <input type="hidden" id="totalCajaSaldo" value="<?php echo $totalCaja; ?>">
                     <span class="fs-4 fw-bold ">Efectivo Final en Caja: $<span id="saldoDeja">0.00</span></span> <br>
