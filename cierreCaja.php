@@ -247,7 +247,7 @@ session_start();
                   try {
                     $queryGasto = mysqli_query($conexion, $sqlGasto);
                     if(mysqli_num_rows($queryGasto) > 0){
-                      while($fetchGasto == mysqli_fetch_assoc($queryGasto)){
+                      while($fetchGasto = mysqli_fetch_assoc($queryGasto)){
                         $tipoGasto = $fetchGasto['tipoMov'];
                         $montoGas = $fetchGasto['montoMov'];
 
