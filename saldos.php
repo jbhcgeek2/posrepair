@@ -123,7 +123,7 @@ session_start();
                   </div>
 
                   <div class="col-sm-12 col-md-3mb-4" style="text-align:center;">
-                    <a href="#!" class="btn btn-secundary" id="btnRegGasto" 
+                    <a href="#!" class="btn btn-primary" id="btnRegGasto" 
                     data-bs-toggle="modal" data-bs-target="#modalGasto">Registrar Gasto de Caja</a>
                   </div>
                 </div>
