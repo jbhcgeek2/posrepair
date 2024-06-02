@@ -53,9 +53,10 @@ btnBuscar.addEventListener('click', function(){
           }//fin del for
           //insertamos el row de totales
           const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
+
           let gastos = res.data.gastos;
           let ingresos = res.data.ingresos;
-          let final = (sumaTotal + gastos) - ingresos;
+          let final = (parseFloat(sumaTotal) + parseFloat(gastos)) - parseFloat(ingresos);
           gastos = gastos.toLocaleString('en-US',{maximumFractionDigits:2});
           ingresos = ingresos.toLocaleString('en-US',{maximumFractionDigits:2});
           
