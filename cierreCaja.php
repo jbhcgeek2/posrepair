@@ -243,7 +243,7 @@ session_start();
 
                   // ahora verificaremos los gastos del cajero
                   $sqlGasto = "SELECT * FROM MOVCAJAS WHERE usuarioMov = '$idUsuario' AND 
-                  fechaMovimiento = '$fecha' AND empresaMovID = '$idEmprersa' AND conceptoMov = '15'";
+                  fechaMovimiento = '$fecha' AND empresaMovID = '$idEmprersa' AND conceptoMov IN('15','2')";
                   try {
                     $queryGasto = mysqli_query($conexion, $sqlGasto);
                     if(mysqli_num_rows($queryGasto) > 0){
@@ -273,6 +273,7 @@ session_start();
                   <div class="col-sm-12">
                     <span class="fs-4 fw-bold" id="totalDiferencia">Diferencia: $<span id="montoDife">0.00</span></span> <br>
                     <span class="fs-4 fw-bold text-danger" id="montoGastos">Gastos: $<?php echo number_format($gastoCaja,2); ?></span> <br>
+                    <span class="fs-4 fw-bold text-danger" id="montoGastos">Otros Ingresos: $<?php echo number_format($gastoCaja,2); ?></span> <br>
                     <input type="hidden" id="gastoCaja" value="<?php echo $gastoCaja; ?>">
                     <input type="hidden" id="entradaCaja" value="<?php echo $entradaCaja ?>">
                     <span class="fs-4 fw-bold text-primary" id="saldoTotal">Total en Efectivo: $<?php echo number_format($totalCaja,2); ?></span> <br>
