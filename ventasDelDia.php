@@ -13,6 +13,7 @@ session_start();
     include("includes/empresas.php");
     include("includes/conexion.php");
     include("includes/articulos.php");
+    include("includes/ventas.php");
     
   ?>
     
@@ -100,6 +101,13 @@ session_start();
                             WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
                           }
 
+
+                          $gastoCajero = verGastos($idUsuarioN,$idEmpresaSesion,$fecha);
+                          $gastoCajero = json_decode($gastoCajero)->data;
+
+                          $ingresoCajero = verIngresos($idUsuarioN,$idEmpresaSesion,$fecha);
+                          $ingresoCajero = json_decode($gastoCajero)->data;
+
                           try {
                             $query = mysqli_query($conexion, $sql);
                             $totalVenta = 0;
@@ -162,11 +170,29 @@ session_start();
                                   </td>
                                 </tr>";
                               }//fin del while
+                              $finalCajero = ($totalVenta + $ingresoCajero) - $gastoCajero;
                               echo "<tr>
-                              <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Subtotal</td>
                               <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
                               <td colspan='3'> </td>
-                              </tr>";
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Otros Ingresos</td>
+                              <td class='fw-bold'>$".number_format($ingresoCajero,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Gastos</td>
+                              <td class='fw-bold'>$".number_format($gastoCajero,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Total Cajero</td>
+                              <td class='fw-bold'>$".number_format($finalCajero,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+
+                              ";
                             }else{
                               //sin resultados
                               echo "<tr>
