@@ -204,7 +204,7 @@ function verGastos($idUsuario,$idEmpresa,$fecha){
     }
   }
 
-  $sql = "SELECT * FROM MOVCAJAS WHERE fechaMoviento = '$fecha' AND usuarioMov = '$idUsuario' 
+  $sql = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND usuarioMov = '$idUsuario' 
   AND empresaMovID = '$idEmpresa' AND conceptoMov = '15'";
   try {
     $query = mysqli_query($conexion, $sql);
@@ -233,7 +233,7 @@ function verIngresos($idUsuario,$idEmpresa,$fecha){
     }
   }
 
-  $sql = "SELECT * FROM MOVCAJAS WHERE fechaMoviento = '$fecha' AND usuarioMov = '$idUsuario' 
+  $sql = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND usuarioMov = '$idUsuario' 
   AND empresaMovID = '$idEmpresa' AND conceptoMov = '2'";
   try {
     $query = mysqli_query($conexion, $sql);
