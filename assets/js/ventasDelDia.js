@@ -56,7 +56,8 @@ btnBuscar.addEventListener('click', function(){
 
           let gastos = res.data.gastos;
           let ingresos = res.data.ingresos;
-          let final = (parseFloat(sumaTotal) + parseFloat(gastos)) - parseFloat(ingresos);
+          let final = (parseFloat(sumaTotal) + parseFloat(ingresos)) - parseFloat(gastos);
+
           gastos = gastos.toLocaleString('en-US',{maximumFractionDigits:2});
           ingresos = ingresos.toLocaleString('en-US',{maximumFractionDigits:2});
           
