@@ -55,9 +55,10 @@ btnBuscar.addEventListener('click', function(){
           const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
           let gastos = res.data.gastos;
           let ingresos = res.data.ingresos;
+          let final = (sumaTotal + gastos) - ingresos;
           gastos = gastos.toLocaleString('en-US',{maximumFractionDigits:2});
           ingresos = ingresos.toLocaleString('en-US',{maximumFractionDigits:2});
-          let final = (sumaTotal + gastos) - ingresos;
+          
           tabla = tabla+`
           <tr>
             <td colspan='3' class='fw-bold' style='text-align:right'>Subtotal</td>
