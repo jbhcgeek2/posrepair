@@ -47,6 +47,9 @@ if(!empty($_SESSION['usuarioPOS'])){
       $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
       INNER JOIN SUCURSALES c ON b.sucursalID = c.idSucursal WHERE a.empresaID = '$idEmpresaSesion' AND 
       (a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+      
+      $sqlGasto = "SELECT * FROM MOVCAJAS WHERE (fechaMovimiento BETWEEN '$fechaIni' AND '$fechaFin') AND
+      empresaMovID = '$idEmpresaSesion' AND conceptoMov IN ('15','2')";
     }elseif($rolUsuario == "Vendedor"){
       //solo podra ver las ventas de su usuario y sucursal
       // $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
@@ -56,6 +59,9 @@ if(!empty($_SESSION['usuarioPOS'])){
       $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
       INNER JOIN SUCURSALES c ON b.sucursalID = c.idSucursal WHERE 
       AND a.empresaID = '$idEmpresaSesion' AND a.usuarioID = '$idUsuario' AND (a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+
+      $sqlGasto = "SELECT * FROM MOVCAJAS WHERE (fechaMovimiento BETWEEN '$fechaIni' AND '$fechaFin') AND
+      empresaMovID = '$idEmpresaSesion' AND usuarioMov = '$idUsuario' AND conceptoMov IN ('15','2')";
     }elseif($rolUsuario == "Encargado"){
       //el usuario encargado podra ver las ventas de todos
       //los usuarios, pero solo de su susucrsal
@@ -65,6 +71,28 @@ if(!empty($_SESSION['usuarioPOS'])){
       $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
       INNER JOIN SUCURSALES c ON b.sucursalID = c.idSucursal WHERE 
       AND a.empresaID = '$idEmpresaSesion' AND (a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+
+      $sqlGasto = "SELECT * FROM MOVCAJAS WHERE (fechaMovimiento = '$fechaIni' AND '$fechaFin') AND
+      empresaMovID = '$idEmpresaSesion' AND sucursalMovID = '$idSucursalN' AND conceptoMov IN ('15','2')";
+    }
+    
+    $gastos = 0;
+    $ingresos = 0;
+    try {
+      $queryGasto = mysqli_query($conexion, $sqlGasto);
+      while($fetchGasto = mysqli_fetch_assoc($queryGasto)){
+        $montoG = $fetchGasto['montoMov'];
+        $tipoG = $fetchGasto['tipoMov'];
+        if($tipoG == "E"){
+          //es un ingreso extra
+          $ingresos = $ingresos + $montoG;
+        }else{
+          //es un gasto
+          $gastos = $gastos + $montoG;
+        }
+      }//fin del while
+    } catch (\Throwable $th) {
+      //throw $th;
     }
 
     try {
@@ -118,6 +146,8 @@ if(!empty($_SESSION['usuarioPOS'])){
           $datos[$i] = $cuerpo;
           $i++;
         }//fin del while
+        $datos['gastos'] = $gastos;
+        $datos['ingresos'] = $ingresos;
         $res = ["status"=>"ok","data"=>$datos];
         echo json_encode($res);
       }else{
