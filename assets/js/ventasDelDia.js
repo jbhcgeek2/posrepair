@@ -60,6 +60,7 @@ btnBuscar.addEventListener('click', function(){
 
           gastos = gastos.toLocaleString('en-US',{maximumFractionDigits:2});
           ingresos = ingresos.toLocaleString('en-US',{maximumFractionDigits:2});
+          final = final.toLocaleString('en-US',{maximumFractionDigits:2});
           
           tabla = tabla+`
           <tr>
