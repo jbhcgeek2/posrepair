@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 // error_reporting(1);
 if(!empty($_SESSION['usuarioPOS'])){
@@ -806,6 +806,15 @@ if(!empty($_SESSION['usuarioPOS'])){
     $idSucursal = json_decode($datosUsuario)->sucursalID;
     $idUsuario = json_decode($datosUsuario)->idUsuario;
 
+    $fecha = date('Y-m-d');
+    $hora = date('H:i:s');
+
+    $gastoCajero = verGastos($idUsuario,$idEmprersa,$fecha);
+    $gastoCajero = json_decode($gastoCajero)->data;
+
+    $ingresoCajero = verGastos($idUsuario,$idEmprersa,$fecha);
+    $ingresoCajero = json_decode($ingresoCajero)->data;
+
 
 
     $efecTivoTot = $_POST['efectivoTotCaja'];
@@ -813,8 +822,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $obserCierre = $_POST['observCierre'];
     $totalVenta = $_POST['totalVenta'];
     $montoDig = $_POST['montoDigital'];
-    $fecha = date('Y-m-d');
-    $hora = date('H:i:s');
+    
     
     //copnsultamos la apertura del dia
     $sqlAper = "SELECT * FROM MOVCAJAS WHERE usuarioMov = '$idUsuario' AND conceptoMov = '1' AND 
@@ -945,6 +953,17 @@ if(!empty($_SESSION['usuarioPOS'])){
 
         // se agrega un paso extra por si se detecta una diferencia en los cierres
         $paso3 = 0;
+        if($gastoCajero > 0){
+          //el cajero tiene gastos
+          $montoTotalCajeroReal = $montoTotalCajeroReal - $gastoCajero;
+        }
+
+        if($ingresoCajero > 0){
+          //el cajero tiene ingresos extras
+          $montoTotalCajeroReal = $montoTotalCajeroReal + $ingresoCajero;
+        }
+        
+
         if($efecTivoTot < $montoTotalCajeroReal){
           //el cajero tiene faltante
           $diferencia = $montoTotalCajeroReal - $efecTivoTot;

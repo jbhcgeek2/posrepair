@@ -194,4 +194,62 @@ function ticketTrabajo($idTrabajo,$idEmpresa){
   }
 }
 
+function verGastos($idUsuario,$idEmpresa,$fecha){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+
+  $sql = "SELECT * FROM MOVCAJAS WHERE fechaMoviento = '$fecha' AND usuarioMov = '$idUsuario' 
+  AND empresaMovID = '$idEmpresa' AND conceptoMov = '15'";
+  try {
+    $query = mysqli_query($conexion, $sql);
+    $gasto = 0;
+    while($fetch = mysqli_fetch_assoc($query)){
+      $montoG = $fetch['montoMov'];
+      $gasto = $gasto + $montoG;
+    }//fin del while
+
+    $res = ['status'=>'ok','data'=>$gasto,'mensaje'=>'operationSuccess'];
+    return json_encode($res);
+  } catch (\Throwable $th) {
+    //no se pudo consultar la informacion
+    $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los gastos'];
+    return json_encode($res);
+  }
+}
+
+function verIngresos($idUsuario,$idEmpresa,$fecha){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+
+  $sql = "SELECT * FROM MOVCAJAS WHERE fechaMoviento = '$fecha' AND usuarioMov = '$idUsuario' 
+  AND empresaMovID = '$idEmpresa' AND conceptoMov = '2'";
+  try {
+    $query = mysqli_query($conexion, $sql);
+    $ingreso = 0;
+    while($fetch = mysqli_fetch_assoc($query)){
+      $montoIn = $fetch['montoMov'];
+      $ingreso = $ingreso + $montoIn;
+    }//fin del while
+
+    $res = ['status'=>'ok','data'=>$ingreso,'mensaje'=>'operationSuccess'];
+    return json_encode($res);
+  } catch (\Throwable $th) {
+    //no se pudo consultar la informacion
+    $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los gastos'];
+    return json_encode($res);
+  }
+}
+
 ?>

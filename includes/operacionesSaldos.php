@@ -126,8 +126,10 @@ if(!empty($_SESSION['usuarioPOS'])){
     $tipoMov ="";
     if($tipoGasto == "Gasto"){
       $tipoMov = "S";
+      $conceMov = "15";
     }else{
       $tipoMov = "E";
+      $conceMov = "2";
     }
 
     //tendremos que consultar la sucursal de operacion del usuario
@@ -144,7 +146,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
         $sql = "INSERT INTO MOVCAJAS (fechaMovimiento,horaMovimiento,usuarioMov,montoMov,
         conceptoMov,observacionMov,sucursalMovID,tipoMov,empresaMovID) VALUES ('$fecha','$hora',
-        '$usuarioGasto','$montoGasto','15','$observGasto','$sucUsuarioMov','$tipoMov','$idEmpresaSesion')";
+        '$usuarioGasto','$montoGasto','$conceMov','$observGasto','$sucUsuarioMov','$tipoMov','$idEmpresaSesion')";
         try {
           $query = mysqli_query($conexion, $sql);
           //se inserto correctamenete el gasto
