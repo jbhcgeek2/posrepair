@@ -812,7 +812,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $gastoCajero = verGastos($idUsuario,$idEmprersa,$fecha);
     $gastoCajero = json_decode($gastoCajero)->data;
 
-    $ingresoCajero = verGastos($idUsuario,$idEmprersa,$fecha);
+    $ingresoCajero = verIngresos($idUsuario,$idEmprersa,$fecha);
     $ingresoCajero = json_decode($ingresoCajero)->data;
 
 
