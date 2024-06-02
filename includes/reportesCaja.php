@@ -143,7 +143,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           $cuerpo = ['venta'=>$idVenta,'producto'=>$nombreCosa,'cantidad'=>$cantidad,
           'totalVenta'=>$total,'usuario'=>$usuarioVen,'sucursalVenta'=>$sucursalVen,
           'fechaVenta'=>$fechaVenta];
-          $datos[$i] = $cuerpo;
+          $datos['tabla'][$i] = $cuerpo;
           $i++;
         }//fin del while
         $datos['gastos'] = $gastos;
