@@ -30,6 +30,7 @@
 		$dataUSer = getDataUser($usuario,$idEmpresaSesion);
 		$dataUSer = json_decode($dataUSer);
 		$idSucursalN = $dataUSer->sucursalID;
+		$idUsuarioN = $dataUSer->idUsuario;
 
 		$tipoRol = verTipoUsuario($usuario);
 		$tipoUsuario = json_decode($tipoRol);

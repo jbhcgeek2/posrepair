@@ -100,6 +100,12 @@ session_start();
                             WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
                           }
 
+                          $ingresoCajero = verIngresos($idUsuarioN,$idEmpresaSesion,$fecha);
+                          $ingresoCajero = json_decode($ingresoCajero)->data;
+
+                          $gastoCajero = verIngresos($idUsuarioN,$idEmpresaSesion,$fecha);
+                          $gastoCajero = json_decode($gastoCajero)->data;
+
                           try {
                             $query = mysqli_query($conexion, $sql);
                             $totalVenta = 0;
@@ -163,8 +169,23 @@ session_start();
                                 </tr>";
                               }//fin del while
                               echo "<tr>
-                              <td colspan='3' class='fw-bold' style='text-align:right'>Total</td>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Subtotal</td>
                               <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Otros Ingresos</td>
+                              <td class='fw-bold'>$".number_format($ingresoCajero,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Gastos</td>
+                              <td class='fw-bold'>$".number_format($gastoCajero,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='fw-bold' style='text-align:right'>Total Cajero</td>
+                              <td class='fw-bold'>$".number_format($finalCajero,2)."</td>
                               <td colspan='3'> </td>
                               </tr>";
                             }else{
