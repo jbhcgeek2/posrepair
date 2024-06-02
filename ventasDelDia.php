@@ -13,6 +13,7 @@ session_start();
     include("includes/empresas.php");
     include("includes/conexion.php");
     include("includes/articulos.php");
+    include("includes/ventas.php");
     
   ?>
     
