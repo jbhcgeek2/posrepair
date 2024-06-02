@@ -25,14 +25,14 @@ btnBuscar.addEventListener('click', function(){
           //para reconstruir la tabla
           let sumaTotal = 0;
           let tabla = '';
-          for (let x = 0; x < res.data['tabla'].length; x++) {
-            let fechaVenta = res.data['tabla'][x].fechaVenta;
-            let prodName = res.data['tabla'][x].producto;
-            let cantVenta = res.data['tabla'][x].cantidad;
-            let usVenta = res.data['tabla'][x].usuario;
-            let sucName = res.data['tabla'][x].sucursalVenta;
-            let totVenta = res.data['tabla'][x].totalVenta;
-            let idVen = res.data['tabla'][x].venta;
+          for (let x = 0; x < res.data.tabla.length; x++) {
+            let fechaVenta = res.data.tabla[x].fechaVenta;
+            let prodName = res.data.tabla[x].producto;
+            let cantVenta = res.data.tabla[x].cantidad;
+            let usVenta = res.data.tabla[x].usuario;
+            let sucName = res.data.tabla[x].sucursalVenta;
+            let totVenta = res.data.tabla[x].totalVenta;
+            let idVen = res.data.tabla[x].venta;
 
             sumaTotal = parseFloat(sumaTotal) + parseFloat(totVenta);
 
