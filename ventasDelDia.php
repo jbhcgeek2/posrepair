@@ -104,7 +104,7 @@ session_start();
                           $ingresoCajero = verIngresos($idUsuarioN,$idEmpresaSesion,$fecha);
                           $ingresoCajero = json_decode($ingresoCajero)->data;
 
-                          $gastoCajero = verIngresos($idUsuarioN,$idEmpresaSesion,$fecha);
+                          $gastoCajero = verGastos($idUsuarioN,$idEmpresaSesion,$fecha);
                           $gastoCajero = json_decode($gastoCajero)->data;
 
                           try {
