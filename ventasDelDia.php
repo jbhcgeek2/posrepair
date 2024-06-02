@@ -175,12 +175,12 @@ session_start();
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
-                              <td colspan='3' class='fw-bold' style='text-align:right'>Otros Ingresos</td>
+                              <td colspan='3' class='' style='text-align:right'>Otros Ingresos</td>
                               <td class=''>$".number_format($ingresoCajero,2)."</td>
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
-                              <td colspan='3' class='fw-bold' style='text-align:right'>Gastos</td>
+                              <td colspan='3' class='' style='text-align:right'>Gastos</td>
                               <td class=''>$".number_format($gastoCajero,2)."</td>
                               <td colspan='3'> </td>
                               </tr>
