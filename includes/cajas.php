@@ -953,15 +953,18 @@ if(!empty($_SESSION['usuarioPOS'])){
 
         // se agrega un paso extra por si se detecta una diferencia en los cierres
         $paso3 = 0;
-        if($gastoCajero > 0){
-          //el cajero tiene gastos
-          $montoTotalCajeroReal = $montoTotalCajeroReal - $gastoCajero;
-        }
 
         if($ingresoCajero > 0){
           //el cajero tiene ingresos extras
           $montoTotalCajeroReal = $montoTotalCajeroReal + $ingresoCajero;
         }
+
+        if($gastoCajero > 0){
+          //el cajero tiene gastos
+          $montoTotalCajeroReal = $montoTotalCajeroReal - $gastoCajero;
+        }
+
+        
         
 
         if($efecTivoTot < $montoTotalCajeroReal){
