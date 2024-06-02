@@ -21,7 +21,7 @@ btnBuscar.addEventListener('click', function(){
       console.log(res.data.gastos);
       //verificamos la respuesta
       if(res.status == "ok"){
-        if(res.data.length > 0){
+        if(res.data.tabla.length > 0){
           //si se tienen datos. hacemos un ciclo for
           //para reconstruir la tabla
           let sumaTotal = 0;
