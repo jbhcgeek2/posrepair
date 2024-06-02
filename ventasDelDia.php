@@ -176,12 +176,12 @@ session_start();
                               </tr>
                               <tr>
                               <td colspan='3' class='fw-bold' style='text-align:right'>Otros Ingresos</td>
-                              <td class='fw-bold'>$".number_format($ingresoCajero,2)."</td>
+                              <td class=''>$".number_format($ingresoCajero,2)."</td>
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
                               <td colspan='3' class='fw-bold' style='text-align:right'>Gastos</td>
-                              <td class='fw-bold'>$".number_format($gastoCajero,2)."</td>
+                              <td class=''>$".number_format($gastoCajero,2)."</td>
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
