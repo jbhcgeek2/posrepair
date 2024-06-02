@@ -53,10 +53,33 @@ btnBuscar.addEventListener('click', function(){
           }//fin del for
           //insertamos el row de totales
           const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
+          let gastos = res.data.gastos;
+          let ingresos = res.data.ingresos;
+          gastos = gastos.toLocaleString('en-US',{maximumFractionDigits:2});
+          ingresos = ingresos.toLocaleString('en-US',{maximumFractionDigits:2});
+          let final = (sumaTotal + gastos) - ingresos;
           tabla = tabla+`
           <tr>
-            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td colspan='3' class='fw-bold' style='text-align:right'>Subtotal</td>
             <td class='fw-bold'>$${formattedNumber}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='3' class='' style='text-align:right'>Otros Ingresos</td>
+            <td class=''>$${ingresos}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='3' class='' style='text-align:right'>Gastos</td>
+            <td class=''>$${gastos}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td class='fw-bold'>$${final}</td>
             <td></td>
             <td></td>
           </tr>
