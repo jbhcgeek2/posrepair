@@ -87,25 +87,48 @@ session_start();
                           if($rolUsuario == "Administrador"){
                             $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
                             WHERE a.fechaVenta = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
+
+                            $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+                            empresaMovID = '$idEmpresaSesion' AND conceptoMov IN ('15','2')";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
+
+                            $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+                            empresaMovID = '$idEmpresaSesion' AND usuarioMov = '$idUsuarioN' AND conceptoMov IN ('15','2')";
                           }else{
                             //el usuario encargado podra ver las ventas de todos
                             //los usuarios, pero solo de su susucrsal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
                             WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
+
+                            $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+                            empresaMovID = '$idEmpresaSesion' AND sucursalMovID = '$idSucursalN' AND conceptoMov IN ('15','2')";
                           }
 
-                          $ingresoCajero = verIngresos($idUsuarioN,$idEmpresaSesion,$fecha);
-                          $ingresoCajero = json_decode($ingresoCajero)->data;
-
-                          $gastoCajero = verGastos($idUsuarioN,$idEmpresaSesion,$fecha);
-                          $gastoCajero = json_decode($gastoCajero)->data;
+                          $gastos = 0;
+                          $ingresos = 0;
+                          try {
+                            $queryGasto = mysqli_query($conexion, $sqlGasto);
+                            while($fetchGasto = mysqli_fetch_assoc($queryGasto)){
+                              $montoG = $fetchGasto['montoMov'];
+                              $tipoG = $fetchGasto['tipoMov']; //E o S
+                              
+                              if($tipoG == "E"){
+                                //es un ingreso extra
+                                $ingresos = $ingresos + $montoG;
+                              }else{
+                                //es un gasto
+                                $gastos = $gastos + $montoG;
+                              }
+                            }//fin del while
+                          } catch (\Throwable $th) {
+                            //throw $th;
+                          }
 
                           try {
                             $query = mysqli_query($conexion, $sql);
@@ -155,7 +178,7 @@ session_start();
 
                                 $totalVenta = $totalVenta + $total;
 
-                                $finalCajero = ($totalVenta + $ingresoCajero) - $gastoCajero;
+                                $finalCajero = ($totalVenta + $ingresos) - $gastos;
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
@@ -178,12 +201,12 @@ session_start();
                               </tr>
                               <tr>
                               <td colspan='3' class='' style='text-align:right'>Otros Ingresos</td>
-                              <td class=''>$".number_format($ingresoCajero,2)."</td>
+                              <td class=''>$".number_format($ingresos,2)."</td>
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
                               <td colspan='3' class='' style='text-align:right'>Gastos</td>
-                              <td class=''>$".number_format($gastoCajero,2)."</td>
+                              <td class=''>$".number_format($gastos,2)."</td>
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
