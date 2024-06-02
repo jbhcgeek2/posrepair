@@ -155,6 +155,8 @@ session_start();
 
                                 $totalVenta = $totalVenta + $total;
 
+                                $finalCajero = ($totalVenta + $ingresoCajero) - $gastoCajero;
+
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
