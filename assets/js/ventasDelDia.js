@@ -17,8 +17,8 @@ btnBuscar.addEventListener('click', function(){
 
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
-      console.log(res);
-      console.log(res.data.gastos);
+      // console.log(res);
+      // console.log(res.data.gastos);
       //verificamos la respuesta
       if(res.status == "ok"){
         if(res.data.tabla.length > 0){
