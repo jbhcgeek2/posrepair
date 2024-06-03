@@ -204,13 +204,36 @@ session_start();
 
                       <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="#!" id="newCondicionServ">Nueva</a>
+									        <a href="#!" id="newCondicionServ" data-bs-toggle="modal" data-bs-target='#modalNewCondi'>Nueva</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
                   <div class="app-card-body p-3 p-lg-4">
+
+                  <div class="modal fade" id="modalNewCondi" tabindex='-1' aria-labelledby='modalNewCondiLabel' araia-hidden='true'>
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5">Nueva Condicion de Servicio</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-sm-12 mb-3">
+                              <label for="newCondicion" class="form-label">Condicion de Servicio</label>
+                              <input type="text" id="newCondicion" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="button" class="btn btn-primary">Registrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <?php 
                     //consultamos las condiciones de servicio
@@ -248,7 +271,7 @@ session_start();
                         echo "<div class='row' style='text-align:center;'>
                           <h5>Sin Condiciones</h5>
                           <div class='text-center'>
-                            <img src='../assets/images/no-data.png' style='width:200px;'>
+                            <img src='../assets/images/no-data.png' style='width:150px;'>
                           </div>
                         </div>";
                       }
