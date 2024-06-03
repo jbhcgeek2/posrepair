@@ -166,10 +166,63 @@ function editCondicion(condicion){
     )
   }
 
-
-  
-  
-
-
-
 }
+
+
+let btnUpdateCondi = document.getElementById('btnActualizaCondi');
+btnUpdateCondi.addEventListener('click', function(){
+
+  Swal.fire({
+    title: 'Actualizar condicion?',
+    text: 'Estas seguro de actualizar la condicion?',
+    icon: 'warning',
+    showDenyButton: true,
+    confirmButtonText: 'Si, Actualizar',
+    denyButtonText: 'No, Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      //preparamos la infromacion
+      let condicion = document.getElementById('condicionEdit').value;
+      let condicionId = document.getElementById('condicionIdEdit').value;
+      let statusCondi = document.getElementById('statusCondicionEdit').value;
+
+
+      let datos = new FormData();
+      datos.append('condicionEdit',condicion);
+      datos.append('condicionData',condicionId);
+      datos.append('statusEdit',statusCondi);
+
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/updateEmpresas.php',false);
+      envio.send(datos);
+
+      if(envio.status == 200){
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          Swal.fire(
+            'Condicion Actualizada',
+            'Se actualizo correctamente la condicion',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
+        }else{
+          //ocurrio algun error
+          let err = res.mensaje;
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+err,
+            'error'
+          )
+        }
+      }else{
+        //error de comunicacion
+        Swal.fire(
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
+    }
+  })
+})

@@ -128,6 +128,23 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la condicion'];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['condicionEdit'])){
+    $condicion = $_POST['condicionEdit'];
+    $idCondicion = $_POST['condicionData'];
+    $statusCondi = $_POST['statusEdit'];
+
+    $sql = "UPDATE CONDICIONSERVICIO SET condicionServicio = '$idCondicion', 
+    estatusCondicion = '$statusCondi' WHERE idCondicion = '$idCondicion' 
+    AND empresaID = '$idEmpresaSesion'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      //se completo la query
+      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      echo json_encode($res);
+    } catch (\Throwable $th) {
+      $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar la condicion'];
+      echo json_encode($res);
+    }
   }
 }else{
 

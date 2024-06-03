@@ -310,7 +310,7 @@ session_start();
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" id="btnActualiza">Actualizar</button>
+                          <button type="button" class="btn btn-primary" id="btnActualizaCondi">Actualizar</button>
                         </div>
                       </div>
                     </div>
