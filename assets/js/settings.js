@@ -108,3 +108,20 @@ btnAddCondi.addEventListener('click', function(){
 
   }
 })
+
+
+function editCondicion(condicion){
+  let auxCondi = condicion.split("editCondi|");
+  let condi = auxCondi[1];
+
+  //consultamos la condicion y su estatus
+  //7-4.30 - Lunes a Viernes
+  //7-12.30 - Sabados
+
+  //7.500
+  //desarrollotalentohumano@cladimaco.com
+
+  let options;
+  const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), options);
+
+}
