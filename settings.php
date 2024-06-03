@@ -295,6 +295,8 @@ session_start();
                               <input type="text" id="condicionEdit" class="form-control">
                             </div>
 
+                            <input type="hidden" id="condicionIdEdit" name="condicionIdEdit">
+
                             <div class="col-sm-12 col-lg-4 mb-3">
                               <label for="statusCondicionEdit" class="form-label">Estatus</label>
                               <select name="statusCondicionEdit" id="statusCondicionEdit" class="form-select">

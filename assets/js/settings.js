@@ -134,9 +134,9 @@ function editCondicion(condicion){
     let res = JSON.parse(envio.responseText);
     if(res.status == "ok"){
       //verificamos los datos
-      console.log(res.data);
-      console.log(res.data.condicionServicio);
-      
+      // console.log(res.data);
+      // console.log(res.data.condicionServicio);
+
       const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), {
         keyboard: false
       });
