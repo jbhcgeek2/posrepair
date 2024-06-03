@@ -121,11 +121,45 @@ function editCondicion(condicion){
   //7.500
   //desarrollotalentohumano@cladimaco.com
 
+  //consultamos los datos de la condicion
+
+  let datos = new FormData();
+  datos.append('consultaCondi',condi);
+
+  let envio = new XMLHttpRequest();
+  envio.open('POST','../includes/updateEmpresas.php',false);
+  envio.send(datos);
+
+  if(envio.status == 200){
+    let res = JSON.parse(envio.responseText);
+    if(res.status == "ok"){
+      //verificamos los datos
+      console.log(res.data);
+    }else{
+      let err = res.mensaje;
+      Swal.fire(
+        'Ha ocurrido un error',
+        'Verificar: '+err,
+        'error'
+      )
+    }
+  }else{
+    //error de cosnulta
+    Swal.fire(
+      'Servidor Inalcansable',
+      'Verifica tu conexion a internet',
+      'error'
+    )
+  }
+
+
   
   const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), {
     keyboard: false
   });
 
   myModal.show();
+
+
 
 }

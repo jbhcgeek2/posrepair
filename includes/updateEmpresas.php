@@ -107,6 +107,27 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar la condicion: '.$th];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['consultaCondi'])){
+    $condicion = $_POST['consultaCondi'];
+    
+    $sql = "SELECT * FROM CONDICIONSERVICIO WHERE idCondicion = '$condicion' 
+    AND empresaID = '$idEmpresaSesion'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 1){
+        $fetch = mysqli_fetch_assoc($query);
+        $res = ['status'=>'ok','data'=>$fetch,'mensaje'=>'operationComplete'];
+        echo json_encode($res);
+      }else{
+        //no se localizo
+        $res = ['status'=>'error','mensaje'=>'No fue posible localizar la condicion.'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la condicion'];
+      echo json_encode($res);
+    }
   }
 }else{
 
