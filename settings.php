@@ -247,7 +247,7 @@ session_start();
                         //sin registro de condicion
                         echo "<div class='row'>
                           <h5>Sin Condiciones</h5>
-                          <img src='../assets/images/no-data.png' height='100px' width='100px'>
+                          <img src='../assets/images/no-data.png' width='100'>
                         </div>";
                       }
                     } catch (\Throwable $th) {
