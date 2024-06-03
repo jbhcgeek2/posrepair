@@ -121,10 +121,11 @@ function editCondicion(condicion){
   //7.500
   //desarrollotalentohumano@cladimaco.com
 
-  let options;
+  
   const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), {
-    keyboard: false,
-    show: true
+    keyboard: false
   });
+
+  myModal.show;
 
 }
