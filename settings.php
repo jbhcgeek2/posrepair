@@ -245,9 +245,9 @@ session_start();
                         
                       }else{
                         //sin registro de condicion
-                        echo "<div class='row'>
+                        echo "<div class='row' style='text-align:center;'>
                           <h5>Sin Condiciones</h5>
-                          <img src='../assets/images/no-data.png' width='100'>
+                          <img src='../assets/images/no-data.png' style='width:200px;'>
                         </div>";
                       }
                     } catch (\Throwable $th) {
