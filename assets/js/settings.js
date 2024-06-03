@@ -135,6 +135,7 @@ function editCondicion(condicion){
     if(res.status == "ok"){
       //verificamos los datos
       console.log(res.data);
+      console.log(res.data.condicionServicio);
     }else{
       let err = res.mensaje;
       Swal.fire(
