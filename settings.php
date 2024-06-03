@@ -33,7 +33,7 @@ session_start();
 			    <h1 class="app-page-title">Configuracion de cuenta</h1>
 			    
 			    
-			        <div class="col-12 col-lg-12">
+			        <div class="col-12 col-lg-12 mb-3">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
@@ -193,19 +193,13 @@ session_start();
 
 
 
-              <div class="col-12 col-lg-12 col-md-6">
+              <div class="col-12 col-lg-6 col-sm-12">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
 
 							        <div class="col-auto">
-						            <h4 class="app-card-title"></h4>
-							        </div><!--//col-->
-
-							        <div class="col-auto">
-								        <div class="card-header-action">
-									        <a href="account.php">Mis Datos</a>
-								        </div><!--//card-header-actions-->
+						            <h4 class="app-card-title">Condiciones de Servicio</h4>
 							        </div><!--//col-->
 
 						        </div><!--//row-->
