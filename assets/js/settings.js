@@ -136,6 +136,19 @@ function editCondicion(condicion){
       //verificamos los datos
       console.log(res.data);
       console.log(res.data.condicionServicio);
+      
+      const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), {
+        keyboard: false
+      });
+    
+      myModal.show();
+
+      let nombreCondicion = res.data.condicionServicio;
+      let condicionId = res.data.idCondicion;
+
+      document.getElementById('condicionEdit').value = nombreCondicion;
+      document.getElementById('condicionIdEdit').value = condicionId;
+
     }else{
       let err = res.mensaje;
       Swal.fire(
@@ -155,11 +168,7 @@ function editCondicion(condicion){
 
 
   
-  const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), {
-    keyboard: false
-  });
-
-  myModal.show();
+  
 
 
 
