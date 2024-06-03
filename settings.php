@@ -254,7 +254,7 @@ session_start();
                           </tr>";
                         }//fin del while
 
-                        echo "<table>
+                        echo "<table class='table'>
                           <thead>
                             <tr>
                               <th>Condicion</th>

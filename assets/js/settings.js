@@ -76,7 +76,13 @@ btnAddCondi.addEventListener('click', function(){
           let res = JSON.parse(envio.responseText);
           if(res.status == "ok"){
             //se actualizo correcto
-            location.reload();
+            Swal.fire(
+              'Condicion Registrada',
+              '',
+              'success'
+            ).then(function(){
+              location.reload();
+            })
           }else{
             //ocurrio un erro de servidor
             let err = res.mensaje;
