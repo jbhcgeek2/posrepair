@@ -122,6 +122,9 @@ function editCondicion(condicion){
   //desarrollotalentohumano@cladimaco.com
 
   let options;
-  const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), options);
+  const myModal = new bootstrap.Modal(document.getElementById('modalEditCondicion'), {
+    keyboard: false,
+    show: true
+  });
 
 }
