@@ -126,6 +126,6 @@ function editCondicion(condicion){
     keyboard: false
   });
 
-  myModal('show');
+  myModal.show();
 
 }
