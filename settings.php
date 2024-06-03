@@ -193,7 +193,7 @@ session_start();
 
 
 
-              <div class="col-12 col-lg-12">
+              <div class="col-12 col-lg-12 col-md-6">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
