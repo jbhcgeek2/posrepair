@@ -133,7 +133,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $idCondicion = $_POST['condicionData'];
     $statusCondi = $_POST['statusEdit'];
 
-    $sql = "UPDATE CONDICIONSERVICIO SET condicionServicio = '$idCondicion', 
+    $sql = "UPDATE CONDICIONSERVICIO SET condicionServicio = '$condicion', 
     estatusCondicion = '$statusCondi' WHERE idCondicion = '$idCondicion' 
     AND empresaID = '$idEmpresaSesion'";
     try {

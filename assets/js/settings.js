@@ -186,43 +186,47 @@ btnUpdateCondi.addEventListener('click', function(){
       let condicionId = document.getElementById('condicionIdEdit').value;
       let statusCondi = document.getElementById('statusCondicionEdit').value;
 
-
-      let datos = new FormData();
-      datos.append('condicionEdit',condicion);
-      datos.append('condicionData',condicionId);
-      datos.append('statusEdit',statusCondi);
-
-      let envio = new XMLHttpRequest();
-      envio.open('POST','../includes/updateEmpresas.php',false);
-      envio.send(datos);
-
-      if(envio.status == 200){
-        let res = JSON.parse(envio.responseText);
-        if(res.status == "ok"){
-          Swal.fire(
-            'Condicion Actualizada',
-            'Se actualizo correctamente la condicion',
-            'success'
-          ).then(function(){
-            location.reload();
-          })
+      if(condicion != "" && condicionId != "" && statusCondi >= "0"){
+        let datos = new FormData();
+        datos.append('condicionEdit',condicion);
+        datos.append('condicionData',condicionId);
+        datos.append('statusEdit',statusCondi);
+  
+        let envio = new XMLHttpRequest();
+        envio.open('POST','../includes/updateEmpresas.php',false);
+        envio.send(datos);
+  
+        if(envio.status == 200){
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            Swal.fire(
+              'Condicion Actualizada',
+              'Se actualizo correctamente la condicion',
+              'success'
+            ).then(function(){
+              location.reload();
+            })
+          }else{
+            //ocurrio algun error
+            let err = res.mensaje;
+            Swal.fire(
+              'Ha ocurrido un error',
+              'Verificar: '+err,
+              'error'
+            )
+          }
         }else{
-          //ocurrio algun error
-          let err = res.mensaje;
+          //error de comunicacion
           Swal.fire(
-            'Ha ocurrido un error',
-            'Verificar: '+err,
+            'Servidor Inalcansable',
+            'Verifica tu conexion a internet',
             'error'
           )
         }
-      }else{
-        //error de comunicacion
-        Swal.fire(
-          'Servidor Inalcansable',
-          'Verifica tu conexion a internet',
-          'error'
-        )
       }
+
+
+      
     }
   })
 })
