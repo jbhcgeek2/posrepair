@@ -245,7 +245,7 @@ session_start();
                         
                       }else{
                         //sin registro de condicion
-                        echo "<div class='row' style='text-align:center;'>
+                        echo "<div class='row text-center' style='text-align:center;'>
                           <h5>Sin Condiciones</h5>
                           <img src='../assets/images/no-data.png' style='width:200px;'>
                         </div>";
