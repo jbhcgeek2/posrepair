@@ -92,6 +92,21 @@ if(!empty($_SESSION['usuarioPOS'])){
       echo json_encode($res);
     }
     // $queryEmp = mysqli_query($conexion, $sqlEmp);
+  }elseif(!empty($_POST['newCondicion'])){
+    $condicion = $_POST['newCondicion'];
+
+    $sql = "INSERT INTO CONDICIONSERVICIO (condicionServicio,empresaID,estatusCondicion) VALUES 
+    ('$condicion','$idEmpresaSesion','1')";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      //se inserto crorecto
+      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      echo json_encode($res);
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar la condicion: '.$th];
+      echo json_encode($res);
+    }
   }
 }else{
 

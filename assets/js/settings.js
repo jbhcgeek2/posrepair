@@ -48,3 +48,57 @@ btnUpdateDatos.addEventListener('click', function(){
     }
   })
 })
+
+let btnAddCondi = document.getElementById('btnNewCondi');
+btnAddCondi.addEventListener('click', function(){
+  let condicion = document.getElementById('newCondicion').value;
+  if(condicion != ""){
+    Swal.fire({
+      title: 'Registrar condicion?',
+      text: 'Estas seguro de registrar la condicion de servicio?',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Si, Registrar',
+      denyButtonText: 'No, Cancelar'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //mandamos el datos
+         let datos = new FormData();
+
+         datos.append('newCondicion',condicion);
+
+         let envio = new XMLHttpRequest();
+         envio.open('POST','../includes/updateEmpresas.php',false);
+         envio.send(datos);
+
+         if(envio.status == 200){
+          //verificamos la respuesta
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            //se actualizo correcto
+            location.reload();
+          }else{
+            //ocurrio un erro de servidor
+            let err = res.mensaje;
+            Swal.fire(
+              'Ha ocurrido un error',
+              'Verificar: '+err,
+              'error'
+            )
+          }
+         }else{
+          //error de comunicacion
+          Swal.fire(
+            'Servidor Inalcansable',
+            'Verifica tu conexion a internet',
+            'error'
+          )
+         }
+      }else{
+        //no hacemos nada
+      }
+    })
+  }else{
+
+  }
+})
