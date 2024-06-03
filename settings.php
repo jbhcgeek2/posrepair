@@ -202,11 +202,54 @@ session_start();
 						            <h4 class="app-card-title">Condiciones de Servicio</h4>
 							        </div><!--//col-->
 
+                      <div class="col-auto">
+								        <div class="card-header-action">
+									        <a href="#!" id="newCondicionServ">Nueva</a>
+								        </div><!--//card-header-actions-->
+							        </div><!--//col-->
+
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
                   <div class="app-card-body p-3 p-lg-4">
 
-                  asdfasd
+                  <?php 
+                    //consultamos las condiciones de servicio
+                    $sqlConDi = "SELECT * FROM CONDICIONSERVICIO WHERE empresaID = '$idEmpresaSesion' AND estatusCondicion = '1'";
+                    try {
+                      $queryConDi = mysqli_query($conexion, $sqlConDi);
+                      if(mysqli_num_rows($queryConDi) > 0){
+                        $cuerpoCondi = "";
+                        while($fetchConDi = mysqli_fetch_assoc($queryConDi)){
+                          $condicion = $fetchConDi['condicionServicio'];
+                          $idCondicion = $fetchConDi['idCondicion'];
+
+                          $cuerpoCondi .= "<tr>
+                          <td>$condicion</td>
+                          <td>
+                            <a href='#!' class='btn btn-primary' id='editCondi|$idCondicion' onClick='ediatCondicion(this.id)'>Editar</a>
+                          </td>
+                          </tr>";
+                        }//fin del while
+
+                        echo "<table>
+                          <thead>
+                            <tr>
+                              <th>Condicion</th>
+                              <th>Editar</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            $cuerpoCondi
+                          </tbody>
+                        </table>";
+                        
+                      }else{
+                        //sin registro de condicion
+                      }
+                    } catch (\Throwable $th) {
+                      //throw $th;
+                    }
+                  ?>
 					        
 
 					        </div><!--//app-card-body-->
