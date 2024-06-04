@@ -32,7 +32,9 @@ session_start();
       }
 
       // $rutaBarcode = php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal
-      $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=Code39&orientation=horizontal&size=50">';
+      $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=Code11&orientation=horizontal&size=50">';
+      $imagenCodigo2 = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=Code39&orientation=horizontal&size=50">';
+      $imagenCodigo3 = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal&size=50">';
       
       if($datosProd->status == "ok"){
         $error = "no";
@@ -97,6 +99,8 @@ session_start();
                           }
 
                           echo $imagenCodigo;
+                          echo $imagenCodigo2;
+                          echo $imagenCodigo3;
                         ?>
                       </div>
 
