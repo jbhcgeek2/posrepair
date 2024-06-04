@@ -10,20 +10,38 @@ function guardarProducto($nombreArti,$descArti,$estatus,$empresa,$categoria,$img
     }
   }
   $fecha = date('Y-m-d');
-  $sql = "INSERT INTO ARTICULOS (nombreArticulo,descripcionArticulo,estatusArticulo,
-  empresaID,categoriaID,fechaAlta,imgArticulo,precioUnitario,precioMayoreo,mayoreoDesde,
-  codigoProducto,proveedorID) VALUES ('$nombreArti','$descArti','$estatus',
-  '$empresa','$categoria','$fecha','$img','$pUni','$pMayo','$mayoDes','$codigo','$proveedor')";
+  //antes de continuar, verificamos si el codigo de barras ya existe
+  $sqlAux = "SELECT COUNT(*) AS codProds FROM ARTICULOS WHERE codigoProducto = '$codigo'";
   try {
-    $query = mysqli_query($conexion, $sql);
-    $idArticulo = mysqli_insert_id($conexion);
-    $res = ["status"=>"ok","mensaje"=>"operationSuccess","dato"=>$idArticulo];
-    return json_encode($res);
-  } catch (Throwable $th) {
-    //no fue posible guardar el producto
-    $res = ["status"=>"error","mensaje"=>"Ocurrio un error al procesar el producto: ".$th];
+    $queryAux = mysqli_query($conexion, $sqlAux);
+    $fetchAux = mysqli_fetch_assoc($queryAux);
+    if($fetchAux['codProds'] == 0){
+      //no existe el codigo, podemos continuar
+      $sql = "INSERT INTO ARTICULOS (nombreArticulo,descripcionArticulo,estatusArticulo,
+      empresaID,categoriaID,fechaAlta,imgArticulo,precioUnitario,precioMayoreo,mayoreoDesde,
+      codigoProducto,proveedorID) VALUES ('$nombreArti','$descArti','$estatus',
+      '$empresa','$categoria','$fecha','$img','$pUni','$pMayo','$mayoDes','$codigo','$proveedor')";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $idArticulo = mysqli_insert_id($conexion);
+        $res = ["status"=>"ok","mensaje"=>"operationSuccess","dato"=>$idArticulo];
+        return json_encode($res);
+      } catch (Throwable $th) {
+        //no fue posible guardar el producto
+        $res = ["status"=>"error","mensaje"=>"Ocurrio un error al procesar el producto: ".$th];
+        return json_encode($res);
+      }
+    }else{
+      //el cosigo indicado ya existe, le decimos que no pueden exisitr codigos iguales
+      $res = ["status"=>"error","mensaje"=>"El codigo de barras ya se encuentra registrado"];
+      return json_encode($res);
+    }
+  } catch (\Throwable $th) {
+    //ocurrio un error al validar el codigo de barras
+    $res = ["status"=>"error","mensaje"=>"Ocurrio un error al validar el codigo de barras: ".$th];
     return json_encode($res);
   }
+  
 
 }//fin funcion guardarProducto
 
@@ -402,6 +420,7 @@ function genCodigo($idEmpresa){
     $empPad = str_pad($idEmpresa, 5, '0', STR_PAD_LEFT);
 
     $codigo = $empPad.$numPad;
+    //antes de asignarlo, verificamos si no esta regisrtrado
     
     $res = ['status'=>'ok','data'=>$codigo];
     return json_encode($res);
