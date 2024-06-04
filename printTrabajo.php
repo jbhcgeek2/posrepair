@@ -51,6 +51,31 @@ if(!empty($_SESSION['usuarioPOS'])){
     $anticipo = $trabajo->data->anticipo;
     $fechaEntrega = $trabajo->data->fechaEntrega;
 
+    // consultamos lascondiciones de  la empresa
+
+    $sqlCondi = "SELECT * FROM CONDICIONSERVICIO WHERE empresaID = '$idEmprersa' 
+    AND estatusCondicion  = '1'";
+    $queryCondi = mysqli_query($conexion, $sqlCondi);
+    $condicionesServicio = "";
+    if(mysqli_num_rows($queryCondi) > 0){
+      while($fetchCondi = mysqli_fetch_assoc($queryCondi)){
+        $condition = $fetchCondi['condicionServicio'];
+
+        $condicionesServicio .= "- ".$condition."<br>";
+      }//fin del while
+    }else{
+      //no tiene condiciones, pornemos por default
+      $condicionesServicio = '- Toda Revision causa honorarios ($100.00).<br>
+                
+      - NOTA:Riesgo de dano en pantallas (LCD-Touch) en la intervencion del equipo 
+      sin responsabilidad del establecimiento notificacion al cliente oral y escrito.<br>
+      
+      - Despues de 60 dias de la fecha de entrega otorgo mi(s) equipo(s) y accesorios a Telcel
+      para que disponga de ellos.<br>
+      - Sin comprobante no se entregara su articulo.<br>
+      - No nos hacemos responsables por articulos no registrados en su nota.';
+    }
+
     
     ?> 
     <!DOCTYPE html>
@@ -174,15 +199,7 @@ if(!empty($_SESSION['usuarioPOS'])){
               </tr>
               <tr>
                 <th style="text-align: justify;font-size:13px;font-weight:normal;">
-                  - Toda Revision causa honorarios ($100.00).<br>
-                
-                  - NOTA:Riesgo de dano en pantallas (LCD-Touch) en la intervencion del equipo 
-                  sin responsabilidad del establecimiento notificacion al cliente oral y escrito.<br>
-                  
-                  - Despues de 60 dias de la fecha de entrega otorgo mi(s) equipo(s) y accesorios a Telcel
-                  para que disponga de ellos.<br>
-                  - Sin comprobante no se entregara su articulo.<br>
-                  - No nos hacemos responsables por articulos no registrados en su nota.
+                  <?php echo $condicionesServicio; ?>
                 </th>
               </tr>
                 
