@@ -373,6 +373,45 @@ function getNameProd($idProd,$empresa){
     return json_encode($res);
   }
 }
+
+function genCodigo($idEmpresa){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+  //en caso de que el usuario no indique un codigo de barras existente
+  //le generaresmo uno automaticamente
+
+  //el codigo estara compuesto de la siguiente informacion
+  // $codigo = $empresa $numArti
+  //$codigo = 00003-00000023
+  //$codigo = 0000300000023
+
+  //consultamos el numero de articulos y sumamos 1
+  $sql = "SELECT COUNT(*) AS numArti FROM ARTICULOS WHERE empresaID = '$idEmpresa'";
+  try {
+    $query = mysqli_query($conexion, $sql);
+    $fetch = mysqli_fetch_assoc($query);
+
+    $num = $fetch['numArti'];
+    $numPad = str_pad($num, 8, '0', STR_PAD_LEFT);
+    $empPad = str_pad($idEmpresa, 5, '0', STR_PAD_LEFT);
+
+    $codigo = $empPad.$numPad;
+    
+    $res = ['status'=>'ok','data'=>$codigo];
+    return json_encode($res);
+  } catch (\Throwable $th) {
+    //throw $th;
+    $res = ['status'=>'error','mensaje'=>'Codigo no procesado'];
+    return json_encode($res);
+  }
+
+}
 // precioUnitario = 17
 // precioCOmpra = 12.20
 // existencia = 150
