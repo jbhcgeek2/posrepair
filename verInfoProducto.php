@@ -99,7 +99,7 @@ session_start();
                           }
 
                           echo "<br>
-                          <div class='row mt-3'>
+                          <div class=' mt-3'>
                             $imagenCodigo
                           </div>";
                           
