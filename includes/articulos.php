@@ -421,9 +421,25 @@ function genCodigo($idEmpresa){
 
     $codigo = $empPad.$numPad;
     //antes de asignarlo, verificamos si no esta regisrtrado
-    
-    $res = ['status'=>'ok','data'=>$codigo];
-    return json_encode($res);
+    $sql2 = "SELECT COUNT(*) AS numArti FROM ARTICULOS WHERE empresaID = '$idEmpresa' AND 
+    codigoProducto = '$codigo'";
+    try {
+      $query2 = mysqli_query($conexion, $sql2);
+      $fetch2 = mysqli_fetch_assoc($query2);
+      if($fetch2['numArti'] == 0){
+        $res = ['status'=>'ok','data'=>$codigo];
+        return json_encode($res);
+      }else{
+        $numPad = str_pad($num, 8, '0', STR_PAD_LEFT);
+        $empPad = str_pad($idEmpresa, 4, '0', STR_PAD_LEFT);
+        $codigo = "1".$empPad.$numPad;
+        
+        $res = ['status'=>'ok','data'=>$codigo];
+        return json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+    }
   } catch (\Throwable $th) {
     //throw $th;
     $res = ['status'=>'error','mensaje'=>'Codigo no procesado'];
