@@ -98,8 +98,12 @@ session_start();
                             echo "<img src='".$datosProd->data->imgArticulo."' class='imagenProducto'>";
                           }
 
-                          echo "<br>";
-                          echo $imagenCodigo;
+                          echo "<br>
+                          <div class='row mt-3'>
+                            $imagenCodigo
+                          </div>";
+                          
+                          // echo $imagenCodigo;
                         ?>
                       </div>
 
