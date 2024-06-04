@@ -21,11 +21,28 @@ session_start();
       $datosProd = json_decode(getInfoproducto($idEmpresaSesion,$idProd));
       // if($datosProd->status == "ok")
       // print_r($datosProd);
+
+      // $codigoBarras = genCodigo($idEmpresaSesion);
+      // $codigoBarras = json_decode($codigoBarras);
+
+      // if($codigoBarras->status == "ok"){
+      //   $codigoBar = $codigoBarras->data;
+      // }else{
+      //   $codigoBar = $codigoBarras->mensaje;
+      // }
+
+      // $rutaBarcode = php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal
+      
+      
+      
       if($datosProd->status == "ok"){
         $error = "no";
         // $datos = json_decode($datosProd->data);
         // echo count($datosProd->data);
         // print_r($datosProd);
+        $codigoBar = $datosProd->data->codigoProducto;
+        $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'2&codetype=Code25&orientation=horizontal&size=40&print=true&sizefactor=1">';
+
       }else{
         //ocurrio un error al consultar la informacion
         $error = "si";
@@ -57,6 +74,7 @@ session_start();
 						            <h4 class="app-card-title">Informacion del Producto</h4>
 							        </div><!--//col-->
 
+                      
 							        <div class="col-auto">
 								        <div class="card-header-action">
 									        <a href="verProductos.php">Ver Productos</a>
@@ -81,6 +99,13 @@ session_start();
                           }else{
                             echo "<img src='".$datosProd->data->imgArticulo."' class='imagenProducto'>";
                           }
+
+                          echo "<br>
+                          <div class=' mt-3'>
+                            $imagenCodigo
+                          </div>";
+                          
+                          // echo $imagenCodigo;
                         ?>
                       </div>
 
@@ -129,6 +154,8 @@ session_start();
                               <!-- <option value="NA">Inactivo</option> -->
                             </select>
                           </div>
+
+                          
 
                           <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                             <label for="categoria" class="form-label">Categoria</label>

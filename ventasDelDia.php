@@ -87,18 +87,47 @@ session_start();
                           if($rolUsuario == "Administrador"){
                             $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
                             WHERE a.fechaVenta = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
+
+                            $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+                            empresaMovID = '$idEmpresaSesion' AND conceptoMov IN ('15','2')";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
+
+                            $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+                            empresaMovID = '$idEmpresaSesion' AND usuarioMov = '$idUsuarioN' AND conceptoMov IN ('15','2')";
                           }else{
                             //el usuario encargado podra ver las ventas de todos
                             //los usuarios, pero solo de su susucrsal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
                             WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
+
+                            $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+                            empresaMovID = '$idEmpresaSesion' AND sucursalMovID = '$idSucursalN' AND conceptoMov IN ('15','2')";
+                          }
+
+                          $gastos = 0;
+                          $ingresos = 0;
+                          try {
+                            $queryGasto = mysqli_query($conexion, $sqlGasto);
+                            while($fetchGasto = mysqli_fetch_assoc($queryGasto)){
+                              $montoG = $fetchGasto['montoMov'];
+                              $tipoG = $fetchGasto['tipoMov']; //E o S
+                              
+                              if($tipoG == "E"){
+                                //es un ingreso extra
+                                $ingresos = $ingresos + $montoG;
+                              }else{
+                                //es un gasto
+                                $gastos = $gastos + $montoG;
+                              }
+                            }//fin del while
+                          } catch (\Throwable $th) {
+                            //throw $th;
                           }
 
 
@@ -156,6 +185,8 @@ session_start();
 
                                 $totalVenta = $totalVenta + $total;
 
+                                $finalCajero = ($totalVenta + $ingresos) - $gastos;
+
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr>
@@ -177,6 +208,7 @@ session_start();
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
+<<<<<<< HEAD
                               <td colspan='3' class='fw-bold' style='text-align:right'>Otros Ingresos</td>
                               <td class='fw-bold'>$".number_format($ingresoCajero,2)."</td>
                               <td colspan='3'> </td>
@@ -184,15 +216,28 @@ session_start();
                               <tr>
                               <td colspan='3' class='fw-bold' style='text-align:right'>Gastos</td>
                               <td class='fw-bold'>$".number_format($gastoCajero,2)."</td>
+=======
+                              <td colspan='3' class='' style='text-align:right'>Otros Ingresos</td>
+                              <td class=''>$".number_format($ingresos,2)."</td>
+                              <td colspan='3'> </td>
+                              </tr>
+                              <tr>
+                              <td colspan='3' class='' style='text-align:right'>Gastos</td>
+                              <td class=''>$".number_format($gastos,2)."</td>
+>>>>>>> main
                               <td colspan='3'> </td>
                               </tr>
                               <tr>
                               <td colspan='3' class='fw-bold' style='text-align:right'>Total Cajero</td>
                               <td class='fw-bold'>$".number_format($finalCajero,2)."</td>
                               <td colspan='3'> </td>
+<<<<<<< HEAD
                               </tr>
 
                               ";
+=======
+                              </tr>";
+>>>>>>> main
                             }else{
                               //sin resultados
                               echo "<tr>

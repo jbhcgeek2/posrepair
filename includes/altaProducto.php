@@ -40,6 +40,19 @@ if(!empty($_SESSION['usuarioPOS'])){
       $empresa = json_decode($empresa);
       $idEmpresaSesion = $empresa->dato;
       $imgArti = "";
+
+      if($codigo != ""){
+        //si tiene capturada un codigo
+      }else{
+        //no tiene captutrado codigo, lo generamos
+        $newCod = genCodigo($idEmpresaSesion);
+        $newCod = json_decode($newCod);
+        if($newCod->status == "ok"){
+          $codigo = $newCod->data;
+        }
+
+      }
+
       if(!empty($_FILES['imagenProducto']['name'])){
         //se detecto que el producto tiene imagen cargada
         $img = $_FILES['imagenProducto'];

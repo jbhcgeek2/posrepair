@@ -21,11 +21,11 @@ btnEnvia.addEventListener("click", function(){
       Swal.fire({
         title: 'Registro Completo',
         text: 'Deseas registrar otro producto?',
-        icon: 'warning',
+        icon: 'success',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
+        confirmButtonText: 'Registrar Otro',
         cancelButtonText: 'No, terminar'
       }).then((result)=>{
         if(result.isConfirmed){

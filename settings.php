@@ -33,7 +33,7 @@ session_start();
 			    <h1 class="app-page-title">Configuracion de cuenta</h1>
 			    
 			    
-			        <div class="col-12 col-lg-12">
+			        <div class="col-12 col-lg-12 mb-3">
 				        <div class="app-card app-card-chart h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
@@ -185,6 +185,137 @@ session_start();
 
                       
                     </div>
+
+					        </div><!--//app-card-body-->
+				        </div><!--//app-card-->
+			        </div><!--//col-->
+
+
+
+
+              <div class="col-12 col-lg-6 col-sm-12">
+				        <div class="app-card app-card-chart h-100 shadow-sm">
+					        <div class="app-card-header p-3">
+						        <div class="row justify-content-between align-items-center">
+
+							        <div class="col-auto">
+						            <h4 class="app-card-title">Condiciones de Servicio</h4>
+							        </div><!--//col-->
+
+                      <div class="col-auto">
+								        <div class="card-header-action">
+									        <a href="#!" id="newCondicionServ" data-bs-toggle="modal" data-bs-target='#modalNewCondi'>Nueva</a>
+								        </div><!--//card-header-actions-->
+							        </div><!--//col-->
+
+						        </div><!--//row-->
+					        </div><!--//app-card-header-->
+                  <div class="app-card-body p-3 p-lg-4">
+
+                  <div class="modal fade" id="modalNewCondi" tabindex='-1' aria-labelledby='modalNewCondiLabel' araia-hidden='true'>
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5">Nueva Condicion de Servicio</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-sm-12 mb-3">
+                              <label for="newCondicion" class="form-label">Condicion de Servicio</label>
+                              <input type="text" id="newCondicion" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="button" class="btn btn-primary" id="btnNewCondi">Registrar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <?php 
+                    //consultamos las condiciones de servicio
+                    $sqlConDi = "SELECT * FROM CONDICIONSERVICIO WHERE empresaID = '$idEmpresaSesion' AND estatusCondicion = '1'";
+                    try {
+                      $queryConDi = mysqli_query($conexion, $sqlConDi);
+                      if(mysqli_num_rows($queryConDi) > 0){
+                        $cuerpoCondi = "";
+                        while($fetchConDi = mysqli_fetch_assoc($queryConDi)){
+                          $condicion = $fetchConDi['condicionServicio'];
+                          $idCondicion = $fetchConDi['idCondicion'];
+
+                          $cuerpoCondi .= "<tr>
+                          <td>$condicion</td>
+                            <td>
+                              <a href='#!' class='btn btn-primary' id='editCondi|$idCondicion' onClick='editCondicion(this.id)'>Editar</a>
+                            </td>
+                          </tr>";
+                        }//fin del while
+
+                        echo "<table class='table'>
+                          <thead>
+                            <tr>
+                              <th>Condicion</th>
+                              <th>Editar</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            $cuerpoCondi
+                          </tbody>
+                        </table>";
+                        
+                      }else{
+                        //sin registro de condicion
+                        echo "<div class='row' style='text-align:center;'>
+                          <h5>Sin Condiciones</h5>
+                          <div class='text-center'>
+                            <img src='../assets/images/no-data.png' style='width:150px;'>
+                          </div>
+                        </div>";
+                      }
+                    } catch (\Throwable $th) {
+                      //throw $th;
+                    }
+                  ?>
+					        
+                  <div class="modal fade" id="modalEditCondicion" tabindex="-1" aria-labelledby="modalEditCondicionLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="modalEditCondicionLabel">Editar Condicion</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+
+                            <div class="col-sm-12 col-lg-8 mb-3">
+                              <label for="condicionEdit" class="form-label">Condicion</label>
+                              <input type="text" id="condicionEdit" class="form-control">
+                            </div>
+
+                            <input type="hidden" id="condicionIdEdit" name="condicionIdEdit">
+
+                            <div class="col-sm-12 col-lg-4 mb-3">
+                              <label for="statusCondicionEdit" class="form-label">Estatus</label>
+                              <select name="statusCondicionEdit" id="statusCondicionEdit" class="form-select">
+                                <option value="" disabled>Seleccione...</option>
+                                <option value="1" selected>Activo</option>
+                                <option value="0">Inactivo</option>
+                              </select>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="button" class="btn btn-primary" id="btnActualizaCondi">Actualizar</button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
 
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->

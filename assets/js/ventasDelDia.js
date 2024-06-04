@@ -17,22 +17,23 @@ btnBuscar.addEventListener('click', function(){
 
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
-      console.log(res);
+      // console.log(res);
+      // console.log(res.data.gastos);
       //verificamos la respuesta
       if(res.status == "ok"){
-        if(res.data.length > 0){
+        if(res.data.tabla.length > 0){
           //si se tienen datos. hacemos un ciclo for
           //para reconstruir la tabla
           let sumaTotal = 0;
           let tabla = '';
-          for (let x = 0; x < res.data.length; x++) {
-            let fechaVenta = res.data[x].fechaVenta;
-            let prodName = res.data[x].producto;
-            let cantVenta = res.data[x].cantidad;
-            let usVenta = res.data[x].usuario;
-            let sucName = res.data[x].sucursalVenta;
-            let totVenta = res.data[x].totalVenta;
-            let idVen = res.data[x].venta;
+          for (let x = 0; x < res.data.tabla.length; x++) {
+            let fechaVenta = res.data.tabla[x].fechaVenta;
+            let prodName = res.data.tabla[x].producto;
+            let cantVenta = res.data.tabla[x].cantidad;
+            let usVenta = res.data.tabla[x].usuario;
+            let sucName = res.data.tabla[x].sucursalVenta;
+            let totVenta = res.data.tabla[x].totalVenta;
+            let idVen = res.data.tabla[x].venta;
 
             sumaTotal = parseFloat(sumaTotal) + parseFloat(totVenta);
 
@@ -52,10 +53,37 @@ btnBuscar.addEventListener('click', function(){
           }//fin del for
           //insertamos el row de totales
           const formattedNumber = sumaTotal.toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+          let gastos = res.data.gastos;
+          let ingresos = res.data.ingresos;
+          let final = (parseFloat(sumaTotal) + parseFloat(ingresos)) - parseFloat(gastos);
+
+          gastos = gastos.toLocaleString('en-US',{maximumFractionDigits:2});
+          ingresos = ingresos.toLocaleString('en-US',{maximumFractionDigits:2});
+          final = final.toLocaleString('en-US',{maximumFractionDigits:2});
+          
           tabla = tabla+`
           <tr>
-            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td colspan='3' class='fw-bold' style='text-align:right'>Subtotal</td>
             <td class='fw-bold'>$${formattedNumber}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='3' class='' style='text-align:right'>Otros Ingresos</td>
+            <td class=''>$${ingresos}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='3' class='' style='text-align:right'>Gastos</td>
+            <td class=''>$${gastos}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='3' class='fw-bold' style='text-align:right'>Total Venta</td>
+            <td class='fw-bold'>$${final}</td>
             <td></td>
             <td></td>
           </tr>

@@ -92,6 +92,59 @@ if(!empty($_SESSION['usuarioPOS'])){
       echo json_encode($res);
     }
     // $queryEmp = mysqli_query($conexion, $sqlEmp);
+  }elseif(!empty($_POST['newCondicion'])){
+    $condicion = $_POST['newCondicion'];
+
+    $sql = "INSERT INTO CONDICIONSERVICIO (condicionServicio,empresaID,estatusCondicion) VALUES 
+    ('$condicion','$idEmpresaSesion','1')";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      //se inserto crorecto
+      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      echo json_encode($res);
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar la condicion: '.$th];
+      echo json_encode($res);
+    }
+  }elseif(!empty($_POST['consultaCondi'])){
+    $condicion = $_POST['consultaCondi'];
+    
+    $sql = "SELECT * FROM CONDICIONSERVICIO WHERE idCondicion = '$condicion' 
+    AND empresaID = '$idEmpresaSesion'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 1){
+        $fetch = mysqli_fetch_assoc($query);
+        $res = ['status'=>'ok','data'=>$fetch,'mensaje'=>'operationComplete'];
+        echo json_encode($res);
+      }else{
+        //no se localizo
+        $res = ['status'=>'error','mensaje'=>'No fue posible localizar la condicion.'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la condicion'];
+      echo json_encode($res);
+    }
+  }elseif(!empty($_POST['condicionEdit'])){
+    $condicion = $_POST['condicionEdit'];
+    $idCondicion = $_POST['condicionData'];
+    $statusCondi = $_POST['statusEdit'];
+
+    $sql = "UPDATE CONDICIONSERVICIO SET condicionServicio = '$condicion', 
+    estatusCondicion = '$statusCondi' WHERE idCondicion = '$idCondicion' 
+    AND empresaID = '$idEmpresaSesion'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      //se completo la query
+      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      echo json_encode($res);
+    } catch (\Throwable $th) {
+      $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar la condicion'];
+      echo json_encode($res);
+    }
   }
 }else{
 
