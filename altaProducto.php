@@ -107,7 +107,7 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                           <label for="categoria" class="form-label"><strong class="text-warning">*</strong> Categoria</label>
                           <select name="categoria" id="categoria" class="form-select required">
                             <option value="" selected disabled>Seleccione...</option>
@@ -129,7 +129,7 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-5 mb-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
                           <label for="descripcion" class="form-label"><strong class="text-warning">*</strong> Descripcion</label>
                           <input type="text" class="form-control required" name="descripcion" id="descripcion">
                         </div>
