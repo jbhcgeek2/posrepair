@@ -22,18 +22,17 @@ session_start();
       // if($datosProd->status == "ok")
       // print_r($datosProd);
 
-      $codigoBarras = genCodigo($idEmpresaSesion);
-      $codigoBarras = json_decode($codigoBarras);
+      // $codigoBarras = genCodigo($idEmpresaSesion);
+      // $codigoBarras = json_decode($codigoBarras);
 
-      if($codigoBarras->status == "ok"){
-        $codigoBar = $codigoBarras->data;
-      }else{
-        $codigoBar = $codigoBarras->mensaje;
-      }
+      // if($codigoBarras->status == "ok"){
+      //   $codigoBar = $codigoBarras->data;
+      // }else{
+      //   $codigoBar = $codigoBarras->mensaje;
+      // }
 
       // $rutaBarcode = php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal
       
-      $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'2&codetype=Code25&orientation=horizontal&size=40&print=true&sizefactor=1">';
       
       
       if($datosProd->status == "ok"){
@@ -41,6 +40,9 @@ session_start();
         // $datos = json_decode($datosProd->data);
         // echo count($datosProd->data);
         // print_r($datosProd);
+        $codigoBar = $datosProd->data->codigoProducto;
+        $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'2&codetype=Code25&orientation=horizontal&size=40&print=true&sizefactor=1">';
+
       }else{
         //ocurrio un error al consultar la informacion
         $error = "si";
