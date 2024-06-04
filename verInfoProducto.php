@@ -167,7 +167,7 @@ session_start();
                           <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
                             <label for="codigo" class="form-label">Codigo</label>
                             <input type="text" class="form-control" id="codigoProducto" 
-                            name="codigoProducto" value="<?php echo $datosProd->data->codigoProducto." - ".$codigoBar; ?>">
+                            name="codigoProducto" value="<?php echo $datosProd->data->codigoProducto; ?>">
                           </div>
 
                           <div class="col-sm-12 col-md-6 mb-3">
