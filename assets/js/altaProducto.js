@@ -25,7 +25,7 @@ btnEnvia.addEventListener("click", function(){
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, Registrar',
+        confirmButtonText: 'Registrar Otro',
         cancelButtonText: 'No, terminar'
       }).then((result)=>{
         if(result.isConfirmed){

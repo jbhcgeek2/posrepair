@@ -30,6 +30,9 @@ session_start();
       }else{
         $codigoBar = $codigoBarras->mensaje;
       }
+
+      $imagenCodigo = '<img src="php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal>';
+      echo $imagenCodigo;
       if($datosProd->status == "ok"){
         $error = "no";
         // $datos = json_decode($datosProd->data);
@@ -66,6 +69,7 @@ session_start();
 						            <h4 class="app-card-title">Informacion del Producto</h4>
 							        </div><!--//col-->
 
+                      
 							        <div class="col-auto">
 								        <div class="card-header-action">
 									        <a href="verProductos.php">Ver Productos</a>
