@@ -98,9 +98,8 @@ session_start();
                             echo "<img src='".$datosProd->data->imgArticulo."' class='imagenProducto'>";
                           }
 
+                          echo "<br>";
                           echo $imagenCodigo;
-                          echo $imagenCodigo2;
-                          echo $imagenCodigo3;
                         ?>
                       </div>
 
