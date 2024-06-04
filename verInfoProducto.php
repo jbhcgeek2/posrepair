@@ -42,7 +42,7 @@ session_start();
         // print_r($datosProd);
         $codigoBar = $datosProd->data->codigoProducto;
         $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codabar&orientation=horizontal&size=40&print=true">';
-        $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=code25&orientation=horizontal&size=40&print=true">';
+        $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'2&codetype=code39&orientation=horizontal&size=40&print=true">';
 
       }else{
         //ocurrio un error al consultar la informacion
