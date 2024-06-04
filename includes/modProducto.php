@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+//mod producto
 if(!empty($_SESSION['usuarioPOS'])){
   //insertamos los archivos que necesitamos
   include("articulos.php");
@@ -38,6 +38,17 @@ if(!empty($_SESSION['usuarioPOS'])){
       $descripcion = $_POST['descripcion'];
       $codigo = $_POST['codigoProducto'];
       $proveedor = $_POST['proveedor'];
+
+      if($codigo == "" || $codigo == " " || empty($codigo)){
+        //no tiene informacion, le generamos un codigo
+        $newCod = genCodigoUpdate($idEmpresaSesion,$idProd);
+        $newCod = json_decode($newCod);
+        if($newCod->status == "ok"){
+          $codigo = $newCod->data;
+        }else{
+          $codigo = "error";
+        }
+      }
 
       //verificamos si se va a cambiar de imagen
       $imgArti = "";
