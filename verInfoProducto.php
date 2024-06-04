@@ -33,7 +33,7 @@ session_start();
 
       // $rutaBarcode = php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal
       
-      $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'2&codetype=Code25&orientation=horizontal&size=40&print=true&sizefactor=2">';
+      $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'2&codetype=Code25&orientation=horizontal&size=40&print=true&sizefactor=1">';
       
       
       if($datosProd->status == "ok"){

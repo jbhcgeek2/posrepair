@@ -103,7 +103,8 @@ function barcode( $filepath="", $text="0", $size="20", $orientation="horizontal"
 	// Pad the edges of the barcode
 	$code_length = 20;
 	if ($print) {
-		$text_height = 30;
+		// $text_height = 30;
+		$text_height = 25;
 	} else {
 		$text_height = 0;
 	}
