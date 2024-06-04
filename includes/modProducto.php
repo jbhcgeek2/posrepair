@@ -39,7 +39,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $codigo = $_POST['codigoProducto'];
       $proveedor = $_POST['proveedor'];
 
-      if($codigo == "" || $codigo == " "){
+      if($codigo == "" || $codigo == " " || empty($codigo)){
         //no tiene informacion, le generamos un codigo
         $newCod = genCodigoUpdate($idEmpresaSesion,$idProd);
         $newCod = json_decode($newCod);
