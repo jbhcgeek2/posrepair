@@ -45,6 +45,8 @@ if(!empty($_SESSION['usuarioPOS'])){
         $newCod = json_decode($newCod);
         if($newCod->status == "ok"){
           $codigo = $newCod->data;
+        }else{
+          $codigo = "error";
         }
       }
 
