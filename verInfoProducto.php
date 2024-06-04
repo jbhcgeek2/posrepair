@@ -31,7 +31,8 @@ session_start();
         $codigoBar = $codigoBarras->mensaje;
       }
 
-      $imagenCodigo = '<img src="php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal>';
+      // $rutaBarcode = php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal
+      $imagenCodigo = '<img src="php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal">';
       
       if($datosProd->status == "ok"){
         $error = "no";
