@@ -32,7 +32,7 @@ session_start();
       }
 
       $imagenCodigo = '<img src="php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=codebar&orientation=horizontal>';
-      echo $imagenCodigo;
+      
       if($datosProd->status == "ok"){
         $error = "no";
         // $datos = json_decode($datosProd->data);
@@ -94,6 +94,8 @@ session_start();
                           }else{
                             echo "<img src='".$datosProd->data->imgArticulo."' class='imagenProducto'>";
                           }
+
+                          echo $imagenCodigo;
                         ?>
                       </div>
 
@@ -142,6 +144,8 @@ session_start();
                               <!-- <option value="NA">Inactivo</option> -->
                             </select>
                           </div>
+
+                          
 
                           <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
