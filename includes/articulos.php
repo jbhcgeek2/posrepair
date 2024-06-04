@@ -467,7 +467,7 @@ function genCodigoUpdate($idEmpresa,$idProducto){
 
   //consultamos el numero de articulos y sumamos 1
   $sql = "SELECT COUNT(*) AS numArti FROM ARTICULOS WHERE empresaID = '$idEmpresa' 
-  AND idArticulo < $idArticulo";
+  AND idArticulo < $idProducto";
   try {
     $query = mysqli_query($conexion, $sql);
     $fetch = mysqli_fetch_assoc($query);
