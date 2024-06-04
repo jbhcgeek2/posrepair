@@ -472,7 +472,8 @@ function genCodigoUpdate($idEmpresa,$idProducto){
     $query = mysqli_query($conexion, $sql);
     $fetch = mysqli_fetch_assoc($query);
 
-    $num = $fetch['numArti']+1;
+    $num = $fetch['numArti'];
+    $num = $num + 1;
     $numPad = str_pad($num, 8, '0', STR_PAD_LEFT);
     $empPad = str_pad($idEmpresa, 5, '0', STR_PAD_LEFT);
 
