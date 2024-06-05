@@ -249,22 +249,7 @@ var lineChartConfig = {
 
 // Servicios mas vendidos
 
-const configBar = {
-  type: 'bar',
-  data: data,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Bar Chart'
-      }
-    }
-  },
-};
+
 
 const DATA_COUNT = 7;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
@@ -292,6 +277,22 @@ const data = {
       borderSkipped: false,
     }
   ]
+};
+const configBar = {
+  type: 'bar',
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  },
 };
 
 // Fin servicios mas vendidos
