@@ -247,7 +247,55 @@ var lineChartConfig = {
 // }
 
 
+// Servicios mas vendidos
 
+
+
+const DATA_COUNT = 7;
+const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+
+const labels2 = ['s','s','s','s','s','s'];
+const data2 = {
+  labels: labels2,
+  datasets: [
+    {
+      label: 'Fully Rounded',
+      data: ['21','12','12','12','12','12'],
+      borderColor: window.chartColors.gray,
+      backgroundColor: window.chartColors.gray,
+      borderWidth: 2,
+      borderRadius: Number.MAX_VALUE,
+      borderSkipped: false,
+    },
+    {
+      label: 'Small Radius',
+      data: ['asd','asd','asd','asd','asd'],
+      borderColor: window.chartColors.gray,
+      backgroundColor: window.chartColors.gray,
+      borderWidth: 2,
+      borderRadius: 5,
+      borderSkipped: false,
+    }
+  ]
+};
+const configBar = {
+  type: 'bar',
+  data: data2,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  },
+};
+
+// Fin servicios mas vendidos
 
 
 
@@ -257,6 +305,9 @@ window.addEventListener('load', function(){
 	
 	var lineChart = document.getElementById('canvas-linechart').getContext('2d');
 	window.myLine = new Chart(lineChart, lineChartConfig);
+
+	var lineChart2 = document.getElementById('canvas-linechart2').getContext('2d');
+	window.myLine = new Chart(lineChart2, configBar);
 	
 	// var barChart = document.getElementById('canvas-barchart').getContext('2d');
 	// window.myBar = new Chart(barChart, barChartConfig);
