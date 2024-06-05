@@ -545,8 +545,10 @@
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="table-responsive">
-							        
+						        <div class="row" id="">
+											<div class="chart-container">
+												<canvas id="canvas-linechart2" ></canvas>
+											</div>
 						        </div><!--//table-responsive-->
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
