@@ -261,8 +261,8 @@ const data2 = {
     {
       label: 'Fully Rounded',
       data: ['21','12','12','12','12','12'],
-      borderColor: Utils.CHART_COLORS.red,
-      backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
+      borderColor: window.chartColors.gray,
+      backgroundColor: window.chartColors.gray,
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
@@ -270,8 +270,8 @@ const data2 = {
     {
       label: 'Small Radius',
       data: ['asd','asd','asd','asd','asd'],
-      borderColor: Utils.CHART_COLORS.blue,
-      backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
+      borderColor: window.chartColors.gray,
+      backgroundColor: window.chartColors.gray,
       borderWidth: 2,
       borderRadius: 5,
       borderSkipped: false,
