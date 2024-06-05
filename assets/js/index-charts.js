@@ -254,7 +254,7 @@ var lineChartConfig = {
 const DATA_COUNT = 7;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
-const labels2 = Utils.months({count: 7});
+const labels2 = ['s','s','s','s','s','s'];
 const data2 = {
   labels: labels2,
   datasets: [
