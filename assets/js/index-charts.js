@@ -260,7 +260,7 @@ const data2 = {
   datasets: [
     {
       label: 'Fully Rounded',
-      data: Utils.numbers(NUMBER_CFG),
+      data: ['21','12','12','12','12','12'],
       borderColor: Utils.CHART_COLORS.red,
       backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
       borderWidth: 2,
@@ -269,7 +269,7 @@ const data2 = {
     },
     {
       label: 'Small Radius',
-      data: Utils.numbers(NUMBER_CFG),
+      data: ['asd','asd','asd','asd','asd'],
       borderColor: Utils.CHART_COLORS.blue,
       backgroundColor: Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
       borderWidth: 2,
