@@ -627,7 +627,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     }
     
     
-  }elseif(!empty($_POST['totalPago']) || $_POST['totalPago'] == "0"){
+  }elseif(isset($_POST['totalPago'])){
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
     $idEmprersa = json_decode($empresa)->dato;
