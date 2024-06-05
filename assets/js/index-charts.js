@@ -254,9 +254,9 @@ var lineChartConfig = {
 const DATA_COUNT = 7;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
-const labels = Utils.months({count: 7});
-const data = {
-  labels: labels,
+const labels2 = Utils.months({count: 7});
+const data2 = {
+  labels: labels2,
   datasets: [
     {
       label: 'Fully Rounded',
@@ -280,7 +280,7 @@ const data = {
 };
 const configBar = {
   type: 'bar',
-  data: data,
+  data: data2,
   options: {
     responsive: true,
     plugins: {
