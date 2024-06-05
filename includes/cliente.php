@@ -10,7 +10,8 @@ function verClientes($idEmpresa){
       }
     }
 
-    $sql = "SELECT * FROM CLIENTES WHERE clienteEmpresaID = '$idEmpresa'";
+    $sql = "SELECT * FROM CLIENTES WHERE clienteEmpresaID = '$idEmpresa' 
+    ORDER BY nombreCliente ASC";
     try {
       $query = mysqli_query($conexion, $sql);
       $data = [];
