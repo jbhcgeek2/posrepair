@@ -1,19 +1,20 @@
 
-<?php 
+<?php
 
 session_start();
 
 if(!empty($_SESSION['usuarioPOS'])){
+  include("conexion.php");
+  include("usuarios.php");
 
+  $usuario = $_SESSION['usuarioPOS'];
+
+  $empresa = datoEmpresaSesion($usuario,"id");
+  $empresa = json_decode($empresa);
+  $idEmpresaSesion = $empresa->dato;
+  
   if(!empty($_POST['getVentasWeek'])){
-    include("conexion.php");
-    include("usuarios.php");
-
-    $usuario = $_SESSION['usuarioPOS'];
-
-    $empresa = datoEmpresaSesion($usuario,"id");
-		$empresa = json_decode($empresa);
-		$idEmpresaSesion = $empresa->dato;
+    
 
     $hoy = date('N'); // Obtener el número del día de la semana actual
 
