@@ -41,7 +41,7 @@ session_start();
         // echo count($datosProd->data);
         // print_r($datosProd);
         $codigoBar = $datosProd->data->codigoProducto;
-        $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=code25&orientation=horizontal&size=40&print=true">';
+        $imagenCodigo = '<img src="../php-barcode-master/barcode.php?text='.$codigoBar.'&codetype=code128a&orientation=horizontal&size=40&print=true">';
 
       }else{
         //ocurrio un error al consultar la informacion
