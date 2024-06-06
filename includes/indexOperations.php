@@ -107,6 +107,31 @@ if(!empty($_SESSION['usuarioPOS'])){
     "datoSemActual"=>$datoSemActual,"datoSemPasada"=>$datoSemPasada];
     echo json_encode($res);
 
+  }elseif(!empty($_POST['getServWeek'])){
+
+    $sql = "SELECT distinct(a.servicioID),
+    (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
+    (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID) AS numTrabajos 
+    FROM TRABAJOS a WHERE a.empresaID = '$idEmpresaSesion' ORDER BY numTrabajos DESC LIMIT 6";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) > 0){
+        $data = [];
+        $i = 0;
+        while($fetch = mysqli_fetch_assoc($query)){
+          $data[$i] = $fetch;
+          $i++;
+        }//fin del while
+        $res = ['status'=>'ok','data'=>$data];
+        echo json_encode($res);
+      }else{
+        //sin datos
+        $res = ['status'=>'error','mensaje'=>'noData'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+    }
   }
 }
 

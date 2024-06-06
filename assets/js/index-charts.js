@@ -249,9 +249,18 @@ var lineChartConfig = {
 
 // Servicios mas vendidos
 
+let datoServ = new FormData();
+datoServ.append('getVentasWeek','yes');
+
+let envioServ = new XMLHttpRequest();
+envioServ.open('POST','../includes/indexOperations.php',false);
+envioServ.send(datoServ);
+
+let resServ = JSON.parse(envioServ.responseText);
+console.log(resServ);
 
 
-const DATA_COUNT = 5;
+const DATA_COUNT = 6;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
 const labels2 = ['1','2','3','4','5'];
