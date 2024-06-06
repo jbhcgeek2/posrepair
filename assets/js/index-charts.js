@@ -261,7 +261,7 @@ const data2 = {
     {
       label: 'Fully Rounded',
       data: ['21','12','12','12','12'],
-      borderColor: window.chartColors.green,
+      borderColor: window.chartColors.grey,
       backgroundColor: window.chartColors.green,
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
