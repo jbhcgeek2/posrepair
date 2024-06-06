@@ -295,6 +295,13 @@ const configBar = {
   data: data2,
   options: {
     responsive: true,
+		animations: {
+			radius: {
+				duration: 400,
+				easing: 'linear',
+				loop: (context) => context.active
+			}
+		},
     plugins: {
       legend: {
         position: 'top',
