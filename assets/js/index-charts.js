@@ -254,13 +254,13 @@ var lineChartConfig = {
 const DATA_COUNT = 7;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
-const labels2 = ['s','s','s','s','s','s'];
+const labels2 = ['1','2','3','4','5'];
 const data2 = {
   labels: labels2,
   datasets: [
     {
       label: 'Fully Rounded',
-      data: ['21','12','12','12','12','12'],
+      data: ['21','12','12','12','12'],
       borderColor: window.chartColors.green,
       backgroundColor: window.chartColors.green,
       borderWidth: 2,
