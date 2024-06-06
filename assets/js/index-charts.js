@@ -263,6 +263,7 @@ console.log(resServ);
 let labelServ = [];
 for(let c = 0; c < resServ.lenght; c++){
 	let auxServ = resServ.data[c].nombreServicio;
+	console.log(auxServ);
 	labelServ.push(auxServ);
 }//fin del for
 
