@@ -4,7 +4,7 @@
  	include("includes/head.php");
 ?>
 
-<body class="app">   	
+<body class="app">   
   <?php
     include("includes/header.php");
 		include("includes/conexion.php");
@@ -535,7 +535,7 @@
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
 							        <div class="col-auto">
-						            <h4 class="app-card-title">Trabajos mas solicitados</h4>
+						            <h4 class="app-card-title">Trabajos mas solicitados (Mensual)</h4>
 							        </div><!--//col-->
 							        <div class="col-auto">
 								        <div class="card-header-action">
