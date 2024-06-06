@@ -36,7 +36,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="verSucursales.php">Ver Trabajos</a>
+									        <a href="verTrabajos.php">Ver Trabajos</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
