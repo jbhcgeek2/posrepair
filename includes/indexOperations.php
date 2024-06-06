@@ -125,26 +125,47 @@ if(!empty($_SESSION['usuarioPOS'])){
     (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID AND month(b.fechaTrabajo) = $mesActual AND year(b.fechaTrabajo) = $anioActual) AS numTrabajos 
     FROM TRABAJOS a WHERE a.empresaID = '3'  ORDER BY numTrabajos DESC LIMIT 6";
 
+    $sql3 = "SELECT distinct(a.servicioID),
+    (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
+    (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID AND month(b.fechaTrabajo) = $mesAnte AND year(b.fechaTrabajo) = $anioAnte) AS numTrabajos 
+    FROM TRABAJOS a WHERE a.empresaID = '3'  ORDER BY numTrabajos DESC LIMIT 6";
+
     $sql = "SELECT distinct(a.servicioID),
     (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
     (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID) AS numTrabajos 
     FROM TRABAJOS a WHERE a.empresaID = '$idEmpresaSesion' ORDER BY numTrabajos DESC LIMIT 6";
     try {
+      $data = [];
       $query = mysqli_query($conexion, $sql2);
       if(mysqli_num_rows($query) > 0){
-        $data = [];
+        
         $i = 0;
         while($fetch = mysqli_fetch_assoc($query)){
           $data['MesActual'][$i] = $fetch;
           $i++;
         }//fin del while
-        $res = ['status'=>'ok','data'=>$data];
-        echo json_encode($res);
+        // $res = ['status'=>'ok','data'=>$data];
+        // echo json_encode($res);
       }else{
         //sin datos
-        $res = ['status'=>'error','mensaje'=>'noData'];
-        echo json_encode($res);
+        // $res = ['status'=>'ok','data'=>'noData'];
+        // echo json_encode($res);
       }
+
+      $query2 = mysqli_query($conexion, $sql3);
+      if(mysqli_num_rows($query2) > 0){
+        $x = 0;
+        while($fetch2 = mysqli_fetch_assoc($query2)){
+          $data['MesAnte'][$x] = $fetch2;
+          $x++;
+        }//fin del while2
+      }else{
+        $data['MesAnte'][0] = "noData";
+      }
+
+      $res = ['status'=>'ok','data'=>$data];
+      echo json_encode($res);
+
     } catch (\Throwable $th) {
       //throw $th;
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los servicios: '.$th];
