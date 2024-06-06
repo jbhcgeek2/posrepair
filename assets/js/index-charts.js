@@ -22,7 +22,7 @@ envio.open('POST','../includes/indexOperations.php',false);
 envio.send(datos);
 
 let res = JSON.parse(envio.responseText);
-console.log(res);
+// console.log(res);
 // console.log(res.actual['sabado']);
 // console.log(res.datoSemActual);
 
@@ -249,31 +249,54 @@ var lineChartConfig = {
 
 // Servicios mas vendidos
 
+let datoServ = new FormData();
+datoServ.append('getServWeek','yes');
+
+let envioServ = new XMLHttpRequest();
+envioServ.open('POST','../includes/indexOperations.php',false);
+envioServ.send(datoServ);
+
+let resServ = JSON.parse(envioServ.responseText);
+// console.log(resServ);
+
+//hacemos el arreglo de las labels
+let labelServ = [];
+let dataServ = [];
+let dataServAnt = [];
+for(let c = 0; c < resServ.data.length; c++){
+	let auxServ = resServ.data[c].nombreServicio;
+	let cantServ = resServ.data[c].numTrabajos;
+	let cantServAnt = resServ.data[c].numTrabajosAnt;
+	// console.log(auxServ);
+	labelServ.push(auxServ);
+	dataServ.push(cantServ);
+	dataServAnt.push(cantServAnt);
+}//fin del for
 
 
-const DATA_COUNT = 7;
+const DATA_COUNT = 6;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
-const labels2 = ['s','s','s','s','s','s'];
+const labels2 = labelServ;
 const data2 = {
   labels: labels2,
   datasets: [
     {
-      label: 'Fully Rounded',
-      data: ['21','12','12','12','12','12'],
-      borderColor: window.chartColors.gray,
-      backgroundColor: window.chartColors.gray,
+      label: 'Mes Actual',
+      data: dataServ,
+      borderColor: window.chartColors.green,
+      backgroundColor: window.chartColors.green,
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
     },
-    {
-      label: 'Small Radius',
-      data: ['asd','asd','asd','asd','asd'],
-      borderColor: window.chartColors.gray,
-      backgroundColor: window.chartColors.gray,
+		{
+      label: 'Mes Anterior',
+      data: dataServAnt,
+      borderColor: window.chartColors.grey,
+      backgroundColor: window.chartColors.grey,
       borderWidth: 2,
-      borderRadius: 5,
+      borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
     }
   ]
@@ -283,6 +306,13 @@ const configBar = {
   data: data2,
   options: {
     responsive: true,
+		animations: {
+			radius: {
+				duration: 400,
+				easing: 'linear',
+				loop: (context) => context.active
+			}
+		},
     plugins: {
       legend: {
         position: 'top',

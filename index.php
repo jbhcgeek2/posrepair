@@ -4,7 +4,7 @@
  	include("includes/head.php");
 ?>
 
-<body class="app">   	
+<body class="app">   
   <?php
     include("includes/header.php");
 		include("includes/conexion.php");
@@ -407,7 +407,7 @@
 											
 											$sqlProd = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID";
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID";
 											$queryProd = mysqli_query($conexion, $sqlProd);
 											$totalesVentas = 0;
 
@@ -418,7 +418,7 @@
 
 											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID ORDER BY totales DESC LIMIT 5";
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID ORDER BY totales DESC LIMIT 5";
 											$queryProd2 = mysqli_query($conexion, $sqlProd2);
 
 											while($fetch7 = mysqli_fetch_assoc($queryProd2)){
@@ -535,7 +535,7 @@
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
 							        <div class="col-auto">
-						            <h4 class="app-card-title">Trabajos mas solicitados</h4>
+						            <h4 class="app-card-title">Trabajos mas solicitados (Mensual)</h4>
 							        </div><!--//col-->
 							        <div class="col-auto">
 								        <div class="card-header-action">
