@@ -261,7 +261,7 @@ console.log(resServ);
 
 //hacemos el arreglo de las labels
 let labelServ = [];
-for(let c = 0; c < resServ.length; c++){
+for(let c = 0; c < resServ.data.length; c++){
 	let auxServ = resServ.data[c].nombreServicio;
 	console.log(auxServ);
 	labelServ.push(auxServ);
