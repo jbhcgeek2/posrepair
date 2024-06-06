@@ -266,15 +266,6 @@ const data2 = {
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
-    },
-    {
-      label: 'Small Radius',
-      data: ['23','asd','asd','asd','asd'],
-      borderColor: window.chartColors.gray,
-      backgroundColor: window.chartColors.gray,
-      borderWidth: 2,
-      borderRadius: 5,
-      borderSkipped: false,
     }
   ]
 };
