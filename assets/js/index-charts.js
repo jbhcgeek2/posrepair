@@ -259,11 +259,18 @@ envioServ.send(datoServ);
 let resServ = JSON.parse(envioServ.responseText);
 console.log(resServ);
 
+//hacemos el arreglo de las labels
+let labelServ = [];
+for(let c = 0; c < resServ.lenght; c++){
+	let auxServ = resServ.data[c].nombreServicio;
+	labelServ.push(auxServ);
+}//fin del for
+
 
 const DATA_COUNT = 6;
 const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
 
-const labels2 = ['1','2','3','4','5'];
+const labels2 = labelServ;
 const data2 = {
   labels: labels2,
   datasets: [
