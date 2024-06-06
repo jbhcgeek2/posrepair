@@ -418,7 +418,7 @@
 
 											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) group by articuloID ORDER BY totales DESC LIMIT 5";
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID ORDER BY totales DESC LIMIT 5";
 											$queryProd2 = mysqli_query($conexion, $sqlProd2);
 
 											while($fetch7 = mysqli_fetch_assoc($queryProd2)){
