@@ -12,7 +12,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   $empresa = datoEmpresaSesion($usuario,"id");
   $empresa = json_decode($empresa);
   $idEmpresaSesion = $empresa->dato;
-  
+
   if(!empty($_POST['getVentasWeek'])){
     
 
@@ -110,12 +110,27 @@ if(!empty($_SESSION['usuarioPOS'])){
 
   }elseif(!empty($_POST['getServWeek'])){
 
+    //consultamos el mes actual y el anio actual
+    $mesActual = date('n');
+    $anioActual = date('Y');
+
+    $mesAnte = date('n', strtotime('-1 month'));
+    $anioAnte = date('Y');
+    if($mesActual == "1"){
+      $anioAnte = date('Y', strtotime('-1 year'));
+    }
+
+    $sql2 = "SELECT distinct(a.servicioID),
+    (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
+    (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID AND month(b.fechaTrabajo) = $mesActual AND year(b.fechaTrabajo) = $anioActual) AS numTrabajos 
+    FROM TRABAJOS a WHERE a.empresaID = '3'  ORDER BY numTrabajos DESC LIMIT 6";
+
     $sql = "SELECT distinct(a.servicioID),
     (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
     (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID) AS numTrabajos 
     FROM TRABAJOS a WHERE a.empresaID = '$idEmpresaSesion' ORDER BY numTrabajos DESC LIMIT 6";
     try {
-      $query = mysqli_query($conexion, $sql);
+      $query = mysqli_query($conexion, $sql2);
       if(mysqli_num_rows($query) > 0){
         $data = [];
         $i = 0;

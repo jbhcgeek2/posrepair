@@ -279,7 +279,7 @@ const data2 = {
   labels: labels2,
   datasets: [
     {
-      label: 'Trabajos Mas Solicitados',
+      label: 'Trabajos Solicitados',
       data: dataServ,
       borderColor: window.chartColors.grey,
       backgroundColor: window.chartColors.green,
