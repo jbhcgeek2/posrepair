@@ -142,7 +142,7 @@ if(!empty($_SESSION['usuarioPOS'])){
         
         $i = 0;
         while($fetch = mysqli_fetch_assoc($query)){
-          $data['MesActual'][$i] = $fetch;
+          $data[$i] = $fetch;
           $i++;
         }//fin del while
         $res = ['status'=>'ok','data'=>$data];

@@ -262,12 +262,15 @@ console.log(resServ);
 //hacemos el arreglo de las labels
 let labelServ = [];
 let dataServ = [];
+let dataServAnt = [];
 for(let c = 0; c < resServ.data.length; c++){
 	let auxServ = resServ.data[c].nombreServicio;
 	let cantServ = resServ.data[c].numTrabajos;
+	let cantServAnt = resServ.data[c].numTrabajosAnt;
 	// console.log(auxServ);
 	labelServ.push(auxServ);
 	dataServ.push(cantServ);
+	dataServAnt.push(cantServAnt);
 }//fin del for
 
 
@@ -281,7 +284,7 @@ const data2 = {
     {
       label: 'Mes Actual',
       data: dataServ,
-      borderColor: window.chartColors.grey,
+      borderColor: window.chartColors.green,
       backgroundColor: window.chartColors.green,
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
@@ -289,9 +292,9 @@ const data2 = {
     },
 		{
       label: 'Mes Anterior',
-      data: dataServ,
+      data: dataServAnt,
       borderColor: window.chartColors.grey,
-      backgroundColor: window.chartColors.green,
+      backgroundColor: window.chartColors.grey,
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
