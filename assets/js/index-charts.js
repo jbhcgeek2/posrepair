@@ -279,7 +279,16 @@ const data2 = {
   labels: labels2,
   datasets: [
     {
-      label: 'Trabajos Solicitados',
+      label: 'Mes Actual',
+      data: dataServ,
+      borderColor: window.chartColors.grey,
+      backgroundColor: window.chartColors.green,
+      borderWidth: 2,
+      borderRadius: Number.MAX_VALUE,
+      borderSkipped: false,
+    },
+		{
+      label: 'Mes Anterior',
       data: dataServ,
       borderColor: window.chartColors.grey,
       backgroundColor: window.chartColors.green,
