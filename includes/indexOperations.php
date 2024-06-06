@@ -131,7 +131,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       }
     } catch (\Throwable $th) {
       //throw $th;
-      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los servicios.'];
+      $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los servicios: '.$th];
       echo json_encode($res);
     }
   }
