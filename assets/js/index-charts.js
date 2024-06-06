@@ -261,10 +261,13 @@ console.log(resServ);
 
 //hacemos el arreglo de las labels
 let labelServ = [];
+let dataServ = [];
 for(let c = 0; c < resServ.data.length; c++){
 	let auxServ = resServ.data[c].nombreServicio;
-	console.log(auxServ);
+	let cantServ = resServ.data[c].numTrabajos;
+	// console.log(auxServ);
 	labelServ.push(auxServ);
+	dataServ.push(cantServ);
 }//fin del for
 
 
@@ -277,7 +280,7 @@ const data2 = {
   datasets: [
     {
       label: 'Fully Rounded',
-      data: ['21','12','12','12','12'],
+      data: dataServ,
       borderColor: window.chartColors.grey,
       backgroundColor: window.chartColors.green,
       borderWidth: 2,
