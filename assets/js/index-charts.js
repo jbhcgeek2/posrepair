@@ -279,10 +279,11 @@ const data2 = {
   labels: labels2,
   datasets: [
     {
-      label: 'Fully Rounded',
+      label: 'Trabajos Mas Solicitados',
       data: dataServ,
       borderColor: window.chartColors.grey,
-      backgroundColor: window.chartColors.green,
+      // backgroundColor: window.chartColors.green,
+			backgroundColor: colorize(false),
       borderWidth: 2,
       borderRadius: Number.MAX_VALUE,
       borderSkipped: false,
