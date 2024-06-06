@@ -250,7 +250,7 @@ var lineChartConfig = {
 // Servicios mas vendidos
 
 let datoServ = new FormData();
-datoServ.append('getVentasWeek','yes');
+datoServ.append('getServWeek','yes');
 
 let envioServ = new XMLHttpRequest();
 envioServ.open('POST','../includes/indexOperations.php',false);
