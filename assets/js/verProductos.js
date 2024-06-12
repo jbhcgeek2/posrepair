@@ -1,6 +1,6 @@
 let buscarP = document.getElementById('buscarProduct');
 
-buscarP.addEventListener('change',function(){
+buscarP.addEventListener('keyUp',function(){
     alert('aa');
 });
 
