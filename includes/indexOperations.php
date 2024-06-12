@@ -124,12 +124,12 @@ if(!empty($_SESSION['usuarioPOS'])){
     (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
     (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID AND month(b.fechaTrabajo) = $mesActual AND year(b.fechaTrabajo) = $anioActual) AS numTrabajos,
     (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID AND month(b.fechaTrabajo) = $mesAnte AND year(b.fechaTrabajo) = $anioAnte) AS numTrabajosAnt 
-    FROM TRABAJOS a WHERE a.empresaID = '3'  ORDER BY numTrabajos DESC LIMIT 6";
+    FROM TRABAJOS a WHERE a.empresaID = '$idEmpresaSesion'  ORDER BY numTrabajos DESC LIMIT 6";
 
     $sql3 = "SELECT distinct(a.servicioID),
     (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
     (SELECT COUNT(*) FROM TRABAJOS b WHERE a.servicioID = b.servicioID AND month(b.fechaTrabajo) = $mesAnte AND year(b.fechaTrabajo) = $anioAnte) AS numTrabajos 
-    FROM TRABAJOS a WHERE a.empresaID = '3'  ORDER BY numTrabajos DESC LIMIT 6";
+    FROM TRABAJOS a WHERE a.empresaID = '$idEmpresaSesion'  ORDER BY numTrabajos DESC LIMIT 6";
 
     // $sql = "SELECT distinct(a.servicioID),
     // (SELECT c.nombreServicio FROM SERVICIOS c WHERE a.servicioID = c.idServicio) AS nombreServicio,
