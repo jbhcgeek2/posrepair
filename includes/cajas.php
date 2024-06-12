@@ -657,7 +657,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
     //antes de continuar, verificamos si las cantidades indicadas existen en la empresa
     $sqlAux = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
-    a.articuloID = b.articuloID WHERE a.ventaID IS NULL AND a.usuarioVenta = '$usuario'";
+    a.articuloID = b.articuloID WHERE b.sucursalID = '$idSucursal' AND a.ventaID IS NULL AND a.usuarioVenta = '$usuario'";
     $queryAux = mysqli_query($conexion, $sqlAux);
     $cantidadSuperada = 0;
     while($fetchAux = mysqli_fetch_assoc($queryAux)){
