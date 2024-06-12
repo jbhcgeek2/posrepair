@@ -1,4 +1,6 @@
 {
   "vscode-pets.theme": "forest",
-  "vscode-pets.petSize": "medium"
+  "vscode-pets.petSize": "medium",
+  "IDX.aI.enableInlineCompletion": true,
+  "IDX.aI.enableCodebaseIndexing": true
 }

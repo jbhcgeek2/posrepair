@@ -45,13 +45,13 @@ session_start();
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoForm">
       
-                    <form id="dataProducto">
+                    
                       <div class="row">
 
                         <div class="input-group col-md-6 mb-3">
                           <!-- <label for="buscarProd">Buscar Producto</label> -->
                           <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
-                          <input type="text" id="buscarProd" class="form-control" placeholder="Buscar Producto">
+                          <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto">
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-lg-12">
@@ -124,7 +124,7 @@ session_start();
                           ?>
                         </div>
                       </div>
-                    </form>
+                    
 
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
@@ -146,11 +146,11 @@ session_start();
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 
-    
+     
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/altaProducto.js"></script>
+    <script src="assets/js/verProductos.js"></script>
 </body>
-</html> 
+</html>
 
