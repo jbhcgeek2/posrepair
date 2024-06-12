@@ -1,5 +1,5 @@
-let buscar = document.getElementById('buscarProd');
+let buscarP = document.getElementById('buscarProduct');
 
-buscar.addEventListener('change',function(){
+buscarP.addEventListener('change',function(){
     alert('aa');
-})
+});
