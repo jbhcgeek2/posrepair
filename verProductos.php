@@ -45,7 +45,7 @@ session_start();
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoForm">
       
-                    
+                     
                       <div class="row">
 
                         <div class="input-group col-md-6 mb-3">
