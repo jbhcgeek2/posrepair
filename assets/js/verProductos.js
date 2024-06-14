@@ -13,7 +13,7 @@ buscarP.addEventListener('keyup',function(){
 
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/verProducto.php',false);
-    envio.send(datos);
+    envio.send(datos); 
 
     if(envio.status == 200){
         alert(envio.responseText);

@@ -22,7 +22,16 @@ if(!empty($?_SESSSION['usuarioPOS'])){
 
     if(!empty($_POST['busProds'])){
         //metodo para buscar productos
-        echo $_POST['busProds'];
+        $busqueda = $_POST['busProds'];
+
+        $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND nombreArticulo LIKE '%$busqueda%'";
+        try {
+            $query = mysqli_query($conexion,$sql);
+            $result = mysqli_fetch_all($query,MYSQLI_ASSOC);
+            echo json_encode($result);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }
 
