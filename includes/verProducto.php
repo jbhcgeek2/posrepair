@@ -44,6 +44,8 @@ if(!empty($_SESSSION['usuarioPOS'])){
             echo json_encode($res);
         } catch (\Throwable $th) {
             //throw $th;
+            $data = ["status"=>'error',"mensaje"=>$th];
+            echo json_encode($res);
         }
     }
 }
