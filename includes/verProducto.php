@@ -27,8 +27,19 @@ if(!empty($?_SESSSION['usuarioPOS'])){
         $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND nombreArticulo LIKE '%$busqueda%'";
         try {
             $query = mysqli_query($conexion,$sql);
-            $result = mysqli_fetch_all($query,MYSQLI_ASSOC);
-            echo json_encode($result);
+            $res = [];
+            $x =0;
+            if(mysqli_num_rows($query) > 0){
+                
+                while($fetch = mysqli_fetch_assoc($query)){
+                    $res[$x] = $fetch;
+                    $x++;
+                }
+            
+            }else{
+                //sin datos
+            }
+            echo json_encode($res);
         } catch (\Throwable $th) {
             //throw $th;
         }
