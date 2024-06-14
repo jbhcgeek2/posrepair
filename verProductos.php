@@ -48,11 +48,19 @@ session_start();
                      
                       <div class="row">
 
-                        <div class="input-group col-md-6 mb-3">
-                          <!-- <label for="buscarProd">Buscar Producto</label> -->
-                          <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
-                          <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto">
+                        <div class="col-sm-12 col-md-4">
+
                         </div>
+
+                        <div class="col-sm-12 col-md-8">
+                          <div class="input-group col-md-6 mb-3">
+                            <!-- <label for="buscarProd">Buscar Producto</label> -->
+                            <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto">
+                          </div>
+                        </div>
+
+                        
 
                         <div class="col-md-12 col-sm-12 col-lg-12">
                           <?php
