@@ -38,7 +38,9 @@ if(!empty($_SESSSION['usuarioPOS'])){
             
             }else{
                 //sin datos
+                $res = "NoData";
             }
+            $data = ["status"=>'ok',"data"=>$res];
             echo json_encode($res);
         } catch (\Throwable $th) {
             //throw $th;

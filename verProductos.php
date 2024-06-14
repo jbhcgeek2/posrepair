@@ -71,7 +71,7 @@ session_start();
                                         <th class="text-center">Ver Mas</th>
                                       </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="resProdBus">
                                       <?php 
                                         for($x = 0; $x < count($productos->data); $x++){
 

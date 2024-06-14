@@ -16,7 +16,17 @@ buscarP.addEventListener('keyup',function(){
     envio.send(datos); 
 
     if(envio.status == 200){
-        alert(envio.responseText);
+        let res = JSON.parse(envio.responseText);
+        let contenido = "";
+        if(res.status == "ok"){
+            //cargamos los datos a la table
+            for(let x = 0; x < res.data.length; x++){
+
+            }//fin del for
+        }else{
+            //se ha producido un error
+        }
+        // alert(envio.responseText);
     }else{
         Swal.fire(
             'Servidor Inalcansable',
