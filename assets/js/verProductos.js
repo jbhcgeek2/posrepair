@@ -5,7 +5,7 @@ buscarP.addEventListener('change',function(){
 });
 
 
-buscarP.addEventListener('keyup',function(){
+buscarP.addEventListener('change',function(){
     let buscar = buscarP.value;
     // console.log(buscar);
     let datos = new FormData();
