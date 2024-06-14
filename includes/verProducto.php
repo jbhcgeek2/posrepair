@@ -2,7 +2,7 @@
 
 session_start();
 
-if(!empty($?_SESSSION['usuarioPOS'])){
+if(!empty($_SESSSION['usuarioPOS'])){
     include("empresas.php");
     include("conexion.php");
     include("usuarios.php");
