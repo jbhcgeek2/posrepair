@@ -49,7 +49,9 @@ session_start();
                       <div class="row">
 
                         <div class="col-sm-12 col-md-4">
-
+                          <select name="catBus" id="catBus">
+                            <option value="" selected>Seleccione...</option>
+                          </select>
                         </div>
 
                         <div class="col-sm-12 col-md-8">
