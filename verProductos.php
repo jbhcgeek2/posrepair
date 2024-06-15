@@ -50,7 +50,7 @@ session_start();
 
                         <div class="col-sm-12 col-md-4">
                           <!-- <label for="catBus" class="form-label">Categoria</label> -->
-                          <select name="catBus" id="catBus" class="form-select">
+                          <select name="catBus" id="catBus" class="form-select" onchange="buscarProd()">
                             <option value="" selected>Categorias</option>
                             <?php
                               //consultaremos las categorias de la empresa

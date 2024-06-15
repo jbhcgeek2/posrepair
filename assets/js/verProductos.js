@@ -5,11 +5,16 @@ buscarP.addEventListener('change',function(){
 });
 
 
-buscarP.addEventListener('change',function(){
-    let buscar = buscarP.value;
+function buscarProd(){
+    let cat = document.getElementById('catBus').value;
+    let buscar = document.getElementById('buscarProducto').value;
+
     // console.log(buscar);
     let datos = new FormData();
     datos.append('busProds',buscar);
+    datos.append('catBus',cat);
+    datos.append('sendBusqueda','yes');
+
 
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/verProducto.php',false);
@@ -34,4 +39,4 @@ buscarP.addEventListener('change',function(){
             'error'
         )
     }
-}); 
+}

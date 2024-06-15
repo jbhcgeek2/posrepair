@@ -20,7 +20,7 @@ if(!empty($_SESSSION['usuarioPOS'])){
     $idUsuario = $dataUSer->idUsuario;
     //detectamos el metodo que desea implementar
 
-    if(!empty($_POST['busProds'])){
+    if(!empty($_POST['sendBusqueda'])){
         //metodo para buscar productos
         $busqueda = $_POST['busProds'];
 
