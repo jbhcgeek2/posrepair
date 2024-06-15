@@ -51,6 +51,20 @@ session_start();
                         <div class="col-sm-12 col-md-4">
                           <select name="catBus" id="catBus">
                             <option value="" selected>Seleccione...</option>
+                            <?php
+                              //consultaremos las categorias de la empresa
+                              $salCat = "SELECT * FROM CATEGORIA WHERE empresaID = '$idEmpresaSesion'";
+                              try {
+                                $queryCat = mysqli_query($conexion, $salCat);
+                                while($rowCat = mysqli_fetch_array($queryCat)){
+                                  $idCat = $rowCat['idCategoria'];
+                                  $nombreCat = $rowCat['nombreCategoria'];
+                                  echo "<option value='$idCat'>$nombreCat</option>";
+                               }
+                              } catch (\Throwable $th) {
+                                echo "<option value=''>Error</option>";
+                              } 
+                            ?>
                           </select>
                         </div>
 
