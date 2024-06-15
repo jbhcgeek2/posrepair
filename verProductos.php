@@ -49,9 +49,9 @@ session_start();
                       <div class="row">
 
                         <div class="col-sm-12 col-md-4">
-                          <label for="catBus" class="form-label">Categoria</label>
+                          <!-- <label for="catBus" class="form-label">Categoria</label> -->
                           <select name="catBus" id="catBus" class="form-select">
-                            <option value="" selected>Seleccione...</option>
+                            <option value="" selected>Categorias</option>
                             <?php
                               //consultaremos las categorias de la empresa
                               $salCat = "SELECT * FROM CATEGORIA WHERE empresaID = '$idEmpresaSesion'";
