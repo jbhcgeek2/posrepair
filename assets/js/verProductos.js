@@ -23,6 +23,7 @@ function buscarProd(){
     if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
         let contenido = "";
+        document.getElementById('resProdBus').innerHTML = res;
         if(res.status == "ok"){
             //cargamos los datos a la table
             for(let x = 0; x < res.data.length; x++){
