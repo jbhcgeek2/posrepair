@@ -22,9 +22,10 @@ if(!empty($_SESSSION['usuarioPOS'])){
 
     if(!empty($_POST['sendBusqueda'])){
         //metodo para buscar productos
-        $busqueda = $_POST['busProds'];
+        $producto = $_POST['busProds'];
+        $cat = $_POST['catBus'];
 
-        $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND nombreArticulo LIKE '%$busqueda%'";
+        $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND nombreArticulo LIKE '%$producto%'";
         try {
             $query = mysqli_query($conexion,$sql);
             $res = [];
