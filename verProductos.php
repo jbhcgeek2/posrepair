@@ -45,14 +45,39 @@ session_start();
                   
 					        <div class="app-card-body p-3 p-lg-4" id="contenidoForm">
       
-                    
+                     
                       <div class="row">
 
-                        <div class="input-group col-md-6 mb-3">
-                          <!-- <label for="buscarProd">Buscar Producto</label> -->
-                          <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
-                          <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto">
+                        <div class="col-sm-12 col-md-4">
+                          <!-- <label for="catBus" class="form-label">Categoria</label> -->
+                          <select name="catBus" id="catBus" class="form-select" onchange="buscarProd()">
+                            <option value="" selected>Categorias</option>
+                            <?php
+                              //consultaremos las categorias de la empresa
+                              $salCat = "SELECT * FROM CATEGORIA WHERE empresaID = '$idEmpresaSesion'";
+                              try {
+                                $queryCat = mysqli_query($conexion, $salCat);
+                                while($rowCat = mysqli_fetch_array($queryCat)){
+                                  $idCat = $rowCat['idCategoria'];
+                                  $nombreCat = $rowCat['nombreCategoria'];
+                                  echo "<option value='$idCat'>$nombreCat</option>";
+                               }
+                              } catch (\Throwable $th) {
+                                echo "<option value=''>Error</option>";
+                              } 
+                            ?>
+                          </select>
                         </div>
+
+                        <div class="col-sm-12 col-md-8">
+                          <div class="input-group col-md-6 mb-3">
+                            <!-- <label for="buscarProd">Buscar Producto</label> -->
+                            <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" onchange="buscarProd()">
+                          </div>
+                        </div>
+
+                        
 
                         <div class="col-md-12 col-sm-12 col-lg-12">
                           <?php
@@ -71,7 +96,7 @@ session_start();
                                         <th class="text-center">Ver Mas</th>
                                       </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="resProdBus">
                                       <?php 
                                         for($x = 0; $x < count($productos->data); $x++){
 

@@ -702,7 +702,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             //una vez proc4esado el ticket, se actualizaran las cantidades en el inventario
             //para ello realizaremos la consulta anterior
             $sqlAux2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
-            a.articuloID = b.articuloID WHERE a.ventaID = '$idVenta' AND a.usuarioVenta = '$usuario'";
+            a.articuloID = b.articuloID WHERE a.ventaID = '$idVenta' AND a.usuarioVenta = '$usuario' AND b.sucursalID = '$idSucursal'";
             $queryAux2 = mysqli_query($conexion, $sqlAux2);
             while($fetchAux2 = mysqli_fetch_assoc($queryAux2)){
               //obtendremos los datos de los articulos
