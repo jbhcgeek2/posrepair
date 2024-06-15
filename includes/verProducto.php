@@ -47,7 +47,11 @@ if(!empty($_SESSSION['usuarioPOS'])){
             $data = ["status"=>'error',"mensaje"=>$th];
             echo json_encode($res);
         }
+    }else{
+        echo "metodo no detectado";
     }
+}else{
+    echo "sin sesion";
 }
 
 ?>
