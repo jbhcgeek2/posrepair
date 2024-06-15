@@ -49,7 +49,8 @@ session_start();
                       <div class="row">
 
                         <div class="col-sm-12 col-md-4">
-                          <select name="catBus" id="catBus">
+                          <label for="catBus" class="form-label">Categoria</label>
+                          <select name="catBus" id="catBus" class="form-select">
                             <option value="" selected>Seleccione...</option>
                             <?php
                               //consultaremos las categorias de la empresa
