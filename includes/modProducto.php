@@ -101,6 +101,25 @@ if(!empty($_SESSION['usuarioPOS'])){
        $res = ["status"=>"error","mensaje"=>"Verifica que los campos esten capturados correctamente."];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['idSucursalCantDirect'])){
+    //seccion para actualizar la cantidad del producto directa
+    $idSucursal = $_POST['idSucursalCantDirect'];
+    $cantidad = $_POST['cantidad'];
+    $idArti = $_POST['articuloUpdateDirect'];
+
+    $sql = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$cantidad' 
+    WHERE sucursalID = '$idSucursal' AND articuloID = '$idArti'";
+    try {
+      $query = mysqli_query(conexion,$sql);
+      //podemos dar por realizada la instruccion
+      $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
+      echo json_encode($res);
+    } catch (\Throwable $th) {
+      //error en la actualizacion
+      $res = ["status"=>"error","mensaje"=>$th];
+      echo json_encode($res);
+
+    }
   }
 }
 
