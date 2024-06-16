@@ -23,7 +23,7 @@ function buscarProd(){
     // document.getElementById('auxRes').innerHTML = 'nada';
 
 
-    if(envio.status == 200){
+    if(envio.status == '200'){
         let res = JSON.parse(envio.responseText);
         let contenido = "";
         document.getElementById('auxRes').innerHTML = res.status;
