@@ -112,7 +112,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $sql = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$cantidad' 
     WHERE sucursalID = '$idSucursal' AND articuloID = '$idArti'";
     try {
-      $query = mysqli_query(conexion,$sql);
+      $query = mysqli_query($conexion,$sql);
       //podemos dar por realizada la instruccion
       $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
       echo json_encode($res);
