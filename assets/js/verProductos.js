@@ -27,9 +27,7 @@ function buscarProd(){
         document.getElementById('auxRes').innerHTML = res;
         if(res.status == "ok"){
             //cargamos los datos a la table
-            for(let x = 0; x < res.data.length; x++){
-
-            }//fin del for
+            
         }else{
             //se ha producido un error
         }
