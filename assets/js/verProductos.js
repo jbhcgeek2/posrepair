@@ -19,8 +19,8 @@ function buscarProd(){
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/verProducto.php',false);
     envio.send(datos); 
-    alert('pasa rey');
-    document.getElementById('auxRes').innerHTML = 'nada';
+    // alert('pasa rey');
+    // document.getElementById('auxRes').innerHTML = 'nada';
 
 
     if(envio.status == 200){
