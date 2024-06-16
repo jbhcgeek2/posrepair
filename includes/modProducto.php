@@ -6,6 +6,8 @@ if(!empty($_SESSION['usuarioPOS'])){
   include("articulos.php");
   include("usuarios.php");
   include("documentos.php");
+  include("conexion.php");
+
 
   if(!empty($_POST['nombreArticulo'])){
     //realizamos la actualizacion del producto
