@@ -26,7 +26,7 @@ function buscarProd(){
     if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
         let contenido = "";
-        document.getElementById('auxRes').innerHTML = res;
+        document.getElementById('auxRes').innerHTML = res.status;
         if(res.status == "ok"){
             //cargamos los datos a la table
             alert('sssss');
