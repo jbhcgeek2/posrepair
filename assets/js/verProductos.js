@@ -20,6 +20,8 @@ function buscarProd(){
     envio.open('POST','../includes/verProducto.php',false);
     envio.send(datos); 
     alert('pasa rey');
+    document.getElementById('auxRes').innerHTML = envio;
+
 
     if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
