@@ -48,7 +48,7 @@ session_start();
                      
                       <div class="row">
 
-                        <div class="col-sm-12 col-md-4">
+                        <div class="col-sm-12 col-md-4 mb-3">
                           <!-- <label for="catBus" class="form-label">Categoria</label> -->
                           <select name="catBus" id="catBus" class="form-select" onchange="buscarProd()">
                             <option value="" selected>Categorias</option>
@@ -69,7 +69,7 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-8">
+                        <div class="col-sm-12 col-md-8 mb-3">
                           <div class="input-group col-md-6 mb-3">
                             <!-- <label for="buscarProd">Buscar Producto</label> -->
                             <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -79,7 +79,7 @@ session_start();
 
                         
 
-                        <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="col-md-12 col-sm-12 col-lg-12" id="auxRes">
                           <?php
                             $productos = json_decode(getProductos($idEmpresaSesion));
                             if($productos->status == "ok"){

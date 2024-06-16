@@ -19,18 +19,20 @@ function buscarProd(){
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/verProducto.php',false);
     envio.send(datos); 
+    // alert('pasa rey');
+    // document.getElementById('auxRes').innerHTML = 'nada';
 
-    if(envio.status == 200){
+
+    if(envio.status == '200'){
         let res = JSON.parse(envio.responseText);
         let contenido = "";
-        document.getElementById('resProdBus').innerHTML = res;
+        document.getElementById('auxRes').innerHTML = res.status;
         if(res.status == "ok"){
             //cargamos los datos a la table
-            for(let x = 0; x < res.data.length; x++){
-
-            }//fin del for
+            alert('sssss');
         }else{
             //se ha producido un error
+            alert('error');
         }
         // alert(envio.responseText);
     }else{

@@ -1,5 +1,5 @@
 let btnUpdate = document.getElementById('btnUpdateProd');
-
+ 
 btnUpdate.addEventListener('click', function(){
   let datos = new FormData(document.getElementById('dataProducto'));
 
@@ -36,3 +36,55 @@ btnUpdate.addEventListener('click', function(){
     )
   }
 })
+
+function updateDirectCant(campo){
+  let auxDato = campo.split('cantidadSuc');
+  let idSucursal = auxDato[1];
+  let cantidad = document.getElementById(campo).value;
+  let articulo = document.getElementById('dataProd').value;
+  //preguntamos si desea cambia la cantidad
+  Swal.fire({
+    title: 'Modificacion directa?',
+    text: 'No se recommienda esta accion',
+    icon: 'warning',
+    showDenyButton: true,
+    confirmButtonText: 'Si',
+    denyButtonText: `No`
+  }).then((result)=>{
+    if(result.isConfirmed){
+      let datos = new FormData();
+      datos.append('idSucursalCantDirect',idSucursal);
+      datos.append('cantidad',cantidad);
+      datos.append('articuloUpdateDirect',articulo);
+
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/modProducto.php',false);
+      envio.send(datos);
+      if(envio.status == 200){
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          Swal.fire(
+            'Cantidad Actualizada',
+            'Se actualizo correctamente la cantidad del producto',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
+        }else{
+          Swal.fire(
+            'Ocurrio un error',
+            res.mensaje,
+            'error'
+          )
+        }
+      }else{
+        //no se puede actualizar
+        Swal.fire(
+          'Error de comunicacion',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
+    }
+  })
+}
