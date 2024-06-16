@@ -70,6 +70,12 @@ function updateDirectCant(campo){
           ).then(function(){
             location.reload();
           })
+        }else{
+          Swal.fire(
+            'Ocurrio un error',
+            res.mensaje,
+            'error'
+          )
         }
       }else{
         //no se puede actualizar
