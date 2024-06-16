@@ -20,7 +20,7 @@ function buscarProd(){
     envio.open('POST','../includes/verProducto.php',false);
     envio.send(datos); 
     alert('pasa rey');
-    document.getElementById('auxRes').innerHTML = 'alv';
+    document.getElementById('auxRes').innerHTML = envio.status;
 
 
     if(envio.status == 200){
