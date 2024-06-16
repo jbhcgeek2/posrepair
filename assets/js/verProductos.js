@@ -19,6 +19,7 @@ function buscarProd(){
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/verProducto.php',false);
     envio.send(datos); 
+    alert('pasa rey');
 
     if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
