@@ -20,7 +20,7 @@ function buscarProd(){
     envio.open('POST','../includes/verProducto.php',false);
     envio.send(datos); 
     alert('pasa rey');
-    document.getElementById('auxRes').innerHTML = envio.status;
+    document.getElementById('auxRes').innerHTML = 'nada';
 
 
     if(envio.status == 200){
@@ -29,9 +29,10 @@ function buscarProd(){
         document.getElementById('auxRes').innerHTML = res;
         if(res.status == "ok"){
             //cargamos los datos a la table
-            
+            alert('sssss');
         }else{
             //se ha producido un error
+            alert('error');
         }
         // alert(envio.responseText);
     }else{
