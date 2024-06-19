@@ -224,7 +224,7 @@ session_start();
                       // ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND 
                       // a.empresaID = '$idEmpresaSesion' AND a.fechaTermino != '0000-00-00' AND a.estatusTrabajo = 'Finalizado'";
                       $sqlTrab = "SELECT a.*,b.nombreCliente,b.telefonoCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
-                      ON a.clienteID = b.idClientes WHERE a.sucursalID = '$idSucursal' AND a.empresaID = '$idEmpresaSesion' 
+                      ON a.clienteID = b.idClientes WHERE a.empresaID = '$idEmpresaSesion' 
                       AND a.fechaTermino IS NOT NULL AND a.fechaCobro IS NULL AND a.estatusTrabajo = 'Finalizado'";
                       try {
                         $queryTrab = mysqli_query($conexion, $sqlTrab);
