@@ -210,7 +210,7 @@ session_start();
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th scope="col">Folio</th>
+                      <th scope="col">Folio X</th>
                       <th scope="col">Cliente</th>
                       <th scope="col">Telefono</th>
                       <th scope="col">Dispositivo</th>
