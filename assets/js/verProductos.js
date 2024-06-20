@@ -41,7 +41,7 @@ function buscarProd(){
                         <td class='text-center'>
                             <a class='btn btn-success' href='verInfoProducto.php?infoProd=${idProd}'>Ver</a>
                         </td>
-                    </tr>`;
+                    </tr>`; 
                 }//fin del for
 
             document.getElementById('resProdBus').innerHTML = contenido;
