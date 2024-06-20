@@ -35,13 +35,15 @@ function buscarProd(){
                     let nombreProd = res.data[x].nombreArticulo;
                     let precio = res.data[x].precioUnitario;
                     let idProd = res.data[x].idArticulo;
+                    let prove = res.data[x].nombreProveedor;
+                    let existen = res.data[x].existencia;
 
                     contenido = contenido+`
                     <tr>
                         <td>${nombreProd}</td>
-                        <td></td>
-                        <td>${precio}</td>
-                        <td></td>
+                        <td>${prove}</td>
+                        <td>$${precio}</td>
+                        <td>${existen}</td>
                         <td>
                             <a class='btn btn-success' href='verInfoProducto.php?infoProd=${idProd}'>Ver</a>
                         </td>

@@ -29,21 +29,29 @@ if(!empty($_SESSION['usuarioPOS'])){
 
         if($cat != "" && $producto != ""){
             //esta buscando por categoria y producto
-            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND categoriaID = '$cat' AND nombreArticulo LIKE '%$producto%' 
+            $sql = "SELECT *,(SELECT SUM(c.existenciaSucursal) FROM ARTICULOSUCURSAL 
+            c WHERE c.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a INNER JOIN PROVEEDORES b 
+            ON a.proveedorID = b.idProveedor WHERE a.empresaID = '$idEmpresaSesion' 
+            AND a.categoriaID = '$cat' AND a.nombreArticulo LIKE '%$producto%' 
             ORDER BY nombreArticulo ASC";
         }elseif($cat != "" && $producto == ""){
             //esta buscando solo por categoria
-            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND categoriaID = '$cat' ORDER BY nombreArticulo ASC";
+            $sql = "SELECT *,(SELECT SUM(c.existenciaSucursal) FROM ARTICULOSUCURSAL 
+            c WHERE c.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a INNER JOIN PROVEEDORES b 
+            ON a.proveedorID = b.idProveedor WHERE a.empresaID = '$idEmpresaSesion' 
+            AND a.categoriaID = '$cat' ORDER BY a.nombreArticulo ASC";
         }elseif($cat == "" && $producto != ""){
             //esta buscando solo por el nombre
-            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND nombreArticulo LIKE '%$producto%' ORDER BY nombreArticulo ASC";
+            $sql = "SELECT *,(SELECT SUM(c.existenciaSucursal) FROM ARTICULOSUCURSAL 
+            c WHERE c.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a INNER JOIN PROVEEDORES b 
+            ON a.proveedorID = b.idProveedor WHERE a.empresaID = '$idEmpresaSesion' 
+            AND a.nombreArticulo LIKE '%$producto%' ORDER BY a.nombreArticulo ASC";
         }else{
             //hacemos una busqueda del nombre
-            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND nombreArticulo LIKE '%$producto%' ORDER BY nombreArticulo ASC";
+            $sql = "SELECT *,(SELECT SUM(c.existenciaSucursal) FROM ARTICULOSUCURSAL 
+            c WHERE c.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a INNER JOIN PROVEEDORES b 
+            ON a.proveedorID = b.idProveedor WHERE a.empresaID = '$idEmpresaSesion' 
+            AND a.nombreArticulo LIKE '%$producto%' ORDER BY a.nombreArticulo ASC";
         }
 
         // $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
