@@ -93,7 +93,7 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Ventas en el mes</h4>
+							    <h4 class="stats-type mb-1">Valor de Inventario</h4>
 							    <div class="stats-figure">$<?php echo number_format($totVentas,2); ?></div>
 							    <div class="stats-meta <?php echo $colorVentas; ?>">
 								    <?php echo $iconoVentas; ?>
@@ -106,7 +106,7 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Gasto Mensual</h4>
+							    <h4 class="stats-type mb-1">Articulos Adquiridos (mes)</h4>
 							    <div class="stats-figure">$<?php echo number_format($montoGasto,2); ?></div>
 							    <div class="stats-meta <?php echo $colorGasto; ?>">
 								    <?php echo $iconoGasto; ?>
@@ -120,7 +120,7 @@
 				    <div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Ventas del Dia</h4>
+							    <h4 class="stats-type mb-1">Articulos Vendidos (mes)</h4>
 							    <div class="stats-figure">$<?php echo number_format($ventasHoy,2); ?></div>
 							    <div class="stats-meta">
 								  </div>
@@ -201,14 +201,9 @@
 							</div><!--//app-card-->
 						</div><!--//col-->
 
-			        
-			        
-			    </div><!--//row-->
 
 
-			    <div class="row g-4 mb-4">
-						
-				    <div class="col-12 col-lg-6">
+						<div class="col-12 col-lg-6">
 				        <div class="app-card app-card-progress-list h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
@@ -285,101 +280,19 @@
 				        </div><!--//app-card-->
 			        </div><!--//col-->
 
+			        
+			        
+			    </div><!--//row-->
 
-			        <div class="col-12 col-lg-6">
-				        <div class="app-card app-card-stats-table h-100 shadow-sm">
-					        <div class="app-card-header p-3">
-						        <div class="row justify-content-between align-items-center">
-							        <div class="col-auto">
-						            <h4 class="app-card-title">Ultimas ventas realizadas</h4>
-							        </div><!--//col-->
-							        <div class="col-auto">
-								        <div class="card-header-action">
-									        <a href="reportesCaja.php">Ver Reportes</a>
-								        </div><!--//card-header-actions-->
-							        </div><!--//col-->
-						        </div><!--//row-->
-					        </div><!--//app-card-header-->
-					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="table-responsive">
-							        <table class="table table-borderless mb-0">
-												<thead>
-													<tr>
-														<th class="meta">Cajero</th>
-														<th class="meta stat-cell">Sucursal</th>
-														<th class="meta stat-cell">Monto</th>
-													</tr>
-												</thead>
-												<tbody>
-													<!-- <tr>
-														<td><a href="#">google.com</a></td>
-														<td class="stat-cell">110</td>
-														<td class="stat-cell">
-															<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									  						<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-															</svg> 
-									            30%
-									          </td>
-													</tr> -->
-													<?php
-														//realizamos la consulta para ver los vendedores
-														$sqlVentas2 = "SELECT *,
-														(SELECT d.nombreSuc FROM DETALLEVENTA c INNER JOIN SUCURSALES d ON c.sucursalID = d.idSucursal 
-														WHERE c.ventaID = a.idVenta LIMIT 1) AS sucVenta FROM VENTAS a INNER JOIN USUARIOS b 
-														ON a.usuarioID = b.idUsuario WHERE a.empresaID = '$idEmpresaSesion' ORDER BY a.idVenta DESC LIMIT 6";
-														try {
-															$queryVentas2 = mysqli_query($conexion, $sqlVentas2);
-															if(mysqli_num_rows($queryVentas2) > 0){
-																while($fetchVentas2 = mysqli_fetch_assoc($queryVentas2)){
-																	$montoVenta = $fetchVentas2['totalVenta'];
-																	$nombreVenta = $fetchVentas2['nombreUsuario']." ".$fetchVentas2['apPaternoUsuario']." ".$fetchVentas2['apMaternoUsuario'];
-																	$sucVenta = $fetchVentas2['sucVenta'];
 
-																	echo "<tr>
-																	<td><a href='#!'>$nombreVenta</a></td>
-																	<td class='stat-cell'>$sucVenta</td>
-																	<td class='stat-cell'>$$montoVenta</td>
-																	</tr>";
-																	
-																}//fin del while 2
-															}else{
-																//sin ventas registradas
-															}
-														} catch (\Throwable $th) {
-															//ocurrio un error en la consulta de datos
-														}
-													?>
-													
-												</tbody>
-											</table>
-						        </div><!--//table-responsive-->
-					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-			        </div><!--//col-->
+			    <div class="row g-4 mb-4">
+						
+				    
 
-							<div class="col-12 col-lg-12">
-				        <div class="app-card app-card-stats-table h-100 shadow-sm">
-					        <div class="app-card-header p-3">
-						        <div class="row justify-content-between align-items-center">
-							        <div class="col-auto">
-						            <h4 class="app-card-title">Trabajos mas solicitados (Mensual)</h4>
-							        </div><!--//col-->
-							        <div class="col-auto">
-								        <div class="card-header-action">
-									        <a href="reportesCaja.php">Ver Reportes</a>
-								        </div><!--//card-header-actions-->
-							        </div><!--//col-->
-						        </div><!--//row-->
-					        </div><!--//app-card-header-->
-					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="row" id="">
-											<div class="chart-container">
-												<canvas id="canvas-linechart2" ></canvas>
-											</div>
-						        </div><!--//table-responsive-->
-					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-			        </div><!--//col-->
+
+			        
+
+							
 
 			    </div><!--//row-->
 
