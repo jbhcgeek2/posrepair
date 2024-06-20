@@ -30,7 +30,7 @@ function buscarProd(){
         
         if(res.status == "ok"){
             //verificamos si cuenta con resultados
-            if(res.mensaje != "NoData"){
+            if(res.data != "NoData"){
 
             }else{
                 //sin resultados
