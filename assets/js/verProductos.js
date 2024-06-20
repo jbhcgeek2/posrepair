@@ -31,11 +31,24 @@ function buscarProd(){
         if(res.status == "ok"){
             //verificamos si cuenta con resultados
             if(res.data != "NoData"){
+                for (let x = 0; x < res.data.length; x++) {
+                    let nombreProd = tes.data[x].nombreArticulo;
 
+                    contenido = contenido+`
+                    <tr>
+                        <td>${nombreProd}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>`;
+                }//fin del for
+                
+            document.getElementById('resProdBus').innerHTML = contenido;
             }else{
                 //sin resultados
                 contenido = `<tr>
-                <td colspan='5' style='text-align:center;'>Sin resultados</td>
+                <td colspan='5' style='text-align:center;'><h5>Sin resultados</h5></td>
                 </tr>`;
             }
             document.getElementById('resProdBus').innerHTML = contenido;
