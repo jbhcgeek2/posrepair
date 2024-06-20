@@ -26,13 +26,26 @@ function buscarProd(){
     if(envio.status == '200'){
         let res = JSON.parse(envio.responseText);
         let contenido = "";
-        document.getElementById('auxRes').innerHTML = res.status;
+        console.log(res);
+        
         if(res.status == "ok"){
-            //cargamos los datos a la table
-            alert('sssss');
+            //verificamos si cuenta con resultados
+            if(res.mensaje != "NoData"){
+
+            }else{
+                //sin resultados
+                contenido = `<tr>
+                <td colspan='5' style='text-align:center;'>Sin resultados</td>
+                </tr>`;
+            }
+            document.getElementById('auxRes').innerHTML = contenido;
         }else{
-            //se ha producido un error
-            alert('error');
+            Swal.fire(
+                'Ha ocurrido un error',
+                res.mensaje,
+                'error'
+            )
+            
         }
         // alert(envio.responseText);
     }else{
