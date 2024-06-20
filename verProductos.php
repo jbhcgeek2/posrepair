@@ -73,7 +73,7 @@ session_start();
                           <div class="input-group col-md-6 mb-3">
                             <!-- <label for="buscarProd">Buscar Producto</label> -->
                             <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Producto" onchange="buscarProd()">
+                            <input type="text" id="buscarProducto" class="form-control" placeholder="Buscar Por Nombre" onchange="buscarProd()">
                           </div>
                         </div>
 

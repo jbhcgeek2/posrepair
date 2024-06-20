@@ -25,7 +25,28 @@ if(!empty($_SESSION['usuarioPOS'])){
         $producto = $_POST['busProds'];
         $cat = $_POST['catBus'];
 
-        $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND nombreArticulo LIKE '%$producto%'";
+        $sql = "";
+
+        if($cat != "" && $producto != ""){
+            //esta buscando por categoria y producto
+            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
+            AND categoriaID = '$cat' AND nombreArticulo LIKE '%$producto%'";
+        }elseif($cat != "" && $producto == ""){
+            //esta buscando solo por categoria
+            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
+            AND categoriaID = '$cat'";
+        }elseif($cat == "" && $producto != ""){
+            //esta buscando solo por el nombre
+            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
+            AND nombreArticulo LIKE '%$producto%'";
+        }else{
+            //hacemos una busqueda del nombre
+            $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
+            AND nombreArticulo LIKE '%$producto%'";
+        }
+
+        // $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
+        // AND nombreArticulo LIKE '%$producto%'";
         try {
             $query = mysqli_query($conexion,$sql);
             $res = [];
@@ -42,11 +63,11 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $res = "NoData";
             }
             $data = ["status"=>'ok',"data"=>$res];
-            echo json_encode($res);
+            echo json_encode($data);
         } catch (\Throwable $th) {
             //throw $th;
             $data = ["status"=>'error',"mensaje"=>$th];
-            echo json_encode($res);
+            echo json_encode($data);
         }
     }else{
         echo "metodo no detectado";
