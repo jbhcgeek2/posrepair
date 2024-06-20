@@ -61,7 +61,7 @@
 			$totalEntradas = $fetchEntradas['total_ingresos'];
 		} catch (\Throwable $th) {
 			//throw $th;
-			$totalEntradas = "Error";
+			$totalEntradas = "0";
 		}
 
 
