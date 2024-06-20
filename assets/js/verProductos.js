@@ -32,7 +32,7 @@ function buscarProd(){
             //verificamos si cuenta con resultados
             if(res.data != "NoData"){
                 for (let x = 0; x < res.data.length; x++) {
-                    let nombreProd = tes.data[x].nombreArticulo;
+                    let nombreProd = res.data[x].nombreArticulo;
 
                     contenido = contenido+`
                     <tr>
@@ -43,7 +43,7 @@ function buscarProd(){
                         <td></td>
                     </tr>`;
                 }//fin del for
-                
+
             document.getElementById('resProdBus').innerHTML = contenido;
             }else{
                 //sin resultados
