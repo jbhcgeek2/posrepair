@@ -30,19 +30,20 @@ if(!empty($_SESSION['usuarioPOS'])){
         if($cat != "" && $producto != ""){
             //esta buscando por categoria y producto
             $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND categoriaID = '$cat' AND nombreArticulo LIKE '%$producto%'";
+            AND categoriaID = '$cat' AND nombreArticulo LIKE '%$producto%' 
+            ORDER BY nombreArticulo ASC";
         }elseif($cat != "" && $producto == ""){
             //esta buscando solo por categoria
             $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND categoriaID = '$cat'";
+            AND categoriaID = '$cat' ORDER BY nombreArticulo ASC";
         }elseif($cat == "" && $producto != ""){
             //esta buscando solo por el nombre
             $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND nombreArticulo LIKE '%$producto%'";
+            AND nombreArticulo LIKE '%$producto%' ORDER BY nombreArticulo ASC";
         }else{
             //hacemos una busqueda del nombre
             $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
-            AND nombreArticulo LIKE '%$producto%'";
+            AND nombreArticulo LIKE '%$producto%' ORDER BY nombreArticulo ASC";
         }
 
         // $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' 
