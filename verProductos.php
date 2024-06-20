@@ -121,6 +121,7 @@ session_start();
 
                                           echo "<tr>
                                             <td>$nombreProd</td>
+                                            <td></td>
                                             <td>$ $precio</td>
                                             <td class='text-center'>$existencia</td>
                                             <td class='text-center'>
