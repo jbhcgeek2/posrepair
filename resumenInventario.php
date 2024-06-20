@@ -259,13 +259,56 @@
 								<div class="app-card-header p-3">
 									<div class="row justify-content-between align-items-center">
 										<div class="col-auto">
-											<h4 class="app-card-title">Ventas de la semana</h4>
+											<h4 class="app-card-title">Productos Por Categoria</h4>
 										</div><!--//col-->
-										
 									</div><!--//row-->
 								</div><!--//app-card-header-->
 								<div class="app-card-body p-3 p-lg-4">
-									<p>Hola</p>
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Categoria</th>
+												<th>Existencia Articulos</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php 
+												// consultamos las categorias
+												$sqlCat = "SELECT idCategoria,nombreCategoria,empresaId FROM CATEGORIA 
+												WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1'";
+												try {
+													$queryCat = mysqli_query($conexion, $sqlCat);
+													while($fetchCat = mysqli_fetch_assoc($queryCat)){
+														$idCat = $fetchCat['idCategoria'];
+														$nombreCat = $fetchCat['nombreCategoria'];
+														$cantidadProds = 0;
+
+														$sqlProd = "SELECT *,(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b
+														WHERE b.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
+														AND empresaID = '$idEmpresaSesion'";
+														try {
+															$queryProd = mysqli_query($conexion, $sqlProd);
+															
+															while($fetchProd = mysqli_fetch_assoc($queryProd)){
+																$cant = $fetchProd['existencia'];
+																$cantidadProds = $cantidadProds + $cant;
+															}//fin del while prods
+														} catch (\Throwable $th) {
+															//throw $th;
+														}
+
+														echo "<tr>
+															<td>$nombreCat</td>
+															<td>$cantidadProds</td>
+														</tr>";
+
+													}//fin del while
+												} catch (\Throwable $th) {
+													//throw $th;
+												}
+											?>
+										</tbody>
+									</table>
 								</div><!--//app-card-body-->
 							</div><!--//app-card-->
 						</div><!--//col-->
@@ -282,9 +325,8 @@
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
 							        <div class="col-auto">
-						                <h4 class="app-card-title">Productos Mas Vendidos</h4>
+						            <h4 class="app-card-title">Productos Mas Vendidos</h4>
 							        </div><!--//col-->
-							        
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body">
