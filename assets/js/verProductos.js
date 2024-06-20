@@ -43,7 +43,7 @@ function buscarProd(){
                         <td>${nombreProd}</td>
                         <td>${prove}</td>
                         <td>$${precio}</td>
-                        <td>${existen}</td>
+                        <td style='text-align:center;'>${existen}</td>
                         <td>
                             <a class='btn btn-success' href='verInfoProducto.php?infoProd=${idProd}'>Ver</a>
                         </td>
