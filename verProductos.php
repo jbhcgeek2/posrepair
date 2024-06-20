@@ -105,9 +105,10 @@ session_start();
                                           $precio = number_format($productos->data[$x]->precioUnitario,2);
                                           $existencia = $productos->data[$x]->cantSucur;
                                           $idProducto = $productos->data[$x]->idArticulo;
-                                          $idProv = $productos->data[x]->proveedorID;
+                                          $idProv = $productos->data[$x]->proveedorID;
                                           //consultamos los proveedores
-                                          $sqlProv = "SELECT nombreProveedor FROM PROVEEDORES WHERE idProveedor = '$idProv'";
+                                          $sqlProv = "SELECT nombreProveedor FROM PROVEEDORES WHERE idProveedor = '$idProv' AND 
+                                          provEmpresaID = '$idEmpresaSesion'";
                                           $queryProv = mysqli_query($conexion, $sqlProv);
                                           $fetchProv = mysqli_fetch_assoc($queryProv);
 
