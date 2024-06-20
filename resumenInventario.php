@@ -21,7 +21,17 @@
 		}
 		
 		
-
+		//consultamos sucursales
+		$sqlSuc = "SELECT * FROM SUCURSALES WHERE empresaID = '$idEmpresaSesion'";
+		$querySuc = mysqli_query($conexion, $sqlSuc);
+		$sucSql = "";
+		while($fetchSuc = mysqli_fetch_assoc($querySuc)){
+			if($sucSql == ""){
+				$sucSql = $fetchSuc['idSucursal'];
+			}else{
+				$sucSql = $sucSql.",".$fetchSuc['idSucursal'];
+			}
+		}//fin sucursales
 
 
 		$fechaHoy = date('Y-m-d');
@@ -39,6 +49,22 @@
 		} catch (\Throwable $th) {
 			//throw $th;
 		}
+
+
+		$sqlEntradas = "SELECT SUM(cantidad) AS total_ingresos FROM DETALLEINGRESO 
+		WHERE (sucursalID IN ($sucSql)) AND MONTH(fechaMov) = MONTH(CURRENT_DATE()) 
+		AND YEAR(fechaMov) = YEAR(CURRENT_DATE()) AND tipoMov = 'Entrada'";
+		try {
+			$queryEntradas = mysqli_query($conexion, $sqlEntradas);
+			$fetchEntradas = mysqli_fetch_assoc($queryEntradas);
+
+			$totalEntradas = $fetchEntradas['total_ingresos'];
+		} catch (\Throwable $th) {
+			//throw $th;
+			$totalEntradas = "Error";
+		}
+
+
   ?>
     
     <div class="app-wrapper">
@@ -89,11 +115,8 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Articulos Adquiridos (mes)</h4>
-							    <div class="stats-figure">$<?php echo number_format($montoGasto,2); ?></div>
-							    <div class="stats-meta <?php echo $colorGasto; ?>">
-								    <?php echo $iconoGasto; ?>
-										<?php echo $porcentGasto; ?>%
-									</div>
+							    <div class="stats-figure">$<?php echo number_format($totalEntradas,0); ?></div>
+							    
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
@@ -170,7 +193,7 @@
 													}//fin del while
 													echo "<tr>
 															<td><strong>Total Global</strong></td>
-															<td>$totalTotal</td>
+															<td><strong>$totalTotal</strong></td>
 														</tr>";
 												} catch (\Throwable $th) {
 													//throw $th;
