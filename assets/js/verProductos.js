@@ -44,7 +44,7 @@ function buscarProd(){
                         <td>${prove}</td>
                         <td>$${precio}</td>
                         <td style='text-align:center;'>${existen}</td>
-                        <td>
+                        <td class='text-center'>
                             <a class='btn btn-success' href='verInfoProducto.php?infoProd=${idProd}'>Ver</a>
                         </td>
                     </tr>`;
