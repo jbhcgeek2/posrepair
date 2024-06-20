@@ -22,7 +22,7 @@
 		
 		
 		//consultamos sucursales
-		$sqlSuc = "SELECT * FROM SUCURSALES WHERE empresaID = '$idEmpresaSesion'";
+		$sqlSuc = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
 		$querySuc = mysqli_query($conexion, $sqlSuc);
 		$sucSql = "";
 		while($fetchSuc = mysqli_fetch_assoc($querySuc)){
@@ -50,7 +50,7 @@
 			//throw $th;
 		}
 
-		echo $sucSql;
+		
 		$sqlEntradas = "SELECT SUM(cantidad) AS total_ingresos FROM DETALLEINGRESO 
 		WHERE (sucursalID IN ($sucSql)) AND MONTH(fechaMov) = MONTH(CURRENT_DATE()) 
 		AND YEAR(fechaMov) = YEAR(CURRENT_DATE()) AND tipoMov = 'Entrada'";
