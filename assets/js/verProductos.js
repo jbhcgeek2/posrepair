@@ -33,14 +33,18 @@ function buscarProd(){
             if(res.data != "NoData"){
                 for (let x = 0; x < res.data.length; x++) {
                     let nombreProd = res.data[x].nombreArticulo;
+                    let precio = res.data[x].precioUnitario;
+                    let idProd = res.data[x].idArticulo;
 
                     contenido = contenido+`
                     <tr>
                         <td>${nombreProd}</td>
                         <td></td>
+                        <td>${precio}</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <a class='btn btn-success' href='verInfoProducto.php?infoProd=${idProd}'>Ver</a>
+                        </td>
                     </tr>`;
                 }//fin del for
 
