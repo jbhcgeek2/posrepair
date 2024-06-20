@@ -78,6 +78,36 @@ if(!empty($_SESSION['usuarioPOS'])){
             $data = ["status"=>'error',"mensaje"=>$th];
             echo json_encode($data);
         }
+    }elseif(!empty($_POST['buscarCodigo'])){
+        //seccion para buscar productos por codigo
+        $codigo = $_POST['buscarCodigo'];
+
+        $sql = "SELECT *,(SELECT SUM(c.existenciaSucursal) FROM ARTICULOSUCURSAL 
+        c WHERE c.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a INNER JOIN PROVEEDORES b 
+        ON a.proveedorID = b.idProveedor WHERE a.empresaID = '$idEmpresaSesion' 
+        AND a.codigoProducto = '$codigo' ORDER BY nombreArticulo ASC";
+        try {
+            $query = mysqli_query($conexion,$sql);
+            $res = [];
+            $x =0;
+            if(mysqli_num_rows($query) > 0){
+                
+                while($fetch = mysqli_fetch_assoc($query)){
+                    $res[$x] = $fetch;
+                    $x++;
+                }
+            
+            }else{
+                //sin datos
+                $res = "NoData";
+            }
+            $data = ["status"=>'ok',"data"=>$res];
+            echo json_encode($data);
+        } catch (\Throwable $th) {
+            //throw $th;
+            $data = ["status"=>'error',"mensaje"=>$th];
+            echo json_encode($data);
+        }
     }else{
         echo "metodo no detectado";
     }
