@@ -91,6 +91,7 @@ session_start();
                                     <thead>
                                       <tr>
                                         <th>Producto</th>
+                                        <th>Proveedor</th>
                                         <th>Precio</th>
                                         <th class="text-center">Existencia</th>
                                         <th class="text-center">Ver Mas</th>
