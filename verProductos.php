@@ -51,7 +51,7 @@ session_start();
                       <div class="col-sm-12 mb-4">
                         <label for="codigoProd" class="form-label">Buscar Por Codigo</label>
                         <input type="text" id="codigoProd" class="form-control"
-                        style="background-color:#43a047 ;color:white;" onchange="buscarCodigo()">
+                        style="background-color:#c8e6c9;" onchange="buscarCodigo()">
                       </div>
 
                         <div class="col-sm-12 col-md-4 mb-3">
