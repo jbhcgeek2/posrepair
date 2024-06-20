@@ -285,6 +285,7 @@
 													?>
 													<li class="submenu-item"><a class="submenu-link" href="altaProducto.php">Registrar Productos</a></li>
 													<li class="submenu-item"><a class="submenu-link" href="entradaMercancia.php">Movimientos de Mercancia</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="resumenInventario.php">Resumen de Inventario</a></li>
 													<?php
 												}
 											?>
