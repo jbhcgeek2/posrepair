@@ -81,6 +81,7 @@
 							    <h4 class="stats-type mb-1">Valor de Inventario</h4>
 							    <div class="stats-figure">$<?php echo number_format($valorInventario,2); ?></div>
 						    	<a class="app-card-link-mask" href="#"></a>
+								</div>
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 				    
