@@ -65,6 +65,18 @@
 			$totalEntradas = "0";
 		}
 
+		$sqlProdVenta = "SELECT SUM(b.cantidadVenta) AS ventasMes FROM VENTAS a INNER JOIN DETALLEVENTA b 
+		ON b.ventaID = a.idVenta WHERE a.empresaID = '4' AND (MONTH(a.fechaVenta) = MONTH(CURRENT_DATE()) 
+		AND YEAR(a.fechaVenta) = YEAR(CURRENT_DATE())) AND b.articuloID IS NOT NULL";
+		try {
+			$queryProdVenta = mysqli_query($conexion, $sqlProdVenta);
+			$fetchProdVenta = mysqli_fetch_assoc($queryProdVenta);
+
+			$ventasMes = $fetchProdVenta['ventasMes'];
+		} catch (\Throwable $th) {
+			//throw $th;
+		}
+
 
   ?>
     
@@ -92,7 +104,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Articulos Adquiridos (mes)</h4>
-							    <div class="stats-figure">$<?php echo number_format($totalEntradas); ?></div>
+							    <div class="stats-figure"><?php echo number_format($totalEntradas); ?></div>
 							    
 						    </div><!--//app-card-body-->
 						    <a class="app-card-link-mask" href="#"></a>
@@ -103,7 +115,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Articulos Vendidos (mes)</h4>
-							    <div class="stats-figure">$<?php echo number_format($ventasHoy,2); ?></div>
+							    <div class="stats-figure"><?php echo number_format($ventasMes); ?></div>
 							    <div class="stats-meta">
 								  </div>
 						    </div><!--//app-card-body-->
