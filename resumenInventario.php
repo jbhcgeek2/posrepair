@@ -75,7 +75,7 @@
 			    </div><!--//app-card-->
 				    
 			    <div class="row g-4 mb-4">
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-4">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Valor de Inventario</h4>
@@ -85,7 +85,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 				    
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-4">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Articulos Adquiridos (mes)</h4>
@@ -99,7 +99,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-4">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Articulos Vendidos (mes)</h4>
@@ -111,16 +111,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 
-				    <div class="col-6 col-lg-3">
-					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Inventario Actual</h4>
-							    <div class="stats-figure"><?php echo $artiActual; ?></div>
-							    <div class="stats-meta">Articulos Disponibles</div>
-						    </div><!--//app-card-body-->
-						    <a class="app-card-link-mask" href="#"></a>
-					    </div><!--//app-card-->
-				    </div><!--//col-->
+				    
 			    </div><!--//row-->
 
 			    <div class="row g-4 mb-4">
@@ -147,12 +138,14 @@
 												$sqlCat = "SELECT idCategoria,nombreCategoria,empresaId FROM CATEGORIA 
 												WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1' ORDER BY
 												nombreCategoria ASC";
+												$totalTotal = 0;
 												try {
 													$queryCat = mysqli_query($conexion, $sqlCat);
 													while($fetchCat = mysqli_fetch_assoc($queryCat)){
 														$idCat = $fetchCat['idCategoria'];
 														$nombreCat = $fetchCat['nombreCategoria'];
 														$cantidadProds = 0;
+														
 
 														$sqlProd = "SELECT a.idArticulo,(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b
 														WHERE b.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
@@ -163,6 +156,7 @@
 															while($fetchProd = mysqli_fetch_assoc($queryProd)){
 																$cant = $fetchProd['existencia'];
 																$cantidadProds = $cantidadProds + $cant;
+																$totalTotal = $totalTotal + $cant;
 															}//fin del while prods
 														} catch (\Throwable $th) {
 															//throw $th;
@@ -174,6 +168,10 @@
 														</tr>";
 
 													}//fin del while
+													echo "<tr>
+															<td><strong>Total Global</strong></td>
+															<td>$totalTotal</td>
+														</tr>";
 												} catch (\Throwable $th) {
 													//throw $th;
 												}
@@ -223,7 +221,7 @@
 
 											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID ORDER BY totales DESC LIMIT 8";
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID ORDER BY totales DESC LIMIT 10";
 											$queryProd2 = mysqli_query($conexion, $sqlProd2);
 
 											while($fetch7 = mysqli_fetch_assoc($queryProd2)){
