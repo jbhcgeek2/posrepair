@@ -261,156 +261,22 @@
 										<div class="col-auto">
 											<h4 class="app-card-title">Ventas de la semana</h4>
 										</div><!--//col-->
-										<div class="col-auto">
-											<div class="card-header-action">
-												<!-- <a href="charts.html">More charts</a> -->
-
-											</div><!--//card-header-actions-->
-										</div><!--//col-->
+										
 									</div><!--//row-->
 								</div><!--//app-card-header-->
-
-
-								<div class="col-sm-12">
-									<?php 
-
-										// $hoy = date('N'); // Obtener el número del día de la semana actual
-
-										// $diaSemana = ['1'=>'lunes', '2'=>'martes', '3'=>'miércoles', '4'=>'jueves', '5'=>'viernes', '6'=>'sábado', '7'=>'domingo'];
-										// $semanaActual = [];
-										// // echo $diaSemana[$hoy]."<br>";
-										
-										// $auxFec = date('Y-m-d');
-										// for ($i = $hoy; $i <= 7; $i++) {
-										// 	// echo $i;
-										// 	// echo $diaSemana[$i] . "<br>";
-										// 	$semanaActual[$diaSemana[$i]]=$auxFec;
-
-										// 	$auxFec = date('Y-m-d', strtotime($auxFec. ' + 1 days'));
-										// 	// echo $auxFec;
-											
-										// }
-
-										// // print_r($semanaActual);
-
-										// // for ($i = 1; $i < $hoy; $i++) {
-										// // 	echo $diaSemana[$i-1] . "<br>";
-										// // }
-										// $auxFec = date('Y-m-d');
-										// for ($i = $hoy; $i >= 1; $i--) {
-										// 	echo $diaSemana[$i] . "<br>";
-										// 	$semanaActual[$diaSemana[$i]]=$auxFec;
-										// 	$auxFec = date('Y-m-d', strtotime($auxFec. ' - 1 days'));
-										// }
-										// asort($semanaActual);
-										// print_r($semanaActual);
-
-										// //Teniendo en cuenta lo anterior calcularemos la semana pasada
-										// $semanaPasada = [];
-										// $ultimoDia = $semanaActual['lunes'];
-										// echo "<br> Ultio Dia, ".$ultimoDia;
-
-										// $auxFec2 = $ultimoDia;
-										// for($x = 7; $x >= 1; $x--){
-										// 	$auxFec2 = date('Y-m-d', strtotime($auxFec2. ' - 1 days'));
-										// 	$semanaPasada[$diaSemana[$x]] = $auxFec2;
-										// 	// echo $diaSemana[$x]."<br>";
-										// }//fin del for
-										// echo "<br>=====<br>";
-										// asort($semanaPasada);
-										// print_r($semanaPasada);
-
-
-										// $dias = ["1"=>"Lunes","2"=>"Martes","3"=>"Miercoles","4"=>"Jueves","5"=>"Viernes","6"=>"Sabado","7"=>"Domingo"];
-										// $dia = date('N');
-										// echo $dias[$dia];
-									?>
-								</div>
-
 								<div class="app-card-body p-3 p-lg-4">
-									<div class="chart-container">
-										<canvas id="canvas-linechart" ></canvas>
-									</div>
+									<p>Hola</p>
 								</div><!--//app-card-body-->
 							</div><!--//app-card-->
 						</div><!--//col-->
 
-			        <div class="col-12 col-lg-6">
-				        <div class="app-card app-card-chart h-100 shadow-sm">
-					        <div class="app-card-header p-3">
-						        <div class="row justify-content-between align-items-center">
-							        <div class="col-auto">
-						                <h4 class="app-card-title">Existencia de Productos</h4>
-							        </div><!--//col-->
-											<div class="col-auto">
-								        <div class="card-header-action">
-									        <a href="verProductos.php">Ver Inventario</a>
-								        </div><!--//card-header-actions-->
-							        </div><!--//col-->
-						        </div><!--//row-->
-					        </div><!--//app-card-header-->
-					        <div class="app-card-body p-3 p-lg-4">
-										<div class="table-responsive">
-											<table class="table table-borderless mb-0">
-												<thead>
-													<tr>
-														<th class="meta">Producto</th>
-														<th class="meta stat-cell">Sucursal</th>
-														<th class="meta stat-cell">Existencia</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-														// tomaremos los productos que tengan menos de 5 productos en existencia
-														$sqlInve = "SELECT a.*,b.nombreArticulo,c.nombreSuc FROM ARTICULOSUCURSAL a INNER JOIN ARTICULOS b 
-														ON a.articuloID = b.idArticulo INNER JOIN SUCURSALES c ON a.sucursalID = c.idSucursal 
-														WHERE a.existenciaSucursal <= 5 AND b.empresaID = '$idEmpresaSesion' LIMIT 8";
-														try {
-															$queryInve = mysqli_query($conexion, $sqlInve);
-															while($fetchInve = mysqli_fetch_assoc($queryInve)){
-																$prod = $fetchInve['nombreArticulo'];
-																$existencia = $fetchInve['existenciaSucursal'];
-																$nombreSuc = $fetchInve['nombreSuc'];
-																$idProdInve = $fetchInve['articuloID'];
-																$claseInve = "";
-																$claseInve2 = "";
-																if($existencia <= 3){
-																	$claseInve = "text-danger";
-																	$claseInve2 = "color:#dc3545 !important;";
-																}else{
-																	$claseInve = "";
-																	$claseInve2 = "color: black !important;";
-																}
-
-																echo "<tr>
-																	<td class='$claseInve'>$prod</td>
-																	<td class='stat-cell $claseInve'>$nombreSuc</td>
-																	<td class='stat-cell $claseInve'>
-																		<a href='verInfoProducto.php?infoProd=$idProdInve' style='$claseInve2'>
-																			$existencia
-																		</a>
-																	</td>
-																</tr>";
-															}//fin del while
-														} catch (\Throwable $th) {
-															//error de consulta
-															echo "error";
-														}
-													?>
-												</tbody>
-											</table>
-										</div>
-						        <?php 
-											
-										?>
-					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-			        </div><!--//col-->
+			        
 			        
 			    </div><!--//row-->
 
 
 			    <div class="row g-4 mb-4">
+						
 				    <div class="col-12 col-lg-6">
 				        <div class="app-card app-card-progress-list h-100 shadow-sm">
 					        <div class="app-card-header p-3">
