@@ -38,7 +38,7 @@ function buscarProd(){
                 <td colspan='5' style='text-align:center;'>Sin resultados</td>
                 </tr>`;
             }
-            document.getElementById('auxRes').innerHTML = contenido;
+            document.getElementById('resProdBus').innerHTML = contenido;
         }else{
             Swal.fire(
                 'Ha ocurrido un error',
