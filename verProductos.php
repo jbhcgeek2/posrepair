@@ -48,7 +48,7 @@ session_start();
                      
                       <div class="row">
 
-                      <div class="col-sm-12">
+                      <div class="col-sm-12 mb-4">
                         <label for="codigoProd" class="form-label">Buscar Por Codigo</label>
                         <input type="text" id="codigoProd" class="form-control" onchange="buscarCodigo()">
                       </div>
