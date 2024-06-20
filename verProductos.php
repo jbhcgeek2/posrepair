@@ -105,6 +105,13 @@ session_start();
                                           $precio = number_format($productos->data[$x]->precioUnitario,2);
                                           $existencia = $productos->data[$x]->cantSucur;
                                           $idProducto = $productos->data[$x]->idArticulo;
+                                          $idProv = $productos->data[x]->proveedorID;
+                                          //consultamos los proveedores
+                                          $sqlProv = "SELECT nombreProveedor FROM PROVEEDORES WHERE idProveedor = '$idProv'";
+                                          $queryProv = mysqli_query($conexion, $sqlProv);
+                                          $fetchProv = mysqli_fetch_assoc($queryProv);
+
+                                          $nombreProv = $fetchProv['nombreProveedor'];
 
                                           // $numero1 = $idEmpresaSesion;
                                           // $formato1 = "%03d";
@@ -121,7 +128,7 @@ session_start();
 
                                           echo "<tr>
                                             <td>$nombreProd</td>
-                                            <td></td>
+                                            <td>$nombreProv</td>
                                             <td>$ $precio</td>
                                             <td class='text-center'>$existencia</td>
                                             <td class='text-center'>
