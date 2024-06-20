@@ -20,40 +20,25 @@
 			<?php
 		}
 		
-		//validacion para comprobar la existencia de articulossucursal
-		$sqlVal1 = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion'";
-		$queryVal1 = mysqli_query($conexion, $sqlVal1);
-		while($fetchVal1 = mysqli_fetch_assoc($queryVal1)){
-			//verificamos las sucursales para ver que existan
-			$sqlVal3 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' AND
-			estatusSuc = '1'";
-			$queryVal3 = mysqli_query($conexion, $sqlVal3);
-			while($fetchVal3 = mysqli_fetch_assoc($queryVal3)){
-				$idSuc = $fetchVal3['idSucursal'];
-				$idArticulo = $fetchVal1['idArticulo'];
-				$sqlVal2 = "SELECT * FROM ARTICULOSUCURSAL WHERE articuloID = '$idArticulo' and sucursalID = '$idSuc'";
-				$queryVal2 = mysqli_query($conexion, $sqlVal2);
-				if(mysqli_num_rows($queryVal2) == 0){
-					//el articulo no existe, por lo que lo tenemos que insertar
-					$sqlInsert = "INSERT INTO ARTICULOSUCURSAL (articuloID,sucursalID,existenciaSucursal) 
-					VALUES ('$idArticulo','$idSuc','0')";
-					try {
-						$queryInsert = mysqli_query($conexion, $sqlInsert);
-						echo "Articulo Insertado";
-					} catch (\Throwable $th) {
-						echo "error: ".$th;
-					}
-				}
-			}//fin del while val 3
-
-			
-		}//fin del while
+		
 
 
 
 		$fechaHoy = date('Y-m-d');
 		//realizamos las consultas para ver las ventas totales en el mes
-		
+		$sqlMonto = "SELECT a.idARticulo,a.nombreArticulo, (a.precioUnitario *
+		(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b WHERE b.articuloID = a.idArticulo)) AS totalSuma
+		FROM ARTICULOS a WHERE a.empresaID = '4' AND a.estatusArticulo = '1'";
+		try {
+			$queryMonto = mysqli_query($conexion, $sqlMonto);
+			$valorInventario = 0;
+			while($fetchMonto = mysqli_fetch_assoc($queryMonto)){
+				$valor = $fetchMonto['totalSuma'];
+				$valorInventario = $valorInventario + $valor;
+			}
+		} catch (\Throwable $th) {
+			//throw $th;
+		}
   ?>
     
     <div class="app-wrapper">
@@ -94,11 +79,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Valor de Inventario</h4>
-							    <div class="stats-figure">$<?php echo number_format($totVentas,2); ?></div>
-							    <div class="stats-meta <?php echo $colorVentas; ?>">
-								    <?php echo $iconoVentas; ?>
-										<?php echo $porcentageVentas; ?>%</div>
-						    	</div><!--//app-card-body-->
+							    <div class="stats-figure">$<?php echo number_format($valorInventario,2); ?></div>
 						    	<a class="app-card-link-mask" href="#"></a>
 					    </div><!--//app-card-->
 				    </div><!--//col-->
@@ -163,7 +144,8 @@
 											<?php 
 												// consultamos las categorias
 												$sqlCat = "SELECT idCategoria,nombreCategoria,empresaId FROM CATEGORIA 
-												WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1'";
+												WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1' ORDER BY
+												nombreCategoria ASC";
 												try {
 													$queryCat = mysqli_query($conexion, $sqlCat);
 													while($fetchCat = mysqli_fetch_assoc($queryCat)){
@@ -240,7 +222,7 @@
 
 											$sqlProd2 = "SELECT SUM(cantidadVenta) AS totales,
 											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID ORDER BY totales DESC LIMIT 5";
+											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID ORDER BY totales DESC LIMIT 8";
 											$queryProd2 = mysqli_query($conexion, $sqlProd2);
 
 											while($fetch7 = mysqli_fetch_assoc($queryProd2)){
