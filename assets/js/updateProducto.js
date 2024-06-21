@@ -88,3 +88,22 @@ function updateDirectCant(campo){
     }
   })
 }
+
+function insertaChip(){
+  let sucursalChip = document.getElementById('sucChip').value;
+  let codigoChip = document.getElementById('codigoChip').value;
+  let articulo = document.getElementById('dataProd').value;
+  
+
+  if(sucursalChip != "" && codigoChip != ""){
+
+    let chipInsert = "<p>"+codigoChip+"</p>";
+    document.getElementById('resChips').insertAdjacentHTML('afterbegin',chipInsert);
+  }else{
+    Swal.fire(
+      'Datos Faltantes',
+      'Verifica la informacion capturada',
+      'error'
+    )
+  }
+}

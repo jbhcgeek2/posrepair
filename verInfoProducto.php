@@ -116,9 +116,9 @@ session_start();
                                             '.$comboSucChip.'
                                           </select>
                                         </div>
-                                        <div class="col-sm-12 col-md-4 mb-3">
+                                        <div class="col-sm-12 col-md-8 mb-3">
                                           <label for="codigoChip" class="form-label">Codigo</label>
-                                          <input type="text" id="codigoChip" class="form-control">
+                                          <input type="text" id="codigoChip" class="form-control" onchange="insertaChip()">
                                         </div>
                                       </div><!--fin row modal-body-->
 
