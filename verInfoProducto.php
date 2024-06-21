@@ -121,7 +121,7 @@ session_start();
                                           <input type="text" id="codigoChip" class="form-control" onchange="insertaChip()">
                                         </div>
 
-                                        <div class="col-sm-12 col-md-6 offset-md-3" id="resChips" style="text-align:center"></div>
+                                        <div class="col-sm-12 col-md-6 offset-md-3" id="resChips" style="text-align:center;height:200px;overflow-y:scroll;"></div>
                                       </div><!--fin row modal-body-->
 
                                     </div><!--Fin modal body-->
