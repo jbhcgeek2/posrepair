@@ -99,6 +99,7 @@ function insertaChip(){
 
     let chipInsert = "<p>"+codigoChip+"</p>";
     document.getElementById('resChips').insertAdjacentHTML('afterbegin',chipInsert);
+    document.getElementById('codigoChip').value = "";
   }else{
     Swal.fire(
       'Datos Faltantes',
