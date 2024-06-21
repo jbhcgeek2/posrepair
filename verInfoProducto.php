@@ -77,6 +77,15 @@ session_start();
                       
 							        <div class="col-auto">
 								        <div class="card-header-action">
+                          <?php 
+                            if($datosProd->data->esChip == 1){
+                              //si es chip
+                              echo '<a href="#!" class="btn btn-success mr-3">Registrar Chip</a>';
+                            }else{
+                              //no mostramos nada
+                            }
+                          ?>
+
 									        <a href="verProductos.php">Ver Productos</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
@@ -242,6 +251,14 @@ session_start();
                           </div>
                           <?php
                         }
+
+                        // validaremos si el producto es chip para ver los chips existentes
+                        if($datosProd->data->esChip == 1){
+                          //si es chip
+
+                        }else{
+                          //no mostramos nada
+                        }
                       ?>
                       
 
@@ -279,7 +296,7 @@ session_start();
                                 </div>
                                 <div class='col-sm-12 col-md-4 col-lg-3 mb-3'>
                                   <label for='cantidadSuc$idSuc' class='form-label'>Existencia en Sucursal</label>
-                                  <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' onchange='updateDirectCant(this.id)'>
+                                  <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' >
                                 </div>
                               </div>";
                             }//fin del for
