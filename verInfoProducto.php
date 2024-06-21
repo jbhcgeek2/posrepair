@@ -80,7 +80,38 @@ session_start();
                           <?php 
                             if($datosProd->data->esChip == 1){
                               //si es chip
-                              echo '<a href="#!" class="btn btn-success mr-3">Registrar Chip</a>';
+                              echo '<a href="#!" class="btn btn-success me-3" data-bs-toggle="modal" 
+                              data-bs-target="#modalNuevoChip">
+                                Registrar Chip
+                              </a>
+                              
+                              <div class="modal fade" id="modalNuevoChip" tabindex="-1" 
+                              aria-labelledby="modalNuevoChipLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="modalNuevoChipLabel">
+                                        Registrar Chips
+                                      </h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                      <div class="row">
+                                        <div class="col-sm-12 col-md-4">
+                                          
+                                        </div>
+                                      </div><!--fin row modal-body-->
+
+                                    </div><!--Fin modal body-->
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                      <button type="button" class="btn btn-primary">Terminar Proceso</button>
+                                    </div><!--Fin Modal Footer-->
+                                  </div>
+                                </div>
+                              </div>
+                              ';
                             }else{
                               //no mostramos nada
                             }
