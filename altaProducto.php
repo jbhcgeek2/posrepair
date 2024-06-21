@@ -134,7 +134,7 @@ session_start();
                           <select name="esChip" id="esChip" class="form-select">
                             <option value="noChip">Seleccione</option>
                             <option value="siChip">Si</option>
-                            <option value="noChip">No</option>
+                            <option value="noChip" selected>No</option>
                           </select>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-9 mb-3">

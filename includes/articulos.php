@@ -1,6 +1,7 @@
 <?php 
 //articulos
-function guardarProducto($nombreArti,$descArti,$estatus,$empresa,$categoria,$img,$pUni,$pMayo,$mayoDes,$codigo,$proveedor){
+function guardarProducto($nombreArti,$descArti,$estatus,$empresa,$categoria,
+$img,$pUni,$pMayo,$mayoDes,$codigo,$proveedor,$chip){
   require('conexion.php');
   $res = [];
   if(!$conexion){
@@ -19,8 +20,8 @@ function guardarProducto($nombreArti,$descArti,$estatus,$empresa,$categoria,$img
       //no existe el codigo, podemos continuar
       $sql = "INSERT INTO ARTICULOS (nombreArticulo,descripcionArticulo,estatusArticulo,
       empresaID,categoriaID,fechaAlta,imgArticulo,precioUnitario,precioMayoreo,mayoreoDesde,
-      codigoProducto,proveedorID) VALUES ('$nombreArti','$descArti','$estatus',
-      '$empresa','$categoria','$fecha','$img','$pUni','$pMayo','$mayoDes','$codigo','$proveedor')";
+      codigoProducto,proveedorID,esChip) VALUES ('$nombreArti','$descArti','$estatus',
+      '$empresa','$categoria','$fecha','$img','$pUni','$pMayo','$mayoDes','$codigo','$proveedor','$chip')";
       try {
         $query = mysqli_query($conexion, $sql);
         $idArticulo = mysqli_insert_id($conexion);
