@@ -129,7 +129,15 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                        <div class="col-sm-12 col-md-12 col-lg-3 mb-3">
+                          <label for="esChip" class="form-label">Es Chip?</label>
+                          <select name="esChip" id="esChip" class="form-select">
+                            <option value="noChip">Seleccione</option>
+                            <option value="siChip">Si</option>
+                            <option value="noChip">No</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-9 mb-3">
                           <label for="descripcion" class="form-label"><strong class="text-warning">*</strong> Descripcion</label>
                           <input type="text" class="form-control required" name="descripcion" id="descripcion">
                         </div>
