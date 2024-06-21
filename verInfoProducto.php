@@ -79,6 +79,17 @@ session_start();
 								        <div class="card-header-action">
                           <?php 
                             if($datosProd->data->esChip == 1){
+                              $sucursalesChip = verSucursales($usuario,'');
+                              $sucursalesChip = json_decode($sucursalesChip);
+                              $comboSucChip = "";
+                              if($sucursalesChip->estatus ==  "ok"){
+                                //print_r($sucursales->dato);
+                                for($x = 0; $x  < count($sucursalesChip->dato); $x++){
+                                  $nombreSucursalChip = $sucursalesChip->dato[$x]->nombreSuc;
+                                  $idSucChip = $sucursalesChip->dato[$x]->idSucursal;
+                                  $comboSucChip .= "<option value='$idSucChip'>$nombreSucursalChip</option>";
+                                }
+                              }
                               //si es chip
                               echo '<a href="#!" class="btn btn-success me-3" data-bs-toggle="modal" 
                               data-bs-target="#modalNuevoChip">
@@ -98,8 +109,16 @@ session_start();
                                     <div class="modal-body">
 
                                       <div class="row">
-                                        <div class="col-sm-12 col-md-4">
-                                          
+                                        <div class="col-sm-12 col-md-4 mb-3">
+                                          <label for="sucChip" class="form-label">Sucursal Destino</label>
+                                          <select id="sucChip" class="form-select">
+                                            <option value="" selected>Selecione...</option>
+                                            '.$comboSucChip.'
+                                          </select>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 mb-3">
+                                          <label for="codigoChip" class="form-label">Codigo</label>
+                                          <input type="text" id="codigoChip" class="form-control">
                                         </div>
                                       </div><!--fin row modal-body-->
 
