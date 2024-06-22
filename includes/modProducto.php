@@ -122,6 +122,44 @@ if(!empty($_SESSION['usuarioPOS'])){
       echo json_encode($res);
 
     }
+  }elseif(!empty($_POST['codigoChip'])){
+    //seccion para insertar chips
+    $codigoChip = $_POST['codigoChip'];
+    $sucursalChip = $_POST['sucursalChip'];
+    $articuloID = $_POST['articuloID'];
+    $fecha = date('Y-m-d');
+
+    $usuario = $_SESSION['usuarioPOS'];
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $empresa = json_decode($empresa);
+    $idEmpresaSesion = $empresa->dato;
+
+    //antes de insertarlo, verificamos que el codigo no este ya registrado
+    $sql = "SELECT * FROM DETALLECHIP WHERE codigoChip = '$codigoChip' AND 
+    empresaID = '$idEmpresaSesion'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 0){
+        //no esta registrado, podemos continuar
+        $sql = "INSERT INTO DETALLECHIP (sucursalID,empresaID,productoID,codigoChip,
+        estatusChip,fechaEntrada,usuarioRegistra) VALUES ('$sucursalChip','$idEmpresaSesion','$articuloID',
+        '$codigoChip','Activo','$fecha','$usuario')";
+        try {
+          $query = mysqli_query($conexion, $sql);
+          //se inserto el chip
+
+        } catch (\Throwable $th) {
+          //throw $th;
+        }
+      }else{
+        //ya esta registrado el chip, mandamos error
+      }
+    } catch (\Throwable $th) {
+      //error de consulta a la base de datos
+    }
+
+    
+
   }
 }
 
