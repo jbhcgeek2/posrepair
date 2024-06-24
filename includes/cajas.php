@@ -246,26 +246,45 @@ if(!empty($_SESSION['usuarioPOS'])){
         try {
           $queryExt2 = mysqli_query($conexion, $sqlExt2);
           if(mysqli_num_rows($queryExt2) == 1){
-            //se trata de un chip, insertamos el detalle venta
-            //como son codigos diferentes no los agruparemos en un solo registro
-            //y cada chip generara un registro nuevo
+            //se trata de un chip, 
+            //verificamos que no este ingresado de nuevo en detalle venta
             $fetchExt2 = mysqli_fetch_assoc($queryExt2);
             $precioUnitario = $fetchExt2['precioUnitario'];
             $idArti = $fetchExt2['idArticulo'];
             $idChip = $fetchExt2['idChip'];
 
-            $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
-            sucursalID,articuloID,chipID) VALUES ('1','$precioUnitario','$precioUnitario','$usuario','$idSucursal',
-            '$idArti','$idChip')";
+            $sqlExt4 = "SELECT * FROM DETALLEVENTA WHERE chipID = '$idChip' AND empresaID = '$idEmprersa'
+            AND sucursalID = '$idSucursal'";
             try {
-              $queryExt3 = mysqli_query($conexion, $sqlExt3);
-              $res = ["status"=>"ok","data"=>"operationSuccess"];
-              echo json_encode($res);
+              $queryExt4 = mysqli_query($conexion, $sqlExt4);
+              if(mysqli_num_rows($queryExt4) == 0){
+                //no existe el chip en el carrito, podemos continuar
+                //insertamos el detalle venta
+                //como son codigos diferentes no los agruparemos en un solo registro
+                //y cada chip generara un registro nuevo
+                
+
+                $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
+                sucursalID,articuloID,chipID) VALUES ('1','$precioUnitario','$precioUnitario','$usuario','$idSucursal',
+                '$idArti','$idChip')";
+                try {
+                  $queryExt3 = mysqli_query($conexion, $sqlExt3);
+                  $res = ["status"=>"ok","data"=>"operationSuccess"];
+                  echo json_encode($res);
+                } catch (\Throwable $th) {
+                  $res = ["status"=>"error","mensaje"=>"Ocurrio un error al insertar el chip en la venta"];
+                  echo json_encode($res);
+                }
+              }else{
+                //ya existe el chip en el carrito
+                $res = ["status"=>"error","mensaje"=>"El chip ya se encuentra en el carrito."];
+                echo json_encode($res);
+              }
             } catch (\Throwable $th) {
-              $res = ["status"=>"error","mensaje"=>"Ocurrio un error al insertar el chip en la venta"];
+              //ocurrio un error al consultar la existencia del chip en el carrito
+              $res = ["status"=>"error","mensaje"=>"Ocurrio un error al consultar la existencia del chip."];
               echo json_encode($res);
             }
-
           }else{
             //es mas de uno o ninguno, hacemos el while
             while($fetchExt = mysqli_fetch_assoc($queryExt)){
