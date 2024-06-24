@@ -111,7 +111,7 @@ function insertaChip(){
       let res = JSON.parse(envio.responseText);
       if(res.status == "ok"){
         //se inserto el chip
-        let chipInsert = "<p>"+codigoChip+"</p>";
+        let chipInsert = "<p>Chip: "+codigoChip+" Insertado</p>";
         document.getElementById('resChips').insertAdjacentHTML('afterbegin',chipInsert);
         document.getElementById('codigoChip').value = "";
       }else{

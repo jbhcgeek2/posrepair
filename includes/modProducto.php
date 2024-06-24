@@ -141,17 +141,44 @@ if(!empty($_SESSION['usuarioPOS'])){
       $query = mysqli_query($conexion, $sql);
       if(mysqli_num_rows($query) == 0){
         //no esta registrado, podemos continuar
-        $sql = "INSERT INTO DETALLECHIP (sucursalID,empresaID,productoID,codigoChip,
-        estatusChip,fechaEntrada,usuarioRegistra) VALUES ('$sucursalChip','$idEmpresaSesion','$articuloID',
-        '$codigoChip','Activo','$fecha','$usuario')";
+        //opero antes de registrar el chip, verificamos las excistencias del mismo 
+        //actualizaremos mientras estemos registrando
+        $sql2 = "SELECT *, (SELECT COUNT(*) FROM DETALLECHIP b WHERE b.sucursalID = a.sucursalID 
+        AND b.productoID = a.articuloID AND b.estatusChip = 'Activo') AS chipsRegistrados 
+        FROM ARTICULOSUCURSAL a WHERE a.articuloID = '$articuloID' AND a.sucursalID = '$sucursalChip'";
         try {
-          $query = mysqli_query($conexion, $sql);
-          //se inserto el chip
-          $res = ['status'=>'ok','mensaje'=>'operationComplete'];
-          echo json_encode($res);
+          $query2 = mysqli_query($conexion, $sql2);
+          $fetch2 = mysqli_fetch_assoc($query2);
+          $existenciaSuc = $fetch2['existenciaSucursal'];
+          $existenciaReal = $fetch2['chipsRegistrados'];
+          $idArtiSuc = $fetch2['idArtiSuc'];
+          
+          $nuevaExistencia = $existenciaReal + 1;
+
+          //ahora procedemois a insertar el chip
+          $sql3 = "INSERT INTO DETALLECHIP (sucursalID,empresaID,productoID,codigoChip,
+          estatusChip,fechaEntrada,usuarioRegistra) VALUES ('$sucursalChip','$idEmpresaSesion','$articuloID',
+          '$codigoChip','Activo','$fecha','$usuario')";
+          try {
+            $query3 = mysqli_query($conexion, $sql3);
+            //se inserto el chip, ahora actualizamos 1
+            $sql4 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaExistencia' WHERE idArtiSuc = '$idArtiSuc'";
+            try {
+              $query4 = mysqli_query($conexion, $sql4);
+              //se completo el proceso
+              $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+              echo json_encode($res);
+            } catch (\Throwable $th) {
+              //error al actualizar
+              $res = ['status'=>'error','mensaje'=>'Ocurrio un error al actualizar las cantidades de chips: '.$th];
+              echo json_encode($res);
+            }
+          } catch (\Throwable $th) {
+            $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el chip: '.$th];
+            echo json_encode($res);
+          }
         } catch (\Throwable $th) {
-          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el chip: '.$th];
-          echo json_encode($res);
+          //error al consultar la existencia real de chips
         }
       }else{
         //ya esta registrado el chip, mandamos error
