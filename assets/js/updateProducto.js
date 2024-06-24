@@ -111,7 +111,7 @@ function insertaChip(){
       let res = JSON.parse(envio.responseText);
       if(res.status == "ok"){
         //se inserto el chip
-        let chipInsert = "<p>Chip: "+codigoChip+" Insertado</p>";
+        let chipInsert = "<p>Chip: <strong>"+codigoChip+"</strong> Insertado</p>";
         document.getElementById('resChips').insertAdjacentHTML('afterbegin',chipInsert);
         document.getElementById('codigoChip').value = "";
       }else{
@@ -121,7 +121,6 @@ function insertaChip(){
           'error'
         )
       }
-      
     }else{
       //ocurrio un error
       Swal.fire(
@@ -139,4 +138,11 @@ function insertaChip(){
       'error'
     )
   }
+}
+
+if(document.getElementById('btnTerminaChip')){
+  let btnTerminChip = document.getElementById('btnTerminaChip');
+  btnTerminChip.addEventListener('click', function(){
+    location.reload(true);
+  })
 }

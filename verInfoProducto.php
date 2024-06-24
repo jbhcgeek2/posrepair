@@ -97,7 +97,7 @@ session_start();
                               </a>
                               
                               <div class="modal fade" id="modalNuevoChip" tabindex="-1" 
-                              aria-labelledby="modalNuevoChipLabel" aria-hidden="true">
+                              aria-labelledby="modalNuevoChipLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
                                 <div class="modal-dialog modal-lg">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -127,7 +127,7 @@ session_start();
                                     </div><!--Fin modal body-->
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                      <button type="button" class="btn btn-primary">Terminar Proceso</button>
+                                      <button type="button" class="btn btn-primary" id="btnTerminaChip">Terminar Proceso</button>
                                     </div><!--Fin Modal Footer-->
                                   </div>
                                 </div>
