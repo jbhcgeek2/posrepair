@@ -147,15 +147,21 @@ if(!empty($_SESSION['usuarioPOS'])){
         try {
           $query = mysqli_query($conexion, $sql);
           //se inserto el chip
-
+          $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+          echo json_encode($res);
         } catch (\Throwable $th) {
-          //throw $th;
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el chip: '.$th];
+          echo json_encode($res);
         }
       }else{
         //ya esta registrado el chip, mandamos error
+        $res = ['status'=>'error','mensaje'=>'El codigo ya esta registrado en el sistema'];
+        echo json_encode($res);
       }
     } catch (\Throwable $th) {
       //error de consulta a la base de datos
+      $res = ['status'=>'error','mensaje'=>'Error al consultar la existencia del chip'];
+      echo json_encode($res);
     }
 
     
