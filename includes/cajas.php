@@ -238,13 +238,32 @@ if(!empty($_SESSION['usuarioPOS'])){
           echo json_encode($res);
         }
       }else{
-        //es mas de uno o ninguno, hacemos el while
-        while($fetchExt = mysqli_fetch_assoc($queryExt)){
-          $datos[$x] = $fetchExt;
-          $x++;
-        }//fin del while
-        $res = ["status"=>"ok","data"=>$datos];
-        echo json_encode($res);
+        //no se detecto en la primer consulta, verificamos si es un chip
+        $sqlExt2 = "SELECT * FROM DETALLECHIP WHERE empresaID = '$idEmprersa' AND 
+        sucursalID = '$idSucursal' AND codigoChip = '$valor' AND estatusChip = 'Activo'";
+        
+        try {
+          $queryExt2 = mysqli_query($conexion, $sqlExt2);
+          if(mysqli_num_rows($queryExt2) == 1){
+            //se trata de un chip, insertamos el detalle venta
+            //como son codigos diferentes no los agruparemos en un solo registro
+            //y cada chip generara un registro nuevo
+            $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
+            sucursalID,articuloID,chipID) VALUES ()";
+
+          }else{
+            //es mas de uno o ninguno, hacemos el while
+            while($fetchExt = mysqli_fetch_assoc($queryExt)){
+              $datos[$x] = $fetchExt;
+              $x++;
+            }//fin del while
+            $res = ["status"=>"ok","data"=>$datos];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          
+        }
+
       }
       
 
