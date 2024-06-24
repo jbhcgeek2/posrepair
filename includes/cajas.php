@@ -253,8 +253,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $idArti = $fetchExt2['idArticulo'];
             $idChip = $fetchExt2['idChip'];
 
-            $sqlExt4 = "SELECT * FROM DETALLEVENTA WHERE chipID = '$idChip' AND empresaID = '$idEmprersa'
-            AND sucursalID = '$idSucursal'";
+            $sqlExt4 = "SELECT * FROM DETALLEVENTA WHERE chipID = '$idChip' AND sucursalID = '$idSucursal'";
             try {
               $queryExt4 = mysqli_query($conexion, $sqlExt4);
               if(mysqli_num_rows($queryExt4) == 0){
