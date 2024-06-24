@@ -351,9 +351,52 @@ session_start();
                                   <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' >
                                 </div>
                               </div>";
+
                             }//fin del for
                           }else{
                             //error al consultar las sucursales
+                          }
+
+                          //si el producto es chip generamos una tabla de contenido 
+                          if($datosProd->data->esChip == 1){
+                            ?>
+                            <p>Listado de Chips en existencia</p>
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Codigo Chip</th>
+                                  <th>Sucursal</th>
+                                  <th>Fecha Alta</th>
+                                  <th>Usuario Registro</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php 
+                                  //consultamos los chis en existencia
+                                  $sqlChip = "SELECT * FROM DETALLECHIP a INNER JOIN SUCURSALES b ON a.sucursalID = b.idSucursal 
+                                  WHERE a.empresaID = '$idEmpresaSesion' AND a.productoID = '$idProd' AND 
+                                  a.estatusChip = 'Activo' ORDER BY a.sucursalID ASC";
+                                  try {
+                                    $queryChip = mysqli_query($conexion, $sqlChip);
+                                    while($fetchChip = mysqli_fetch_assoc($queryChip)){
+                                      $codChip = $fetchChip['codigoChip'];
+                                      $sucChip = $fetchChip['nombreSuc'];
+                                      $fechaChip = $fetchChip['fechaEntrada'];
+                                      $usuarioChip = $fetchChip['usuarioRegistra'];
+                                      echo "<tr>
+                                        <td>$codChip</td>
+                                        <td>$sucChip</td>
+                                        <td>$fechaChip</td>
+                                        <td>$usuarioChip</td>
+                                      </tr>";
+                                    }//fin del while
+                                  } catch (\Throwable $th) {
+                                    echo "<tr><td colspan='4'>Error de base de datos</td></tr>";
+                                  }
+                                ?>
+                              </tbody>
+                            </table>
+                            <?php
                           }
                         ?>
 
