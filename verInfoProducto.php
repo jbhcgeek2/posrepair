@@ -360,8 +360,9 @@ session_start();
                           //si el producto es chip generamos una tabla de contenido 
                           if($datosProd->data->esChip == 1){
                             ?>
-                            <p>Listado de Chips en existencia</p>
-                            <table class="table">
+                            <hr class="my-4">
+                            <h1 class="fs-5">Listado de Chips en Existencia</h1>
+                            <table class="table table-stripe">
                               <thead>
                                 <tr>
                                   <th>Codigo Chip</th>
