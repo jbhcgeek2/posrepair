@@ -361,42 +361,46 @@ session_start();
                           if($datosProd->data->esChip == 1){
                             ?>
                             <hr class="my-4">
-                            <h1 class="fs-5">Listado de Chips en Existencia</h1>
-                            <table class="table table-stripe">
-                              <thead>
-                                <tr>
-                                  <th>Codigo Chip</th>
-                                  <th>Sucursal</th>
-                                  <th>Fecha Alta</th>
-                                  <th>Usuario Registro</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php 
-                                  //consultamos los chis en existencia
-                                  $sqlChip = "SELECT * FROM DETALLECHIP a INNER JOIN SUCURSALES b ON a.sucursalID = b.idSucursal 
-                                  WHERE a.empresaID = '$idEmpresaSesion' AND a.productoID = '$idProd' AND 
-                                  a.estatusChip = 'Activo' ORDER BY a.sucursalID ASC";
-                                  try {
-                                    $queryChip = mysqli_query($conexion, $sqlChip);
-                                    while($fetchChip = mysqli_fetch_assoc($queryChip)){
-                                      $codChip = $fetchChip['codigoChip'];
-                                      $sucChip = $fetchChip['nombreSuc'];
-                                      $fechaChip = $fetchChip['fechaEntrada'];
-                                      $usuarioChip = $fetchChip['usuarioRegistra'];
-                                      echo "<tr>
-                                        <td>$codChip</td>
-                                        <td>$sucChip</td>
-                                        <td>$fechaChip</td>
-                                        <td>$usuarioChip</td>
-                                      </tr>";
-                                    }//fin del while
-                                  } catch (\Throwable $th) {
-                                    echo "<tr><td colspan='4'>Error de base de datos</td></tr>";
-                                  }
-                                ?>
-                              </tbody>
-                            </table>
+                            <h1 class="fs-5 text-center">Listado de Chips en Existencia</h1>
+                            
+                            <div class="row" style="height:250px; overflow-y:scroll;">
+                              <table class="table table-stripe ">
+                                <thead>
+                                  <tr>
+                                    <th>Codigo Chip</th>
+                                    <th>Sucursal</th>
+                                    <th>Fecha Alta</th>
+                                    <th>Usuario Registro</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php 
+                                    //consultamos los chis en existencia
+                                    $sqlChip = "SELECT * FROM DETALLECHIP a INNER JOIN SUCURSALES b ON a.sucursalID = b.idSucursal 
+                                    WHERE a.empresaID = '$idEmpresaSesion' AND a.productoID = '$idProd' AND 
+                                    a.estatusChip = 'Activo' ORDER BY a.sucursalID ASC";
+                                    try {
+                                      $queryChip = mysqli_query($conexion, $sqlChip);
+                                      while($fetchChip = mysqli_fetch_assoc($queryChip)){
+                                        $codChip = $fetchChip['codigoChip'];
+                                        $sucChip = $fetchChip['nombreSuc'];
+                                        $fechaChip = $fetchChip['fechaEntrada'];
+                                        $usuarioChip = $fetchChip['usuarioRegistra'];
+                                        echo "<tr>
+                                          <td>$codChip</td>
+                                          <td>$sucChip</td>
+                                          <td>$fechaChip</td>
+                                          <td>$usuarioChip</td>
+                                        </tr>";
+                                      }//fin del while
+                                    } catch (\Throwable $th) {
+                                      echo "<tr><td colspan='4'>Error de base de datos</td></tr>";
+                                    }
+                                  ?>
+                                </tbody>
+                              </table>
+                            </div>
+                            
                             <?php
                           }
                         ?>
