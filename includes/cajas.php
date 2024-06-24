@@ -249,9 +249,10 @@ if(!empty($_SESSION['usuarioPOS'])){
             //como son codigos diferentes no los agruparemos en un solo registro
             //y cada chip generara un registro nuevo
             $fetchExt2 = mysqli_fetch_assoc($queryExt2);
-            $precioUnitario = $fetchExt2['precioUNitario'];
+            $precioUnitario = $fetchExt2['precioUnitario'];
             $idArti = $fetchExt2['idArticulo'];
             $idChip = $fetchExt2['idChip'];
+            
             $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
             sucursalID,articuloID,chipID) VALUES ('1','$precioUnitario','$precioUnitario','$usuario','$idSucursal',
             '$idArti','$idChip')";
