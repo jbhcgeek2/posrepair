@@ -239,7 +239,8 @@ if(!empty($_SESSION['usuarioPOS'])){
         }
       }else{
         //no se detecto en la primer consulta, verificamos si es un chip
-        $sqlExt2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b WHERE a.productoID = b.idArticulo WHERE a.empresaID = '$idEmprersa' AND 
+        $sqlExt2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b 
+        ON a.productoID = b.idArticulo WHERE a.empresaID = '$idEmprersa' AND 
         a.sucursalID = '$idSucursal' AND a.codigoChip = '$valor' AND a.estatusChip = 'Activo'";
         
         try {
