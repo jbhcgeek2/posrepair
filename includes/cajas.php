@@ -239,8 +239,8 @@ if(!empty($_SESSION['usuarioPOS'])){
         }
       }else{
         //no se detecto en la primer consulta, verificamos si es un chip
-        $sqlExt2 = "SELECT * FROM DETALLECHIP WHERE empresaID = '$idEmprersa' AND 
-        sucursalID = '$idSucursal' AND codigoChip = '$valor' AND estatusChip = 'Activo'";
+        $sqlExt2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b WHERE a.productoID = b.idArticulo WHERE a.empresaID = '$idEmprersa' AND 
+        a.sucursalID = '$idSucursal' AND a.codigoChip = '$valor' AND a.estatusChip = 'Activo'";
         
         try {
           $queryExt2 = mysqli_query($conexion, $sqlExt2);
@@ -248,8 +248,21 @@ if(!empty($_SESSION['usuarioPOS'])){
             //se trata de un chip, insertamos el detalle venta
             //como son codigos diferentes no los agruparemos en un solo registro
             //y cada chip generara un registro nuevo
+            $fetchExt2 = mysqli_fetch_assoc($queryExt2);
+            $precioUnitario = $fetchExt2['precioUNitario'];
+            $idArti = $fetchExt2['idArticulo'];
+            $idChip = $fetchExt2['idChip'];
             $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
-            sucursalID,articuloID,chipID) VALUES ()";
+            sucursalID,articuloID,chipID) VALUES ('1','$precioUnitario','$precioUnitario','$usuario','$idSucursal',
+            '$idArti','$idChip')";
+            try {
+              $queryExt3 = mysqli_query($conexion, $sqlExt3);
+              $res = ["status"=>"ok","data"=>"operationSuccess"];
+              echo json_encode($res);
+            } catch (\Throwable $th) {
+              $res = ["status"=>"error","mensaje"=>"Ocurrio un error al insertar el chip en la venta"];
+              echo json_encode($res);
+            }
 
           }else{
             //es mas de uno o ninguno, hacemos el while
