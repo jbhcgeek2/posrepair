@@ -252,7 +252,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $precioUnitario = $fetchExt2['precioUnitario'];
             $idArti = $fetchExt2['idArticulo'];
             $idChip = $fetchExt2['idChip'];
-            
+
             $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
             sucursalID,articuloID,chipID) VALUES ('1','$precioUnitario','$precioUnitario','$usuario','$idSucursal',
             '$idArti','$idChip')";
@@ -275,7 +275,8 @@ if(!empty($_SESSION['usuarioPOS'])){
             echo json_encode($res);
           }
         } catch (\Throwable $th) {
-          
+          $res = ["status"=>"error","mensaje"=>"Ocurrio un error al insertar consultar datos de inventario: ".$th];
+          echo json_encode($res);
         }
 
       }
