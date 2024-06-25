@@ -238,7 +238,7 @@ session_start();
                 </div><!--Fin modal body-->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary">Registrar</button>
+                  <button type="button" class="btn btn-primary" id="btnAltaCliente">Registrar</button>
                 </div>
               </div>
             </div>

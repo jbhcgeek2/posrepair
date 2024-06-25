@@ -16,6 +16,47 @@ document.addEventListener("DOMContentLoaded", function() {
       //abrimos el modal para nuevo cliente
       let modalCliente = new bootstrap.Modal(document.getElementById('nuevoCliente'));
       modalCliente.show();
+
+      let btnAlta = document.getElementById('btnAltaCliente');
+      btnAlta.addEventListener('click', function(){
+        //antes de continuar, verificamos que el nombre
+        //y el telefono este capturado
+        let nombreCli = document.getElementById('nombreCliente').value;
+        let telCli = document.getElementById('telefonoCliente').value;
+        let mailCli = document.getElementById('emailCliente').value;
+        let direCli = document.getElementById('direccionCliente').value;
+        let rfcCli = document.getElementById('rfcCliente').value;
+        if(nombreCli != "" && telCli != ""){
+          let datos = new FormData();
+          datos.append('nombreCliente',nombreCli);
+          datos.append('telefonoCliente',telCli);
+          datos.append('emailCliente',mailCli);
+          datos.append('direccionCliente',direCli);
+          datos.append('rfcCliente',rfcCli);
+
+          let envio = new XMLHttpRequest();
+          envio.open("POST","../includes/operacionesCliente.php",false);
+          envio.send(datos);
+          if(envio.status == 200){
+            let res = JSON.parse(envio.responseText);
+            console.log(res);
+          }else{
+            Swal.fire(
+              'Servidor Inalcansable',
+              'Verifica tu conexion a internet',
+              'error'
+            )
+          }
+
+        }else{
+          Swal.fire(
+            'Campos faltantes',
+            'Asegurate de almenos capturar el nombre y telefono.',
+            'error'
+          )
+        }
+
+      });
     }
   })
 
