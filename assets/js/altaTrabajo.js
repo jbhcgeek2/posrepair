@@ -41,7 +41,13 @@ document.addEventListener("DOMContentLoaded", function() {
           if(envio.status == 200){
             let res = JSON.parse(envio.responseText);
             if(res.status == "ok"){
-              
+              //ordenamos los clientes
+              console.log(res);
+              let clientes = "";
+              for(let x = 0; x < res.clientes; x++){
+                // let name = res.clientes[x]->nombreCliente;
+                // clientes = clientes+'<option value="">'+name+'</option>';
+              }//fin del for clientes
             }
           }else{
             Swal.fire(
