@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", function() {
             let res = JSON.parse(envio.responseText);
             if(res.status == "ok"){
               //ordenamos los clientes
-              console.log(res);
+              // console.log(res);
               let clientesContent = "";
-              console.log(res.clientes);
+              // console.log(res.clientes);
               for(let x = 0; x < res.clientes.length; x++){
                 let name = res.clientes[x]['nombreCliente'];
                 let idClie = res.clientes[x]['idClientes'];
-                console.log(name);
+                // console.log(name);
                 if(idClie == res.data){
                   clientesContent = clientesContent+'<option value="'+idClie+'" selected>'+name+'</option>';
                 }else{
