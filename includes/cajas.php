@@ -792,8 +792,9 @@ if(!empty($_SESSION['usuarioPOS'])){
               $idArticulo = $fetchAux2['articuloID'];
               if($fetchAux2['chipID'] > 0){
                 //se trata de un chip
+                $idChip = $fetchAux2['chipID'];
                 $sqlChip = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha', 
-                ventaID = '$idVenta'";
+                ventaID = '$idVenta' WHERE idChip = '$idChip'";
                 $queryChip = mysqli_query($conexion, $sqlChip);
               }else{
                 //es un producto cualquiera
