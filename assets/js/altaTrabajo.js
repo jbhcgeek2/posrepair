@@ -12,7 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
       //ya esta registrado
     }else{
       //no esta registrado, lo damos de alta
-      window.location = 'altaCliente.php';
+      // window.location = 'altaCliente.php';
+      //abrimos el modal para nuevo cliente
+      let modalCliente = new bootstrap.Modal(document.getElementById('nuevoCliente'));
+      modalCliente.open();
     }
   })
 
