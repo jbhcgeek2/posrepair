@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
               //ordenamos los clientes
               console.log(res);
               let clientesContent = "";
-              console.log(res.clientes.length);
-              for(let x = 0; x < res.clientes; x++){
+              console.log(res.clientes);
+              for(let x = 0; x < res.clientes.length; x++){
                 let name = res.clientes[x]['nombreCliente'];
                 console.log(name);
                 // clientesContent = clientesContent+'<option value="">'+name+'</option>';
