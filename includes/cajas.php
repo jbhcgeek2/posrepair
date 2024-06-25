@@ -784,6 +784,9 @@ if(!empty($_SESSION['usuarioPOS'])){
             $sqlAux2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
             a.articuloID = b.articuloID WHERE a.ventaID = '$idVenta' AND a.usuarioVenta = '$usuario' AND b.sucursalID = '$idSucursal'";
             $queryAux2 = mysqli_query($conexion, $sqlAux2);
+            $tieneChip = 0;
+            $vanChip = 0;
+            $canChipExisten = 0;
             while($fetchAux2 = mysqli_fetch_assoc($queryAux2)){
               //obtendremos los datos de los articulos
               $cantidadVenta = $fetchAux2['cantidadVenta'];
@@ -796,13 +799,24 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $sqlChip = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha', 
                 ventaID = '$idVenta' WHERE idChip = '$idChip'";
                 $queryChip = mysqli_query($conexion, $sqlChip);
+                
+                $sqlUpChip = "SELECT COUNT(*) AS existenciaChip FROM DETALLECHIP WHERE idChip = '$idChip' 
+                AND estatusChip = 'Activo' AND sucursalID = '$idSucursal'";
+                $queryUpChip = mysqli_query($conexion, $sqlUpChip);
+                $fetchUpChip = mysqli_fetch_assoc($queryUpChip);
+                $existeChip = $fetchUpChip['existenciaChip'];
+
+                $sqlCantAux = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$existeChip' 
+                WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
+                $queryCantAux = mysqli_query($conexion, $sqlCantAux);
               }else{
                 //es un producto cualquiera
+                //hacemos el update a la sucursal
+                $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
+                WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
+                $queryCant = mysqli_query($conexion, $sqlCant);
               }
-              //hacemos el update a la sucursal
-              $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
-              WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
-              $queryCant = mysqli_query($conexion, $sqlCant);
+              
 
               
             }//fin del whileAux2
