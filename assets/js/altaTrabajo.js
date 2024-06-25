@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // window.location = 'altaCliente.php';
       //abrimos el modal para nuevo cliente
       let modalCliente = new bootstrap.Modal(document.getElementById('nuevoCliente'));
-      modalCliente.open();
+      modalCliente.show();
     }
   })
 
