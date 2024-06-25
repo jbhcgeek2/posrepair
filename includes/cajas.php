@@ -800,7 +800,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 ventaID = '$idVenta' WHERE idChip = '$idChip'";
                 $queryChip = mysqli_query($conexion, $sqlChip);
                 
-                $sqlUpChip = "SELECT COUNT(*) AS existenciaChip FROM DETALLECHIP WHERE idChip = '$idChip' 
+                $sqlUpChip = "SELECT COUNT(*) AS existenciaChip FROM DETALLECHIP WHERE productoID = '$idArticulo' 
                 AND estatusChip = 'Activo' AND sucursalID = '$idSucursal'";
                 $queryUpChip = mysqli_query($conexion, $sqlUpChip);
                 $fetchUpChip = mysqli_fetch_assoc($queryUpChip);
