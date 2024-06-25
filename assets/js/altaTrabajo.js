@@ -47,11 +47,17 @@ document.addEventListener("DOMContentLoaded", function() {
               console.log(res.clientes);
               for(let x = 0; x < res.clientes.length; x++){
                 let name = res.clientes[x]['nombreCliente'];
+                let idClie = res.clientes[x]['idClientes'];
                 console.log(name);
-                // clientesContent = clientesContent+'<option value="">'+name+'</option>';
+                if(idClie == res.data){
+                  clientesContent = clientesContent+'<option value="'+idClie+'" selected>'+name+'</option>';
+                }else{
+                  clientesContent = clientesContent+'<option value="'+idClie+'">'+name+'</option>';
+                }
               }//fin del for clientes\\for
 
-             
+              document.getElementById('clienteTrabajo').innerHTML = clientesContent;
+              modalCliente.hide();
             }
           }else{
             Swal.fire(
