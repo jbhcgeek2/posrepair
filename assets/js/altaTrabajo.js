@@ -33,13 +33,16 @@ document.addEventListener("DOMContentLoaded", function() {
           datos.append('emailCliente',mailCli);
           datos.append('direccionCliente',direCli);
           datos.append('rfcCliente',rfcCli);
+          datos.append('altaCliModal','yes');
 
           let envio = new XMLHttpRequest();
           envio.open("POST","../includes/operacionesCliente.php",false);
           envio.send(datos);
           if(envio.status == 200){
             let res = JSON.parse(envio.responseText);
-            console.log(res);
+            if(res.status == "ok"){
+              
+            }
           }else{
             Swal.fire(
               'Servidor Inalcansable',
