@@ -44,12 +44,14 @@ document.addEventListener("DOMContentLoaded", function() {
               //ordenamos los clientes
               console.log(res);
               let clientesContent = "";
-              console.log(res.clientes);
+              console.log(res.clientes.length);
               for(let x = 0; x < res.clientes; x++){
                 let name = res.clientes[x]['nombreCliente'];
                 console.log(name);
-                clientesContent = clientesContent+'<option value="">'+name+'</option>';
-              }//fin del for clientes
+                // clientesContent = clientesContent+'<option value="">'+name+'</option>';
+              }//fin del for clientes\\for
+
+             
             }
           }else{
             Swal.fire(
