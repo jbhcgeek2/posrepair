@@ -817,8 +817,6 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $queryCant = mysqli_query($conexion, $sqlCant);
               }
               
-
-              
             }//fin del whileAux2
 
             //antes de finalizar el proceso, consultamos si se cuenta con servicios
