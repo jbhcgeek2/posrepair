@@ -34,7 +34,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           //consultamos el listado de clientes
           $clientes = verClientes($idEmpresaSesion);
           $clientes = json_decode($clientes)->data;
-          $clienteAlta = $altaCliente->data;
+          $clienteAlta = $altaClienteAux->data;
           $res = ['status'=>'ok','clientes'=>$clientes,'data'=>$clienteAlta];
           echo json_encode($res);
         }else{
