@@ -790,6 +790,14 @@ if(!empty($_SESSION['usuarioPOS'])){
               $cantidadExiste = $fetchAux2['existenciaSucursal'];
               $nuevaCantidad = $cantidadExiste-$cantidadVenta;
               $idArticulo = $fetchAux2['articuloID'];
+              if($fetchAux2['chipID'] > 0){
+                //se trata de un chip
+                $sqlChip = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha', 
+                ventaID = '$idVenta'";
+                $queryChip = mysqli_query($conexion, $sqlChip);
+              }else{
+                //es un producto cualquiera
+              }
               //hacemos el update a la sucursal
               $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
               WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
