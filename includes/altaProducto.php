@@ -87,7 +87,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           $campo = "cantidadSuc".$idSucursal;
           $cantidadSuc = $_POST[$campo];
 
-          if($cantidadSuc > 0){
+          if($cantidadSuc >= 0){
             //insertamos la cantidad en la sucursal
             $cantidadSuc = guardarArticuloSuc($cantidadSuc,$idSucursal,$idArticulo);
             $cantidadSuc = json_decode($cantidadSuc);
@@ -104,7 +104,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
         if($camposMal == 0){
           //se inserto todo correctamente
-          $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
+          $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idArticulo];
           echo json_encode($res);
         }else{
           //error al insertar algun campo

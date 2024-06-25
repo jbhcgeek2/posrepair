@@ -30,9 +30,11 @@ btnEnvia.addEventListener("click", function(){
       }).then((result)=>{
         if(result.isConfirmed){
           //registramos otro
+          window.open("verInfoProducto.php?infoProd="+res.data,"_blank");
           location.reload();
         }else{
           window.location = "verProductos.php";
+          window.open("verInfoProducto.php?infoProd="+res.data,"_blank");
         }
       })
     }else{
