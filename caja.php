@@ -412,30 +412,62 @@ session_start();
                         } else {
                             $cadenaTruncada = $nombreProdVenta;
                         }
-                        $contenido .= "
-                        <tr class='p-1' style='height: 58px;'>
-                          <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
-  
-                          <td class='d-flex ' style='height: 58px;'>
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delOneProd($idProdVenta)' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
-                              <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
-                            </svg>
-                            
-                            <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)'>
-  
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='addMoreProd($idProdVenta)' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
-                              <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
-                            </svg>
-                          </td>
-  
-                          <td style='height: 58px;' id='subTotVenta$idProdVenta' onclick='modPreUnit(this.id)'>$$subTotal</td>
-  
-                          <td class='text-center' style='height: 58px;'>
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delProd($idProdVenta)' class='bi bi-trash-fill text-danger' viewBox='0 0 16 16'>
-                              <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/>
-                            </svg>
-                          </td>
-                        </tr>";
+
+                        if($fetchVen['chipID'] > 0){
+                          //se tratab de un chip
+                          $contenido .= "
+                          <tr class='p-1' style='height: 58px;'>
+                            <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
+    
+                            <td class='d-flex ' style='height: 58px;'>
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
+                                <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
+                              </svg>
+                              
+                              <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' readonly>
+    
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
+                                <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
+                              </svg>
+                            </td>
+    
+                            <td style='height: 58px;' id='subTotVenta$idProdVenta' onclick='modPreUnit(this.id)'>$$subTotal</td>
+    
+                            <td class='text-center' style='height: 58px;'>
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delProd($idProdVenta)' class='bi bi-trash-fill text-danger' viewBox='0 0 16 16'>
+                                <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/>
+                              </svg>
+                            </td>
+                          </tr>";
+                        }else{
+                          //es un producto servicio normal
+                          $contenido .= "
+                          <tr class='p-1' style='height: 58px;'>
+                            <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
+    
+                            <td class='d-flex ' style='height: 58px;'>
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delOneProd($idProdVenta)' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
+                                <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
+                              </svg>
+                              
+                              <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)'>
+    
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='addMoreProd($idProdVenta)' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
+                                <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
+                              </svg>
+                            </td>
+    
+                            <td style='height: 58px;' id='subTotVenta$idProdVenta' onclick='modPreUnit(this.id)'>$$subTotal</td>
+    
+                            <td class='text-center' style='height: 58px;'>
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delProd($idProdVenta)' class='bi bi-trash-fill text-danger' viewBox='0 0 16 16'>
+                                <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0'/>
+                              </svg>
+                            </td>
+                          </tr>";
+                        }
+
+                        
                       }else{
                         //es servicio/trabajo
                         // $idTrabajo = $fetchVen['ventaID'];

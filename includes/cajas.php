@@ -238,13 +238,66 @@ if(!empty($_SESSION['usuarioPOS'])){
           echo json_encode($res);
         }
       }else{
-        //es mas de uno o ninguno, hacemos el while
-        while($fetchExt = mysqli_fetch_assoc($queryExt)){
-          $datos[$x] = $fetchExt;
-          $x++;
-        }//fin del while
-        $res = ["status"=>"ok","data"=>$datos];
-        echo json_encode($res);
+        //no se detecto en la primer consulta, verificamos si es un chip
+        $sqlExt2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b 
+        ON a.productoID = b.idArticulo WHERE a.empresaID = '$idEmprersa' AND 
+        a.sucursalID = '$idSucursal' AND a.codigoChip = '$valor' AND a.estatusChip = 'Activo'";
+        
+        try {
+          $queryExt2 = mysqli_query($conexion, $sqlExt2);
+          if(mysqli_num_rows($queryExt2) == 1){
+            //se trata de un chip, 
+            //verificamos que no este ingresado de nuevo en detalle venta
+            $fetchExt2 = mysqli_fetch_assoc($queryExt2);
+            $precioUnitario = $fetchExt2['precioUnitario'];
+            $idArti = $fetchExt2['idArticulo'];
+            $idChip = $fetchExt2['idChip'];
+
+            $sqlExt4 = "SELECT * FROM DETALLEVENTA WHERE chipID = '$idChip' AND sucursalID = '$idSucursal'";
+            try {
+              $queryExt4 = mysqli_query($conexion, $sqlExt4);
+              if(mysqli_num_rows($queryExt4) == 0){
+                //no existe el chip en el carrito, podemos continuar
+                //insertamos el detalle venta
+                //como son codigos diferentes no los agruparemos en un solo registro
+                //y cada chip generara un registro nuevo
+                
+
+                $sqlExt3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
+                sucursalID,articuloID,chipID) VALUES ('1','$precioUnitario','$precioUnitario','$usuario','$idSucursal',
+                '$idArti','$idChip')";
+                try {
+                  $queryExt3 = mysqli_query($conexion, $sqlExt3);
+                  $res = ["status"=>"ok","data"=>"operationSuccess"];
+                  echo json_encode($res);
+                } catch (\Throwable $th) {
+                  $res = ["status"=>"error","mensaje"=>"Ocurrio un error al insertar el chip en la venta"];
+                  echo json_encode($res);
+                }
+              }else{
+                //ya existe el chip en el carrito
+                $res = ["status"=>"error","mensaje"=>"El chip ya se encuentra en el carrito."];
+                echo json_encode($res);
+              }
+            } catch (\Throwable $th) {
+              //ocurrio un error al consultar la existencia del chip en el carrito
+              $res = ["status"=>"error","mensaje"=>"Ocurrio un error al consultar la existencia del chip."];
+              echo json_encode($res);
+            }
+          }else{
+            //es mas de uno o ninguno, hacemos el while
+            while($fetchExt = mysqli_fetch_assoc($queryExt)){
+              $datos[$x] = $fetchExt;
+              $x++;
+            }//fin del while
+            $res = ["status"=>"ok","data"=>$datos];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          $res = ["status"=>"error","mensaje"=>"Ocurrio un error al insertar consultar datos de inventario: ".$th];
+          echo json_encode($res);
+        }
+
       }
       
 
@@ -330,18 +383,31 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $cadenaTruncada = $nombreProdVenta;
                 }
                 $totalArticulos = $totalArticulos + $cantidadVenta;
+
+                if($fetchVen['chipID'] > 0){
+                  //se trata de un chip, no ponemos los metodos
+                  $metodoMenos = "";
+                  $metodoMas = "";
+                  $readOnly = "readonly";
+                }else{
+                  //si ponemos los metodos
+                  $metodoMenos = "onclick='delOneProd($idProdVenta)'";
+                  $metodoMas = "onclick='addMoreProd($idProdVenta)'";
+                  $readOnly = "";
+                }
+
                 $contenido .= "
                 <tr class='p-1' style='height: 58px;'>
                   <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
 
                   <td class='d-flex ' style='height: 58px;'>
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delOneProd($idProdVenta)' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' $metodoMenos class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
                       <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
                     </svg>
                     
-                    <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)'>
+                    <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)' $readOnly>
 
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='addMoreProd($idProdVenta)' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' $metodoMas class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
                       <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
                     </svg>
                   </td>
@@ -549,18 +615,32 @@ if(!empty($_SESSION['usuarioPOS'])){
               $cadenaTruncada = $nombreProdVenta;
           }
           $totalArti = $totalArti + $cantidadVenta;
+
+          if($fetchVen['chipID'] > 0){
+            //se trata de un chip, no ponemos los metodos
+            $metodoMenos = "";
+            $metodoMas = "";
+            $readOnly = "readonly";
+          }else{
+            //si ponemos los metodos
+            $metodoMenos = "onclick='delOneProd($idProdVenta)'";
+            $metodoMas = "onclick='addMoreProd($idProdVenta)'";
+            $readOnly = "";
+          }
+
+
           $contenido .= "
           <tr class='p-1' style='height: 58px;'>
             <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
 
             <td class='d-flex ' style='height: 58px;'>
-              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delOneProd($idProdVenta)' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
+              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' $metodoMenos class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
                 <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
               </svg>
               
-              <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)'>
+              <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)' $readOnly>
 
-              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='addMoreProd($idProdVenta)' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
+              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' $metodoMas class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
                 <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
               </svg>
             </td>
@@ -704,17 +784,38 @@ if(!empty($_SESSION['usuarioPOS'])){
             $sqlAux2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
             a.articuloID = b.articuloID WHERE a.ventaID = '$idVenta' AND a.usuarioVenta = '$usuario' AND b.sucursalID = '$idSucursal'";
             $queryAux2 = mysqli_query($conexion, $sqlAux2);
+            $tieneChip = 0;
+            $vanChip = 0;
+            $canChipExisten = 0;
             while($fetchAux2 = mysqli_fetch_assoc($queryAux2)){
               //obtendremos los datos de los articulos
               $cantidadVenta = $fetchAux2['cantidadVenta'];
               $cantidadExiste = $fetchAux2['existenciaSucursal'];
               $nuevaCantidad = $cantidadExiste-$cantidadVenta;
               $idArticulo = $fetchAux2['articuloID'];
-              //hacemos el update a la sucursal
-              $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
-              WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
-              $queryCant = mysqli_query($conexion, $sqlCant);
+              if($fetchAux2['chipID'] > 0){
+                //se trata de un chip
+                $idChip = $fetchAux2['chipID'];
+                $sqlChip = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha', 
+                ventaID = '$idVenta' WHERE idChip = '$idChip'";
+                $queryChip = mysqli_query($conexion, $sqlChip);
+                
+                $sqlUpChip = "SELECT COUNT(*) AS existenciaChip FROM DETALLECHIP WHERE productoID = '$idArticulo' 
+                AND estatusChip = 'Activo' AND sucursalID = '$idSucursal'";
+                $queryUpChip = mysqli_query($conexion, $sqlUpChip);
+                $fetchUpChip = mysqli_fetch_assoc($queryUpChip);
+                $existeChip = $fetchUpChip['existenciaChip'];
 
+                $sqlCantAux = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$existeChip' 
+                WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
+                $queryCantAux = mysqli_query($conexion, $sqlCantAux);
+              }else{
+                //es un producto cualquiera
+                //hacemos el update a la sucursal
+                $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
+                WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
+                $queryCant = mysqli_query($conexion, $sqlCant);
+              }
               
             }//fin del whileAux2
 

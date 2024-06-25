@@ -122,6 +122,77 @@ if(!empty($_SESSION['usuarioPOS'])){
       echo json_encode($res);
 
     }
+  }elseif(!empty($_POST['codigoChip'])){
+    //seccion para insertar chips
+    $codigoChip = $_POST['codigoChip'];
+    $sucursalChip = $_POST['sucursalChip'];
+    $articuloID = $_POST['articuloID'];
+    $fecha = date('Y-m-d');
+
+    $usuario = $_SESSION['usuarioPOS'];
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $empresa = json_decode($empresa);
+    $idEmpresaSesion = $empresa->dato;
+
+    //antes de insertarlo, verificamos que el codigo no este ya registrado
+    $sql = "SELECT * FROM DETALLECHIP WHERE codigoChip = '$codigoChip' AND 
+    empresaID = '$idEmpresaSesion'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 0){
+        //no esta registrado, podemos continuar
+        //opero antes de registrar el chip, verificamos las excistencias del mismo 
+        //actualizaremos mientras estemos registrando
+        $sql2 = "SELECT *, (SELECT COUNT(*) FROM DETALLECHIP b WHERE b.sucursalID = a.sucursalID 
+        AND b.productoID = a.articuloID AND b.estatusChip = 'Activo') AS chipsRegistrados 
+        FROM ARTICULOSUCURSAL a WHERE a.articuloID = '$articuloID' AND a.sucursalID = '$sucursalChip'";
+        try {
+          $query2 = mysqli_query($conexion, $sql2);
+          $fetch2 = mysqli_fetch_assoc($query2);
+          $existenciaSuc = $fetch2['existenciaSucursal'];
+          $existenciaReal = $fetch2['chipsRegistrados'];
+          $idArtiSuc = $fetch2['idArtiSuc'];
+          
+          $nuevaExistencia = $existenciaReal + 1;
+
+          //ahora procedemois a insertar el chip
+          $sql3 = "INSERT INTO DETALLECHIP (sucursalID,empresaID,productoID,codigoChip,
+          estatusChip,fechaEntrada,usuarioRegistra) VALUES ('$sucursalChip','$idEmpresaSesion','$articuloID',
+          '$codigoChip','Activo','$fecha','$usuario')";
+          try {
+            $query3 = mysqli_query($conexion, $sql3);
+            //se inserto el chip, ahora actualizamos 1
+            $sql4 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaExistencia' WHERE idArtiSuc = '$idArtiSuc'";
+            try {
+              $query4 = mysqli_query($conexion, $sql4);
+              //se completo el proceso
+              $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+              echo json_encode($res);
+            } catch (\Throwable $th) {
+              //error al actualizar
+              $res = ['status'=>'error','mensaje'=>'Ocurrio un error al actualizar las cantidades de chips: '.$th];
+              echo json_encode($res);
+            }
+          } catch (\Throwable $th) {
+            $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el chip: '.$th];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          //error al consultar la existencia real de chips
+        }
+      }else{
+        //ya esta registrado el chip, mandamos error
+        $res = ['status'=>'error','mensaje'=>'El codigo ya esta registrado en el sistema'];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //error de consulta a la base de datos
+      $res = ['status'=>'error','mensaje'=>'Error al consultar la existencia del chip'];
+      echo json_encode($res);
+    }
+
+    
+
   }
 }
 

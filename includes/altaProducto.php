@@ -35,6 +35,12 @@ if(!empty($_SESSION['usuarioPOS'])){
       $mayoDesde = $_POST['mayoreoDesde'];
       $codigo = $_POST['codigoProducto'];
       $proveedor = $_POST['provProducto'];
+      $esChip = $_POST['esChip'];
+      if($esChip == "siChip"){
+        $chip = "1";
+      }else{
+        $chip = "0";
+      }
       
       $empresa = datoEmpresaSesion($usuario,"id");
       $empresa = json_decode($empresa);
@@ -66,7 +72,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       }
 
       $guardarProd = guardarProducto($nombreArti,$descr,$estatus,$idEmpresaSesion,
-      $categoria,$imgArti,$pMenudeo,$pMayoreo,$mayoDesde,$codigo,$proveedor);
+      $categoria,$imgArti,$pMenudeo,$pMayoreo,$mayoDesde,$codigo,$proveedor,$chip);
       $guardarProd = json_decode($guardarProd);
       if($guardarProd->mensaje == "operationSuccess"){
         //verificamos el id de articulo

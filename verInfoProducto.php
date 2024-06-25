@@ -77,6 +77,67 @@ session_start();
                       
 							        <div class="col-auto">
 								        <div class="card-header-action">
+                          <?php 
+                            if($datosProd->data->esChip == 1){
+                              $sucursalesChip = verSucursales($usuario,'');
+                              $sucursalesChip = json_decode($sucursalesChip);
+                              $comboSucChip = "";
+                              if($sucursalesChip->estatus ==  "ok"){
+                                //print_r($sucursales->dato);
+                                for($x = 0; $x  < count($sucursalesChip->dato); $x++){
+                                  $nombreSucursalChip = $sucursalesChip->dato[$x]->nombreSuc;
+                                  $idSucChip = $sucursalesChip->dato[$x]->idSucursal;
+                                  $comboSucChip .= "<option value='$idSucChip'>$nombreSucursalChip</option>";
+                                }
+                              }
+                              //si es chip
+                              echo '<a href="#!" class="btn btn-success me-3" data-bs-toggle="modal" 
+                              data-bs-target="#modalNuevoChip">
+                                Registrar Chip
+                              </a>
+                              
+                              <div class="modal fade" id="modalNuevoChip" tabindex="-1" 
+                              aria-labelledby="modalNuevoChipLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                                <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="modalNuevoChipLabel">
+                                        Registrar Chips
+                                      </h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                      <div class="row">
+                                        <div class="col-sm-12 col-md-4 mb-3">
+                                          <label for="sucChip" class="form-label">Sucursal Destino</label>
+                                          <select id="sucChip" class="form-select">
+                                            <option value="" selected>Selecione...</option>
+                                            '.$comboSucChip.'
+                                          </select>
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 mb-3">
+                                          <label for="codigoChip" class="form-label">Codigo</label>
+                                          <input type="text" id="codigoChip" class="form-control" onchange="insertaChip()">
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 offset-md-3" id="resChips" style="text-align:center;height:200px;overflow-y:scroll;"></div>
+                                      </div><!--fin row modal-body-->
+
+                                    </div><!--Fin modal body-->
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                      <button type="button" class="btn btn-primary" id="btnTerminaChip">Terminar Proceso</button>
+                                    </div><!--Fin Modal Footer-->
+                                  </div>
+                                </div>
+                              </div>
+                              ';
+                            }else{
+                              //no mostramos nada
+                            }
+                          ?>
+
 									        <a href="verProductos.php">Ver Productos</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
@@ -242,6 +303,14 @@ session_start();
                           </div>
                           <?php
                         }
+
+                        // validaremos si el producto es chip para ver los chips existentes
+                        if($datosProd->data->esChip == 1){
+                          //si es chip
+
+                        }else{
+                          //no mostramos nada
+                        }
                       ?>
                       
 
@@ -279,12 +348,60 @@ session_start();
                                 </div>
                                 <div class='col-sm-12 col-md-4 col-lg-3 mb-3'>
                                   <label for='cantidadSuc$idSuc' class='form-label'>Existencia en Sucursal</label>
-                                  <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' onchange='updateDirectCant(this.id)'>
+                                  <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' >
                                 </div>
                               </div>";
+
                             }//fin del for
                           }else{
                             //error al consultar las sucursales
+                          }
+
+                          //si el producto es chip generamos una tabla de contenido 
+                          if($datosProd->data->esChip == 1){
+                            ?>
+                            <hr class="my-4">
+                            <h1 class="fs-5 text-center">Listado de Chips en Existencia</h1>
+                            
+                            <div class="row" style="height:250px; overflow-y:scroll;">
+                              <table class="table table-stripe ">
+                                <thead>
+                                  <tr>
+                                    <th>Codigo Chip</th>
+                                    <th>Sucursal</th>
+                                    <th>Fecha Alta</th>
+                                    <th>Usuario Registro</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php 
+                                    //consultamos los chis en existencia
+                                    $sqlChip = "SELECT * FROM DETALLECHIP a INNER JOIN SUCURSALES b ON a.sucursalID = b.idSucursal 
+                                    WHERE a.empresaID = '$idEmpresaSesion' AND a.productoID = '$idProd' AND 
+                                    a.estatusChip = 'Activo' ORDER BY a.sucursalID ASC";
+                                    try {
+                                      $queryChip = mysqli_query($conexion, $sqlChip);
+                                      while($fetchChip = mysqli_fetch_assoc($queryChip)){
+                                        $codChip = $fetchChip['codigoChip'];
+                                        $sucChip = $fetchChip['nombreSuc'];
+                                        $fechaChip = $fetchChip['fechaEntrada'];
+                                        $usuarioChip = $fetchChip['usuarioRegistra'];
+                                        echo "<tr>
+                                          <td>$codChip</td>
+                                          <td>$sucChip</td>
+                                          <td>$fechaChip</td>
+                                          <td>$usuarioChip</td>
+                                        </tr>";
+                                      }//fin del while
+                                    } catch (\Throwable $th) {
+                                      echo "<tr><td colspan='4'>Error de base de datos</td></tr>";
+                                    }
+                                  ?>
+                                </tbody>
+                              </table>
+                            </div>
+                            
+                            <?php
                           }
                         ?>
 
