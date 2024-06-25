@@ -215,11 +215,11 @@ session_start();
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                      <label class="form-label" for="nombreCliente">Nombre Cliente</label>
+                      <label class="form-label" for="nombreCliente"><strong>*</strong> Nombre Cliente</label>
                       <input type="text" id="nombreCliente" name="nombreCliente" class="form-control">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                      <label for="telefonoCliente" class="form-label">Telefono</label>
+                      <label for="telefonoCliente" class="form-label"><strong>*</strong>Telefono</label>
                       <input type="text" id="telefonoCliente" name="telefonoCliente" class="form-control">
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
