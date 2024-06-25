@@ -383,18 +383,31 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $cadenaTruncada = $nombreProdVenta;
                 }
                 $totalArticulos = $totalArticulos + $cantidadVenta;
+
+                if($fetchVen['chipID'] > 0){
+                  //se trata de un chip, no ponemos los metodos
+                  $metodoMenos = "";
+                  $metodoMas = "";
+                  $readOnly = "readonly";
+                }else{
+                  //si ponemos los metodos
+                  $metodoMenos = "onclick='delOneProd($idProdVenta)'";
+                  $metodoMas = "onclick='addMoreProd($idProdVenta)'";
+                  $readOnly = "";
+                }
+
                 $contenido .= "
                 <tr class='p-1' style='height: 58px;'>
                   <td style='font-size:11px;height: 58px !important;'>$cadenaTruncada</td>
 
                   <td class='d-flex ' style='height: 58px;'>
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='delOneProd($idProdVenta)' class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' $metodoMenos class='bi bi-cart-dash-fill m-2' viewBox='0 0 16 16'>
                       <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1'/>
                     </svg>
                     
-                    <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)'>
+                    <input type='text' value='$cantidadVenta' pattern='[0-9]+' id='cantVent$idProdVenta' class='form-control' style='width:60px;' onchange='updateCantProd(this.id)' $readOnly>
 
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' onclick='addMoreProd($idProdVenta)' class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' $metodoMas class='bi bi-cart-plus-fill m-2' viewBox='0 0 16 16'>
                       <path d='M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0'/>
                     </svg>
                   </td>
