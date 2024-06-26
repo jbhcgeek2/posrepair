@@ -47,7 +47,8 @@ function altaCliente($nombre,$tel,$mail,$dir,$rfc,$idEmpresa){
 
     try {
       $query = mysqli_query($conexion, $sql);
-      $res = ['status'=>'ok','mensaje'=>'operationSuccess'];
+      $idCliente = mysqli_insert_id($conexion);
+      $res = ['status'=>'ok','mensaje'=>'operationSuccess','data'=>$idCliente];
       return json_encode($res);
     } catch (\Throwable $th) {
       $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al insertar el cliente'];

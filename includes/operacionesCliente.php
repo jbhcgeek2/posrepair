@@ -27,7 +27,24 @@ if(!empty($_SESSION['usuarioPOS'])){
 
     if($van == 0){
       $altaCliente = altaCliente($nombreCliente,$telefono,$email,$direccion,$rfcCliente,$idEmpresaSesion);
-      echo $altaCliente;
+      $altaClienteAux = json_decode($altaCliente);
+      //si se registro el cliente
+      if(!empty($_POST['altaCliModal'])){
+        if($altaClienteAux->status == "ok"){
+          //consultamos el listado de clientes
+          $clientes = verClientes($idEmpresaSesion);
+          $clientes = json_decode($clientes)->data;
+          $clienteAlta = $altaClienteAux->data;
+          $res = ['status'=>'ok','clientes'=>$clientes,'data'=>$clienteAlta];
+          echo json_encode($res);
+        }else{
+          echo $altaCliente;
+        }
+      }else{
+        echo $altaCliente;
+      }
+      
+      
     }else{
       $res = ['status'=>'error','mensaje'=>'Verifica que los campos esten correctamente capturados'];
       echo json_encode($res);

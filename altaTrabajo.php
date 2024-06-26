@@ -63,7 +63,6 @@ session_start();
                                 for ($i=0; $i <count($clientes->data) ; $i++) { 
                                   $nombreCliente = $clientes->data[$i]->nombreCliente;
                                   $cliente = $clientes->data[$i]->idClientes;
-
                                   echo "<option value='$cliente'>$nombreCliente</option>";
                                 }
                               }else{
@@ -143,6 +142,7 @@ session_start();
                             <option value="Laptop">Laptop</option>
                             <option value="Desktop">Desktop</option>
                             <option value="Smartwatch">Smartwatch</option>
+                            <option value="Bocina">Bocina</option>
                           </select>
                           <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
@@ -205,8 +205,44 @@ session_start();
 			        </div><!--//col-->
           <hr class="my-4">
         
-
-
+          <div class="modal fade" id="nuevoCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="nuevoClienteLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="nuevoClienteLabel">Nuevo Cliente</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                      <label class="form-label" for="nombreCliente">Nombre Cliente <span class='text-danger fw-bold'>*<span></label>
+                      <input type="text" id="nombreCliente" name="nombreCliente" class="form-control">
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                      <label for="telefonoCliente" class="form-label">Telefono <span class='text-danger fw-bold'>*<span></label>
+                      <input type="text" id="telefonoCliente" name="telefonoCliente" class="form-control">
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                      <label for="emailCliente" class="form-label">Email</label>
+                      <input type="text" id="emailCliente" name="emailCliente" class="form-control">
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                      <label for="direccionCliente" class="form-label">Direccion</label>
+                      <input type="text" id="direccionCliente" name="direccionCliente" class="form-control">
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                      <label for="rfcCliente" class="form-label">RFC</label>
+                      <input type="text" id="rfcCliente" name="rfcCliente" class="form-control">
+                    </div>  
+                  </div>
+                </div><!--Fin modal body-->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="btnAltaCliente">Registrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
 			    
 	    
 	    <?php 
