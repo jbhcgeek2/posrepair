@@ -142,6 +142,7 @@ session_start();
                             <option value="Laptop">Laptop</option>
                             <option value="Desktop">Desktop</option>
                             <option value="Smartwatch">Smartwatch</option>
+                            <option value="Bocina">Bocina</option>
                           </select>
                           <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
