@@ -45,7 +45,7 @@ function buscarProd(){
                 }//fin del for
 
             document.getElementById('resProdBus').innerHTML = contenido;
-            document.getElementById('codigoProd').value = '';
+            
             }else{
                 //sin resultados
                 contenido = `<tr>
@@ -53,7 +53,7 @@ function buscarProd(){
                 </tr>`;
             }
             document.getElementById('resProdBus').innerHTML = contenido;
-            document.getElementById('codigoProd').value = '';
+            
         }else{
             Swal.fire(
                 'Ha ocurrido un error',
@@ -116,6 +116,7 @@ function buscarCodigo(){
                 }//fin del for
 
             document.getElementById('resProdBus').innerHTML = contenido;
+            document.getElementById('codigoProd').value = '';
             }else{
                 //sin resultados
                 contenido = `<tr>
@@ -123,6 +124,7 @@ function buscarCodigo(){
                 </tr>`;
             }
             document.getElementById('resProdBus').innerHTML = contenido;
+            document.getElementById('codigoProd').value = '';
         }else{
             Swal.fire(
                 'Ha ocurrido un error',
