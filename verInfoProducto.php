@@ -348,7 +348,7 @@ session_start();
                                 </div>
                                 <div class='col-sm-12 col-md-4 col-lg-3 mb-3'>
                                   <label for='cantidadSuc$idSuc' class='form-label'>Existencia en Sucursal</label>
-                                  <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' >
+                                  <input type='number' class='form-control' name='cantidadSuc$idSuc' id='cantidadSuc$idSuc' value='$cantidad' onchange='updateDirectCant(this.id)'>
                                 </div>
                               </div>";
 
