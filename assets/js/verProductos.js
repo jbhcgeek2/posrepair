@@ -52,6 +52,7 @@ function buscarProd(){
                 </tr>`;
             }
             document.getElementById('resProdBus').innerHTML = contenido;
+            document.getElementById('codigoProd').value = '';
         }else{
             Swal.fire(
                 'Ha ocurrido un error',
