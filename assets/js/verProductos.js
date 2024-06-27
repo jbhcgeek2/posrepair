@@ -45,6 +45,7 @@ function buscarProd(){
                 }//fin del for
 
             document.getElementById('resProdBus').innerHTML = contenido;
+            document.getElementById('codigoProd').value = '';
             }else{
                 //sin resultados
                 contenido = `<tr>
