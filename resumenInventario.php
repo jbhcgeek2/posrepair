@@ -38,7 +38,7 @@
 		//realizamos las consultas para ver las ventas totales en el mes
 		$sqlMonto = "SELECT a.idARticulo,a.nombreArticulo, (a.precioUnitario *
 		(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b WHERE b.articuloID = a.idArticulo)) AS totalSuma
-		FROM ARTICULOS a WHERE a.empresaID = '4' AND a.estatusArticulo = '1'";
+		FROM ARTICULOS a WHERE a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1'";
 		try {
 			$queryMonto = mysqli_query($conexion, $sqlMonto);
 			$valorInventario = 0;
@@ -66,7 +66,7 @@
 		}
 
 		$sqlProdVenta = "SELECT SUM(b.cantidadVenta) AS ventasMes FROM VENTAS a INNER JOIN DETALLEVENTA b 
-		ON b.ventaID = a.idVenta WHERE a.empresaID = '4' AND (MONTH(a.fechaVenta) = MONTH(CURRENT_DATE()) 
+		ON b.ventaID = a.idVenta WHERE a.empresaID = '$idEmpresaSesion' AND (MONTH(a.fechaVenta) = MONTH(CURRENT_DATE()) 
 		AND YEAR(a.fechaVenta) = YEAR(CURRENT_DATE())) AND b.articuloID IS NOT NULL";
 		try {
 			$queryProdVenta = mysqli_query($conexion, $sqlProdVenta);
