@@ -58,7 +58,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       // AND a.sucursalID = '$idSucursal'";
       $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
       INNER JOIN SUCURSALES c ON b.sucursalID = c.idSucursal WHERE 
-      AND a.empresaID = '$idEmpresaSesion' AND a.usuarioID = '$idUsuario' AND (a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+      a.empresaID = '$idEmpresaSesion' AND a.usuarioID = '$idUsuario' AND (a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
 
       $sqlGasto = "SELECT * FROM MOVCAJAS WHERE (fechaMovimiento BETWEEN '$fechaIni' AND '$fechaFin') AND
       empresaMovID = '$idEmpresaSesion' AND usuarioMov = '$idUsuario' AND conceptoMov IN ('15','2')";
