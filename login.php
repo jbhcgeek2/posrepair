@@ -2,7 +2,7 @@
 <html lang="en">
 <?php 
 	session_start();
-	if(!empty($_SESSION['cochiUsuario'])){
+	if(!empty($_SESSION['usuarioPOS'])){
 		header('Location:index.php');
 		?>
 		<script>
