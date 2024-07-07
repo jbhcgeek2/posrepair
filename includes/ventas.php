@@ -101,13 +101,12 @@ function verTicket($ticket,$idUsuario){
             }else{
               $fetchExt3 = mysqli_fetch_assoc($queryExt3);
               $data2[$x] = $fetchExt3;
-              $x++;
             }
 
           }
           // $data2[$x] = $fetch2;
           $idSucursal = $fetch2['sucursalID'];
-          
+          $x++;
         }//fin del while
         $sql3 = "SELECT * FROM SUCURSALES WHERE idSucursal = '$idSucursal'";
         try {
