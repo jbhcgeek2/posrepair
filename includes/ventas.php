@@ -91,11 +91,11 @@ function verTicket($ticket,$idUsuario){
             INNER JOIN SERVICIOS c ON b.servicioID = c.idServicio 
             WHERE a.ventaID = '$ticket'";
             $queryExt3 = mysqli_query($conexion, $sqlExt3);
-            $auxX = $x;
+            // $auxX = $x;
             // if(mysqli_num_rows($queryExt3) > 1){
               while($fetchExt3 = mysqli_fetch_assoc($queryExt3)){
-                $data2[$auxX] = $fetchExt3;
-                $auxX++;
+                $data2[$x] = $fetchExt3;
+                $x++;
               }//fin del while tickets
 
             // }else{
