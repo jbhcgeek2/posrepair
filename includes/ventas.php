@@ -91,8 +91,8 @@ function verTicket($ticket,$idUsuario){
             INNER JOIN SERVICIOS c ON b.servicioID = c.idServicio 
             WHERE a.ventaID = '$ticket'";
             $queryExt3 = mysqli_query($conexion, $sqlExt3);
-            if(mysqli_num_rows($queryExt3) > 1){
 
+            if(mysqli_num_rows($queryExt3) > 1){
               while($fetchExt3 = mysqli_fetch_assoc($queryExt3)){
                 $data2[$x] = $fetchExt3;
                 $x++;
@@ -101,12 +101,13 @@ function verTicket($ticket,$idUsuario){
             }else{
               $fetchExt3 = mysqli_fetch_assoc($queryExt3);
               $data2[$x] = $fetchExt3;
+              $x++;
             }
 
           }
           // $data2[$x] = $fetch2;
           $idSucursal = $fetch2['sucursalID'];
-          $x++;
+          
         }//fin del while
         $sql3 = "SELECT * FROM SUCURSALES WHERE idSucursal = '$idSucursal'";
         try {
