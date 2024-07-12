@@ -338,7 +338,7 @@ traspasoCod.addEventListener('change', function(){
     datosCod.append('showCodTraspaso',codigo);
 
     let envio = new XMLHttpRequest();
-    envio.open('POST','../includes/movProds.php',false);
+    envio.open('POST','../includes/movsProds.php',false);
     envio.send(datosCod);
 
     if(envio.status == 200){
