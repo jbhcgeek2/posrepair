@@ -142,6 +142,7 @@
 											<tr>
 												<th>Categoria</th>
 												<th>Existencia Articulos</th>
+												<th>Valor de Venta</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -158,6 +159,7 @@
 														$nombreCat = $fetchCat['nombreCategoria'];
 														$cantidadProds = 0;
 														
+														
 
 														$sqlProd = "SELECT a.idArticulo,(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b
 														WHERE b.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
@@ -167,6 +169,8 @@
 															
 															while($fetchProd = mysqli_fetch_assoc($queryProd)){
 																$cant = $fetchProd['existencia'];
+																$valor = $fetchProd['precioUnitario'];
+																$valorProd = $valor * $cant;
 																$cantidadProds = $cantidadProds + $cant;
 																$totalTotal = $totalTotal + $cant;
 															}//fin del while prods
@@ -177,6 +181,7 @@
 														echo "<tr>
 															<td>$nombreCat</td>
 															<td>$cantidadProds</td>
+															<td>$$valorProd</td>
 														</tr>";
 
 													}//fin del while
