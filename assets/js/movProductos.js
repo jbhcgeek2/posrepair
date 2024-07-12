@@ -345,7 +345,7 @@ traspasoCod.addEventListener('change', function(){
       let res = JSON.parse(envio.responseText);
       if(res.status == "ok"){
         let prod = res.data;
-        document.getElementById('prodModal').value(prod);
+        document.getElementById('prodModal').value = prod;
       }else{
         Swal.fire(
           'Ha ocurrido un error',
