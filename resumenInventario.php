@@ -181,7 +181,7 @@
 														echo "<tr>
 															<td>$nombreCat</td>
 															<td>$cantidadProds</td>
-															<td>$$valorProd"</td>
+															<td>$$valorProd</td>
 														</tr>";
 
 													}//fin del while
