@@ -162,7 +162,7 @@
 														
 
 														$sqlProd = "SELECT a.idArticulo,(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b
-														WHERE b.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
+														WHERE b.articuloID = a.idArticulo) AS existencia,a.precioUnitario FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
 														AND a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1'";
 														try {
 															$queryProd = mysqli_query($conexion, $sqlProd);
