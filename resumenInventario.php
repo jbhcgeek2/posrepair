@@ -181,7 +181,7 @@
 														echo "<tr>
 															<td>$nombreCat</td>
 															<td>$cantidadProds</td>
-															<td>$".number_format($valorProd,2)."</td>
+															<td>$$valorProd"</td>
 														</tr>";
 
 													}//fin del while
