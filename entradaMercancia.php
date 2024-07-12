@@ -68,7 +68,7 @@ session_start();
                             }//fin del for sucursales
                             ?> 
                             <div class="col-sm-12 col-md-4 mb-3">
-                              <label for="codProdModal">Codigo Producto</label>
+                              <label for="codProdModal" class="form-label">Codigo Producto</label>
                               <input type="text" id="codProdModal" name="codProdModal" class="form-control">
                             </div>
 

@@ -332,7 +332,37 @@ traspasoCod.addEventListener('change', function(){
 
   let codigo = traspasoCod.value;
 
-  alert(codigo);
+  if(codigo != "" || codigo != " "){
+    //hacemos una peticion para consultar la existencia
+    let datosCod = new FormData();
+    datosCod.append('showCodTraspaso',codigo);
+
+    let envio = new XMLHttpRequest();
+    envio.open('POST','../includes/movProds.php',false);
+    envio.send(datosCod);
+
+    if(envio.status == 200){
+      let res = JSON.parse(envio.responseText);
+      if(res.status == "ok"){
+        let prod = res.data;
+        document.getElementById('prodModal').value(prod);
+      }else{
+        Swal.fire(
+          'Ha ocurrido un error',
+          res.mensaje,
+          'error'
+        )
+      }
+    }else{
+      Swal.fire(
+        'Servidor Inalcansable',
+        'Ocurrio un error al consultar el servidor',
+        'error'
+      )
+    }
+  }else{
+    //no hacemos nada
+  }
 
 })//fin codigo modal
 
