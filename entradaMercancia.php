@@ -67,7 +67,12 @@ session_start();
                               }
                             }//fin del for sucursales
                             ?> 
-                            <div class="col-sm-12 col-md-12 mb-3">
+                            <div class="col-sm-12 col-md-4 mb-3">
+                              <label for="codProdModal">Codigo Producto</label>
+                              <input type="text" id="codProdModal" name="codProdModal" class="form-control">
+                            </div>
+
+                            <div class="col-sm-12 col-md-8 mb-3">
                               <label for="prodModal" class="form-label">Seleccione Producto...</label>
                               <select name="prodModal" id="prodModal" class="form-select">
                                 <option value="">Seleccione...</option>

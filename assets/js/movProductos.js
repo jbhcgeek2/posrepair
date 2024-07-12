@@ -327,6 +327,15 @@ btnAdd.addEventListener('click', function(){
 
 });
 
+let traspasoCod = document.getElementById("codProdModal");
+traspasoCod.addEventListener('change', function(){
+
+  let codigo = traspasoCod.value;
+
+  alert(codigo);
+
+})//fin codigo modal
+
 function traspasoModal(valor){
   if(valor == "Traspaso"){
     //uinicamente estar activa en la seccion de traspasos y 
