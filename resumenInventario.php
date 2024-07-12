@@ -158,6 +158,7 @@
 														$idCat = $fetchCat['idCategoria'];
 														$nombreCat = $fetchCat['nombreCategoria'];
 														$cantidadProds = 0;
+														$valorProd = 0;
 														
 														
 
@@ -166,11 +167,13 @@
 														AND a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1'";
 														try {
 															$queryProd = mysqli_query($conexion, $sqlProd);
-															$valorProd = 0;
+															
 															while($fetchProd = mysqli_fetch_assoc($queryProd)){
 																$cant = $fetchProd['existencia'];
 																$valor = $fetchProd['precioUnitario'];
-																$valorProd = $valor * $cant;
+																$valor = $valor * $cant;
+																$valorProd = $valorProd + $valor;
+																
 																$cantidadProds = $cantidadProds + $cant;
 																$totalTotal = $totalTotal + $cant;
 															}//fin del while prods
