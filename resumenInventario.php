@@ -177,7 +177,7 @@
 																
 																$cantidadProds = $cantidadProds + $cant;
 																$totalTotal = $totalTotal + $cant;
-																$valorTotalCant = $valorTotalCant + $valorProd;
+																$valorTotalCant = $valorTotalCant + $valor;
 															}//fin del while prods
 														} catch (\Throwable $th) {
 															//throw $th;
