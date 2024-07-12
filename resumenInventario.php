@@ -185,7 +185,7 @@
 
 														echo "<tr>
 															<td>$nombreCat</td>
-															<td>".number_format($cantidadProds,0)"</td>
+															<td>".number_format($cantidadProds,0)."</td>
 															<td>$".number_format($valorProd,2)."</td>
 														</tr>";
 
