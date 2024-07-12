@@ -192,7 +192,8 @@
 													}//fin del while
 													echo "<tr>
 															<td><strong>Total Global</strong></td>
-															<td><strong>$totalTotal</strong></td>
+															<td><strong>".number_format($totalTotal,0)."</strong></td>
+															<td><strong>".number_format($valorTotalCant,2)."</strong></td>
 														</tr>";
 												} catch (\Throwable $th) {
 													//throw $th;
