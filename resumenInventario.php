@@ -166,7 +166,7 @@
 														AND a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1'";
 														try {
 															$queryProd = mysqli_query($conexion, $sqlProd);
-															
+															$valorProd = 0;
 															while($fetchProd = mysqli_fetch_assoc($queryProd)){
 																$cant = $fetchProd['existencia'];
 																$valor = $fetchProd['precioUnitario'];
@@ -181,7 +181,7 @@
 														echo "<tr>
 															<td>$nombreCat</td>
 															<td>$cantidadProds</td>
-															<td>$$valorProd</td>
+															<td>$".number_format($valorProd,2)."</td>
 														</tr>";
 
 													}//fin del while
