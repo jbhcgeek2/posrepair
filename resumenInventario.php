@@ -152,6 +152,7 @@
 												WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1' ORDER BY
 												nombreCategoria ASC";
 												$totalTotal = 0;
+												$valorTotalCant = 0;
 												try {
 													$queryCat = mysqli_query($conexion, $sqlCat);
 													while($fetchCat = mysqli_fetch_assoc($queryCat)){
@@ -176,6 +177,7 @@
 																
 																$cantidadProds = $cantidadProds + $cant;
 																$totalTotal = $totalTotal + $cant;
+																$valorTotalCant = $valorTotalCant + $valorProd;
 															}//fin del while prods
 														} catch (\Throwable $th) {
 															//throw $th;
