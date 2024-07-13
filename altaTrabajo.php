@@ -51,6 +51,29 @@ session_start();
                       <form id="dataAltaTrab" class="row">
                         
 
+                      <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                          <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
+                          <input type="text" id="clienteTrabajo2" name="clienteTrabajo2" list="clienteList">
+                            <datalist id="clienteList">
+                            <?php 
+                              $clientes = verClientes($idEmpresaSesion);
+                              $clientes = json_decode($clientes);
+                              if($clientes->status == 'ok'){
+
+                                for ($i=0; $i <count($clientes->data) ; $i++) { 
+                                  $nombreCliente = $clientes->data[$i]->nombreCliente;
+                                  $cliente = $clientes->data[$i]->idClientes;
+                                  echo "<option value='$cliente'>$nombreCliente</option>";
+                                }
+                              }else{
+                                //error de consulta
+                                echo "<option>Error de consulta a la BD</option>";
+                              }
+                            ?>
+                          </datalist>
+                          
+                        </div>
+                        
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
                           <select name="clienteTrabajo" id="clienteTrabajo" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
