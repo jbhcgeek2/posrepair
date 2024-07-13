@@ -50,10 +50,10 @@ session_start();
                       
                       <form id="dataAltaTrab" class="row">
                         
-
+                      <input type="hidden" name="clienteTrabajo" id="clienteTrabajo">
                       <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                          <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <input type="text" id="clienteTrabajo2" name="clienteTrabajo2" list="clienteList" class="form-control">
+                          <label for="NombreclienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
+                          <input type="text" id="NombreclienteTrabajo" name="NombreclienteTrabajo" list="clienteList" class="form-control">
                             <datalist id="clienteList">
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
@@ -75,8 +75,8 @@ session_start();
                         </div>
                         
                         <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                          <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <select name="clienteTrabajo" id="clienteTrabajo" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
+                          <label for="clienteTrabajo2" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
+                          <select name="clienteTrabajo2" id="clienteTrabajo2" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
                             <option value="" selected>Seleccione...</option>
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);

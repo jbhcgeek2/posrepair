@@ -208,3 +208,9 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 
+let autoCom = document.getElementById('NombreclienteTrabajo');
+autoCom.addEventListener('change', function(){
+  console.log(autoCom.value);
+  console.log(autoCom);
+})
+
