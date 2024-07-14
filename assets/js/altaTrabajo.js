@@ -214,6 +214,6 @@ autoCom.addEventListener('change', function(){
   let dataList = document.getElementById('clienteList');
   
   let selectedOpt = Array.from(dataList.options).find(item => item.value == autoCom.value);
-  console.log(selectedOpt);
+  console.log(selectedOpt.textContent);
 })
 
