@@ -56,8 +56,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
               }//fin del for clientes\\for
 
-              document.getElementById('clienteTrabajo').innerHTML = clientesContent;
+              document.getElementById('clienteList').innerHTML = clientesContent;
               modalCliente.hide();
+              let autoCom = document.getElementById('clienteList');
+              let campoNombre = document.getElementById('NombreclienteTrabajo');
+              let selectedOpt = Array.from(autoCom.options).find(item => item.value == res.data);
+              campoNombre = selectedOpt.textContent;
             }
           }else{
             Swal.fire(
@@ -214,7 +218,6 @@ autoCom.addEventListener('change', function(){
   
   let dataList = document.getElementById('clienteList');
   let selectedOpt = Array.from(dataList.options).find(item => item.value == autoCom.value);
-  
 
   autoCom.value = selectedOpt.textContent;
 })

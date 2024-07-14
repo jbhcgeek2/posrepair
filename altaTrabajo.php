@@ -74,28 +74,7 @@ session_start();
                           
                         </div>
                         
-                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                          <label for="clienteTrabajo2" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <select name="clienteTrabajo2" id="clienteTrabajo2" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
-                            <option value="" selected>Seleccione...</option>
-                            <?php 
-                              $clientes = verClientes($idEmpresaSesion);
-                              $clientes = json_decode($clientes);
-                              if($clientes->status == 'ok'){
-
-                                for ($i=0; $i <count($clientes->data) ; $i++) { 
-                                  $nombreCliente = $clientes->data[$i]->nombreCliente;
-                                  $cliente = $clientes->data[$i]->idClientes;
-                                  echo "<option value='$cliente'>$nombreCliente</option>";
-                                }
-                              }else{
-                                //error de consulta
-                                echo "<option>Error de consulta a la BD</option>";
-                              }
-                            ?>
-                          </select>
-                          
-                        </div>
+                        
 
                         <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
