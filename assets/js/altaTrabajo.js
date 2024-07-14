@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 let idClie = res.clientes[x]['idClientes'];
                 // console.log(name);
                 if(idClie == res.data){
-                  clientesContent = clientesContent+'<option value="'+idClie+'" selected>'+name+'</option>';
+                  clientesContent = clientesContent+'<option value="'+idClie+'">'+name+'</option>';
                 }else{
                   clientesContent = clientesContent+'<option value="'+idClie+'">'+name+'</option>';
                 }
@@ -58,10 +58,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
               document.getElementById('clienteList').innerHTML = clientesContent;
               modalCliente.hide();
-              let autoCom = document.getElementById('clienteList');
-              let campoNombre = document.getElementById('NombreclienteTrabajo');
-              let selectedOpt = Array.from(autoCom.options).find(item => item.value == res.data);
-              campoNombre = selectedOpt.textContent;
+              
+              
+              let dataList = document.getElementById('clienteList');
+              let selectedOpt = Array.from(dataList.options).find(item => item.value == res.data);
+              document.getElementById('NombreclienteTrabajo') = selectedOpt.textContent;
             }
           }else{
             Swal.fire(
