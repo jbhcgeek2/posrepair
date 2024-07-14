@@ -210,12 +210,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 let autoCom = document.getElementById('NombreclienteTrabajo');
 autoCom.addEventListener('change', function(){
+  document.getElementById('clienteTrabajo').value = autoCom.value;
   
   let dataList = document.getElementById('clienteList');
   let selectedOpt = Array.from(dataList.options).find(item => item.value == autoCom.value);
   
 
   autoCom.value = selectedOpt.textContent;
-  document.getElementById('clienteTrabajo').value = autoCom.value;
 })
 
