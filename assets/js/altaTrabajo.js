@@ -213,7 +213,7 @@ autoCom.addEventListener('change', function(){
   
   let dataList = document.getElementById('clienteList');
   let selectedOpt = Array.from(dataList.options).find(item => item.value == autoCom.value);
-  console.log(selectedOpt.textContent);
+  
 
   autoCom.value = selectedOpt.textContent;
   document.getElementById('clienteTrabajo').value = autoCom.value;
