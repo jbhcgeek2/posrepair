@@ -540,6 +540,14 @@ function buscarCodigo(){
         )
       }else{
         //si es un codigo valido de articulo
+        let categoria = res.data['categoriaID'];
+        let nombre = res.data['nombreArticulo'];
+        let precio = res.data['precioUnitario'];
+        let idProd = red.data['idArticulo'];
+        document.getElementById('catArticulo').value = categoria;
+        document.getElementById('precioArti').value = precio;
+        let comboProds = "<option value='"+idProd+"' selected>"+nombre+"</option>";
+        document.getElementById('articuloAgrega').innerHTML = comboProds;
 
       }
     }else{

@@ -377,7 +377,8 @@ session_start();
 
                               <div class="col-sm-12">
                                 <label for="codigoArticuloAdd" class="form-label">Escanear Codigo</label>
-                                <input type="text" id="codigoArticuloAdd" name="codigoArticuloAdd" style="background-color:#c8e6c9;" onchange="buscarCodigo();">
+                                <input type="text" id="codigoArticuloAdd" name="codigoArticuloAdd" 
+                                style="background-color:#c8e6c9;" onchange="buscarCodigo();" class="form-control">
                               </div>
 
                               <div class="col-sm-12 col-md-6 mb-3">
