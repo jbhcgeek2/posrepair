@@ -379,6 +379,7 @@ session_start();
                                 <label for="codigoArticuloAdd" class="form-label">Escanear Codigo</label>
                                 <input type="text" id="codigoArticuloAdd" name="codigoArticuloAdd" 
                                 style="background-color:#c8e6c9;" onchange="buscarCodigo();" class="form-control">
+                                <input type="hidden" name="idCodEspe" id="idCodEspe">
                               </div>
 
                               <div class="col-sm-12 col-md-6 mb-3">

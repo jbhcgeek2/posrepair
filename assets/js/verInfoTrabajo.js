@@ -544,10 +544,19 @@ function buscarCodigo(){
         let nombre = res.data['nombreArticulo'];
         let precio = res.data['precioUnitario'];
         let idProd = res.data['idArticulo'];
+
         document.getElementById('catArticulo').value = categoria;
         document.getElementById('precioArti').value = precio;
         let comboProds = "<option value='"+idProd+"' selected>"+nombre+"</option>";
         document.getElementById('articuloAgrega').innerHTML = comboProds;
+        if(res.data['esChip'] == 1){
+          document.getElementById('idCodEspe').value = res.data['idChip'];
+          document.getElementById('cantidadArti').value = "1";
+          document.getElementById('totalExtra').value = precio;
+
+          document.getElementById('cantidadArti').readonly = "true";
+          
+        }
 
       }
     }else{
