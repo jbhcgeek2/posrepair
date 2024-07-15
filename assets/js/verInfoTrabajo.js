@@ -531,15 +531,16 @@ function buscarCodigo(){
     if(res.status == 'ok'){
       //consultamos el resulgtado
       console.log(res.data['esChip']);
-      if(res.data['esChip'] == 0){
-        //es un codigo de articulo correcto
-      }else{
+      if(res.data['esChip'] != null && res.data['codigoProducto'] == codigo){
         //se trata de un chip, debe indicar el codigo
         Swal.fire(
           'Codigo Incorrecto',
           'Asegurate de escanear el codigo del Chip o el IMEI',
           'warning'
         )
+      }else{
+        //si es un codigo valido de articulo
+
       }
     }else{
       //ocurrio un error de consulta
