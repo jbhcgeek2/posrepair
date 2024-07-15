@@ -394,6 +394,46 @@
         $res = ['status'=>'error','mensaje'=>'Ocurrio un error al registrar el gasto.'];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['codigoProdTrabajo'])){
+      //seccion para buscar articulo por codigo
+      $codigo = $_POST['codigoProdTrabajo'];
+
+      //primero consultamos los articulos que no sean chips
+      $sql = "SELECT * FROM ARTICULOS a INNER JOIN ARTICULOSUCURSAL b ON a.idArrticulo = b.articuloID WHERE a.codigoProducto = '$codigo' AND 
+      a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1' AND b.sucursalID = '$idSucursalN'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        if(mysqli_num_rows($query) == 1){
+          $fetch = mysqli_fetch_assoc($query);
+          $res = ['status'=>'ok','data'=>$fetch];
+          echo json_encode($res);
+        }else{
+          // el articulo no se localizo, buscamos en los chips
+          $sql2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b ON a.productoID = b.idArticulo WHERE 
+          a.codigoChip = '$codigo' AND a.empresaID ='$idEmpresaSesion' AND a.sucursalID = '$idSucursalN'";
+          try {
+            $query2 = mysqli_query($conexion, $sql2);
+            if(mysqli_num_rows($query2) == 1){
+              //si se localizo el articulo
+              $fetch2 = mysqli_fetch_assoc($query2);
+              $res = ['status'=>'ok','data'=>$fetch2];
+              echo json_encode($res);
+            }else{
+              //articulo no localizado
+              $res = ['status'=>'error','data'=>'noData','mensaje'=>'No se localizo el articulo'];
+              echo json_encode($res);
+            }
+          } catch (\Throwable $th) {
+            //error al consultar el chip
+            $res = ['status'=>'error','data'=>'noData','mensaje'=>'Ha ocurrido un erro al consultar la BD 2: '.$th];
+            echo json_encode($res);
+          }
+        }
+      } catch (\Throwable $th) {
+        //throw $th;
+        $res = ['status'=>'error','data'=>'noData','mensaje'=>'Ha ocurrido un erro al consultar la BD: '.$th];
+        echo json_encode($res);
+      }
     }
   }
 ?>

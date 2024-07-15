@@ -513,3 +513,27 @@ btnAddGasto.addEventListener('click', function(){
     }
   })
 })
+
+function buscarCodigo(){
+  let codigo = document.getElementById('codigoArticuloAdd').value;
+
+
+  let datos = new FormData();
+  datos.append('codigoProdTrabajo',codigo);
+
+  let envio = new XMLHttpRequest();
+  envio.open('POST','../includes/trabajosOperaciones.php',false);
+  envio.send(datos);
+
+  if(envio.status == 200){
+    let res = JSON.parse(envio.responseText);
+    console.log(res);
+  }else{
+    Swal.fire(
+      'Servidor Inalcansable',
+      'Verifica tu conexion a internet',
+      'error'
+    )
+  }
+
+}
