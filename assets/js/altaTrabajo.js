@@ -59,10 +59,11 @@ document.addEventListener("DOMContentLoaded", function() {
               document.getElementById('clienteList').innerHTML = clientesContent;
               modalCliente.hide();
               
-              
+              console.log(res.data);
               let dataList = document.getElementById('clienteList');
               let selectedOpt = Array.from(dataList.options).find(item => item.value == res.data);
               document.getElementById('NombreclienteTrabajo') = selectedOpt.textContent;
+              document.getElementById('clienteTrabajo').value = res.data;
             }
           }else{
             Swal.fire(
