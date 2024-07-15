@@ -528,7 +528,7 @@ function buscarCodigo(){
   if(envio.status == 200){
     let res = JSON.parse(envio.responseText);
     console.log(res);
-    if(res.status == 200){
+    if(res.status == 'ok'){
       //consultamos el resulgtado
       console.log(res.data['esChip']);
       if(res.data['esChip'] == 0){
