@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
               console.log(res.data);
               let dataList = document.getElementById('clienteList');
               let selectedOpt = Array.from(dataList.options).find(item => item.value == res.data);
-              document.getElementById('NombreclienteTrabajo') = selectedOpt.textContent;
+              document.getElementById('NombreclienteTrabajo').value = selectedOpt.textContent;
               document.getElementById('clienteTrabajo').value = res.data;
             }
           }else{
