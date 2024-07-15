@@ -543,7 +543,7 @@ function buscarCodigo(){
         let categoria = res.data['categoriaID'];
         let nombre = res.data['nombreArticulo'];
         let precio = res.data['precioUnitario'];
-        let idProd = red.data['idArticulo'];
+        let idProd = res.data['idArticulo'];
         document.getElementById('catArticulo').value = categoria;
         document.getElementById('precioArti').value = precio;
         let comboProds = "<option value='"+idProd+"' selected>"+nombre+"</option>";
