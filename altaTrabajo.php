@@ -82,7 +82,7 @@ session_start();
                             <option value="" selected>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
-                              estatusCategoria = '1'";
+                              estatusCategoria = '1' ORDER BY nombreServicio ASC";
                               try {
                                 $queryTServ = mysqli_query($conexion, $sqlTServ);
                                 if(mysqli_num_rows($queryTServ) > 0){
