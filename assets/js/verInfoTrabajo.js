@@ -528,6 +528,27 @@ function buscarCodigo(){
   if(envio.status == 200){
     let res = JSON.parse(envio.responseText);
     console.log(res);
+    if(res.status == 200){
+      //consultamos el resulgtado
+      console.log(res.data['esChip']);
+      if(res.data['esChip'] == 0){
+        //es un codigo de articulo correcto
+      }else{
+        //se trata de un chip, debe indicar el codigo
+        Swal.fire(
+          'Codigo Incorrecto',
+          'Asegurate de escanear el codigo del Chip o el IMEI',
+          'warning'
+        )
+      }
+    }else{
+      //ocurrio un error de consulta
+      Swal.fire(
+        'Ha ocurrido un error',
+        res.mensaje,
+        'error'
+      )
+    }
   }else{
     Swal.fire(
       'Servidor Inalcansable',
