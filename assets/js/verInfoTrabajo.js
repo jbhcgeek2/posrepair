@@ -554,8 +554,8 @@ function buscarCodigo(){
           document.getElementById('cantidadArti').value = "1";
           document.getElementById('totalExtra').value = precio;
 
-          document.getElementById('cantidadArti').readonly = "true";
-          
+          document.getElementById('cantidadArti').setAttribute("readonly", "true");
+
         }
 
       }
