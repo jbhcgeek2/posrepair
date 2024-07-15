@@ -399,7 +399,7 @@
       $codigo = $_POST['codigoProdTrabajo'];
 
       //primero consultamos los articulos que no sean chips
-      $sql = "SELECT * FROM ARTICULOS a INNER JOIN ARTICULOSUCURSAL b ON a.idArrticulo = b.articuloID WHERE a.codigoProducto = '$codigo' AND 
+      $sql = "SELECT * FROM ARTICULOS a INNER JOIN ARTICULOSUCURSAL b ON a.idArticulo = b.articuloID WHERE a.codigoProducto = '$codigo' AND 
       a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1' AND b.sucursalID = '$idSucursalN'";
       try {
         $query = mysqli_query($conexion, $sql);
