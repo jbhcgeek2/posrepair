@@ -139,6 +139,7 @@ session_start();
                                 $nombreCosa = "";
                                 $fechaVenta = $fetch['fechaVenta'];
                                 //verificamos si la venta es un producto o servicio
+                                $claseTR = "";
                                 if($fetch['articuloID'] > 1){
                                   //se trata de un articulo
                                   $idProd = $fetch['articuloID'];
@@ -146,7 +147,6 @@ session_start();
                                   $queryExt = mysqli_query($conexion, $sqlExt);
                                   $fetchExt = mysqli_fetch_assoc($queryExt);
                                   $nombreCosa =  $fetchExt['nombreArticulo'];
-                                  $claseTR = '';
                                 }else{
                                   //es un servicio
                                   $idServ = $fetch['trabajoID'];
