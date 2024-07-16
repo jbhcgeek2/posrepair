@@ -133,7 +133,7 @@ session_start();
                                   <td>$nombreProd</td>
                                   <td>$$montoUnitario</td>
                                   <td>$cantidad</td>
-                                  <td>$$tipoMov</td>
+                                  <td>$tipoMov</td>
                                   <td>$usuarioMov</td>
                                   <td>$sucursalMov</td>
                                 </tr>";
