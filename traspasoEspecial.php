@@ -74,14 +74,39 @@ session_start();
                           <label for="sucurOrigen" class="form-label">Sucursal Origen</label>
                           <select name="sucurOrigen" id="sucurOrigen" class="form-select">
                             <option value="" selected>Seleccione...</option>
-
+                            <?php 
+                              $sqlSuc1 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
+                              try {
+                                $querySuc1 = mysqli_query($conexion, $sqlSuc1);
+                                while($fetchSuc1 = mysqli_fetch_assoc($querySuc1)){
+                                  $nameSuc1 = $fetchSuc1['nombreSuc'];
+                                  $idSuc1 = $fetchSuc1['idSucursal'];
+                                  echo "<option value='$idSuc1'>$nameSuc1</option>";
+                                }//fin del while
+                              } catch (\Throwable $th) {
+                                echo "<option value='error'>Erro de consulta</option>";
+                              }
+                            ?>
                           </select>
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
-                          <label for="anticipoServicio" class="form-label">Anticipo</label>
+                          <label for="anticipoServicio" class="form-label">Sucursal Destino</label>
                           <select name="sucurDestino" id="sucurDestino" class="form-select">
                             <option value="" selected>Seleccione...</option>
+                            <?php 
+                              $sqlSuc2 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
+                              try {
+                                $querySuc2 = mysqli_query($conexion, $sqlSuc2);
+                                while($fetchSuc2 = mysqli_fetch_assoc($querySuc2)){
+                                  $nameSuc2 = $fetchSuc2['nombreSuc'];
+                                  $idSuc2 = $fetchSuc2['idSucursal'];
+                                  echo "<option value='$idSuc2'>$nameSuc2</option>";
+                                }//fin del while
+                              } catch (\Throwable $th) {
+                                echo "<option value='error'>Erro de consulta</option>";
+                              }
+                            ?>
                           </select>
                         </div>
 
