@@ -244,6 +244,7 @@ if(!empty($_SESSION['usuarioPOS'])){
               $montoMov = $fetch2['precioUnitario'];
               $precioCompra = $fetch2['precioCompra'];
               $producto = $fetch2['idArticulo'];
+              $idChip = $fetch2['idChip'];
 
               $cantidad = 1;
               //primero insertamos el movimiento en la tabla INGRESO
@@ -272,9 +273,13 @@ if(!empty($_SESSION['usuarioPOS'])){
                   articuloID = '$producto' AND sucursalID = '$origen'";
                   $sql7 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$sumDestino' WHERE 
                   articuloID = '$producto' AND sucursalID = '$destino'";
+                  $sql8 = "UPDATE DETALLECHIP SET sucursalID = '$destino' WHERE idChip = '$idChip' 
+                  AND codigoChip = '$codigo'";
                   try {
                     $query6 = mysqli_query($conexion, $sql6);
                     $query7 = mysqli_query($conexion, $sql7);
+                    $query8 = mysqli_query($conexion, $sql8);
+
 
                     //se completo el traspaso correctamente
                     $mensajeCorto = "Articulo: ".$fetch2['nombreArticulo']." Traspasado.";
