@@ -105,12 +105,14 @@ session_start();
                                       $tipopago = $fetchMov3['tipoPago'];
                                       $ticket = $fetchMov3['num_comprobante'];
                                       $idCliente = $fetchMov3['clienteID'];
+                                      $claseTR = '';
                                       if($fetchMov3['trabajoVenta'] == null){
                                         $dataCliente = verCliente($idCliente,$idEmprersa);
                                         $nombreClie = json_decode($dataCliente)->data->nombreCliente;
                                       }else{
                                         //se trata de un trabajo
                                         $nombreClie = $fetchMov3['trabajoVenta'];
+                                        $claseTR = 'table-success';
                                       }
 
                                       
@@ -123,7 +125,7 @@ session_start();
 
                                       $totalVenta = $totalVenta + $montoVenta;
 
-                                      echo "<tr>
+                                      echo "<tr class='$claseTR'>
                                         <td class='text-center'>$ticket</td>
                                         <td>$nombreClie</td>
                                         <td>$tipopago</td>
