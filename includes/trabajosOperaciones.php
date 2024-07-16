@@ -224,8 +224,27 @@
             $updateCant = setCantidad($nuevaCantidad,$articulo,$idSucursalN);
             $updateCant = json_decode($updateCant);
             if($updateCant->status == 'ok'){
-              $res = ['status'=>'ok','mensaje'=>'operationComplete'];
-              echo json_encode($res);
+              if(!empty($_POST['idCodEspe'])){
+                //se agrego un articulo/chip
+                $codigoChip = $_POST['idCodEspe'];
+                $sql2 = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha',
+                trabajoID = '$trabajo' WHERE idChip = '$codigoChip'";
+                try {
+                  $query2 = mysqli_query($conexion, $sql2);
+                  //se completo el proceso
+                  $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+                  echo json_encode($res);
+                } catch (\Throwable $th) {
+                  //error al registrar la venta del chip
+                  $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error fatal, contacta a soporte tecnico.'];
+                  echo json_encode($res);
+                }
+              }else{
+                //hasta aqui se termina el proceso
+                $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+                echo json_encode($res);
+              }
+              
             }else{
               //error, le decimos que contacte a soporte
               $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error fatal, contacta a soporte tecnico.'];
