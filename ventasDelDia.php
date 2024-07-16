@@ -155,7 +155,7 @@ session_start();
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                                   $nombreCosa = $fetchExt2['nombreServicio'];
-                                  $claseTR = 'style="background-color:#c8e6c9;"';
+                                  $claseTR = 'table-info';
                                 }
 
                                 // $nombreprod = $fetch['nombreArticulo'];
@@ -185,7 +185,7 @@ session_start();
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
-                                echo "<tr $claseTR>
+                                echo "<tr class='$claseTR'>
                                   <td>$fechaVenta</td>
                                   <td>$nombreCosa</td>
                                   <td>$cantVenta</td>
