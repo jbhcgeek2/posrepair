@@ -61,7 +61,7 @@ session_start();
       
                     <div class="row">
                       
-                      <form id="traspasoDirecto" class="row">
+                      <div id="traspasoDirecto" class="row">
                         
                     
                         <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
@@ -116,7 +116,7 @@ session_start();
                         </div>
 
                       
-                      </form>
+                      </div>
 
                       <div class="col-sm-12" id="resTraspaso">
 
