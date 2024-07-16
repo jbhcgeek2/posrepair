@@ -35,7 +35,7 @@ btnBuscar.addEventListener('click', function(){
             let totVenta = res.data.tabla[x].totalVenta;
             let idVen = res.data.tabla[x].venta;
             let servicio = "";
-            if(res.data.tabla[x].esServicio == "Si"){
+            if(res.data.tabla[x].servicio == "Si"){
               servicio = "table-success";
             }
 
