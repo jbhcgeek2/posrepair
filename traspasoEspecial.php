@@ -118,8 +118,8 @@ session_start();
                       
                       </div>
 
-                      <div class="col-sm-12" id="">
-                        <table>
+                      <div class="col-sm-12 text-center" id="">
+                        <table class="table">
                           <tbody id="resTraspaso"></tbody>
                         </table>
                       </div>
