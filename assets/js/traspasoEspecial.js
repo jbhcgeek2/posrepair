@@ -23,6 +23,16 @@ codigo.addEventListener('change', function(){
       if(envio.status == 200){
         let res = JSON.parse(envio.responseText);
         console.log(res);
+        if(res.status == "ok"){
+          let cuerpo = "<td><td>"+res.mensaje+"</td></tr>";
+          document.getElementById('resTraspaso').insertAdjacentElement('afterbegin',cuerpo);
+        }else{
+          Swal.fire(
+            'Ha ocurrido un error',
+            res.mensaje,
+            'error'
+          )
+        }
       }else{
         Swal.fire(
           'Servidor Inalcansable',
