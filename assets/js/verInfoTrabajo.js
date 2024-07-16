@@ -161,6 +161,7 @@ btnGuardar.addEventListener('click', function(){
     let cantidad = document.getElementById('cantidadArti').value;
     let total = document.getElementById('totalExtra').value;
     let trabajo = document.getElementById('datoTrabajo').value;
+    let idCodEspe = document.getElementById('idCodEspe').value;
 
     let datos = new FormData();
     datos.append('artiServicio',articulo);
@@ -168,6 +169,7 @@ btnGuardar.addEventListener('click', function(){
     datos.append('cantidadArtiServ',cantidad);
     datos.append('totalArtiServ',total);
     datos.append('trabajoArtiServ',trabajo);
+    datos.append('idCodEspe',idCodEspe);
 
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/trabajosOperaciones.php',false);

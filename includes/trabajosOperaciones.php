@@ -224,7 +224,7 @@
             $updateCant = setCantidad($nuevaCantidad,$articulo,$idSucursalN);
             $updateCant = json_decode($updateCant);
             if($updateCant->status == 'ok'){
-              if(!empty($_POST['idCodEspe'])){
+              if($_POST['idCodEspe'] > 0){
                 //se agrego un articulo/chip
                 $codigoChip = $_POST['idCodEspe'];
                 $sql2 = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha',
