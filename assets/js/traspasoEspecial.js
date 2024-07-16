@@ -33,6 +33,7 @@ codigo.addEventListener('change', function(){
             res.mensaje,
             'error'
           )
+          document.getElementById('codigoTraspaso').value = "";
         }
       }else{
         Swal.fire(
@@ -40,6 +41,7 @@ codigo.addEventListener('change', function(){
           'Verifica tu conexion a internet',
           'error'
         )
+        document.getElementById('codigoTraspaso').value = "";
       }
 
       
@@ -50,6 +52,7 @@ codigo.addEventListener('change', function(){
         'Asegurate de indicar las sucursales correctamente',
         'error'
       )
+      document.getElementById('codigoTraspaso').value = "";
     }
   }else{
     //sin codigo para procesar
