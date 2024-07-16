@@ -94,7 +94,6 @@ session_start();
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
 
@@ -139,7 +138,8 @@ session_start();
                                 $nombreCosa = "";
                                 $fechaVenta = $fetch['fechaVenta'];
                                 //verificamos si la venta es un producto o servicio
-                                if(!empty($fetch['articuloID'])){
+                                $claseTR = "";
+                                if($fetch['articuloID'] > 1){
                                   //se trata de un articulo
                                   $idProd = $fetch['articuloID'];
                                   $sqlExt = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idProd' AND empresaID = '$idEmpresaSesion'";
@@ -154,6 +154,7 @@ session_start();
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                                   $nombreCosa = $fetchExt2['nombreServicio'];
+                                  $claseTR = 'table-success';
                                 }
 
                                 // $nombreprod = $fetch['nombreArticulo'];
@@ -183,7 +184,7 @@ session_start();
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
-                                echo "<tr>
+                                echo "<tr class='$claseTR'>
                                   <td>$fechaVenta</td>
                                   <td>$nombreCosa</td>
                                   <td>$cantVenta</td>

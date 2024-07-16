@@ -34,11 +34,15 @@ btnBuscar.addEventListener('click', function(){
             let sucName = res.data.tabla[x].sucursalVenta;
             let totVenta = res.data.tabla[x].totalVenta;
             let idVen = res.data.tabla[x].venta;
+            let servicio = "";
+            if(res.data.tabla[x].servicio == "Si"){
+              servicio = "table-success";
+            }
 
             sumaTotal = parseFloat(sumaTotal) + parseFloat(totVenta);
 
             tabla = tabla+`
-            <tr>
+            <tr class='${servicio}'>
             <td>${fechaVenta}</td>
             <td>${prodName}</td>
             <td>${cantVenta}</td>
