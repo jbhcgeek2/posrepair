@@ -139,7 +139,7 @@ session_start();
                                 $nombreCosa = "";
                                 $fechaVenta = $fetch['fechaVenta'];
                                 //verificamos si la venta es un producto o servicio
-                                if(!empty($fetch['articuloID'])){
+                                if($fetch['articuloID']>0){
                                   //se trata de un articulo
                                   $idProd = $fetch['articuloID'];
                                   $sqlExt = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idProd' AND empresaID = '$idEmpresaSesion'";
