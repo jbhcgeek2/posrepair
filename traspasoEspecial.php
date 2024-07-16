@@ -64,13 +64,13 @@ session_start();
                       <div id="traspasoDirecto" class="row">
                         
                     
-                        <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="fechaTraspaso" class="form-label">Fecha Traspaso</label>
                           <input type="date" name="fechaTraspaso" id="fechaTraspaso" class="form-control" required
                           value="<?php echo $fecha; ?>">
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="sucurOrigen" class="form-label">Sucursal Origen</label>
                           <select name="sucurOrigen" id="sucurOrigen" class="form-select">
                             <option value="" selected>Seleccione...</option>
@@ -90,7 +90,7 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="sucurDestino" class="form-label">Sucursal Destino</label>
                           <select name="sucurDestino" id="sucurDestino" class="form-select">
                             <option value="" selected>Seleccione...</option>
@@ -110,7 +110,7 @@ session_start();
                           </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 mb-3">
+                        <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                           <label for="codigoTraspaso" class="form-label">Codigo</label>
                           <input type="text" id="codigoTraspaso" name="codigoTraspaso" class="form-control">
                         </div>
@@ -123,7 +123,6 @@ session_start();
                           <tbody id="resTraspaso"></tbody>
                         </table>
                       </div>
-                              
                     </div>
 
                     
