@@ -193,6 +193,128 @@ if(!empty($_SESSION['usuarioPOS'])){
 
     
 
+  }elseif(!empty($_POST['codigoDirecto'])){
+    //Seccion para realizar traspasos directos
+    $codigo = $_POST['codigoDirecto'];
+    $origen = $_POST['sucOrigenDirecto'];
+    $destino = $_POST['sucDestinoDirecto'];
+    $fecha = $_POST['fechaDirecto'];
+    $hora = date('H:m:i');
+
+    $usuario = $_SESSION['usuarioPOS'];
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $empresa = json_decode($empresa);
+    $idEmpresaSesion = $empresa->dato;
+
+    $comprobacion = date('ymd');
+    
+
+    //consultamos el codigo
+    $sql = "SELECT * FROM ARTICULOS a INNER JOIN ARTICULOSUCURSAL b ON a.idArticulo = b.articuloID WHERE 
+    b.sucursalID = '$origen' AND a.empresaID = $idEmpresaSesion AND a.codigoProducto = '$codigo'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 1){
+        $fetch = mysqli_fetch_assoc($query);
+        //verificamos si es chip para indicarle que escane el codigo correcto
+        if($fetch['esChip'] == 1){
+          //metodo no permitido aqui
+          $res = ['status'=>'error','mensaje'=>'Debe escanear el codigo del chip o imei del equipo'];
+          echo json_encode($res);
+        }else{
+
+        }
+      }else{
+        //no se localizo el producto, verificamos si es un chip
+        //$sql2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b ON a.productoID = b.idArticulo 
+        //WHERE a.codigoChip = '$codigo' AND b.empresaID = '$idEmpresaSesion'";
+
+        $sql2 = "SELECT *,(SELECT c.existenciaSucursal FROM ARTICULOSUCURSAL c WHERE 
+        c.articuloID = a.productoID AND c.sucursalID = $origen) AS existenciaOrigen, 
+        (SELECT c.existenciaSucursal FROM ARTICULOSUCURSAL c WHERE c.articuloID = a.productoID AND 
+        c.sucursalID = '$destino') AS existenciaDestino FROM DETALLECHIP a INNER JOIN ARTICULOS b 
+        ON a.productoID = b.idArticulo WHERE a.codigoChip = '$codigo' AND b.empresaID = '$idEmpresaSesion'";
+        try {
+          $query2 = mysqli_query($conexion, $sql2);
+          if(mysqli_num_rows($query2) == 1){
+            //verificamos que no este marcado como vendido
+            $fetch2 = mysqli_fetch_assoc($query2);
+            if($fetch2['estatusChip'] == 'Activo'){
+              //procesamos el movimiento
+              $montoMov = $fetch2['precioUnitario'];
+              $precioCompra = $fetch2['precioCompra'];
+              $producto = $fetch2['idArticulo'];
+
+              $cantidad = 1;
+              //primero insertamos el movimiento en la tabla INGRESO
+              $sql3 = "INSERT INTO INGRESO (numComprobante,tipoComprobante,fechaIngreso,horaIngreso,
+              totalIngreso,totArticulos,empresaID) VALUES ('$comprobacion','Ticket','$fecha',
+              '$hora','$montoMov','$cantidad','$idEmpresaSesion')";
+              try {
+                $query3 = mysqli_query($conexion, $sql3);
+                //ahora insertamos la salida de la mercancia
+                $idMovimiento = mysqli_insert_id($conexion);
+
+                $sql4 = "INSERT INTO DETALLEINGRESO (cantidad,precioCompra,ingresoID,sucursalID,fechaMov,usuarioMov,tipoMov,prodMov) 
+                VALUES ('$cantidad','$precioCompra','$idMovimiento','$origen',
+                '$fechaTras','$usuario','Salida','$producto')";
+                $sql5 = "INSERT INTO DETALLEINGRESO (cantidad,precioCompra,ingresoID,sucursalID,fechaMov,usuarioMov,tipoMov,prodMov) 
+                VALUES ('$cantidad','$precioCompra','$idMovimiento','$destino',
+                '$fechaTras','$usuario','Entrada','$producto')";
+                try {
+                  $query4 = mysqli_query($conexion, $sql4);
+                  $query5 = mysqli_query($conexion, $sql5);
+
+                  //actualizamos las sucursales
+                  $sumOrigen = $fetch2['existenciaOrigen']-1;
+                  $sumDestino = $fetch2['existenciaDestino']+1;
+                  $sql6 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$sumOrigen' WHERE 
+                  articuloID = '$producto' AND sucursalID = '$origen'";
+                  $sql7 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$sumDestino' WHERE 
+                  articuloID = '$producto' AND sucursalID = '$destino'";
+                  try {
+                    $query6 = mysqli_query($conexion, $sql6);
+                    $query7 = mysqli_query($conexion, $sql7);
+
+                    //se completo el traspaso correctamente
+                    $mensajeCorto = "Articulo: ".$fetch2['nombreArticulo']." Traspasado.";
+                    $res = ["status"=>"ok","mensaje"=>$mensajeCorto];
+                    echo json_encode($res);
+                  } catch (\Throwable $th) {
+                    //throw $th;
+                    $res = ["status"=>"error","mensaje"=>"Error al actualizar cantidades: ".$th];
+                    echo json_encode($res);
+                  }
+                } catch (\Throwable $th) {
+                  //throw $th;
+                  $res = ["status"=>"error","mensaje"=>"Error al insertar el detalle de movimiento: ".$th];
+                  echo json_encode($res);
+                }
+
+              } catch (\Throwable $th) {
+                //throw $th;
+                $res = ["status"=>"error","mensaje"=>"Error al insertar el movimiento: ".$th];
+                echo json_encode($res);
+              }
+            }else{
+              //chip en baja o vendido
+              $res = ["status"=>"error","mensaje"=>"Chip Dado de Baja o Vendido"];
+              echo json_encode($res);
+            }
+          }else{
+            //producto no definido correctamente
+            $res = ["status"=>"error","mensaje"=>"Error al consultar el producto 2"];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          $res = ["status"=>"error","mensaje"=>"Error al consultar el producto 1. ".$th];
+          echo json_encode($res);
+        }
+      }
+    } catch (\Throwable $th) {
+      $res = ["status"=>"error","mensaje"=>"Error al consultar el codigo. ".$th];
+      echo json_encode($res);
+    }
   }
 }
 

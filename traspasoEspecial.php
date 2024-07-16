@@ -91,7 +91,7 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
-                          <label for="anticipoServicio" class="form-label">Sucursal Destino</label>
+                          <label for="sucurDestino" class="form-label">Sucursal Destino</label>
                           <select name="sucurDestino" id="sucurDestino" class="form-select">
                             <option value="" selected>Seleccione...</option>
                             <?php 
@@ -119,6 +119,7 @@ session_start();
                       </form>
 
                       <div class="col-sm-12" id="resTraspaso">
+
                       </div>
                               
                     </div>
