@@ -26,6 +26,7 @@ codigo.addEventListener('change', function(){
         if(res.status == "ok"){
           let cuerpo = "<td><td>"+res.mensaje+"</td></tr>";
           document.getElementById('resTraspaso').insertAdjacentElement('afterbegin',cuerpo);
+          codigo.value = "";
         }else{
           Swal.fire(
             'Ha ocurrido un error',
