@@ -111,6 +111,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $queryExt = mysqli_query($conexion, $sqlExt);
             $fetchExt = mysqli_fetch_assoc($queryExt);
             $nombreCosa =  $fetchExt['nombreArticulo'];
+            $esServicio = "No";
           }else{
             //se trata de un servicio
             $idServ = $fetch['trabajoID'];
@@ -119,6 +120,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $queryExt2 = mysqli_query($conexion, $sqlExt2);
             $fetchExt2 = mysqli_fetch_assoc($queryExt2);
             $nombreCosa = $fetchExt2['nombreServicio'];
+            $esServicio = "Si";
           }
           $idVenta = $fetch['idVenta'];
           $fechaVenta = $fetch['fechaVenta'];
@@ -142,7 +144,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           
           $cuerpo = ['venta'=>$idVenta,'producto'=>$nombreCosa,'cantidad'=>$cantidad,
           'totalVenta'=>$total,'usuario'=>$usuarioVen,'sucursalVenta'=>$sucursalVen,
-          'fechaVenta'=>$fechaVenta];
+          'fechaVenta'=>$fechaVenta,'servicio'=>$esServicio];
           $datos['tabla'][$i] = $cuerpo;
           $i++;
         }//fin del while
