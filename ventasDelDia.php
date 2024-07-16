@@ -146,6 +146,7 @@ session_start();
                                   $queryExt = mysqli_query($conexion, $sqlExt);
                                   $fetchExt = mysqli_fetch_assoc($queryExt);
                                   $nombreCosa =  $fetchExt['nombreArticulo'];
+                                  $claseTR = '';
                                 }else{
                                   //es un servicio
                                   $idServ = $fetch['trabajoID'];
@@ -154,6 +155,7 @@ session_start();
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                                   $nombreCosa = $fetchExt2['nombreServicio'];
+                                  $claseTR = 'style="background-color:#c8e6c9;"';
                                 }
 
                                 // $nombreprod = $fetch['nombreArticulo'];
@@ -183,7 +185,7 @@ session_start();
 
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
-                                echo "<tr>
+                                echo "<tr $claseTR>
                                   <td>$fechaVenta</td>
                                   <td>$nombreCosa</td>
                                   <td>$cantVenta</td>
