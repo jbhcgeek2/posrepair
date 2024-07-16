@@ -155,7 +155,7 @@ session_start();
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                                   $nombreCosa = $fetchExt2['nombreServicio'];
-                                  $claseTR = 'table-info';
+                                  $claseTR = 'table-success';
                                 }
 
                                 // $nombreprod = $fetch['nombreArticulo'];
