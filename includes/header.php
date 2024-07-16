@@ -285,9 +285,17 @@
 													?>
 													<li class="submenu-item"><a class="submenu-link" href="altaProducto.php">Registrar Productos</a></li>
 													<li class="submenu-item"><a class="submenu-link" href="entradaMercancia.php">Movimientos de Mercancia</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="traspasoEspecial.php">Traspaso de Chips / Equipos</a></li>
 													<li class="submenu-item"><a class="submenu-link" href="resumenInventario.php">Resumen de Inventario</a></li>
 													<?php
 												}
+												if($rolUsuario == "Encargado"){
+													?>
+													<li class="submenu-item"><a class="submenu-link" href="altaProducto.php">Registrar Productos</a></li>
+													<li class="submenu-item"><a class="submenu-link" href="traspasoEspecial.php">Traspaso de Chips / Equipos</a></li>
+													<?php
+												}
+
 											?>
 										</ul>
 									</div>
