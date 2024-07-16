@@ -50,14 +50,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 let idClie = res.clientes[x]['idClientes'];
                 // console.log(name);
                 if(idClie == res.data){
-                  clientesContent = clientesContent+'<option value="'+idClie+'" selected>'+name+'</option>';
+                  clientesContent = clientesContent+'<option value="'+idClie+'">'+name+'</option>';
                 }else{
                   clientesContent = clientesContent+'<option value="'+idClie+'">'+name+'</option>';
                 }
               }//fin del for clientes\\for
 
-              document.getElementById('clienteTrabajo').innerHTML = clientesContent;
+              document.getElementById('clienteList').innerHTML = clientesContent;
               modalCliente.hide();
+              
+              console.log(res.data);
+              let dataList = document.getElementById('clienteList');
+              let selectedOpt = Array.from(dataList.options).find(item => item.value == res.data);
+              document.getElementById('NombreclienteTrabajo').value = selectedOpt.textContent;
+              document.getElementById('clienteTrabajo').value = res.data;
             }
           }else{
             Swal.fire(
@@ -207,4 +213,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 })
 
+
+let autoCom = document.getElementById('NombreclienteTrabajo');
+autoCom.addEventListener('change', function(){
+  document.getElementById('clienteTrabajo').value = autoCom.value;
+  
+  let dataList = document.getElementById('clienteList');
+  let selectedOpt = Array.from(dataList.options).find(item => item.value == autoCom.value);
+
+  autoCom.value = selectedOpt.textContent;
+})
 

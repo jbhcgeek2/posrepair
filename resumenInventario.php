@@ -142,6 +142,7 @@
 											<tr>
 												<th>Categoria</th>
 												<th>Existencia Articulos</th>
+												<th>Valor de Venta</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -151,24 +152,32 @@
 												WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1' ORDER BY
 												nombreCategoria ASC";
 												$totalTotal = 0;
+												$valorTotalCant = 0;
 												try {
 													$queryCat = mysqli_query($conexion, $sqlCat);
 													while($fetchCat = mysqli_fetch_assoc($queryCat)){
 														$idCat = $fetchCat['idCategoria'];
 														$nombreCat = $fetchCat['nombreCategoria'];
 														$cantidadProds = 0;
+														$valorProd = 0;
+														
 														
 
 														$sqlProd = "SELECT a.idArticulo,(SELECT SUM(b.existenciaSucursal) FROM ARTICULOSUCURSAL b
-														WHERE b.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
+														WHERE b.articuloID = a.idArticulo) AS existencia,a.precioUnitario FROM ARTICULOS a WHERE a.categoriaID = '$idCat'
 														AND a.empresaID = '$idEmpresaSesion' AND a.estatusArticulo = '1'";
 														try {
 															$queryProd = mysqli_query($conexion, $sqlProd);
 															
 															while($fetchProd = mysqli_fetch_assoc($queryProd)){
 																$cant = $fetchProd['existencia'];
+																$valor = $fetchProd['precioUnitario'];
+																$valor = $valor * $cant;
+																$valorProd = $valorProd + $valor;
+																
 																$cantidadProds = $cantidadProds + $cant;
 																$totalTotal = $totalTotal + $cant;
+																$valorTotalCant = $valorTotalCant + $valor;
 															}//fin del while prods
 														} catch (\Throwable $th) {
 															//throw $th;
@@ -176,13 +185,15 @@
 
 														echo "<tr>
 															<td>$nombreCat</td>
-															<td>$cantidadProds</td>
+															<td>".number_format($cantidadProds,0)."</td>
+															<td>$".number_format($valorProd,2)."</td>
 														</tr>";
 
 													}//fin del while
 													echo "<tr>
 															<td><strong>Total Global</strong></td>
-															<td><strong>$totalTotal</strong></td>
+															<td><strong>".number_format($totalTotal,0)."</strong></td>
+															<td><strong>".number_format($valorTotalCant,2)."</strong></td>
 														</tr>";
 												} catch (\Throwable $th) {
 													//throw $th;

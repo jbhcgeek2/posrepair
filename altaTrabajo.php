@@ -50,11 +50,11 @@ session_start();
                       
                       <form id="dataAltaTrab" class="row">
                         
-
-                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                          <label for="clienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <select name="clienteTrabajo" id="clienteTrabajo" aria-describedby="clienteTrabajoFeedBack" class="form-select" required>
-                            <option value="" selected>Seleccione...</option>
+                      <input type="hidden" name="clienteTrabajo" id="clienteTrabajo" value="">
+                      <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                          <label for="NombreclienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
+                          <input type="text" id="NombreclienteTrabajo" name="NombreclienteTrabajo" list="clienteList" class="form-control">
+                            <datalist id="clienteList">
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
                               $clientes = json_decode($clientes);
@@ -70,9 +70,11 @@ session_start();
                                 echo "<option>Error de consulta a la BD</option>";
                               }
                             ?>
-                          </select>
+                          </datalist>
                           
                         </div>
+                        
+                        
 
                         <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                           <label for="tipoServicio" class="form-label">Tipo de Servicio <span class='text-danger fw-bold'>*<span></label>
@@ -80,7 +82,7 @@ session_start();
                             <option value="" selected>Seleccione...</option>
                             <?php 
                               $sqlTServ = "SELECT * FROM SERVICIOS WHERE empresaID = '$idEmpresaSesion' AND 
-                              estatusCategoria = '1'";
+                              estatusCategoria = '1' ORDER BY nombreServicio ASC";
                               try {
                                 $queryTServ = mysqli_query($conexion, $sqlTServ);
                                 if(mysqli_num_rows($queryTServ) > 0){

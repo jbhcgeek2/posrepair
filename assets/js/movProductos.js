@@ -327,6 +327,45 @@ btnAdd.addEventListener('click', function(){
 
 });
 
+let traspasoCod = document.getElementById("codProdModal");
+traspasoCod.addEventListener('change', function(){
+
+  let codigo = traspasoCod.value;
+
+  if(codigo != "" || codigo != " "){
+    //hacemos una peticion para consultar la existencia
+    let datosCod = new FormData();
+    datosCod.append('showCodTraspaso',codigo);
+
+    let envio = new XMLHttpRequest();
+    envio.open('POST','../includes/movsProds.php',false);
+    envio.send(datosCod);
+
+    if(envio.status == 200){
+      let res = JSON.parse(envio.responseText);
+      if(res.status == "ok"){
+        let prod = res.data;
+        document.getElementById('prodModal').value = prod;
+      }else{
+        Swal.fire(
+          'Ha ocurrido un error',
+          res.mensaje,
+          'error'
+        )
+      }
+    }else{
+      Swal.fire(
+        'Servidor Inalcansable',
+        'Ocurrio un error al consultar el servidor',
+        'error'
+      )
+    }
+  }else{
+    //no hacemos nada
+  }
+
+})//fin codigo modal
+
 function traspasoModal(valor){
   if(valor == "Traspaso"){
     //uinicamente estar activa en la seccion de traspasos y 

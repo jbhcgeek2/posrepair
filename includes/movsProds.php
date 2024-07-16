@@ -422,6 +422,37 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ["status"=>"error","mensaje"=>"Articulo no localizado en la sucursal origen"];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['showCodTraspaso'])){
+    //metodo para consultar un producto con el codigo en la seccion de traspasos
+    $codigo = $_POST['showCodTraspaso'];
+
+    //consultamos la existencia del codigoi
+
+    $sql = "SELECT * FROM ARTICULOS WHERE codigoProducto = '$codigo' AND empresaID = '$idEmprersa'";
+    try {
+      $query = mysqli_query($conexion, $sql);
+      if(mysqli_num_rows($query) == 1){
+        $fetch = mysqli_fetch_assoc($query);
+        if($fetch['esChip'] == 1){
+          //no se puede utilizar este metodo
+          $res = ["status"=>"error","mensaje"=>"Metodo no Soportado actualmente"];
+          echo json_encode($res);
+        }else{
+          $idProd = $fetch['idArticulo'];
+          $res = ["status"=>"ok","data"=>$idProd];
+          echo json_encode($res);
+        }
+      }else{
+        //producto no localizado
+        $res = ["status"=>"error","mensaje"=>"Producto No localizado"];
+        echo json_encode($res);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      $res = ["status"=>"error","mensaje"=>"Ocurrio un error al consultar el producto"];
+      echo json_encode($res);
+    }
+
   }
 }
 

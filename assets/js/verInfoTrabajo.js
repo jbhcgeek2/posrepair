@@ -161,6 +161,7 @@ btnGuardar.addEventListener('click', function(){
     let cantidad = document.getElementById('cantidadArti').value;
     let total = document.getElementById('totalExtra').value;
     let trabajo = document.getElementById('datoTrabajo').value;
+    let idCodEspe = document.getElementById('idCodEspe').value;
 
     let datos = new FormData();
     datos.append('artiServicio',articulo);
@@ -168,6 +169,7 @@ btnGuardar.addEventListener('click', function(){
     datos.append('cantidadArtiServ',cantidad);
     datos.append('totalArtiServ',total);
     datos.append('trabajoArtiServ',trabajo);
+    datos.append('idCodEspe',idCodEspe);
 
     let envio = new XMLHttpRequest();
     envio.open('POST','../includes/trabajosOperaciones.php',false);
@@ -513,3 +515,66 @@ btnAddGasto.addEventListener('click', function(){
     }
   })
 })
+
+function buscarCodigo(){
+  let codigo = document.getElementById('codigoArticuloAdd').value;
+
+
+  let datos = new FormData();
+  datos.append('codigoProdTrabajo',codigo);
+
+  let envio = new XMLHttpRequest();
+  envio.open('POST','../includes/trabajosOperaciones.php',false);
+  envio.send(datos);
+
+  if(envio.status == 200){
+    let res = JSON.parse(envio.responseText);
+    console.log(res);
+    if(res.status == 'ok'){
+      //consultamos el resulgtado
+      console.log(res.data['esChip']);
+      if(res.data['esChip'] != null && res.data['codigoProducto'] == codigo){
+        //se trata de un chip, debe indicar el codigo
+        Swal.fire(
+          'Codigo Incorrecto',
+          'Asegurate de escanear el codigo del Chip o el IMEI',
+          'warning'
+        )
+      }else{
+        //si es un codigo valido de articulo
+        let categoria = res.data['categoriaID'];
+        let nombre = res.data['nombreArticulo'];
+        let precio = res.data['precioUnitario'];
+        let idProd = res.data['idArticulo'];
+
+        document.getElementById('catArticulo').value = categoria;
+        document.getElementById('precioArti').value = precio;
+        let comboProds = "<option value='"+idProd+"' selected>"+nombre+"</option>";
+        document.getElementById('articuloAgrega').innerHTML = comboProds;
+        if(res.data['esChip'] == 1){
+          document.getElementById('idCodEspe').value = res.data['idChip'];
+          document.getElementById('cantidadArti').value = "1";
+          document.getElementById('totalExtra').value = precio;
+
+          document.getElementById('cantidadArti').setAttribute("readonly", "true");
+
+        }
+
+      }
+    }else{
+      //ocurrio un error de consulta
+      Swal.fire(
+        'Ha ocurrido un error',
+        res.mensaje,
+        'error'
+      )
+    }
+  }else{
+    Swal.fire(
+      'Servidor Inalcansable',
+      'Verifica tu conexion a internet',
+      'error'
+    )
+  }
+
+}
