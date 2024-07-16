@@ -84,9 +84,15 @@ session_start();
                                 //si procede el cierre, por lo que pasamos a consultar sus ventas
                                 $fetchMov = mysqli_fetch_assoc($queryMov);
                                 $montoInicio = $fetchMov['montoMov'];
+                                //$sqlMov3 = "SELECT *,(SELECT DISTINCT(b.sucursalID) FROM DETALLEVENTA b 
+                                //WHERE b.ventaID = a.idVenta) AS sucursalVenta FROM VENTAS a WHERE 
+                                //a.fechaVenta = '$fecha' AND a.usuarioID = '$idUsuario' AND a.empresaID = '$idEmprersa'";
+
                                 $sqlMov3 = "SELECT *,(SELECT DISTINCT(b.sucursalID) FROM DETALLEVENTA b 
-                                WHERE b.ventaID = a.idVenta) AS sucursalVenta FROM VENTAS a WHERE 
-                                a.fechaVenta = '$fecha' AND a.usuarioID = '$idUsuario' AND a.empresaID = '$idEmprersa'";
+                                WHERE b.ventaID = a.idVenta) AS sucursalVenta,(SELECT DISTINCT(e.nombreServicio) FROM DETALLEVENTA c 
+                                INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e ON d.servicioID = e.idServicio 
+                                WHERE c.ventaID = a.idVenta) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
+                                '$idUsuario' AND a.empresaID = '$idEmprersa'";
                                 
                                 try {
                                   $queryMov3 = mysqli_query($conexion, $sqlMov3);
@@ -99,9 +105,15 @@ session_start();
                                       $tipopago = $fetchMov3['tipoPago'];
                                       $ticket = $fetchMov3['num_comprobante'];
                                       $idCliente = $fetchMov3['clienteID'];
+                                      if($fetchMov3['trabajoVenta'] == null){
+                                        $dataCliente = verCliente($idCliente,$idEmprersa);
+                                        $nombreClie = json_decode($dataCliente)->data->nombreCliente;
+                                      }else{
+                                        //se trata de un trabajo
+                                        $nombreClie = $fetchMov3['trabajoVenta'];
+                                      }
 
-                                      $dataCliente = verCliente($idCliente,$idEmprersa);
-                                      $nombreClie = json_decode($dataCliente)->data->nombreCliente;
+                                      
                                       
                                       if($tipopago == "Efectivo"){
                                         $totalEfectivo = $totalEfectivo + $montoVenta;
