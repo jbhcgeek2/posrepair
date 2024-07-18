@@ -232,12 +232,13 @@ if(!empty($_SESSION['usuarioPOS'])){
           //antes de continuar verificamos si existe 1 articulo a traspasar
           $cantOrigen = $fetch['existenciaSucursal'];
           if($cantOrigen >= 1){
+
             $sqlX2 = "SELECT *,(SELECT b.sucursalID FROM DETALLEINGRESO b WHERE b.ingresoID = a.ingresoID 
             AND b.prodMov = a.prodMov AND b.tipoMov = 'Entrada' AND b.fechaMov = '$fechaTras' AND 
             b.usuarioMov = a.usuarioMov) AS sucDestino, (SELECT f.existenciaSucursal FROM ARTICULOSUCURSAL f 
             where f.articuloID = a.prodMov AND f.sucursalID = '$destino') AS numDestino FROM DETALLEINGRESO a INNER JOIN INGRESO d 
-            ON a.ingresoID = d.idIngreso WHERE a.fechaMov = '$fechaHoy' 
-            AND a.prodMov = '$idProd' AND a.tipoMov = 'Salida' AND a.usuarioMov = '$usuario'";
+            ON a.ingresoID = d.idIngreso WHERE a.fechaMov = '$fechaHoy' AND a.prodMov = '$idProd' 
+            AND a.tipoMov = 'Salida' AND a.usuarioMov = '$usuario'";
             try {
               $queryX2 = mysqli_query($conexion, $sqlX2);
               if(mysqli_num_rows($queryX2) == 1){
@@ -360,7 +361,7 @@ if(!empty($_SESSION['usuarioPOS'])){
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
-              $res = ["status"=>"error","mensaje"=>"Error al consultar la existencia de un traspaso previo."];
+              $res = ["status"=>"error","mensaje"=>"Error al consultar la existencia de un traspaso previo. ".$th];
               echo json_encode($res);
             }
           }else{
