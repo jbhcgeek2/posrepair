@@ -234,7 +234,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           if($cantOrigen >= 1){
             $sqlX2 = "SELECT *,(SELECT b.sucursalID FROM DETALLEINGRESO b WHERE b.ingresoID = a.ingresoID 
             AND b.prodMov = a.prodMov AND b.tipoMov = 'Entrada' AND b.fechaMov = '$fechaTras' AND 
-            b.usuarioMov = a.usuarioMov) AS sucDestino,, (SELECT f.existenciaSucursal FROM ARTICULOSUCURSAL f 
+            b.usuarioMov = a.usuarioMov) AS sucDestino, (SELECT f.existenciaSucursal FROM ARTICULOSUCURSAL f 
             where f.articuloID = a.prodMov AND f.sucursalID = '$destino') AS numDestino FROM DETALLEINGRESO a INNER JOIN INGRESO d 
             ON a.ingresoID = d.idIngreso WHERE a.fechaMov = '$fechaHoy' 
             AND a.prodMov = '$idProd' AND a.tipoMov = 'Salida' AND a.usuarioMov = '$usuario'";
