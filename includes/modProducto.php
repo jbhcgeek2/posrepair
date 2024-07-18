@@ -257,7 +257,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 // Obtener la diferencia en minutos
                 $minutos = $diferencia->i;
                 //validamos si el movimiento es a la sucursal de origen
-                if($fetchX2['sucDestino'] == $destino && $minutos < 30){
+                if(($fetchX2['sucDestino'] == $destino) && ($minutos < 30)){
                   //entra dentro del limite, sumamos un nuevo producto al movimiento
                   $van = $fetchX2['totArticulos'];
                   $van = $van+1;
