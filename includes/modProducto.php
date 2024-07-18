@@ -309,6 +309,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                     'fechaTras' => $fechaTras,
                     'tipoComproTras' => 'Ticket'
                   );
+                  $ch = curl_init();
                   // Establecer la URL de destino
                   curl_setopt($ch, CURLOPT_URL, $url);
                   // Establecer el método de la petición a POST
@@ -341,6 +342,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   'fechaTras' => $fechaTras,
                   'tipoComproTras' => 'Ticket'
                 );
+                $ch = curl_init();
                 // Establecer la URL de destino
                 curl_setopt($ch, CURLOPT_URL, $url);
                 // Establecer el método de la petición a POST
@@ -352,7 +354,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 $response = curl_exec($ch);
                 // Verificar si hubo algún error en la petición
                 if ($response === false) {
-                    echo 'Error: ' . curl_error($ch);
+                  echo 'Error: ' . curl_error($ch);
                 }
                 // Cerrar la sesión cURL
                 curl_close($ch);
