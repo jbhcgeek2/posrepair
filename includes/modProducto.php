@@ -299,7 +299,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }
                 }else{
                   //se tiene que realizar un registro nuevo
-                  $url = 'movsProds.php';
+                  $url = 'https://postrepair.tecuanisoft.com/includes/movsProds.php';
                   $data = array(
                     'prodModalTras' => $idProd,
                     'sucOriTras' => $origen,
@@ -319,17 +319,15 @@ if(!empty($_SESSION['usuarioPOS'])){
                     )
                   );
                   $context = stream_context_create($options);
-
                   // Realizar la petición POST al archivo PHP de destino
                   $response = file_get_contents($url, false, $context);
-
                   // Manejar la respuesta recibida
                   echo $response;
               }else{
                 //no se han realizado traspasos de esa mercancia en el dia, lo registramos como un 
                 //movimiento nuevo
                 //se tiene que realizar un registro nuevo
-                $url = 'movsProds.php';
+                $url = 'https://postrepair.tecuanisoft.com/includes/movsProds.php';
                 $data = array(
                   'prodModalTras' => $idProd,
                   'sucOriTras' => $origen,
@@ -348,10 +346,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                   )
                 );
                 $context = stream_context_create($options);
-
                 // Realizar la petición POST al archivo PHP de destino
                 $response = file_get_contents($url, false, $context);
-
                 // Manejar la respuesta recibida
                 echo $response;
               }
