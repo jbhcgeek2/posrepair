@@ -299,7 +299,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }
                 }else{
                   //se tiene que realizar un registro nuevo
-                  $url = 'https://postrepair2.tecuanisoft.com/inlcudes/movsProds.php';
+                  $url = 'https://postrepair2.tecuanisoft.com/includes/movsProds.php';
                   $data = array(
                     'prodModalTras' => $idProd,
                     'sucOriTras' => $origen,
@@ -356,7 +356,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 // Cerrar la sesión cURL
                 curl_close($ch);
                 // Manejar la respuesta recibida
-                echo $response;
+                echo "Aquina".$response;
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
