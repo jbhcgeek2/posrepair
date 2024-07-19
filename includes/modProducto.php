@@ -312,7 +312,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   
                   // Crear el contexto de la solicitud POST
                   $options = array(
-                    'http' => array(
+                    'https' => array(
                         'method' => 'POST',
                         'header' => 'Content-type: application/x-www-form-urlencoded',
                         'content' => http_build_query($data)
@@ -339,7 +339,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 );
                 // Crear el contexto de la solicitud POST
                 $options = array(
-                  'http' => array(
+                  'https' => array(
                       'method' => 'POST',
                       'header' => 'Content-type: application/x-www-form-urlencoded',
                       'content' => http_build_query($data)
