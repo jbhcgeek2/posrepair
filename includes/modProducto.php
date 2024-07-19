@@ -348,19 +348,30 @@ if(!empty($_SESSION['usuarioPOS'])){
                   'fechaTras' => $fechaTras,
                   'tipoComproTras' => 'Ticket'
                 );
-                // Crear el contexto de la solicitud POST
-                $options = array(
-                  'https' => array(
-                      'method' => 'POST',
-                      'header' => 'Content-type: application/x-www-form-urlencoded',
-                      'content' => http_build_query($data)
-                  )
-                );
-                $context = stream_context_create($options);
-                // Realizar la petición POST al archivo PHP de destino
-                $response = file_get_contents($url, false, $context);
-                // Manejar la respuesta recibida
-                echo $response;
+                $curl = curl_init($url);
+
+                  // Establecer los datos POST
+                  curl_setopt($curl, CURLOPT_POST, true);
+                  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+                  
+                  // Devolver la respuesta en lugar de mostrarla
+                  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                  
+                  // Ejecutar la solicitud
+                  $response = curl_exec($curl);
+                  
+                  // Verificar si hay errores
+                  if ($response === false) {
+                      $error = curl_error($curl);
+                      // Manejar el error adecuadamente
+                      // ...
+                  } else {
+                      // Manejar la respuesta recibida
+                      echo $response;
+                  }
+                  
+                  // Cerrar la sesión de cURL
+                  curl_close($curl);
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
