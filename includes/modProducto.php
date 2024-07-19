@@ -299,7 +299,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }
                 }else{
                   //se tiene que realizar un registro nuevo
-                  $url = 'movsProds.php';
+                  $url = 'https://postrepair2.tecuanisoft.com/inlcudes/movsProds.php';
                   $data = array(
                     'prodModalTras' => $idProd,
                     'sucOriTras' => $origen,
@@ -309,22 +309,19 @@ if(!empty($_SESSION['usuarioPOS'])){
                     'fechaTras' => $fechaTras,
                     'tipoComproTras' => 'Ticket'
                   );
-                  $ch = curl_init();
-                  // Establecer la URL de destino
-                  curl_setopt($ch, CURLOPT_URL, $url);
-                  // Establecer el método de la petición a POST
-                  curl_setopt($ch, CURLOPT_POST, true);
+                  // Crear el contexto de la solicitud POST
+                  $options = array(
+                    'http' => array(
+                        'method' => 'POST',
+                        'header' => 'Content-type: application/x-www-form-urlencoded',
+                        'content' => http_build_query($data)
+                    )
+                  );
+                  $context = stream_context_create($options);
 
-                  // Establecer los datos a enviar en la petición POST
-                  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                  // Ejecutar la petición y obtener la respuesta
-                  $response = curl_exec($ch);
-                  // Verificar si hubo algún error en la petición
-                  if ($response === false) {
-                      echo 'Error: ' . curl_error($ch);
-                  }
-                  // Cerrar la sesión cURL
-                  curl_close($ch);
+                  // Realizar la petición POST al archivo PHP de destino
+                  $response = file_get_contents($url, false, $context);
+
                   // Manejar la respuesta recibida
                   echo $response;
                 }
