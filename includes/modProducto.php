@@ -351,7 +351,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 if ($response === false) {
                     $error = curl_error($curl);
                     // Manejar el error adecuadamente
-                    // ...
+                    echo $error;
                 } else {
                     // Manejar la respuesta recibida
                     echo $response;
