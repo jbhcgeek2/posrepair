@@ -339,18 +339,21 @@ if(!empty($_SESSION['usuarioPOS'])){
                   'fechaTras' => $fechaTras,
                   'tipoComproTras' => 'Ticket'
                 );
-                $request = new HttpRequest($url, HttpRequest::METH_POST);
-                $request->setHeaders(array('Content-Type' => 'application/x-www-form-urlencoded'));
-                $request->setPostFields($data);
+                 // Crear el contexto de la solicitud POST
+                 $options = array(
+                  'http' => array(
+                      'method' => 'POST',
+                      'header' => 'Content-type: application/x-www-form-urlencoded',
+                      'content' => http_build_query($data)
+                  )
+                );
+                $context = stream_context_create($options);
 
-                try {
-                    $response = $request->send();
-                    // Manejar la respuesta recibida
-                    echo $response->getBody();
-                } catch (HttpException $ex) {
-                    // Manejar el error adecuadamente
-                    echo $ex;
-                }
+                // Realizar la petición POST al archivo PHP de destino
+                $response = file_get_contents($url, false, $context);
+
+                // Manejar la respuesta recibida
+                echo $response;
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
