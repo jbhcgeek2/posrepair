@@ -257,7 +257,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 // Obtener la diferencia en minutos
                 $minutos = $diferencia->i;
                 //validamos si el movimiento es a la sucursal de origen
-                if(($fetchX2['sucDestino'] == $destino) && ($minutos < 30)){
+                if($fetchX2['sucDestino'] == $destino && $minutos < 30){
                   //entra dentro del limite, sumamos un nuevo producto al movimiento
                   $van = $fetchX2['totArticulos'];
                   $van = $van+1;
@@ -299,7 +299,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }
                 }else{
                   //se tiene que realizar un registro nuevo
-                  $url = 'https://postrepair2.tecuanisoft.com/includes/movsProds.php';
+                  $url = 'movsProds.php';
                   $data = array(
                     'prodModalTras' => $idProd,
                     'sucOriTras' => $origen,
@@ -309,36 +309,30 @@ if(!empty($_SESSION['usuarioPOS'])){
                     'fechaTras' => $fechaTras,
                     'tipoComproTras' => 'Ticket'
                   );
-                  
-                  $curl = curl_init($url);
+                  $ch = curl_init();
+                  // Establecer la URL de destino
+                  curl_setopt($ch, CURLOPT_URL, $url);
+                  // Establecer el método de la petición a POST
+                  curl_setopt($ch, CURLOPT_POST, true);
 
-                  // Establecer los datos POST
-                  curl_setopt($curl, CURLOPT_POST, true);
-                  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-                  
-                  // Devolver la respuesta en lugar de mostrarla
-                  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                  
-                  // Ejecutar la solicitud
-                  $response = curl_exec($curl);
-                  
-                  // Verificar si hay errores
+                  // Establecer los datos a enviar en la petición POST
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                  // Ejecutar la petición y obtener la respuesta
+                  $response = curl_exec($ch);
+                  // Verificar si hubo algún error en la petición
                   if ($response === false) {
-                      $error = curl_error($curl);
-                      // Manejar el error adecuadamente
-                      // ...
-                  } else {
-                      // Manejar la respuesta recibida
-                      echo $response;
+                      echo 'Error: ' . curl_error($ch);
                   }
-                  
-                  // Cerrar la sesión de cURL
-                  curl_close($curl);
+                  // Cerrar la sesión cURL
+                  curl_close($ch);
+                  // Manejar la respuesta recibida
+                  echo $response;
+                }
               }else{
                 //no se han realizado traspasos de esa mercancia en el dia, lo registramos como un 
                 //movimiento nuevo
                 //se tiene que realizar un registro nuevo
-                $url = 'https://postrepair2.tecuanisoft.com/includes/movsProds.php';
+                $url = 'movsProds.php';
                 $data = array(
                   'prodModalTras' => $idProd,
                   'sucOriTras' => $origen,
@@ -348,30 +342,24 @@ if(!empty($_SESSION['usuarioPOS'])){
                   'fechaTras' => $fechaTras,
                   'tipoComproTras' => 'Ticket'
                 );
-                $curl = curl_init($url);
+                $ch = curl_init();
+                // Establecer la URL de destino
+                curl_setopt($ch, CURLOPT_URL, $url);
+                // Establecer el método de la petición a POST
+                curl_setopt($ch, CURLOPT_POST, true);
 
-                  // Establecer los datos POST
-                  curl_setopt($curl, CURLOPT_POST, true);
-                  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-                  
-                  // Devolver la respuesta en lugar de mostrarla
-                  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                  
-                  // Ejecutar la solicitud
-                  $response = curl_exec($curl);
-                  
-                  // Verificar si hay errores
-                  if ($response === false) {
-                      $error = curl_error($curl);
-                      // Manejar el error adecuadamente
-                      // ...
-                  } else {
-                      // Manejar la respuesta recibida
-                      echo $response;
-                  }
-                  
-                  // Cerrar la sesión de cURL
-                  curl_close($curl);
+                // Establecer los datos a enviar en la petición POST
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                // Ejecutar la petición y obtener la respuesta
+                $response = curl_exec($ch);
+                // Verificar si hubo algún error en la petición
+                if ($response === false) {
+                  echo 'Error: ' . curl_error($ch);
+                }
+                // Cerrar la sesión cURL
+                curl_close($ch);
+                // Manejar la respuesta recibida
+                echo $response;
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
