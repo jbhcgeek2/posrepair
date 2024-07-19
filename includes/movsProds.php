@@ -454,6 +454,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     }
 
   }
+}else{
+  echo "No Sesion Detected";
 }
 
 ?>
