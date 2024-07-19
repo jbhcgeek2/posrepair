@@ -329,7 +329,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 //no se han realizado traspasos de esa mercancia en el dia, lo registramos como un 
                 //movimiento nuevo
                 //se tiene que realizar un registro nuevo
-                $url = 'https://postrepair2.tecuanisoft.com/inlcudes/movsProds.php';
+                $url = 'https://postrepair2.tecuanisoft.com/includes/movsProds.php';
                 $data = array(
                   'prodModalTras' => $idProd,
                   'sucOriTras' => $origen,
