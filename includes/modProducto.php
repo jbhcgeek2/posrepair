@@ -339,24 +339,18 @@ if(!empty($_SESSION['usuarioPOS'])){
                   'fechaTras' => $fechaTras,
                   'tipoComproTras' => 'Ticket'
                 );
-                $ch = curl_init();
-                // Establecer la URL de destino
-                curl_setopt($ch, CURLOPT_URL, $url);
-                // Establecer el método de la petición a POST
-                curl_setopt($ch, CURLOPT_POST, true);
+                $request = new HttpRequest($url, HttpRequest::METH_POST);
+                $request->setHeaders(array('Content-Type' => 'application/x-www-form-urlencoded'));
+                $request->setPostFields($data);
 
-                // Establecer los datos a enviar en la petición POST
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                // Ejecutar la petición y obtener la respuesta
-                $response = curl_exec($ch);
-                // Verificar si hubo algún error en la petición
-                if ($response === false) {
-                  echo 'Error: ' . curl_error($ch);
+                try {
+                    $response = $request->send();
+                    // Manejar la respuesta recibida
+                    echo $response->getBody();
+                } catch (HttpException $ex) {
+                    // Manejar el error adecuadamente
+                    echo $ex;
                 }
-                // Cerrar la sesión cURL
-                curl_close($ch);
-                // Manejar la respuesta recibida
-                echo "Aquina".$response;
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
