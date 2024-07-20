@@ -299,65 +299,20 @@ if(!empty($_SESSION['usuarioPOS'])){
                   }
                 }else{
                   //se tiene que realizar un registro nuevo
-                  $url = 'https://postrepair2.tecuanisoft.com/includes/movsProds.php';
-                  $data = array(
-                    'prodModalTras' => $idProd,
-                    'sucOriTras' => $origen,
-                    'sucDesTras' => $destino,
-                    'cantidadTras' => '1',
-                    'numComproTras' => '1212',
-                    'fechaTras' => $fechaTras,
-                    'tipoComproTras' => 'Ticket'
-                  );
-                  // Crear el contexto de la solicitud POST
-                  $options = array(
-                    'http' => array(
-                        'method' => 'POST',
-                        'header' => 'Content-type: application/x-www-form-urlencoded',
-                        'content' => http_build_query($data)
-                    )
-                  );
-                  $context = stream_context_create($options);
+                  $traspasoNuevo = traspaso($idProd,$origen,$destino,'1','1212',$fechaTras,
+                 'Ticket',$idEmpresaSesion,$usuario);
 
-                  // Realizar la petición POST al archivo PHP de destino
-                  $response = file_get_contents($url, false, $context);
-
-                  // Manejar la respuesta recibida
-                  echo $response;
+                 echo $traspasoNuevo;
                 }
               }else{
                 //no se han realizado traspasos de esa mercancia en el dia, lo registramos como un 
                 //movimiento nuevo
                 //se tiene que realizar un registro nuevo
-                $url = 'movsProds.php';
-                $data = array(
-                  'prodModalTras' => $idProd,
-                  'sucOriTras' => $origen,
-                  'sucDesTras' => $destino,
-                  'cantidadTras' => '1',
-                  'numComproTras' => '1212',
-                  'fechaTras' => $fechaTras,
-                  'tipoComproTras' => 'Ticket'
-                );
-                 // Crear el contexto de la solicitud POST
-                 $curl = curl_init($url);
+                
+                 $traspasoNuevo = traspaso($idProd,$origen,$destino,'1','1212',$fechaTras,
+                 'Ticket',$idEmpresaSesion,$usuario);
 
-                curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-                $response = curl_exec($curl);
-
-                if ($response === false) {
-                    $error = curl_error($curl);
-                    // Manejar el error adecuadamente
-                    echo $error;
-                } else {
-                    // Manejar la respuesta recibida
-                    echo $response;
-                }
-
-                curl_close($curl);
+                 echo $traspasoNuevo;
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
