@@ -276,7 +276,7 @@ btnTermina.addEventListener('click', function(){
   let costoFinal = parseFloat(document.getElementById('costoFinal').value);
   let costoIni = parseFloat(document.getElementById('costoIniFinal').value);
 
-  if(costoFinal > 0 && costoFinal >= costoIni){
+  if(costoFinal){
     Swal.fire({
       title: 'Finalizar Trabajo?',
       text: 'Estas seguro de terminar el trabajo?',
