@@ -147,64 +147,68 @@ function updateTotal(){
 let btnGuardar = document.getElementById('btnSave');
 btnGuardar.addEventListener('click', function(){
   //preguntamos si esta seguro
-  Swal.fire({
-    title: 'Registrar Pieza?',
-    text: 'Esto afectara la existencia de tu inventario',
-    icon: 'warning',
-    showDenyButton: true,
-    confirmButtonText: 'Si, Registrar',
-    denyButtonText: 'Cancelar'
-  }).then((result)=>{
-    //si se proceara el movimiento
-    let articulo = document.getElementById('articuloAgrega').value;
-    let precio = document.getElementById('precioArti').value;
-    let cantidad = document.getElementById('cantidadArti').value;
-    let total = document.getElementById('totalExtra').value;
-    let trabajo = document.getElementById('datoTrabajo').value;
-    let idCodEspe = document.getElementById('idCodEspe').value;
-
-    let datos = new FormData();
-    datos.append('artiServicio',articulo);
-    datos.append('precioArtiServ',precio);
-    datos.append('cantidadArtiServ',cantidad);
-    datos.append('totalArtiServ',total);
-    datos.append('trabajoArtiServ',trabajo);
-    datos.append('idCodEspe',idCodEspe);
-
-    let envio = new XMLHttpRequest();
-    envio.open('POST','../includes/trabajosOperaciones.php',false);
-    envio.send(datos);
-
-    if(envio.status == 200){
-      //verificamos la respuesta
-      let res = JSON.parse(envio.responseText);
-      if(res.status == 'ok'){
-        //podemos dar por registrado el articulo
-        Swal.fire(
-          'Pieza Registrada',
-          'Se ha registrado la pieza correctamente',
-          'success'
-        ).then(function(){
-          location.reload();
-        })
+  let cantidad2 = document.getElementById('cantidadArti').value;
+  if(cantidad2 > 0 && !isNaN(cantidad2)){
+    Swal.fire({
+      title: 'Registrar Pieza?',
+      text: 'Esto afectara la existencia de tu inventario',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Si, Registrar',
+      denyButtonText: 'Cancelar'
+    }).then((result)=>{
+      //si se proceara el movimiento
+      let articulo = document.getElementById('articuloAgrega').value;
+      let precio = document.getElementById('precioArti').value;
+      let cantidad = document.getElementById('cantidadArti').value;
+      let total = document.getElementById('totalExtra').value;
+      let trabajo = document.getElementById('datoTrabajo').value;
+      let idCodEspe = document.getElementById('idCodEspe').value;
+  
+      let datos = new FormData();
+      datos.append('artiServicio',articulo);
+      datos.append('precioArtiServ',precio);
+      datos.append('cantidadArtiServ',cantidad);
+      datos.append('totalArtiServ',total);
+      datos.append('trabajoArtiServ',trabajo);
+      datos.append('idCodEspe',idCodEspe);
+  
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/trabajosOperaciones.php',false);
+      envio.send(datos);
+  
+      if(envio.status == 200){
+        //verificamos la respuesta
+        let res = JSON.parse(envio.responseText);
+        if(res.status == 'ok'){
+          //podemos dar por registrado el articulo
+          Swal.fire(
+            'Pieza Registrada',
+            'Se ha registrado la pieza correctamente',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
+        }else{
+          //error al registrar el articulo
+          let err = res.mensaje;
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+err,
+            'error'
+          )
+          
+        }
       }else{
-        //error al registrar el articulo
-        let err = res.mensaje;
         Swal.fire(
-          'Ha ocurrido un error',
-          'Verificar: '+err,
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
           'error'
         )
-        
       }
-    }else{
-      Swal.fire(
-        'Servidor Inalcansable',
-        'Verifica tu conexion a internet',
-        'error'
-      )
-    }
-  })
+    })
+  }
+  
 })
 
 
