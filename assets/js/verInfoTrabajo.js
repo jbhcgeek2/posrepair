@@ -207,6 +207,12 @@ btnGuardar.addEventListener('click', function(){
         )
       }
     })
+  }else{
+    Swal.fire(
+      'Campos Invalidos',
+      'Asegurate de indicar el numero de piezas y un monto final valido',
+      'error'
+    )
   }
   
 })
