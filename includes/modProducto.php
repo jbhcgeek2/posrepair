@@ -302,7 +302,14 @@ if(!empty($_SESSION['usuarioPOS'])){
                   $traspasoNuevo = traspaso($idProd,$origen,$destino,'1','1212',$fechaTras,
                  'Ticket',$idEmpresaSesion,$usuario);
 
-                 echo $traspasoNuevo;
+                 $traspasoNuevo = json_decode($traspasoNuevo);
+                 if($traspasoNuevo->status == "ok"){
+                  $mensajeCorto = "Articulo: ".$nombreProd." Traspasado - Codigo: ".$codigo;
+                  $res = ["status"=>"ok","mensaje"=>$mensajeCorto];
+                  echo json_encode($res);
+                 }
+
+                 
                 }
               }else{
                 //no se han realizado traspasos de esa mercancia en el dia, lo registramos como un 
@@ -312,7 +319,12 @@ if(!empty($_SESSION['usuarioPOS'])){
                  $traspasoNuevo = traspaso($idProd,$origen,$destino,'1','1212',$fechaTras,
                  'Ticket',$idEmpresaSesion,$usuario);
 
-                 echo $traspasoNuevo;
+                 $traspasoNuevo = json_decode($traspasoNuevo);
+                 if($traspasoNuevo->status == "ok"){
+                  $mensajeCorto = "Articulo: ".$nombreProd." Traspasado - Codigo: ".$codigo;
+                  $res = ["status"=>"ok","mensaje"=>$mensajeCorto];
+                  echo json_encode($res);
+                 }
               }
             } catch (\Throwable $th) {
               //error al consultar la existencia de traspaso previo
