@@ -289,7 +289,8 @@ session_start();
 
                         <div class="col-sm-12 mb-4">
                           <label for="solucionTrabajo" class="form-label">Solucion</label>
-                          <input type="text" id="solucionTrabajo" name="solucionTrabajo" value="" class="form-control">
+                          <input type="text" id="solucionTrabajo" name="solucionTrabajo" style="background-color:#c8e6c9;" 
+                          class="form-control">
                         </div>
                         
                       </form>
