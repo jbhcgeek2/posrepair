@@ -585,8 +585,7 @@ function updateCosto(){
   let trabajo = document.getElementById('datoTrabajo').value;
   if(!isNaN(nuevoCosto)){
     //confirmamos
-    Swal.fire(
-      Swal.fire({
+     Swal.fire({
         title: 'Modificar Costo',
         text: 'Estas seguro de modificar el costo inicial?',
         icon: 'warning',
@@ -633,6 +632,5 @@ function updateCosto(){
           //no se hace nada
         }
       })
-    )
   }
 }
