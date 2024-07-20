@@ -453,6 +453,23 @@
         $res = ['status'=>'error','data'=>'noData','mensaje'=>'Ha ocurrido un erro al consultar la BD: '.$th];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['trabajoUpdateCosto'])){
+      //Seccion para actualizar el precio inicial de un trabajo
+      $idTrabajo = $_POST['trabajoUpdateCosto'];
+      $costo = $_POST['updateNewCosto'];
+
+      //actualizamos el costo
+      $sql = "UPDATE TRABAJOS SET costoInicial = '$costo' WHERE idTrabajo = '$idTrabajo'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        //se completo el proceso
+        $res = ['status'=>'ok','mensaje'=>'operationSuccess'];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        //throw $th;
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el costo: '.$th];
+        echo json_encode($res);
+      }
     }
   }
 ?>

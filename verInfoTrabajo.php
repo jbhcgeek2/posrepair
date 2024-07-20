@@ -131,7 +131,7 @@ session_start();
                         <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
                           <label for="costoServicio" class="form-label">Costo</label>
                           <input type="number" name="costoServicio" id="costoServicio" class="form-control" 
-                          value="<?php echo $costoIni; ?>" readonly>
+                          value="<?php echo $costoIni; ?>" onchange="updateCosto()">
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-2 mb-3">

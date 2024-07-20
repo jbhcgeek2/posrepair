@@ -578,3 +578,61 @@ function buscarCodigo(){
   }
 
 }
+
+function updateCosto(){
+  //metodo para actualizar el costo inicial de un servicio
+  let nuevoCosto = document.getElementById('costoServicio').value;
+  let trabajo = document.getElementById('datoTrabajo').value;
+  if(!isNaN(nuevoCosto)){
+    //confirmamos
+    Swal.fire(
+      Swal.fire({
+        title: 'Modificar Costo',
+        text: 'Estas seguro de modificar el costo inicial?',
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Si, modificar',
+        denyButtonText: 'Cancelar'
+      }).then((result)=>{
+        if(result.isConfirmed){
+          //hacemos la peticion de actualizacion
+          let datos = new FormData();
+          datos.append('updateNewCosto',nuevoCosto);
+          datos.append('trabajoUpdateCosto',trabajo);
+
+          let envio = new XMLHttpRequest();
+          envio.open('POST','../includes/trabajosOperaciones.php',false);
+          envio.send(datos);
+
+          if(envio.status == 200){
+            let res = JSON.parse(envio.responseText);
+            if(res.status == "ok"){
+              Swal.fire(
+                'Precio Actualizado',
+                'Se actualizo el precio correctamente',
+                'success'
+              )
+            }else{
+              //ha opcurrido un error
+              Swal.fire(
+                'Ha ocurrido un error',
+                res.mensaje,
+                'error'
+              )
+            }
+          }else{
+            //error de servidor
+            Swal.fire(
+              'Servidor Inalcansable',
+              'Verifica tu conexion a internet',
+              'error'
+            )
+          }
+
+        }else{
+          //no se hace nada
+        }
+      })
+    )
+  }
+}
