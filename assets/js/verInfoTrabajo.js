@@ -147,64 +147,74 @@ function updateTotal(){
 let btnGuardar = document.getElementById('btnSave');
 btnGuardar.addEventListener('click', function(){
   //preguntamos si esta seguro
-  Swal.fire({
-    title: 'Registrar Pieza?',
-    text: 'Esto afectara la existencia de tu inventario',
-    icon: 'warning',
-    showDenyButton: true,
-    confirmButtonText: 'Si, Registrar',
-    denyButtonText: 'Cancelar'
-  }).then((result)=>{
-    //si se proceara el movimiento
-    let articulo = document.getElementById('articuloAgrega').value;
-    let precio = document.getElementById('precioArti').value;
-    let cantidad = document.getElementById('cantidadArti').value;
-    let total = document.getElementById('totalExtra').value;
-    let trabajo = document.getElementById('datoTrabajo').value;
-    let idCodEspe = document.getElementById('idCodEspe').value;
-
-    let datos = new FormData();
-    datos.append('artiServicio',articulo);
-    datos.append('precioArtiServ',precio);
-    datos.append('cantidadArtiServ',cantidad);
-    datos.append('totalArtiServ',total);
-    datos.append('trabajoArtiServ',trabajo);
-    datos.append('idCodEspe',idCodEspe);
-
-    let envio = new XMLHttpRequest();
-    envio.open('POST','../includes/trabajosOperaciones.php',false);
-    envio.send(datos);
-
-    if(envio.status == 200){
-      //verificamos la respuesta
-      let res = JSON.parse(envio.responseText);
-      if(res.status == 'ok'){
-        //podemos dar por registrado el articulo
-        Swal.fire(
-          'Pieza Registrada',
-          'Se ha registrado la pieza correctamente',
-          'success'
-        ).then(function(){
-          location.reload();
-        })
+  let cantidad2 = document.getElementById('cantidadArti').value;
+  if(cantidad2 > 0 && !isNaN(cantidad2)){
+    Swal.fire({
+      title: 'Registrar Pieza?',
+      text: 'Esto afectara la existencia de tu inventario',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Si, Registrar',
+      denyButtonText: 'Cancelar'
+    }).then((result)=>{
+      //si se proceara el movimiento
+      let articulo = document.getElementById('articuloAgrega').value;
+      let precio = document.getElementById('precioArti').value;
+      let cantidad = document.getElementById('cantidadArti').value;
+      let total = document.getElementById('totalExtra').value;
+      let trabajo = document.getElementById('datoTrabajo').value;
+      let idCodEspe = document.getElementById('idCodEspe').value;
+  
+      let datos = new FormData();
+      datos.append('artiServicio',articulo);
+      datos.append('precioArtiServ',precio);
+      datos.append('cantidadArtiServ',cantidad);
+      datos.append('totalArtiServ',total);
+      datos.append('trabajoArtiServ',trabajo);
+      datos.append('idCodEspe',idCodEspe);
+  
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/trabajosOperaciones.php',false);
+      envio.send(datos);
+  
+      if(envio.status == 200){
+        //verificamos la respuesta
+        let res = JSON.parse(envio.responseText);
+        if(res.status == 'ok'){
+          //podemos dar por registrado el articulo
+          Swal.fire(
+            'Pieza Registrada',
+            'Se ha registrado la pieza correctamente',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
+        }else{
+          //error al registrar el articulo
+          let err = res.mensaje;
+          Swal.fire(
+            'Ha ocurrido un error',
+            'Verificar: '+err,
+            'error'
+          )
+          
+        }
       }else{
-        //error al registrar el articulo
-        let err = res.mensaje;
         Swal.fire(
-          'Ha ocurrido un error',
-          'Verificar: '+err,
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
           'error'
         )
-        
       }
-    }else{
-      Swal.fire(
-        'Servidor Inalcansable',
-        'Verifica tu conexion a internet',
-        'error'
-      )
-    }
-  })
+    })
+  }else{
+    Swal.fire(
+      'Campos Invalidos',
+      'Asegurate de indicar el numero de piezas y un monto final valido',
+      'error'
+    )
+  }
+  
 })
 
 
@@ -276,7 +286,7 @@ btnTermina.addEventListener('click', function(){
   let costoFinal = parseFloat(document.getElementById('costoFinal').value);
   let costoIni = parseFloat(document.getElementById('costoIniFinal').value);
 
-  if(costoFinal > 0 && costoFinal >= costoIni){
+  if(costoFinal){
     Swal.fire({
       title: 'Finalizar Trabajo?',
       text: 'Estas seguro de terminar el trabajo?',
@@ -577,4 +587,60 @@ function buscarCodigo(){
     )
   }
 
+}
+
+function updateCosto(){
+  //metodo para actualizar el costo inicial de un servicio
+  let nuevoCosto = document.getElementById('costoServicio').value;
+  let trabajo = document.getElementById('datoTrabajo').value;
+  if(!isNaN(nuevoCosto)){
+    //confirmamos
+     Swal.fire({
+        title: 'Modificar Costo',
+        text: 'Estas seguro de modificar el costo inicial?',
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Si, modificar',
+        denyButtonText: 'Cancelar'
+      }).then((result)=>{
+        if(result.isConfirmed){
+          //hacemos la peticion de actualizacion
+          let datos = new FormData();
+          datos.append('updateNewCosto',nuevoCosto);
+          datos.append('trabajoUpdateCosto',trabajo);
+
+          let envio = new XMLHttpRequest();
+          envio.open('POST','../includes/trabajosOperaciones.php',false);
+          envio.send(datos);
+
+          if(envio.status == 200){
+            let res = JSON.parse(envio.responseText);
+            if(res.status == "ok"){
+              Swal.fire(
+                'Precio Actualizado',
+                'Se actualizo el precio correctamente',
+                'success'
+              )
+            }else{
+              //ha opcurrido un error
+              Swal.fire(
+                'Ha ocurrido un error',
+                res.mensaje,
+                'error'
+              )
+            }
+          }else{
+            //error de servidor
+            Swal.fire(
+              'Servidor Inalcansable',
+              'Verifica tu conexion a internet',
+              'error'
+            )
+          }
+
+        }else{
+          //no se hace nada
+        }
+      })
+  }
 }

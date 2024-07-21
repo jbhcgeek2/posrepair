@@ -506,6 +506,126 @@ function genCodigoUpdate($idEmpresa,$idProducto){
   }
 
 }
+
+function traspaso($producto,$sucOrigi,$sucDesti,$cantidad,$comproTras,$fechaTras,$tipoComp,$idEmprersa,$usuario){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+  //seccion para hacer que se realicen los traspasos de sucursal
+  
+  $horaTras = date('H:i:s');
+
+  //verificamos la existencia del producto
+  //en la sucursal origen
+  $cantidadSuc = getArtiSucursal($sucOrigi,$producto);
+  $cantidadSuc = json_decode($cantidadSuc);
+  if($cantidadSuc->status == "ok"){
+    //verificamos si la cantidad a traspasar es igual o superior a lo que se desea
+    if($cantidadSuc->data > 0){
+      if($cantidadSuc->data >= $cantidad){
+        $cantidadOrigen = $cantidadSuc->data;
+        $infoArti = getInfoproducto($idEmprersa,$producto);
+        $infoArti = json_decode($infoArti);
+        if($infoArti->status == "ok"){
+          $precioCompra = $infoArti->data->precioCompra;
+          $montoMov = $precioCompra * $cantidad;
+          //si se cuenta con stok, asi que procesamos el movimiento
+          //primero insertamos en el INGRESO
+          $sql = "INSERT INTO INGRESO (numComprobante,tipoComprobante,fechaIngreso,horaIngreso,
+          totalIngreso,totArticulos,empresaID) VALUES ('$comproTras','$tipoComp','$fechaTras',
+          '$horaTras','$montoMov','$cantidad','$idEmprersa')";
+          try {
+            $query = mysqli_query($conexion, $sql);
+            $idMovTras = mysqli_insert_id($conexion);
+            //ahora insertamos el detalle movimiento, primero la salida
+            $sql2 = "INSERT INTO DETALLEINGRESO (cantidad,precioCompra,ingresoID,sucursalID,fechaMov,usuarioMov,tipoMov,prodMov) 
+            VALUES ('$cantidad','$precioCompra','$idMovTras','$sucDesti',
+            '$fechaTras','$usuario','Salida','$producto')";
+            $sql22 = "INSERT INTO DETALLEINGRESO (cantidad,precioCompra,ingresoID,sucursalID,fechaMov,usuarioMov,tipoMov,prodMov) 
+            VALUES ('$cantidad','$precioCompra','$idMovTras','$sucOrigi',
+            '$fechaTras','$usuario','Entrada','$producto')";
+            try {
+              $query2 = mysqli_query($conexion, $sql2);
+              $query22 = mysqli_query($conexion, $sql22);
+              //ahora afectamos las cantidades del inventario
+              $nuevaCantidad = $cantidadOrigen - $cantidad;
+              
+              $cantNuevaSuc = getArtiSucursal($sucDesti,$producto);
+              $cantNuevaSuc = json_decode($cantNuevaSuc);
+              if($cantNuevaSuc->status == "ok"){
+                if($cantNuevaSuc->mensaje == "noData"){
+                  //el producto no existe, se insertara
+                  $nuevaCantidad2 = $cantidad;
+                  $sql3 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
+                  WHERE sucursalID = '$sucOrigi' AND articuloID = '$producto'";
+                  $sql33 = "INSERT INTO ARTICULOSUCURSAL (existenciaSucursal,sucursalID,articuloID) 
+                  VALUES ('$nuevaCantidad2','$sucDesti','$producto')";
+                }else{
+                  //el producto existe, lo actualizamos
+                  $cantSucDes = $cantNuevaSuc->data;
+                  $nuevaCantidad2 = $cantSucDes + $cantidad;
+
+                  $sql3 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
+                  WHERE sucursalID = '$sucOrigi' AND articuloID = '$producto'";
+                  $sql33 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad2' WHERE 
+                  sucursalID = '$sucDesti' AND articuloID = '$producto'";
+                }
+
+                try {
+                  $query3 = mysqli_query($conexion, $sql3);
+                  $query33 = mysqli_query($conexion, $sql33);
+                  //hasta este punto se puede decir que ya esta procesado toda la info
+                  $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
+                  return json_encode($res);
+                } catch (\Throwable $th) {
+                  //error al actualizar las cantidades
+                  $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al actualizar las cantidades, reporta a soporte tecnico. ".$th];
+                  return json_encode($res);
+                }
+              }else{
+                //error al consultar la cantidad
+                $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al consultar las cantidades en inventario. "];
+                return json_encode($res);
+              }
+              
+            } catch (\Throwable $th) {
+              $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al registrar la transaccion. ".$th];
+              return json_encode($res);
+            }
+
+          } catch (Throwable $th) {
+            $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al insertar el detalle de movimiento. ".$th];
+            return json_encode($res);
+          }
+        }else{
+          //error al consultar la informacion del estatus
+          $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al consultar la informacion del articulo. ".$th];
+          return json_encode($res);
+        }
+        
+        // $query = mysqli_query($conexion, $sql);
+      }else{
+        //se quiere traspasar mas de lo que se cuenta en stok
+        $cantSuc = $cantidadSuc->data;
+        $res = ["status"=>"error","mensaje"=>"Cuidado, actualmente cuentas con ".$cantSuc." articulos en la sucursal origen."];
+        return json_encode($res);  
+      }
+    }else{
+      //sin productos disponibles en la sucursal origen
+      $res = ["status"=>"error","mensaje"=>"No se cuenta con stock en la sucursal origen."];
+      return json_encode($res);
+    }
+  }else{
+    //error en la consulta del articulo
+    $res = ["status"=>"error","mensaje"=>"Articulo no localizado en la sucursal origen"];
+    return json_encode($res);
+  }
+}
 // precioUnitario = 17
 // precioCOmpra = 12.20
 // existencia = 150

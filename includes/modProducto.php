@@ -200,6 +200,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $destino = $_POST['sucDestinoDirecto'];
     $fechaTras = $_POST['fechaDirecto'];
     $hora = date('H:m:i');
+    $fechaHoy = date('Y-m-d');
 
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
@@ -222,7 +223,119 @@ if(!empty($_SESSION['usuarioPOS'])){
           $res = ['status'=>'error','mensaje'=>'Debe escanear el codigo del chip o imei del equipo'];
           echo json_encode($res);
         }else{
+          //se trata de un articulo normal consultamos si ya existe un traspaso previo
+          $idProd = $fetch['idArticulo'];
+          $nombreProd = $fetch['nombreArticulo'];
+          //$sqlX2 = "SELECT * FROM DETALLEINGRESO WHERE sucursalID = '$origen' AND prodMov = '$idProd' 
+          //AND tipoMov = 'Salida' AND fechaMov = '$fechaHoy'";
 
+          //antes de continuar verificamos si existe 1 articulo a traspasar
+          $cantOrigen = $fetch['existenciaSucursal'];
+          if($cantOrigen >= 1){
+
+            $sqlX2 = "SELECT *,(SELECT b.sucursalID FROM DETALLEINGRESO b WHERE b.ingresoID = a.ingresoID 
+            AND b.prodMov = a.prodMov AND b.tipoMov = 'Entrada' AND b.fechaMov = '$fechaTras' AND 
+            b.usuarioMov = a.usuarioMov) AS sucDestino, (SELECT f.existenciaSucursal FROM ARTICULOSUCURSAL f 
+            where f.articuloID = a.prodMov AND f.sucursalID = '$destino') AS numDestino FROM DETALLEINGRESO a INNER JOIN INGRESO d 
+            ON a.ingresoID = d.idIngreso WHERE a.fechaMov = '$fechaHoy' AND a.prodMov = '$idProd' 
+            AND a.tipoMov = 'Salida' AND a.usuarioMov = '$usuario'";
+            try {
+              $queryX2 = mysqli_query($conexion, $sqlX2);
+              if(mysqli_num_rows($queryX2) == 1){
+                //Ya existe un traspaso realizado en el dia del mismo usuario
+                //verificamos las horas del proceso, si son menores a 30 minutos, la sumamos
+                //si no entra en un nuevo movimiento
+                $fetchX2 = mysqli_fetch_assoc($queryX2);
+                $horaMov = $fetchX2['horaIngreso'];
+                $horaActual = date('H:i:s');
+                
+                // Crear objetos DateTime para las horas de registro y actual
+                $datetimeRegistro = DateTime::createFromFormat('H:i:s', $horaMov);
+                $datetimeActual = DateTime::createFromFormat('H:i:s', $horaActual);
+                // Calcular la diferencia de tiempo
+                $diferencia = $datetimeActual->diff($datetimeRegistro);
+                // Obtener la diferencia en minutos
+                $minutos = $diferencia->i;
+                //validamos si el movimiento es a la sucursal de origen
+                if($fetchX2['sucDestino'] == $destino && $minutos < 30){
+                  //entra dentro del limite, sumamos un nuevo producto al movimiento
+                  $van = $fetchX2['totArticulos'];
+                  $van = $van+1;
+                  $idIngreso = $fetchX2['ingresoID'];
+                  $numDestino = $fetchX2['numDestino'];
+  
+                  $montoCompra = $fetchX2['precioCompra'];
+                  $montoUpdate = $montoCompra * $van;
+                  //actualizamos las cantidades de DETALLEINGRESO
+                  $sqlX3 = "UPDATE DETALLEINGRESO SET cantidad = '$van' WHERE ingresoID = '$idIngreso'";
+                  $sqlX4 = "UPDATE INGRESO SET totArticulos = '$van', totalIngreso = '$montoUpdate' WHERE 
+                  empresaID = '$idEmpresaSesion' AND idIngreso = '$idIngreso'";
+                  try {
+                    $queryX3 = mysqli_query($conexion, $sqlX3);
+                    $queryX4 = mysqli_query($conexion, $sqlX4);
+                    //ahora aumentamos y restamos de ARTICULOSUCURSAL
+                    $nuevaCantOrigen = $cantOrigen - 1;
+                    $nuevaCantDestino = $numDestino + 1;
+                    $sqlX5 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantOrigen' WHERE 
+                    articuloID = '$idArti' AND sucursalID = '$origen'";
+                    $sqlX6 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantDestino' WHERE 
+                    articuloID = '$idArti' AND sucursalID = '$destino'";
+                    try {
+                      $queryX5 = mysqli_query($conexion, $sqlX5);
+                      $queryX6 = mysqli_query($conexion, $sqlX6);
+                      //Sobrevivimos a la actualizacion
+                      $mensajeCorto = "Articulo: ".$nombreProd." Traspasado - Codigo: ".$codigo;
+                      $res = ["status"=>"ok","mensaje"=>$mensajeCorto];
+                      echo json_encode($res);
+                    } catch (\Throwable $th) {
+                      //error al actualizar las cantidades
+                      $res = ["status"=>"error","mensaje"=>"Error al actualizar las cantidades del inventario"];
+                      echo json_encode($res);
+                    }
+                  } catch (\Throwable $th) {
+                    //error al actualizar el traspaso existente
+                    $res = ["status"=>"error","mensaje"=>"Ocurrio un error al actualizar el traspaso."];
+                    echo json_encode($res);
+                  }
+                }else{
+                  //se tiene que realizar un registro nuevo
+                  $traspasoNuevo = traspaso($idProd,$origen,$destino,'1','1212',$fechaTras,
+                 'Ticket',$idEmpresaSesion,$usuario);
+
+                 $traspasoNuevo = json_decode($traspasoNuevo);
+                 if($traspasoNuevo->status == "ok"){
+                  $mensajeCorto = "Articulo: ".$nombreProd." Traspasado - Codigo: ".$codigo;
+                  $res = ["status"=>"ok","mensaje"=>$mensajeCorto];
+                  echo json_encode($res);
+                 }
+
+                 
+                }
+              }else{
+                //no se han realizado traspasos de esa mercancia en el dia, lo registramos como un 
+                //movimiento nuevo
+                //se tiene que realizar un registro nuevo
+                
+                 $traspasoNuevo = traspaso($idProd,$origen,$destino,'1','1212',$fechaTras,
+                 'Ticket',$idEmpresaSesion,$usuario);
+
+                 $traspasoNuevo = json_decode($traspasoNuevo);
+                 if($traspasoNuevo->status == "ok"){
+                  $mensajeCorto = "Articulo: ".$nombreProd." Traspasado - Codigo: ".$codigo;
+                  $res = ["status"=>"ok","mensaje"=>$mensajeCorto];
+                  echo json_encode($res);
+                 }
+              }
+            } catch (\Throwable $th) {
+              //error al consultar la existencia de traspaso previo
+              $res = ["status"=>"error","mensaje"=>"Error al consultar la existencia de un traspaso previo. ".$th];
+              echo json_encode($res);
+            }
+          }else{
+            //sin existencia en sucursal de origen
+            $res = ["status"=>"error","mensaje"=>"Sin articulos en sucursal de origen."];
+            echo json_encode($res);
+          }
         }
       }else{
         //no se localizo el producto, verificamos si es un chip

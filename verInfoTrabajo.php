@@ -131,7 +131,7 @@ session_start();
                         <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
                           <label for="costoServicio" class="form-label">Costo</label>
                           <input type="number" name="costoServicio" id="costoServicio" class="form-control" 
-                          value="<?php echo $costoIni; ?>" readonly>
+                          value="<?php echo $costoIni; ?>" onchange="updateCosto()">
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-2 mb-3">
@@ -289,7 +289,8 @@ session_start();
 
                         <div class="col-sm-12 mb-4">
                           <label for="solucionTrabajo" class="form-label">Solucion</label>
-                          <input type="text" id="solucionTrabajo" name="solucionTrabajo" value="" class="form-control">
+                          <input type="text" id="solucionTrabajo" name="solucionTrabajo" style="background-color:#c8e6c9;" 
+                          class="form-control">
                         </div>
                         
                       </form>
