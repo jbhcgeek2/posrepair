@@ -89,9 +89,9 @@ session_start();
                                 //a.fechaVenta = '$fecha' AND a.usuarioID = '$idUsuario' AND a.empresaID = '$idEmprersa'";
 
                                 $sqlMov3 = "SELECT *,(SELECT DISTINCT(b.sucursalID) FROM DETALLEVENTA b 
-                                WHERE b.ventaID = a.idVenta) AS sucursalVenta,(SELECT DISTINCT(e.nombreServicio) FROM DETALLEVENTA c 
+                                WHERE b.ventaID = a.idVenta LIMIT 1) AS sucursalVenta,(SELECT DISTINCT(e.nombreServicio) FROM DETALLEVENTA c 
                                 INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e ON d.servicioID = e.idServicio 
-                                WHERE c.ventaID = a.idVenta) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
+                                WHERE c.ventaID = a.idVenta LIMIT 1) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
                                 '$idUsuario' AND a.empresaID = '$idEmprersa'";
                                 
                                 try {
