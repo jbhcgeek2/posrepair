@@ -98,7 +98,7 @@ session_start();
                                 }//fin del while
                               }else{
                                 //sin resultados
-                                echo "<tr><td colspan='5'><h5>Sin Auditorias</h5></td></tr>";
+                                echo "<tr><td colspan='5' class='text-center'><h5>Sin Auditorias</h5></td></tr>";
                               }
                             } catch (\Throwable $th) {
                               //error de consulta
