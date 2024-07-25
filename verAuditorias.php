@@ -137,7 +137,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/ventasUsuario.js"></script>
+    <script src="assets/js/verAuditorias.js"></script>
 </body>
 </html> 
 
