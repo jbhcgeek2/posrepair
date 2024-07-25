@@ -7,5 +7,9 @@ btnNuevaAudi.addEventListener('click', function(){
     confirmButtonTExt: 'Generar'
   }).then((result)=>{
     console.log(result);
+    if(result.isConfirmed){
+      let passAudi = result.value;
+      console.log(passAudi);
+    }
   })
 })
