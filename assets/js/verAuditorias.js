@@ -5,9 +5,7 @@ btnNuevaAudi.addEventListener('click', function(){
     input: 'password',
     showCancelButton: true,
     confirmButtonTExt: 'Generar'
-  }).then(function(){
-    if(result.isConfirmed){
-      console.log(result);
-    }
+  }).then((result)=>{
+    console.log(result);
   })
 })
