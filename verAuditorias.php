@@ -43,7 +43,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-									        <a href="reportesCaja.php">Nueva Auditoria</a>
+									        <a href="#!" id="newAuditoria">Nueva Auditoria</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
 
