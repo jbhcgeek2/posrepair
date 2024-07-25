@@ -93,6 +93,10 @@ session_start();
                                 INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e ON d.servicioID = e.idServicio 
                                 WHERE c.ventaID = a.idVenta LIMIT 1) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
                                 '$idUsuario' AND a.empresaID = '$idEmprersa'";
+
+                                // $sqlMov3 = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                                // WHERE b.fechaVenta = '$fecha' AND b.usuarioID = '$idUsuario' 
+                                // AND a.sucursalID = '$idSucursalN'";
                                 
                                 try {
                                   $queryMov3 = mysqli_query($conexion, $sqlMov3);
