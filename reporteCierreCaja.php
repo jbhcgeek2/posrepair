@@ -19,6 +19,11 @@ if(!empty($_SESSION['usuarioPOS'])){
   $nombreEmpresa = datoEmpresaSesion($usuario,"nombre");
   $nombreEmpresa = json_decode($nombreEmpresa)->dato;
 
+  $sqlUser = "SELECT * FROM USUARIOS WHERE userName = '$usuario'";
+  $queryUser = mysqli_query($conexion, $sqlUser);
+  $fetchUser = mysqli_fetch_assoc($queryUser);
+  $nombreUsuario = $fetchUser['nombreUsuario']." ".$fetchUser['apPaternoUsuario']." ".$fetchUser['apMaternoUsuario'];
+
   //consultamos si el usuario ya tiene el cierre procesado
   $sql = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND
   usuarioMov = '$idUsuario' AND conceptoMov = '4'";
@@ -102,26 +107,17 @@ if(!empty($_SESSION['usuarioPOS'])){
               </head>
               <body>
                 <div style="border: 0px solid #000; width:250px; text-align:center; font-family: 'Ubuntu', sans-serif;">
-                  <div style="font-size: 15px;">
-                    <?php echo $nombreEmpresa; ?><br>
-                    Sucursal: <?php echo $nombreSuc; ?><br>
-                    Domicilio: <?php echo $domSuc; ?><br>
-                    Telefono: <?php echo $telSuc; ?><br>
-                    <br>
-                  </div>
+                  
                   
 
                   <table style="width:100%;">
                     <thead>
                       <tr>
-                        <th colspan="4" style="text-align:left;">Fecha de Venta. <?php echo date('d-m-Y'); ?></th>
+                        <th colspan="4" style="text-align:left;">Cierre del dia. <?php echo date('d-m-Y'); ?></th>
                         
                       </tr>
                       <tr style="font-size:13px;">
-                        <th colspan="4" style="font-weight:100;">Cliente - <?php echo $nombreCliente; ?></th>
-                      </tr>
-                      <tr style="font-size:13px;">
-                        <th colspan="4" style="font-weight:100;">Fecha y hora - <?php echo $fechaRegistro." - ".$horaRegistro; ?></th>
+                        <th colspan="4" style="font-weight:100;">Fecha y hora - <?php echo date('d-m-Y')." - ".date('H:i:s'); ?></th>
                         <th></th>
                       </tr>
                       <tr style="font-size:13px;">
