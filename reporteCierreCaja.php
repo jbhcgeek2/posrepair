@@ -166,9 +166,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <th colspan="3" style="border-top: 1px solid;"></th>
                       </tr>
                       <tr>
-                        <th style="text-align:center;">Detalle de Venta</th>
-                        <td></td>
-                        <td></td>
+                        <th colspan="3" style="text-align:center;">Detalle de Venta</th>
+                        
                       </tr>
                       <tr>
                         <th colspan="3" style="border-top: 1px solid;"></th>
