@@ -147,8 +147,8 @@ session_start();
                                 $controlCierre = "display:none;";
                                 echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>
                                 <div class='row text-center'>
-                                  <div class='col-sm-12'>
-                                    <a href='#!' class='btn btn-warning'>Ver Reporte</a>
+                                  <div class='col-sm-12 mb-3'>
+                                    <a href='#!' class='btn btn-danger'>Ver Reporte</a>
                                   </div>
                                 </div>";
                               }
