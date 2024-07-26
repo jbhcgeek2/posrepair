@@ -121,7 +121,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <th></th>
                       </tr>
                       <tr style="font-size:13px;">
-                        <th colspan="4" style="font-weight:100;">Empleado - <?php echo $nombreUsuario; ?></th>
+                        <th colspan="4" style="font-weight:100;"><?php echo $nombreUsuario; ?></th>
                         <th></th>
                       </tr>
                       <tr>
