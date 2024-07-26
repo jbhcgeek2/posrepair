@@ -77,8 +77,7 @@ if(!empty($_SESSION['usuarioPOS'])){
               }
             }
 
-            $contenidoTabla = $contenidoTabla."
-            <tr><th>$nombreCosa - $".number_format($venta,2)."</th></tr>";
+            $contenidoTabla .= "<tr><th>$nombreCosa - $".number_format($venta,2)."</th></tr>";
 
           }//fin del while detalleventa
 
