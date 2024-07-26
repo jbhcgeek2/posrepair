@@ -51,7 +51,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
             //consultamos las cosas vendidas
             $nombreCosa = "";
-            if($fetch2['articuloID'] > 0){
+            if($fetch2['articuloID'] != NULL){
               //se trata de un articulo
               $idArti = $fetch2['articuloID'];
               $sql3 = "SELECT a.nombreArticulo FROM ARTICULOS a WHERE 
