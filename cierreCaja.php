@@ -146,8 +146,8 @@ session_start();
                                 //ya tiene realizado el cierre del dia en la sucursal
                                 $controlCierre = "display:none;";
                                 echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>
-                                <div class='row'>
-                                  <a href='#!' class='btn-success'>Ver Reporte</a>
+                                <div class='row text-center'>
+                                  <a href='#!' class='btn btn-success'>Ver Reporte</a>
                                 </div>";
                               }
                             } catch (\Throwable $th) {
