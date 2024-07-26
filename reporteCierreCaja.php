@@ -176,9 +176,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <td></td>
                       </tr>
                       <tr>
-                        <td style="text-align:right;">$<?php echo number_format($totalVenta,2); ?></td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="2" style="text-align:right;">$<?php echo number_format($totalVenta,2); ?></td>
                       </tr>
 
                       <tr>
