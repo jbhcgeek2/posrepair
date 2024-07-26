@@ -97,7 +97,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <th colspan="3" style="border-top: 1px solid;"></th>
                       </tr>
                       <tr>
-                        <th>Datos del Servicio</th>
+                        <th>Concentrado de Venta</th>
                       </tr>
                       <tr>
                         <th colspan="3" style="border-top: 1px solid;"></th>
@@ -105,28 +105,28 @@ if(!empty($_SESSION['usuarioPOS'])){
                     </thead>
                     <tbody style="text-align:left;">
                       <tr>
-                        <td style="font-weight:bold;">Dispositivo:</td>
+                        <td style="font-weight:bold;">Venta Efectivo:</td>
                       </tr>
                       <tr>
-                        <td><?php echo $dispositivo; ?></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;">Tipo de Servicio:</td>
-                      </tr>
-                      <tr>
-                        <td><?php echo $tipoServicio; ?></td>
+                        <td><?php echo $ventaEfectivo; ?></td>
                       </tr>
                       <tr>
                         <th style="border-top: 1px dotted;"></th>
                       </tr>
                       <tr>
-                        <td style="font-weight:bold;">Descripcion del problema:</td>
+                        <td style="font-weight:bold;">Venta Digital:</td>
                       </tr>
                       <tr>
-                        <td><?php echo $problema; ?></td>
+                        <td><?php echo $ventaDigital; ?></td>
+                      </tr>
+                      <tr>
+                        <th style="border-top: 1px dotted;"></th>
+                      </tr>
+                      <tr>
+                        <td style="font-weight:bold;">Venta Total:</td>
+                      </tr>
+                      <tr>
+                        <td><?php echo $totalVenta; ?></td>
                       </tr>
                       <tr>
                         <th style="border-top: 1px dotted;"></th>
