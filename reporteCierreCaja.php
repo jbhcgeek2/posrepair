@@ -115,21 +115,27 @@ if(!empty($_SESSION['usuarioPOS'])){
                     <thead>
                       <tr>
                         <th colspan="3" style="text-align:left;">Fecha de Venta. <?php echo date('d-m-Y'); ?></th>
+                        <th></th>
                       </tr>
                       <tr style="font-size:13px;">
                         <th colspan="3" style="font-weight:100;">Cliente - <?php echo $nombreCliente; ?></th>
+                        <th></th>
                       </tr>
                       <tr style="font-size:13px;">
                         <th colspan="3" style="font-weight:100;">Fecha y hora - <?php echo $fechaRegistro." - ".$horaRegistro; ?></th>
+                        <th></th>
                       </tr>
                       <tr style="font-size:13px;">
                         <th colspan="3" style="font-weight:100;">Empleado - <?php echo $nombreUsuario; ?></th>
+                        <th></th>
                       </tr>
                       <tr>
                         <th colspan="3" style="border-top: 1px solid;"></th>
+                        <th></th>
                       </tr>
                       <tr>
                         <th>Concentrado de Venta</th>
+                        <th></th>
                       </tr>
                       <tr>
                         <th colspan="3" style="border-top: 1px solid;"></th>
