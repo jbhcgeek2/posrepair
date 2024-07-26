@@ -148,7 +148,7 @@ session_start();
                                 echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>
                                 <div class='row text-center'>
                                   <div class='col-sm-12'>
-                                    <a href='#!' class='btn btn-success'>Ver Reporte</a>
+                                    <a href='#!' class='btn btn-warning'>Ver Reporte</a>
                                   </div>
                                 </div>";
                               }
