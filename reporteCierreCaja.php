@@ -149,7 +149,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <td colspan="2" style="text-align:right;">$<?php echo number_format($ventaEfectivo,2); ?></td>
                       </tr>
                       <tr>
-                        <th style="border-top: 1px dotted;"></th>
+                        <th colspan="2" style="border-top: 1px dotted;"></th>
                       </tr>
                       <tr>
                         <td colspan="2" style="font-weight:bold;">Venta Digital:</td>
