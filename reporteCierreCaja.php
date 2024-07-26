@@ -55,7 +55,7 @@ if(!empty($_SESSION['usuarioPOS'])){
               //se trata de un articulo
               $idArti = $fetch2['articuloID'];
               $sql3 = "SELECT a.nombreArticulo FROM ARTICULOS a WHERE 
-              a.idArticulo = '$idArti' AND empresaID = '$idEmprersa'";
+              a.idArticulo = '$idArti' AND a.empresaID = '$idEmprersa'";
               try {
                 $query3 = mysqli_query($conexion, $sql3);
                 $fetch3 = mysqli_fetch_assoc($query3);
