@@ -37,6 +37,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           $ventaDigital = 0;
           $numArticulos = 0;
           $totalVenta = 0;
+          $contenidoTabla = "";
 
           while($fetch2 = mysqli_fetch_assoc($query2)){
             $venta = $fetch2['subtotalVenta'];
@@ -47,6 +48,37 @@ if(!empty($_SESSION['usuarioPOS'])){
             }else{
               $ventaDigital = $ventaDigital + $venta;
             }
+
+            //consultamos las cosas vendidas
+            $nombreCosa = "";
+            if($fetch2['articuloID'] > 0){
+              //se trata de un articulo
+              $idArti = $fetch2['articuloID'];
+              $sql3 = "SELECT a.nombreArticulo FROM ARTICULOS a WHERE 
+              a.idArticulo = '$idArti' AND empresaID = '$idEmprersa'";
+              try {
+                $query3 = mysqli_query($conexion, $sql3);
+                $fetch3 = mysqli_fetch_assoc($query3);
+                $nombreCosa = $fetch3['nombreArticulo'];
+              } catch (\Throwable $th) {
+                //error al consultar el producto
+              }
+            }else{
+              //se trata de un servicio
+              $idTrabajo = $fetch2['trabajoID'];
+              $sql4 = "SELECT a.idTrabajo,b.nombreServicio FROM TRABAJOS a INNER JOIN SERVICIOS b 
+              ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idTrabajo'";
+              try {
+                $query4 = mysqli_query($conexion, $sql4);
+                $fetch4 = mysqli_fetch_assoc($query4);
+                $nombreCosa = $fetch4['nombreServicio'];
+              } catch (\Throwable $th) {
+                //throw $th;
+              }
+            }
+
+            $contenidoTabla = $contenidoTabla."
+            <tr><th>$nombreCosa - $".number_format($venta,2)."</th></tr>";
 
           }//fin del while detalleventa
 
@@ -82,7 +114,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   <table style="width:100%;">
                     <thead>
                       <tr>
-                        <th colspan="3" style="text-align:left;">Servicio No. <?php echo $numServ; ?></th>
+                        <th colspan="3" style="text-align:left;">Fecha de Venta. <?php echo date('d-m-Y'); ?></th>
                       </tr>
                       <tr style="font-size:13px;">
                         <th colspan="3" style="font-weight:100;">Cliente - <?php echo $nombreCliente; ?></th>
@@ -139,60 +171,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <th colspan="3" style="border-top: 1px solid;"></th>
                       </tr>
 
-
-                      <tr>
-                        <td style="font-weight:bold;">Observaciones:</td>
-                      </tr>
-                      <tr>
-                        <td><?php echo $observaciones; ?></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;">Accesorios:</td>
-                      </tr>
-                      <tr>
-                        <td><?php echo $accesorios; ?></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;">Costo Aproximado:</td>
-                      </tr>
-                      <tr>
-                        <td>$<?php echo $costoAprox; ?></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;">Anticipo:</td>
-                      </tr>
-                      <tr>
-                        <td>$<?php echo $anticipo; ?></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;">Fecha Estimada de entrega:</td>
-                      </tr>
-                      <tr>
-                        <td><?php echo $fechaEntrega; ?></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;text-align:center;">Condiciones del Servicio</td>
-                      </tr>
-                      <tr>
-                        <th style="text-align: justify;font-size:13px;font-weight:normal;">
-                          <?php echo $condicionesServicio; ?>
-                        </th>
-                      </tr>
+                      <?php echo $contenidoTabla; ?>
                         
                     </tbody>
                   </table>
