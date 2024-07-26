@@ -147,7 +147,9 @@ session_start();
                                 $controlCierre = "display:none;";
                                 echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>
                                 <div class='row text-center'>
-                                  <a href='#!' class='btn btn-success'>Ver Reporte</a>
+                                  <div class='col-sm-12'>
+                                    <a href='#!' class='btn btn-success'>Ver Reporte</a>
+                                  </div>
                                 </div>";
                               }
                             } catch (\Throwable $th) {
