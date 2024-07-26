@@ -77,7 +77,8 @@ if(!empty($_SESSION['usuarioPOS'])){
               }
             }
 
-            $contenidoTabla .= "<tr><th style='font-weight:normal;'>".strtolower($nombreCosa)." - $".number_format($venta,2)."</th></tr>";
+            $contenidoTabla .= "<tr><th style='font-weight:normal;'>".
+            strtolower($nombreCosa)."</th><th> $".number_format($venta,2)."</th></tr>";
 
           }//fin del while detalleventa
 
