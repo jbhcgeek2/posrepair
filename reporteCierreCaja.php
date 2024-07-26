@@ -105,10 +105,10 @@ if(!empty($_SESSION['usuarioPOS'])){
                     </thead>
                     <tbody style="text-align:left;">
                       <tr>
-                        <td style="font-weight:bold;">Venta Efectivo:</td>
+                        <td style="font-weight:bold;">Venta Efectivo: <?php echo number_format($ventaEfectivo,2); ?></td>
                       </tr>
                       <tr>
-                        <td><?php echo $ventaEfectivo; ?></td>
+                        <td><?php echo number_format($ventaEfectivo,2); ?></td>
                       </tr>
                       <tr>
                         <th style="border-top: 1px dotted;"></th>
@@ -117,7 +117,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <td style="font-weight:bold;">Venta Digital:</td>
                       </tr>
                       <tr>
-                        <td><?php echo $ventaDigital; ?></td>
+                        <td><?php echo number_format($ventaDigital,2); ?></td>
                       </tr>
                       <tr>
                         <th style="border-top: 1px dotted;"></th>
@@ -126,7 +126,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                         <td style="font-weight:bold;">Venta Total:</td>
                       </tr>
                       <tr>
-                        <td><?php echo $totalVenta; ?></td>
+                        <td><?php echo number_format($totalVenta,2); ?></td>
                       </tr>
                       <tr>
                         <th style="border-top: 1px dotted;"></th>
