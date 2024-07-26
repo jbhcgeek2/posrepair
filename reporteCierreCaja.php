@@ -143,37 +143,25 @@ if(!empty($_SESSION['usuarioPOS'])){
                     </thead>
                     <tbody style="text-align:left;">
                       <tr>
-                        <td style="font-weight:bold;">Venta Efectivo:</td>
-                        
+                        <td colspan="2" style="font-weight:bold;">Venta Efectivo:</td>
                       </tr>
                       <tr>
-                        <td style="text-align:right;">$<?php echo number_format($ventaEfectivo,2); ?></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td style="font-weight:bold;">Venta Digital:</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td style="text-align:right;">$<?php echo number_format($ventaDigital,2); ?></td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="2" style="text-align:right;">$<?php echo number_format($ventaEfectivo,2); ?></td>
                       </tr>
                       <tr>
                         <th style="border-top: 1px dotted;"></th>
-                        <td></td>
-                        <td></td>
                       </tr>
                       <tr>
-                        <td style="font-weight:bold;">Venta Total:</td>
-                        <td></td>
-                        <td></td>
+                        <td colspan="2" style="font-weight:bold;">Venta Digital:</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="text-align:right;">$<?php echo number_format($ventaDigital,2); ?></td>
+                      </tr>
+                      <tr>
+                        <th colspan="2" style="border-top: 1px dotted;"></th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-weight:bold;">Venta Total:</td>
                       </tr>
                       <tr>
                         <td colspan="2" style="text-align:right;">$<?php echo number_format($totalVenta,2); ?></td>
