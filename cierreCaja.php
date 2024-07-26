@@ -93,6 +93,10 @@ session_start();
                                 INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e ON d.servicioID = e.idServicio 
                                 WHERE c.ventaID = a.idVenta LIMIT 1) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
                                 '$idUsuario' AND a.empresaID = '$idEmprersa'";
+
+                                // $sqlMov3 = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                                // WHERE b.fechaVenta = '$fecha' AND b.usuarioID = '$idUsuario' 
+                                // AND a.sucursalID = '$idSucursalN'";
                                 
                                 try {
                                   $queryMov3 = mysqli_query($conexion, $sqlMov3);
@@ -141,7 +145,12 @@ session_start();
                               }else{
                                 //ya tiene realizado el cierre del dia en la sucursal
                                 $controlCierre = "display:none;";
-                                echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>";
+                                echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>
+                                <div class='row text-center'>
+                                  <div class='col-sm-12 mb-3'>
+                                    <a href='reporteCierreCaja.php' target='_blank' class='btn btn-danger'>Ver Reporte</a>
+                                  </div>
+                                </div>";
                               }
                             } catch (\Throwable $th) {
                               //error al consultar si existe el cierre del dia
