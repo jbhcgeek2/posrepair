@@ -128,9 +128,6 @@ if(!empty($_SESSION['usuarioPOS'])){
                       <tr>
                         <td style="text-align:right;">$<?php echo number_format($totalVenta,2); ?></td>
                       </tr>
-                      <tr>
-                        <th style="border-top: 1px dotted;"></th>
-                      </tr>
 
                       <tr>
                         <th colspan="3" style="border-top: 1px solid;"></th>
