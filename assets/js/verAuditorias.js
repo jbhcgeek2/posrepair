@@ -11,7 +11,17 @@ btnNuevaAudi.addEventListener('click', function(){
     console.log(result);
     if(result.isConfirmed){
       let passAudi = result.value;
-      console.log(passAudi);
+      
+      //generamos el formData
+      let datos = new FormData();
+      datos.append('autorization',passAudi);
+
+      let envio = new XMLHttpRequest();
+      envio.open('POST','../includes/operacionesAuditoria.php',false);
+      envio.send(datos);
+      
+
+      
     }
   })
 })
