@@ -16,6 +16,19 @@ if(!empty($_SESSION['usuarioPOS'])){
   $idSucursalN = $dataUSer->sucursalID;
   $idUsuario = $dataUSer->idUsuario;
 
+  //verificamos si el usuario solicitante es administrador
+  $tipoRol = verTipoUsuario($usuario);
+  $tipoUsuario = json_decode($tipoRol);
+  $rolUsuario = "";
+  // print_r($tipoUsuario);
+  if($tipoUsuario->status == "ok"){
+    $rolUsuario = $tipoUsuario->data;
+  }else{
+    $rolUsuario = "error";
+  }
+
+  echo $rolUsuario;
+
 
 }
 ?>

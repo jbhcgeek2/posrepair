@@ -19,6 +19,16 @@ btnNuevaAudi.addEventListener('click', function(){
       let envio = new XMLHttpRequest();
       envio.open('POST','../includes/operacionesAuditoria.php',false);
       envio.send(datos);
+
+      if(envio.status == 200){
+        console.log(envio.responseText);
+      }else{
+        Swal.fire(
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
       
 
       
