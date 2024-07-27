@@ -33,7 +33,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $clave = datoEmpresaSesion($usuario,"claveAudi");
       $clave = json_decode($clave);
       $claveAutori = $empresa->dato;
-
+      echo $claveAutori;
       $claveInput = $_POST['autorization'];
       //consultamos la clave de la empresa
 
