@@ -27,7 +27,39 @@ if(!empty($_SESSION['usuarioPOS'])){
     $rolUsuario = "error";
   }
 
-  echo $rolUsuario;
+  if($rolUsuario == "Administrador"){
+    if(!empty($_POST['autorization'])){
+      //tiene clace de autorizacion
+      $clave = datoEmpresaSesion($usuario,"claveAudi");
+      $clave = json_decode($clave);
+      $claveAutori = $empresa->dato;
+
+      $clave = $_POST['autorization'];
+      //consultamos la clave de la empresa
+
+      if($clave == $claveAutori){
+        //se autoriza la auditoria
+        //primero consultaremos los articulos y las existencias actuales
+        //y los amacenaremos en una tabla
+        $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND 
+        estatusArticulo = '0'";
+        try {
+          $query = mysqli_query($conexion, $sql);
+          while($fetch = mysqli_fetch_assoc($query)){
+            echo $fetch['nombreArticulo'];
+          }//fin del while
+        } catch (\Throwable $th) {
+          //throw $th;
+        }
+      }else{
+        $res = ['status'=>'error','mensaje'=>'Clave de autorizacion incorrecta.'];
+      }
+    }else{
+      $res = ['status'=>'error','mensaje'=>'Acceso Denegado'];
+    }
+  }else{
+    $res = ['status'=>'error','mensaje'=>'Acceso Denegado'];
+  }
 
 
 }

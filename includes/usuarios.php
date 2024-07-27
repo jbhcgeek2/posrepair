@@ -37,6 +37,9 @@
           case 'logo':
             $valor = $fetch['imgLogoEmpresa'];
             break;
+          case 'claveAudi':
+            $valor = $fetch['claveAuditoria'];
+            break;
           
           default:
             $valor = "error";
