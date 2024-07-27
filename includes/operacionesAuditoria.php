@@ -34,10 +34,10 @@ if(!empty($_SESSION['usuarioPOS'])){
       $clave = json_decode($clave);
       $claveAutori = $empresa->dato;
 
-      $clave = $_POST['autorization'];
+      $claveInput = $_POST['autorization'];
       //consultamos la clave de la empresa
 
-      if($clave == $claveAutori){
+      if($claveInput == $claveAutori){
         //se autoriza la auditoria
         //primero consultaremos los articulos y las existencias actuales
         //y los amacenaremos en una tabla
