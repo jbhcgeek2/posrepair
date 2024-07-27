@@ -31,8 +31,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     if(!empty($_POST['autorization'])){
       //tiene clace de autorizacion
       $claveEmpresa = datoEmpresaSesion($usuario,"claveAudi");
-      $clave = json_decode($clave);
-      $claveAutori = $clave->dato;
+      $claveEmpresa = json_decode($claveEmpresa);
+      $claveAutori = $claveEmpresa->dato;
       echo $claveAutori;
       $claveInput = $_POST['autorization'];
       //consultamos la clave de la empresa
