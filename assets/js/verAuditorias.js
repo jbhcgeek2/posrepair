@@ -21,7 +21,18 @@ btnNuevaAudi.addEventListener('click', function(){
       envio.send(datos);
 
       if(envio.status == 200){
-        console.log(envio.responseText);
+        // console.log(envio.responseText);
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          console.log(res);
+        }else{
+          //ocurrio un error
+          Swal.fire(
+            'Ha ocurrido un error',
+            res.mensaje,
+            'error'
+          )
+        }
       }else{
         Swal.fire(
           'Servidor Inalcansable',

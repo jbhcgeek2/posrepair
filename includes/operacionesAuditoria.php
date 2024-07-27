@@ -53,12 +53,15 @@ if(!empty($_SESSION['usuarioPOS'])){
         }
       }else{
         $res = ['status'=>'error','mensaje'=>'Clave de autorizacion incorrecta.'];
+        echo json_encode($res);
       }
     }else{
       $res = ['status'=>'error','mensaje'=>'Acceso Denegado'];
+      echo json_encode($res);
     }
   }else{
     $res = ['status'=>'error','mensaje'=>'Acceso Denegado'];
+    echo json_encode($res);
   }
 
 
