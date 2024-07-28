@@ -20,7 +20,7 @@
 			<?php
 		}
 		
-		validacion para comprobar la existencia de articulossucursal
+		// validacion para comprobar la existencia de articulossucursal
 		$sqlVal1 = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion'";
 		$queryVal1 = mysqli_query($conexion, $sqlVal1);
 		while($fetchVal1 = mysqli_fetch_assoc($queryVal1)){
