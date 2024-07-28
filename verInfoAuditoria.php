@@ -37,7 +37,7 @@ session_start();
             }//fin del for existencias
           }
         } catch (\Throwable $th) {
-          //throw $th;
+          echo $th;
         }
         
       }else{
