@@ -78,6 +78,7 @@ session_start();
                                   $usuarioIni = $fetch['usuarioInicia'];
                                   $estatus = "";
                                   $fechaTermino = "";
+                                  $idAudi = $fetch['idAuditoria'];
                                   if($fechaFin == "" || $fechaFin == null){
                                     $estatus = "En proceso";
                                     $fechaTermino = "N/A";
@@ -92,7 +93,7 @@ session_start();
                                     <td>$usuarioIni</td>
                                     <td>$fechaTermino</td>
                                     <td>
-                                      <a href='#!' class='btn-primary'>Ver</a>
+                                      <a href='verInfoAuditoria.php?data=$idAudi' class='btn btn-primary'>Ver</a>
                                     </td>
                                   </tr>";
                                 }//fin del while

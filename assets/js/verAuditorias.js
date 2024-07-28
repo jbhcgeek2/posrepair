@@ -24,7 +24,14 @@ btnNuevaAudi.addEventListener('click', function(){
         // console.log(envio.responseText);
         let res = JSON.parse(envio.responseText);
         if(res.status == "ok"){
-          console.log(res);
+          //proceso completado
+          Swal.fire(
+            'Auditoria Registrada',
+            'ya es posible validar los objetos',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
         }else{
           //ocurrio un error
           Swal.fire(
