@@ -21,7 +21,7 @@ session_start();
     try {
       $query1 = mysqli_query($conexion, $sql1);
       if(mysqli_num_rows($query1) == 1){
-        //si existe la auditoria, consultamos un resumen de articulos escaneados
+        //si existe la auditoria, consultamos lo existente
         $sql2 = "SELECT * FROM ARTICULOAUDITORIA WHERE auditoriaID = '$idAuditoria' 
         AND empresaID = '$idEmpresaSesion'";
         $articulosTotales = 0;
@@ -32,9 +32,9 @@ session_start();
             $auxExis = explode("|",$auxExis);
 
             for($x = 0; $x < count($auxExis); $x++){
-              echo $auxExis[$x]."<br>";
+              // echo $auxExis[$x]."<br>";
               $aux2 = explode("=",$auxExis[$x]);
-              echo $aux2[1]."<br>";
+              // echo $aux2[1]."<br>";
               if(empty($aux2[1])){
                 $suma = 0;
               }else{
@@ -46,6 +46,18 @@ session_start();
         } catch (\Throwable $th) {
           // echo $th;
         }
+
+        //consultamos los articulos validados
+        $sql3 = "SELECT count(*) AS artiValidados FROM DETALLEAUDITORIA WHERE auditoriaID = '$idAuditoria' 
+        AND empresaID = '$idEmpresaSesion'";
+        try {
+          $query3 = mysqli_query($conexion, $sql3);
+          $fetch3 = mysqli_fetch_assoc($query3);
+          $validados = $fetch3['artiValidados'];
+        } catch (\Throwable $th) {
+          //throw $th;
+        }
+
         
       }else{
         //no existe la auditoria
@@ -103,6 +115,17 @@ session_start();
                           <div class="app-card-body p-3 p-lg-4">
                             <h4 class="stats-type mb-1">Articulos Existentes</h4>
                             <div class="stats-figure"><?php echo number_format($articulosTotales,0); ?></div>
+                            
+                          </div><!--//app-card-body-->
+                          <a class="app-card-link-mask" href="#"></a>
+                        </div><!--//app-card-->
+                      </div><!--//col-->
+
+                      <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                          <div class="app-card-body p-3 p-lg-4">
+                            <h4 class="stats-type mb-1">Articulos Validados</h4>
+                            <div class="stats-figure"><?php echo number_format($validados,0); ?></div>
                             
                           </div><!--//app-card-body-->
                           <a class="app-card-link-mask" href="#"></a>
