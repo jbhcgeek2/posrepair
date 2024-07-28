@@ -149,7 +149,30 @@ session_start();
                 </div>
                 <div class="modal-body">
                   <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 col-md-4">
+                      <input type="hidden" id="auditoriaData" value="<?php echo $idAuditoria; ?>">
+                      <label for="sucurArti" class="form-label">Sucursal</label>
+                      <select name="" id="sucurArti" class="form-select">
+                        <option value="" selected>Seleccione</option>
+                        <?php 
+                          //consultamos las sucursales
+                          $sqlSuc = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' 
+                          AND estatusSuc = '1'";
+                          try {
+                            $querySuc = mysqli_query($conexion, $sqlSuc);
+                            while($fetchSuc = mysqli_fetch_assoc($querySuc)){
+                              $nombreSuc = $fetchSuc['nombreSuc'];
+                              $idSuc = $fetchSuc['idSucursal'];
+
+                              echo "<option value='$idSuc'>$nombreSuc</option>";
+                            }//fin while suc
+                          } catch (\Throwable $th) {
+                            //throw $th;
+                          }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="col-sm-12 col-md-8">
                       <label for="escanear" class="form-label">Escanear Codigo</label>
                       <input type="text" id="escanear" class="form-control">
                     </div>

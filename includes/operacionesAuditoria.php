@@ -124,6 +124,83 @@ if(!empty($_SESSION['usuarioPOS'])){
         $res = ['status'=>'error','mensaje'=>'Clave de autorizacion incorrecta.'];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['codigoEscaneo'])){
+      //seccion para validar objetos
+      $codigo = $_POST['codigoEscaneo'];
+      $idSucuCod = $_POST['sucurCodigo'];
+      $idAudi = $_POST['idAudiCod'];
+      $fecha = date('Y-m-d');
+      $hora = date('H:i:s');
+
+      //primero consultamos el codigo, si no existe es por que es un chip
+      $sql = "SELECT * FROM ARTICULOS WHERE codigoProducto = '$codigo' AND 
+      empresaID = '$idEmpresaSesion'";
+      try {
+        $query = mysqli_query($conexion, $sql);
+        if(mysqli_num_rows($query) == 1){
+          //es un articulo normal lo registramos
+          $fetch = mysqli_fetch_assoc($query);
+          $nombreArti = $fetch['nombreArticulo'];
+          $idArti = $fetch['idArticulo'];
+          $sql3 = "INSERT INTO DETALLEAUDITORIA (usuarioValida,
+          fechaValida,horaValida,codigoEscanea,sucursalID,empresaID,
+          auditoriaID,nombreArticulo,articuloID) VALUES ('$usuario',
+          '$fecha','$hora','$codigo','$idSucuCod','$idEmpresaSesion',
+          '$idAudi','$nombreArti','$idArti')";
+          try {
+            $query3 = mysqli_query($conexion, $sql3);
+            //se inserto la auditoria
+            $msn = "Articulo ".$nombreArti." Escaneado";
+            $res = ['status'=>'ok','mensaje'=>$msn];
+            echo json_encode($res);
+          } catch (\Throwable $th) {
+            //error al registrar la auditoria
+            $res = ['status'=>'error','mensaje'=>'Error al registrar la auditoria. '.$th];
+            echo json_encode($res);
+          }
+        }else{
+          //puede ser un chip, consultamos los chips
+          $sql2 = "SELECT * FROM DETALLECHIP a INNER JOIN ARTICULOS b ON 
+          a.productoID = b.idArticulo WHERE a.codigoChip = '$codigo' AND 
+          a.sucursalID = '$idSucuCod' AND a.empresaID = '$idEmpresaSesion'";
+          try {
+            $query2 = mysqli_query($conexion, $sql2);
+            if(mysqli_num_rows($query2) == 1){
+              //si existe el codigo, lo registramos
+              $fetch2 = mysqli_fetch_assoc($query2);
+              $nombreArti = $fetch2['nombreArticulo'];
+              $idArti = $fetch2['idArticulo'];
+              $sql4 = "INSERT INTO DETALLEAUDITORIA (usuarioValida,
+              fechaValida,horaValida,codigoEscanea,sucursalID,empresaID,
+              auditoriaID,nombreArticulo,articuloID) VALUES ('$usuario',
+              '$fecha','$hora','$codigo','$idSucuCod','$idEmpresaSesion',
+              '$idAudi','$nombreArti','$idArti')";
+              try {
+                $query4 = mysqli_query($conexion, $sql4);
+                $msn = "Articulo ".$nombreArti." Escaneado";
+                $res = ['status'=>'ok','mensaje'=>$msn];
+                echo json_encode($res);
+              } catch (\Throwable $th) {
+                //error al insertar el articulo
+                $res = ['status'=>'error','mensaje'=>'Error al registrar la auditoria. '.$th];
+                echo json_encode($res);
+              }
+            }else{
+              //no existe el codigo
+              $res = ['status'=>'error','mensaje'=>'Articulo no detectado'];
+              echo json_encode($res);
+            }
+          } catch (\Throwable $th) {
+            //error al consultar el codigo chip
+            $res = ['status'=>'error','mensaje'=>'Error al consultar chip. '.$th];
+            echo json_encode($res);
+          }
+        }
+      } catch (\Throwable $th) {
+        //error al consultar el articulo principal
+        $res = ['status'=>'error','mensaje'=>'Error al consultar el articulo'.$th];
+        echo json_encode($res);
+      }
     }else{
       $res = ['status'=>'error','mensaje'=>'Acceso Denegado'];
       echo json_encode($res);
