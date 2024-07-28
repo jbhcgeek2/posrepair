@@ -31,7 +31,7 @@ session_start();
             $auxExis = $fetch2['existenciaAudi'];
             $auxExis = explode("|",$auxExis);
             for($x = 0; $x < count($auxExis); $x++){
-
+              echo $auxExis;
               $aux2 = explode("=",$auxExis[$x]);
               $articulosTotales = $articulosTotales+$aux2[1];
             }//fin del for existencias
