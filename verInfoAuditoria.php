@@ -99,6 +99,7 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
+                          <a href="#!" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEscaneo">Escanear</a>
 									        <a href="verAuditorias.php">Ver Auditorias</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->
@@ -137,6 +138,30 @@ session_start();
 				        </div><!--//app-card-->
 			        </div><!--//col-->
           <hr class="my-4">
+
+
+          <div class="modal fade" id="modalEscaneo" tabindex="-1" aria-labelledby="modalEscaneoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Escanear Articulos</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label for="escanear">Escanear Codigo</label>
+                      <input type="text" id="escanear">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <a href="#!" class="btn btn-primary" id="btnTermina">Terminar</a>
+                </div>
+              </div>
+            </div>
+          </div>
         
 
 
@@ -157,7 +182,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/verInfoProv.js"></script>
+    <script src="assets/js/verInfoAuditoria.js"></script>
 </body>
 </html> 
 
