@@ -178,7 +178,7 @@ session_start();
                     </div>
                   </div>
 
-                  <div class="row" id="resMensaje"></div>
+                  <div class="row" style="text-align:center;" id="resMensaje"></div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
