@@ -28,7 +28,7 @@ session_start();
         try {
           $query2 = mysqli_query($conexion, $sql2);
           while($fetch2 = mysqli_fetch_assoc($query2)){
-            $auxExis = $fetch2['existenciaAudi'];
+            $auxExis = $fetch2['existenciasAudi'];
             $auxExis = explode("|",$auxExis);
             for($x = 0; $x < count($auxExis); $x++){
               echo $auxExis[$x];
