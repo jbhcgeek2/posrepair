@@ -33,7 +33,12 @@ session_start();
             for($x = 0; $x < count($auxExis); $x++){
               echo $auxExis[$x]."<br>";
               $aux2 = explode("=",$auxExis[$x]);
-              $articulosTotales = $articulosTotales+$aux2[1];
+              if(empty($aux2[1])){
+                $suma = 0;
+              }else{
+                $suma = $aux[1];
+              }
+              $articulosTotales = $articulosTotales+$suma;
             }//fin del for existencias
           }
         } catch (\Throwable $th) {
