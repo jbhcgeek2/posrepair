@@ -30,13 +30,15 @@ session_start();
           while($fetch2 = mysqli_fetch_assoc($query2)){
             $auxExis = $fetch2['existenciasAudi'];
             $auxExis = explode("|",$auxExis);
+
             for($x = 0; $x < count($auxExis); $x++){
               echo $auxExis[$x]."<br>";
               $aux2 = explode("=",$auxExis[$x]);
+              echo $aux2[1]."<br>";
               if(empty($aux2[1])){
                 $suma = 0;
               }else{
-                $suma = $aux[1];
+                $suma = $aux2[1];
               }
               $articulosTotales = $articulosTotales+$suma;
             }//fin del for existencias
