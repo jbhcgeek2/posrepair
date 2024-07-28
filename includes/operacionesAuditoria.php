@@ -82,7 +82,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                   if($existenciaArticulo == ""){
                     $existenciaArticulo = $datoExiste;
                   }else{
-                    $existenciaArticulo = "|".$datoExiste;
+                    $existenciaArticulo .= "|".$datoExiste;
                   }
                 }//fin del while articulo sucursal
 
