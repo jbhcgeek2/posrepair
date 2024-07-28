@@ -31,7 +31,7 @@ session_start();
             $auxExis = $fetch2['existenciasAudi'];
             $auxExis = explode("|",$auxExis);
             for($x = 0; $x < count($auxExis); $x++){
-              echo $auxExis[$x];
+              echo $auxExis[$x]."<br>";
               $aux2 = explode("=",$auxExis[$x]);
               $articulosTotales = $articulosTotales+$aux2[1];
             }//fin del for existencias
@@ -94,7 +94,7 @@ session_start();
                       <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
                           <div class="app-card-body p-3 p-lg-4">
-                            <h4 class="stats-type mb-1">Articulos Validados</h4>
+                            <h4 class="stats-type mb-1">Articulos Existentes</h4>
                             <div class="stats-figure"><?php echo number_format($articulosTotales,0); ?></div>
                             
                           </div><!--//app-card-body-->
