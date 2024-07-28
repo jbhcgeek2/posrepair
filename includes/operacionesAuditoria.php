@@ -49,7 +49,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           //primero consultaremos los articulos y las existencias actuales
           //y los amacenaremos en una tabla
           $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion' AND 
-          estatusArticulo = '0'";
+          estatusArticulo = '1'";
           //consultamos las sucursales de la empresa, para ver las existencias
           $sql2 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' AND
           estatusSuc = '1'";
