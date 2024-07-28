@@ -21,7 +21,24 @@ session_start();
     try {
       $query1 = mysqli_query($conexion, $sql1);
       if(mysqli_num_rows($query1) == 1){
-        //si existe la auditoria
+        //si existe la auditoria, consultamos un resumen de articulos escaneados
+        $sql2 = "SELECT * FROM ARTICULOAUDITORIA WHERE auditoriaID = '$idAuditoria' 
+        AND empresaID = '$idEmpresaSesion'";
+        $articulosTotales = 0;
+        try {
+          $query2 = mysqli_query($conexion, $sql2);
+          while($fetch2 = mysqli_fetch_assoc($query2)){
+            $auxExis = $fetch2['existenciaAudi'];
+            $auxExis = explode("|",$auxExis);
+            for($x = 0; $x < count($auxExis); $x++){
+
+              $aux2 = explode("=",$auxExis[$x]);
+              $articulosTotales = $articulosTotales+$aux2[1];
+            }//fin del for existencias
+          }
+        } catch (\Throwable $th) {
+          //throw $th;
+        }
         
       }else{
         //no existe la auditoria
@@ -74,7 +91,16 @@ session_start();
 					        <div class="app-card-body p-3 p-lg-4" id="">
       
                     <div class="row">
-                      
+                      <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                          <div class="app-card-body p-3 p-lg-4">
+                            <h4 class="stats-type mb-1">Articulos Validados</h4>
+                            <div class="stats-figure"><?php echo number_format($articulosTotales,0); ?></div>
+                            
+                          </div><!--//app-card-body-->
+                          <a class="app-card-link-mask" href="#"></a>
+                        </div><!--//app-card-->
+                      </div><!--//col-->
                     </div>
 
 					        </div><!--//app-card-body-->
