@@ -150,8 +150,8 @@ session_start();
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-sm-12">
-                      <label for="escanear">Escanear Codigo</label>
-                      <input type="text" id="escanear">
+                      <label for="escanear" class="form-label">Escanear Codigo</label>
+                      <input type="text" id="escanear" class="form-control">
                     </div>
                   </div>
                 </div>
