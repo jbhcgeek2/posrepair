@@ -18,7 +18,8 @@ inputEscaner.addEventListener('change', function(){
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
       if(res.status == "ok"){
-        document.getElementById('resMensaje').insertAdjacentHTML('afterbegin',res.mensaje);
+        let msn = "<p>"+res.mensaje+"</p>";
+        document.getElementById('resMensaje').insertAdjacentHTML('afterbegin',msn);
         document.getElementById('escanear').value= "";
       }else{
         Swal.fire(
