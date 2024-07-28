@@ -20,34 +20,34 @@
 			<?php
 		}
 		
-		//validacion para comprobar la existencia de articulossucursal
-		// $sqlVal1 = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion'";
-		// $queryVal1 = mysqli_query($conexion, $sqlVal1);
-		// while($fetchVal1 = mysqli_fetch_assoc($queryVal1)){
-		// 	//verificamos las sucursales para ver que existan
-		// 	$sqlVal3 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' AND
-		// 	estatusSuc = '1'";
-		// 	$queryVal3 = mysqli_query($conexion, $sqlVal3);
-		// 	while($fetchVal3 = mysqli_fetch_assoc($queryVal3)){
-		// 		$idSuc = $fetchVal3['idSucursal'];
-		// 		$idArticulo = $fetchVal1['idArticulo'];
-		// 		$sqlVal2 = "SELECT * FROM ARTICULOSUCURSAL WHERE articuloID = '$idArticulo' and sucursalID = '$idSuc'";
-		// 		$queryVal2 = mysqli_query($conexion, $sqlVal2);
-		// 		if(mysqli_num_rows($queryVal2) == 0){
-		// 			//el articulo no existe, por lo que lo tenemos que insertar
-		// 			$sqlInsert = "INSERT INTO ARTICULOSUCURSAL (articuloID,sucursalID,existenciaSucursal) 
-		// 			VALUES ('$idArticulo','$idSuc','0')";
-		// 			try {
-		// 				$queryInsert = mysqli_query($conexion, $sqlInsert);
-		// 				echo "Articulo Insertado";
-		// 			} catch (\Throwable $th) {
-		// 				echo "error: ".$th;
-		// 			}
-		// 		}
-		// 	}//fin del while val 3
+		validacion para comprobar la existencia de articulossucursal
+		$sqlVal1 = "SELECT * FROM ARTICULOS WHERE empresaID = '$idEmpresaSesion'";
+		$queryVal1 = mysqli_query($conexion, $sqlVal1);
+		while($fetchVal1 = mysqli_fetch_assoc($queryVal1)){
+			//verificamos las sucursales para ver que existan
+			$sqlVal3 = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' AND
+			estatusSuc = '1'";
+			$queryVal3 = mysqli_query($conexion, $sqlVal3);
+			while($fetchVal3 = mysqli_fetch_assoc($queryVal3)){
+				$idSuc = $fetchVal3['idSucursal'];
+				$idArticulo = $fetchVal1['idArticulo'];
+				$sqlVal2 = "SELECT * FROM ARTICULOSUCURSAL WHERE articuloID = '$idArticulo' and sucursalID = '$idSuc'";
+				$queryVal2 = mysqli_query($conexion, $sqlVal2);
+				if(mysqli_num_rows($queryVal2) == 0){
+					//el articulo no existe, por lo que lo tenemos que insertar
+					$sqlInsert = "INSERT INTO ARTICULOSUCURSAL (articuloID,sucursalID,existenciaSucursal) 
+					VALUES ('$idArticulo','$idSuc','0')";
+					try {
+						$queryInsert = mysqli_query($conexion, $sqlInsert);
+						echo "Articulo Insertado";
+					} catch (\Throwable $th) {
+						echo "error: ".$th;
+					}
+				}
+			}//fin del while val 3
 
 			
-		// }//fin del while
+		}//fin del while
 
 
 
