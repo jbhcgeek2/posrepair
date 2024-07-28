@@ -106,6 +106,10 @@ if(!empty($_SESSION['usuarioPOS'])){
               }
 
             }//fin del while articulos
+            //si llega hasta aqui es por que se termino de registrar todos
+            $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+            echo json_encode($res);
+
           } catch (\Throwable $th) {
             //error al consultar los articulos
             $res = ['status'=>'error','mensaje'=>'Error al consultar los articulos: '.$th];
