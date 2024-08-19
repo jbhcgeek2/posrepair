@@ -206,8 +206,9 @@ session_start();
 
                 <!-- Seccion para cobrar trabajos -->
                 <h4 class="app-card-title">Servicios listo para cobro</h4>
+                <div style="max-height:110px;overflow-y: scroll;">
 
-                <table class="table table-striped" style="height: 110px;overflow-y: scroll;">
+                <table class="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">Folio</th>
@@ -217,7 +218,7 @@ session_start();
                       <th scope="col">Monto</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody >
                     <?php 
                       //consultaremos los trabajos que estan listos para su cobro
                       // $sqlTrab = "SELECT a.*,b.nombreCliente FROM TRABAJOS a INNER JOIN CLIENTES b 
@@ -261,6 +262,7 @@ session_start();
                     ?>
                   </tbody>
                 </table>
+                </div>
 
                 <hr class="my-4">
 
