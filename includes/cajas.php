@@ -1285,7 +1285,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             }
           }else{
             //ya se encuentra agregado, 
-            $respuesta = "DataError+-_-+El servicio ya se encuentra en el carrito";
+            $respuesta = "DataError+-_-+El servicio ya se encuentra en el carrito.";
             echo $respuesta;
           }
         } catch (\Throwable $th) {

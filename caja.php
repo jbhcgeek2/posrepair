@@ -207,7 +207,7 @@ session_start();
                 <!-- Seccion para cobrar trabajos -->
                 <h4 class="app-card-title">Servicios listo para cobro</h4>
 
-                <table class="table table-striped">
+                <table class="table table-striped" style="height: 110px;overflow-y: scroll;">
                   <thead>
                     <tr>
                       <th scope="col">Folio</th>
