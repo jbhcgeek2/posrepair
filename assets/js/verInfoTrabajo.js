@@ -648,7 +648,7 @@ function updateCosto(){
 let inputComent = document.getElementById('newComent');
 inputComent.addEventListener('change', function(){
   //metodo para inserta un comentario en el trabajo
-  if(inputComent.length.trim() > 2){
+  if(inputComent.length > 2){
     //no preguntamos e insertamos el comentario de manera directa
     let datos = new FormData();
     let idTrab = document.getElementById('datoTrabajo').value;
