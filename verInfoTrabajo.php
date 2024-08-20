@@ -282,7 +282,7 @@ session_start();
                         </div>
 
                         <div class="col-sm-12 col-md-6 mb-3">  
-                          <label class="form-label">Observaciones</label>
+                          <label class="form-label">Observacion Inicial</label>
                           <textarea name="observServicio" id="observServicio" style="height:70px;"
                           class="form-control" readonly><?php echo $observaciones; ?></textarea>
                         </div>
@@ -291,6 +291,11 @@ session_start();
                           <label for="solucionTrabajo" class="form-label">Solucion</label>
                           <input type="text" id="solucionTrabajo" name="solucionTrabajo" style="background-color:#c8e6c9;" 
                           class="form-control">
+                        </div>
+
+                        <div class="col-sm-12 mb-4">
+                          <label for="newComent" class="form-label">Nuevo Comentario</label>
+                          <input type="text" id="newComent" class="form-control">
                         </div>
                         
                       </form>
@@ -360,6 +365,56 @@ session_start();
                           //throw $th;
                         }
                       ?>
+                    </div>
+
+                    <div class="row">
+                      <hr class="my-4">
+                      <h4 class="fw-bold">Comentarios del Trabajo</h4>
+                      <br>
+
+                      <div class="col-sm-12">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Fecha</th>
+                              <th>Usuario</th>
+                              <th>Comentario</th>
+                            </tr>
+                          </thead>
+                          <tbody id="resComentarios">
+                            <?php
+                              //consultamos los comentarios
+                              $sqlCom = "SELECT * FROM COMENTARIOSTRABAJOS WHERE trabajoID = '$idTicket'
+                              ORDER BY idComentario DESC";
+                              try {
+                                $queryCom = mysqli_query($conexion, $sqlCom);
+                                if(mysqli_num_rows($queryCom) > 0){
+                                  while($fetchCom = mysqli_fetch_assoc($queryCom)){
+                                    $comentario = $fetchCom['comentario'];
+                                    $usuario = $fetchCom['usuarioComentario'];
+                                    $fecha = $fetchCom['fechaComentario'];
+  
+                                    echo "<tr>
+                                      <td>$fecha</td>
+                                      <td>$usuario</td>
+                                      <td>$comentario</td>
+                                    </tr>";
+                                  }//fin del while
+                                }else{
+                                  //sin comentarios
+                                  echo "<tr>
+                                    <td colspan='3'>SIN COMENTARIOS AGREGADOS</td>
+                                  </tr>";
+                                }
+                              } catch (\Throwable $th) {
+                                echo "<tr>
+                                  <td colspan='3'>ERROR DE CONSULTA</td>
+                                </tr>";
+                              }
+                            ?>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
 
                     <div class="modal fade" id="modalPieza" tabindex="-1" data-bs-backdrop="static" 
@@ -523,7 +578,7 @@ session_start();
                                 <label for="costoFinal" class="form-label">Costo Final</label>
                                 <div class="input-group">
                                   <span class="input-group-text">$</span>
-                                  <input type="number" id="costoFinal" class="form-control">
+                                  <input type="number" id="costoFinal" class="form-control" value="<?php echo $costoIni; ?>">
                                 </div>
                               </div>
                             </div>

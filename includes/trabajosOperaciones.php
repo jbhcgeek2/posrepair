@@ -470,6 +470,46 @@
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el costo: '.$th];
         echo json_encode($res);
       }
+    }elseif(!empty($_POST['newComent'])){
+      //seccion para insertar un comentario en los trabajos
+      $idTrabajo = $_POST['comentDataId'];
+      $comentario = $_POST['newComent'];
+      $fecha = date('Y-m-d');
+      $hora = date('H:i:s');
+
+      //verificamos si tiene todos los datos
+      if(!empty($idTrabajo) && !empty($comentario)){
+        $sql = "INSERT INTO COMENTARIOSTRABAJOS (fechaComentario,usuarioComentario,
+        empresaID,comentario,horaComentario,trabajoID) VALUES ('$fecha','$usuario',
+        '$idEmpresaSesion','$comentario','$hora','$idTrabajo')";
+        try {
+          $query = mysqli_query($conexion, $sql);
+          //si se inserto consultamos los comentario para mostrarlos
+          $sql2 = "SELECT * FROM COMENTARIOSTRABAJOS WHERE trabajoID = '$idTrabajo' 
+          ORDER BY idComentario DESC";
+          try {
+            $query2 = mysqli_query($conexion, $sql2);
+            $data = [];
+            $x = 0;
+            while($fetch2 = mysqli_fetch_assoc($query2)){
+              $data[$x] = $fetch2;
+              $x++;
+            }//fin del while
+            $res = ['status'=>'ok','data'=>$data,'mensaje'=>'operationComplete'];
+            echo json_encode($res);
+          } catch (\Throwable $th) {
+            $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los comentario.'];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el comentario.'];
+          echo json_encode($res);
+        }
+      }else{
+        //sin datos
+        $res = ['status'=>'error','mensaje'=>'No se detectaron los datos.'];
+        echo json_encode($res);
+      }
     }
   }
 ?>

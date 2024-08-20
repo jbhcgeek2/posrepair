@@ -644,3 +644,43 @@ function updateCosto(){
       })
   }
 }
+
+let inputComent = document.getElementById('newComent');
+inputComent.addEventListener('change', function(){
+  //metodo para inserta un comentario en el trabajo
+  if(inputComent.length.trim() > 2){
+    //no preguntamos e insertamos el comentario de manera directa
+    let datos = new FormData();
+    let idTrab = document.getElementById('datoTrabajo').value;
+    datos.append('newComent',inputComent.value);
+    datos.append('comentDataId',idTrab);
+
+    let envio = new XMLHttpRequest();
+    envio.open('POST','../includes/trabajosOperaciones.php',false);
+    envio.send(datos);
+
+    if(envio.status == 200){
+      let res = JSON.parse(envio.responseText);
+      if(res.status == "ok"){
+        //si todo salio bien, mostramos los comentarios
+        for (let x = 0; x < res.data.length; x++) {
+          
+        }//fin del for
+      }else{
+        Swal.fire(
+          'Ha ocurrido un error',
+          res.mensaje,
+          'error'
+        )
+      }
+    }else{
+      //ocurrio un error
+      Swal.fire(
+        'Servidor Inalcansable',
+        'Ha ocurrido un error al tratar de insertar el comentario.',
+        'error'
+      )
+    }
+
+  }
+})
