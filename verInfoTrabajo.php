@@ -373,7 +373,7 @@ session_start();
                       <br>
 
                       <div class="col-sm-12">
-                        <table>
+                        <table class="table">
                           <thead>
                             <tr>
                               <th>Fecha</th>
