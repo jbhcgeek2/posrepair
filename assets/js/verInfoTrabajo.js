@@ -663,9 +663,21 @@ inputComent.addEventListener('change', function(){
       let res = JSON.parse(envio.responseText);
       if(res.status == "ok"){
         //si todo salio bien, mostramos los comentarios
+        let contenido = '';
         for (let x = 0; x < res.data.length; x++) {
-          
+          let fecha = res.data[x]['fechaComentario'];
+          let usuarioCom = res.data[x]['usuarioComentario'];
+          let comentario = res.data[x]['comentario'];
+
+          contenido = contenido+`<tr>
+            <td>${fecha}</td>
+            <td>${usuarioCom}</td>
+            <td>${comentario}</td>
+          </tr>`;
         }//fin del for
+        //insertamos el comentario
+
+        document.getElementById('resComentarios').innerHTML = contenido;
       }else{
         Swal.fire(
           'Ha ocurrido un error',
