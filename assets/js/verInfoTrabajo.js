@@ -679,7 +679,7 @@ inputComent.addEventListener('change', function(){
 
         document.getElementById('resComentarios').innerHTML = contenido;
         //regrtesamos el campo limpio
-        inputComent.value = "";
+        document.getElementById('newComent').value = "";
       }else{
         Swal.fire(
           'Ha ocurrido un error',
