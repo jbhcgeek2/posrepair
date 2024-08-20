@@ -678,6 +678,8 @@ inputComent.addEventListener('change', function(){
         //insertamos el comentario
 
         document.getElementById('resComentarios').innerHTML = contenido;
+        //regrtesamos el campo limpio
+        inputComent.value = "";
       }else{
         Swal.fire(
           'Ha ocurrido un error',
