@@ -146,6 +146,7 @@ session_start();
                                   $queryExt = mysqli_query($conexion, $sqlExt);
                                   $fetchExt = mysqli_fetch_assoc($queryExt);
                                   $nombreCosa =  $fetchExt['nombreArticulo'];
+                                  $nombreCosa = strtoupper($nombreCosa);
                                 }else{
                                   //es un servicio
                                   $idServ = $fetch['trabajoID'];
@@ -155,6 +156,7 @@ session_start();
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
                                   $nombreCosa = $fetchExt2['nombreServicio']." - ".$fetchExt2['marca']." ".$fetchExt2['modelo'];
+                                  $nombreCosa = strtoupper($nombreCosa);
                                   $claseTR = 'table-success';
                                 }
 
