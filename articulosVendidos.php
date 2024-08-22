@@ -64,55 +64,59 @@ session_start();
 
                     <hr clas="my-4">
 
-                    <h5>Se muestran los articulos vendidos el dia: <?php echo $fechaAyer; ?></h5>
+                    <h5 id="tituloFiltro">Se muestran los articulos vendidos el dia: <?php echo $fechaAyer; ?></h5><br>
 
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Producto</th>
-                          <th>Cantidad</th>
-                        </tr>
-                      </thead>
-                      <tbody id="bodyTableReport">
-                        <?php 
-                          
-                          $fecha = date('Y-m-d');
-                          //consultamos los productos vendidos del dia de ayer
-                          $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
-                          d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
-                          ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
-                          IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
-                          try {
-                            $query = mysqli_query($conexion,$sql);
-                            if(mysqli_num_rows($query) > 0){
-                              while($fetch = mysqli_fetch_assoc($query)){
-                                $articulo = strtoupper($fetch['nombreArticulo']);
-                                $articulo = str_replace('&NTILDE;','Ñ',$articulo);
-                                $vendidos = $fetch['vendidos'];
+                    <div style="max-height:500px;overflow-y: scroll;">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="bodyTableReport">
+                          <?php 
+                            
+                            $fecha = date('Y-m-d');
+                            //consultamos los productos vendidos del dia de ayer
+                            $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+                            d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+                            ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
+                            IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+                            try {
+                              $query = mysqli_query($conexion,$sql);
+                              if(mysqli_num_rows($query) > 0){
+                                while($fetch = mysqli_fetch_assoc($query)){
+                                  $articulo = strtoupper($fetch['nombreArticulo']);
+                                  $articulo = str_replace('&NTILDE;','Ñ',$articulo);
+                                  $vendidos = $fetch['vendidos'];
 
+                                  echo "<tr>
+                                    <td>$articulo</td>
+                                    <td>$vendidos</td>
+                                  </tr>";
+                                }//fin del while articulos agrupados
+                              }else{
+                                //sin articulos vendidos
                                 echo "<tr>
-                                  <td>$articulo</td>
-                                  <td>$vendidos</td>
+                                  <td colspan='2'>SIN ARTICULOS VENDIDOS</td>
                                 </tr>";
-                              }//fin del while articulos agrupados
-                            }else{
-                              //sin articulos vendidos
+                              }
+                            } catch (\Throwable $th) {
+                              //error al consultar los articulos agrupados
                               echo "<tr>
-                                <td colspan='2'>SIN ARTICULOS VENDIDOS</td>
-                              </tr>";
+                                  <td colspan='2'>$th</td>
+                                </tr>";
                             }
-                          } catch (\Throwable $th) {
-                            //error al consultar los articulos agrupados
-                            echo "<tr>
-                                <td colspan='2'>$th</td>
-                              </tr>";
-                          }
-                          
+                            
 
-                          
-                        ?>
-                      </tbody>
-                    </table>
+                            
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    
 
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
