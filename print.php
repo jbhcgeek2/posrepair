@@ -46,7 +46,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $nombre = $fetchUs['nombreUsuario']." ".$fetchUs['apPaternoUsuario']." ".$fetchUs['apMaternoUsuario'];
       $usuarioVenta = strtoupper($nombre);
     }else{
-      $usuarioVenta = $nombreUsuario;
+      $usuarioVenta = strtoupper($nombreUsuario);
     }
     
     if($cliente == 1){
