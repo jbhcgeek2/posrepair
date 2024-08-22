@@ -14,7 +14,7 @@ session_start();
     include("includes/conexion.php");
     include("includes/articulos.php");
     include("includes/ventas.php");
-    
+    $fechaAyer = date('Y-m-d', strtotime('-1 day'));
   ?>
     
     <div class="app-wrapper">
@@ -64,6 +64,8 @@ session_start();
 
                     <hr clas="my-4">
 
+                    <h5>Se muestran los articulos vendidos el dia: <?php echo $fechaAyer; ?></h5>
+
                     <table class="table">
                       <thead>
                         <tr>
@@ -75,7 +77,6 @@ session_start();
                         <?php 
                           
                           $fecha = date('Y-m-d');
-                          $fechaAyer = date('Y-m-d', strtotime('-1 day'));
                           //consultamos los productos vendidos del dia de ayer
                           $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
                           d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
