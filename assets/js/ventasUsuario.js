@@ -51,7 +51,7 @@ btnBuscar.addEventListener('click', function(){
 
             contenido = contenido+`<tr class='${classTr}'>
               <td>${fecha}</td>
-              <td>${prod}</td>
+              <td>${prod.toUpperCase()}</td>
               <td>${cant}</td>
               <td>${auxMontoFormato}</td>
               <td>${sucursal}</td>
