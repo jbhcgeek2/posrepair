@@ -289,7 +289,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $queryAux2 = mysqli_query($conexion, $sqlAux2);
             $fetchAux2 = mysqli_fetch_assoc($queryAux2);
             $data[$x] = $fetch;
-            $data[$x] = $fetchAux2;
+            $data[$x]['dataArticulo'] = $fetchAux2;
           }else{
             //es trabajo, lo consultamos
             $sqlAux3 = "SELECT a.idTrabajo,a.marca,a.modelo,b.nombreServicio 
@@ -298,7 +298,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             $queryAux3 = mysqli_query($conexion, $sqlAux3);
             $fetchAux3 = mysqli_fetch_assoc($queryAux3);
             $data[$x] = $fetch;
-            $data[$x] = $fetchAux3;  
+            $data[$x]['dataTrabajo'] = $fetchAux3;
           }
           // $data[$x] = $fetch;
           $x++;
