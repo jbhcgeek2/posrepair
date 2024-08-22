@@ -102,7 +102,7 @@ session_start();
                     <h5>Articulos Vendidos: <span class='stext-success fw-bold' id='totArti'></span> </h5>
                     <h5>Total de Venta: <span class='text-success fw-bold' id='totVenta'></span></h5>
 
-                    <div class="row" style="height:600px;overflow-y:scroll;">
+                    <div class="row" style="height:500px;overflow-y:scroll;">
                       <table class="table">
                         <thead>
                           <tr>
