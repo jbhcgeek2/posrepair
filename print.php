@@ -39,8 +39,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     $idUsuarioVenta = $venta->venta->usuarioID;
     //consultamos el usuario de venta
     $sqlUs = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuarioVenta'";
+    $queryUs = mysqli_query($conexion, $sqlUs);
     if(mysqli_num_rows($queryUs) == 1){
-      $queryUs = mysqli_query($conexion, $sqlUs);
       $fetchUs = mysqli_fetch_assoc($queryUs);
 
       $nombre = $fetchUs['nombreUsuario']." ".$fetchUs['apPaternoUsuario']." ".$fetchUs['apMaternoUsuario'];
