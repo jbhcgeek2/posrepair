@@ -51,7 +51,7 @@ function getTotalArti($usuario,$sucursal){
   }
 }
 
-function verTicket($ticket,$idUsuario){
+function verTicket($ticket,$idUsuario){ 
   require('conexion.php');
   $res = [];
   if(!$conexion){
@@ -61,7 +61,7 @@ function verTicket($ticket,$idUsuario){
     }
   }
 
-  $sql = "SELECT * FROM VENTAS WHERE idVenta = '$ticket' AND usuarioID = '$idUsuario'";
+  $sql = "SELECT * FROM VENTAS WHERE idVenta = '$ticket' AND empresaID = '$idUsuario'";
   try {
     $query = mysqli_query($conexion, $sql);
     $fetch = mysqli_fetch_assoc($query);

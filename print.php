@@ -25,7 +25,7 @@ if(!empty($_SESSION['usuarioPOS'])){
   $nombreEmpresa = json_decode($nombreEmpresa)->dato;
 
   //verificamos que la venta exista
-  $venta = verTicket($ticket,$idUsuario);
+  $venta = verTicket($ticket,$idEmprersa);
   $venta = json_decode($venta);
   // print_r($venta);
 
