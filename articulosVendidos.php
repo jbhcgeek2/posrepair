@@ -80,7 +80,7 @@ session_start();
                           $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
                           d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
                           ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
-                          IS NOT NULL GROUP BY a.articuloID";
+                          IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
                           try {
                             $query = mysqli_query($conexion,$sql);
                             if(mysqli_num_rows($query) > 0){
