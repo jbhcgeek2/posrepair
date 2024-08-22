@@ -53,7 +53,7 @@ session_start();
                       <input type="hidden" name="clienteTrabajo" id="clienteTrabajo" value="">
                       <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="NombreclienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
-                          <input type="text" id="NombreclienteTrabajo" name="NombreclienteTrabajo" list="clienteList" class="form-control">
+                          <input type="text" id="NombreclienteTrabajo" name="NombreclienteTrabajo" list="clienteList" class="form-control" autocomplete="off">
                             <datalist id="clienteList">
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
