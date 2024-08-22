@@ -282,22 +282,22 @@ if(!empty($_SESSION['usuarioPOS'])){
         while($fetch = mysqli_fetch_assoc($query)){
           //verificamos si es trabajo o articulo
           $tipoV = "";
+          $data[$x] = $fetch;
           if($fetch['articuloID'] != null){
             //es articulo, lo consultamos
             $idArti = $fetch['articuloID'];
             $sqlAux2 = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idArti'";
             $queryAux2 = mysqli_query($conexion, $sqlAux2);
             $fetchAux2 = mysqli_fetch_assoc($queryAux2);
-            $data[$x] = $fetch;
             $data[$x]['dataArticulo'] = $fetchAux2;
           }else{
             //es trabajo, lo consultamos
+            $idTrabajo = $fetch['trabajoID'];
             $sqlAux3 = "SELECT a.idTrabajo,a.marca,a.modelo,b.nombreServicio 
             FROM TRABAJOS a INNER JOIN SERVICIOS b 
-            ON a.servicioID = b.idServicio WHERE a.idTrabajo";
+            ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idTrabajo'";
             $queryAux3 = mysqli_query($conexion, $sqlAux3);
             $fetchAux3 = mysqli_fetch_assoc($queryAux3);
-            $data[$x] = $fetch;
             $data[$x]['dataTrabajo'] = $fetchAux3;
           }
           // $data[$x] = $fetch;
