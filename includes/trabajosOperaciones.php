@@ -8,6 +8,7 @@
     include("usuarios.php");
     include("trabajos.php");
     include("articulos.php");
+    include("cliente.php");
 
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
@@ -136,7 +137,7 @@
               }
             }else{
               //no se indico un cliente correcto
-              $res =['status'=>'error','mensaje'=>'Asegurate de seleccionar el clinete de manera correcta.'];
+              $res =['status'=>'error','mensaje'=>'Asegurate de seleccionar el cliente de manera correcta.'];
               echo json_encode($res);
             }
           }else{
