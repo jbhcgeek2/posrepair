@@ -33,12 +33,14 @@ btnBuscar.addEventListener('click', function(){
             if(res.data[z].articuloID != null){
               //obtenemos los datos del articulo
               prod = res.data[z]['dataArticulo'].nombreArticulo;
+              prod.toUpperCase();
               classTr = "";
             }else{
               //obtenemos los datos del trabajo
               let auxMarca = res.data[z]['dataTrabajo'].marca;
               let auxMod = res.data[z]['dataTrabajo'].modelo;
               prod = res.data[z]['dataTrabajo'].nombreServicio+" "+auxMarca+" "+auxMod;
+              prod.toUpperCase();
               classTr = "table-success";
             }
             let cant = parseInt(res.data[z].cantidadVenta);
@@ -51,7 +53,7 @@ btnBuscar.addEventListener('click', function(){
 
             contenido = contenido+`<tr class='${classTr}'>
               <td>${fecha}</td>
-              <td>${prod.toUpperCase()}</td>
+              <td>${prod}</td>
               <td>${cant}</td>
               <td>${auxMontoFormato}</td>
               <td>${sucursal}</td>
