@@ -86,7 +86,7 @@ session_start();
                             if(mysqli_num_rows($query) > 0){
                               while($fetch = mysqli_fetch_assoc($query)){
                                 $articulo = strtoupper($fetch['nombreArticulo']);
-                                $articulo = str_replace('&NTILDE;','Ñ'$articulo);
+                                $articulo = str_replace('&NTILDE;','Ñ',$articulo);
                                 $vendidos = $fetch['vendidos'];
 
                                 echo "<tr>
