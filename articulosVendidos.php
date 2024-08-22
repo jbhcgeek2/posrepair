@@ -85,7 +85,8 @@ session_start();
                             $query = mysqli_query($conexion,$sql);
                             if(mysqli_num_rows($query) > 0){
                               while($fetch = mysqli_fetch_assoc($query)){
-                                $articulo = html_entity_decode(strtoupper($fetch['nombreArticulo']));
+                                $articulo = strtoupper($fetch['nombreArticulo']);
+                                $articulo = html_entity_decode($articulo);
                                 $vendidos = $fetch['vendidos'];
 
                                 echo "<tr>
