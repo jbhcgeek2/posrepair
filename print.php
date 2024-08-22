@@ -36,6 +36,19 @@ if(!empty($_SESSION['usuarioPOS'])){
     $ticketNo = $venta->venta->num_comprobante;
     //para obtener los datos del cliente
     $cliente = $venta->venta->clienteID;
+    $idUsuario = $venta->venta->usuarioID;
+    //consultamos el usuario de venta
+    $sqlUs = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuario'";
+    if(mysqli_num_rows($queryUs) == 1){
+      $queryUs = mysqli_query($conexion, $sqlUs);
+      $fetchUs = mysqli_fetch_assoc($queryUs);
+
+      $nombre = $fetchUs['nombreUsuario']." ".$fetchUs['apPaternoUsuario']." ".$fetchUs['apMaternoUsuario'];
+      $usuarioVenta = strtoupper($nombre);
+    }else{
+      $usuarioVenta = $nombreUsuario;
+    }
+    
     if($cliente == 1){
       //publico en general
       $cliente = "Publico en General";
@@ -77,7 +90,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 <th colspan="3" style="font-weight:100;">Fecha y hora - <?php echo $fechaHora; ?></th>
               </tr>
               <tr style="font-size:13px;">
-                <th colspan="3" style="font-weight:100;">Cajero - <?php echo $nombreUsuario; ?></th>
+                <th colspan="3" style="font-weight:100;">Cajero - <?php echo $usuarioVenta; ?></th>
               </tr>
               <tr>
                 <th colspan="3" style="border-top: 1px solid;"></th>
