@@ -36,9 +36,9 @@ if(!empty($_SESSION['usuarioPOS'])){
     $ticketNo = $venta->venta->num_comprobante;
     //para obtener los datos del cliente
     $cliente = $venta->venta->clienteID;
-    $idUsuario = $venta->venta->usuarioID;
+    $idUsuarioVenta = $venta->venta->usuarioID;
     //consultamos el usuario de venta
-    $sqlUs = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuario'";
+    $sqlUs = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuarioVenta'";
     if(mysqli_num_rows($queryUs) == 1){
       $queryUs = mysqli_query($conexion, $sqlUs);
       $fetchUs = mysqli_fetch_assoc($queryUs);
