@@ -55,8 +55,14 @@ session_start();
       $claseFinalizado2 = '';
       if($estatusTrab == "Finalizado" || $estatusTrab == "Cancelado"){
         //si esta finalizado o cancelado, ya no se podra modificar
-        $claseFinalizado = 'disabled';
-        $claseFinalizado2 = 'style="display:none;"';
+        if($rolUsuario == "Administrador" || $rolUsuario == "Tecnico"){
+          $claseFinalizado = '';
+          $claseFinalizado2 = '';
+        }else{
+          $claseFinalizado = 'disabled';
+          $claseFinalizado2 = 'style="display:none;"';
+        }
+        
         ?>
         <script src="assets/js/swetAlert.js"></script>
         <script>
@@ -157,7 +163,7 @@ session_start();
                                   echo "<option value='".$estatus[$i]."' selected>".$estatus[$i]."</option>";
                                 }else{
                                   if($estatus[$i] == "Finalizado"){
-                                    echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
+                                    echo "<option value='".$estatus[$i]."' disabled>".$estatus[$i]."</option>";
                                   }else{
                                     echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
                                   }
