@@ -49,7 +49,7 @@ btnBuscar.addEventListener('click', function(){
 
             let auxMontoFormato = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
-            contenido = contenido+`<tr class="${classTr}">
+            contenido = contenido+`<tr class='${classTr}'>
               <td>${fecha}</td>
               <td>${prod}</td>
               <td>${cant}</td>
