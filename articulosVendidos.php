@@ -67,13 +67,9 @@ session_start();
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Fecha</th>
                           <th>Producto</th>
                           <th>Cantidad</th>
                           <th>Total</th>
-                          <th>Usuario</th>
-                          <th>Sucursal</th>
-                          <th>Ticket</th>
                         </tr>
                       </thead>
                       <tbody id="bodyTableReport">
