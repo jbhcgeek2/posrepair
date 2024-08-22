@@ -48,11 +48,11 @@ btnBuscar.addEventListener('click', function(){
             totalArti = totalArti+cant;
 
             let auxMontoFormato = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            prod = prod.toUpperCase();
+            let prodName = prod.toUpperCase();
 
             contenido = contenido+`<tr class='${classTr}'>
               <td>${fecha}</td>
-              <td>${prod}</td>
+              <td>${prodName}</td>
               <td>${cant}</td>
               <td>${auxMontoFormato}</td>
               <td>${sucursal}</td>
