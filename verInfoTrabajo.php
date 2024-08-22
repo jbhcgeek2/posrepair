@@ -157,11 +157,7 @@ session_start();
                                   echo "<option value='".$estatus[$i]."' selected>".$estatus[$i]."</option>";
                                 }else{
                                   if($estatus[$i] == "Finalizado"){
-                                    if($rolUsuario == "Administrador" || $rolUsuario == "Tecnico"){
-                                      echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
-                                    }else{
-                                      echo "<option value='".$estatus[$i]."' disabled>".$estatus[$i]."</option>";
-                                    }
+                                    echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
                                   }else{
                                     echo "<option value='".$estatus[$i]."'>".$estatus[$i]."</option>";
                                   }
