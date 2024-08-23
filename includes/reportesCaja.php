@@ -328,13 +328,13 @@ if(!empty($_SESSION['usuarioPOS'])){
         //buscamos en todas las sucursales
         $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
         d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
-        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN $fechaIni AND $fechaFin) AND b.empresaID = '$idEmpresaSesion' 
+        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
         AND a.articuloID IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
       }else{
         //buscamos por sucursal
         $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
         d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
-        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN $fechaIni AND $fechaFin) AND b.empresaID = '$idEmpresaSesion' 
+        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
         AND a.sucursalID = '$sucVenta' AND a.articuloID 
         IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
       }
