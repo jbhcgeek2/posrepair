@@ -107,9 +107,7 @@ session_start();
                                     <tbody id="resProdBus">
                                       <?php 
                                         for($x = 0; $x < count($productos->data); $x++){
-                                          if($x == 50 ){
-                                            break;
-                                          }
+                                          
                                           $nombreProd = $productos->data[$x]->nombreArticulo;
                                           $precio = number_format($productos->data[$x]->precioUnitario,2);
                                           $existencia = $productos->data[$x]->cantSucur;
@@ -133,9 +131,6 @@ session_start();
 
                                           // $clave = $clave1.$clave2;
 
-
-
-
                                           echo "<tr>
                                             <td>$nombreProd</td>
                                             <td>$nombreProv</td>
@@ -145,6 +140,10 @@ session_start();
                                               <a class='btn btn-success' href='verInfoProducto.php?infoProd=$idProducto'>Ver</a>
                                             </td>
                                           </tr>";
+
+                                          if($x == 50 ){
+                                            break;
+                                          }
                                         }//fin del for de datos
                                       ?>
                                     </tbody>

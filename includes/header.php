@@ -214,6 +214,7 @@
 										<span class="nav-link-text">Nuevo Trabajo</span>
 									</a>
 								</li>
+								<hr>
 
 								<li class="nav-item has-submenu">
 									<a href="#!" class="nav-link submenu-toggle" data-bs-toggle="collapse" data-bs-target="#submenu-cajas" aria-expanded="false" aria-controls="submenu-cajas">
