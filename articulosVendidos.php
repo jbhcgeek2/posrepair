@@ -104,7 +104,7 @@ session_start();
                             $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
                             (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
                             ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
-                            z.fechaVenta = '$fechaAyer' AS vendidos FROM DETALLEVENTA a 
+                            z.fechaVenta = '$fechaAyer') AS vendidos FROM DETALLEVENTA a 
                             INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS c 
                             ON a.articuloID = c.idArticulo WHERE b.fechaVenta = '$fechaAyer'";
 
