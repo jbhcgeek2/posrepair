@@ -326,17 +326,32 @@ if(!empty($_SESSION['usuarioPOS'])){
       $sql = "";
       if($sucVenta == "" || $sucVenta == "todas"){
         //buscamos en todas las sucursales
-        $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
-        d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
-        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
-        AND a.articuloID IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+        // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+        // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+        // ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
+        // AND a.articuloID IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+        $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
+        (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
+        ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
+        (z.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')) 
+        AS vendidos FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+        INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo WHERE 
+        (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
       }else{
         //buscamos por sucursal
-        $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
-        d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
-        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
-        AND a.sucursalID = '$sucVenta' AND a.articuloID 
-        IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+        // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+        // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+        // ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
+        // AND a.sucursalID = '$sucVenta' AND a.articuloID 
+        // IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+
+        $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
+        (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
+        ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
+        x.sucursalID = '$sucVenta' AND (z.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')) 
+        AS vendidos FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+        INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo WHERE 
+        (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$sucVenta'";
       }
 
       try {
