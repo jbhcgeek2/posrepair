@@ -18,6 +18,7 @@ btnBuscar.addEventListener('click', function(){
 
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
+      console.log(res);
       if(res.status == "ok"){
         if(res.data.length > 0){
           let conTabla = "";
@@ -33,7 +34,8 @@ btnBuscar.addEventListener('click', function(){
           document.getElementById('bodyTableReport').innerHTML = conTabla;
         }else{
           //sin resultados
-          
+          let conTabla = `<tr><td colspan="2">SIN RESULTADOS</td></tr>`;
+          document.getElementById('bodyTableReport').innerHTML = conTabla;
         }
       }else{
         //error desconocido
