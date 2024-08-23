@@ -23,9 +23,10 @@ btnBuscar.addEventListener('click', function(){
           let conTabla = "";
           for (let i = 0; i < res.data.length; i++) {
             let nombre = res.data[i].nombreArticulo;
+            let cantidadProd = res.data[i].vendidos;
             conTabla += `<tr>
               <td>${nombre}</td>
-              <td></td>
+              <td>${cantidadProd}</td>
             </tr>`;
           }//fin del for
 
