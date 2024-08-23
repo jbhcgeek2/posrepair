@@ -324,7 +324,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     if($fechaFin >= $fechaIni){
       //verificamos si se indico una sucursal o todas
       $sql = "";
-      if($sucVenta == "" || $sucVenta == "Todas"){
+      if($sucVenta == "" || $sucVenta == "todas"){
         //buscamos en todas las sucursales
         $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
         d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
