@@ -18,6 +18,8 @@ btnBuscar.addEventListener('click', function(){
 
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
+      let texto = "Se muestran los articulos vendidos del "+fechaIni+" al "+fechaFin;
+      document.getElementById('tituloFiltro').innerHTML = texto;
       console.log(res);
       if(res.status == "ok"){
         if(res.data.length > 0){
@@ -34,8 +36,8 @@ btnBuscar.addEventListener('click', function(){
           document.getElementById('bodyTableReport').innerHTML = conTabla;
         }else{
           //sin resultados
-          let conTabla = `<tr><td colspan="2">SIN RESULTADOS</td></tr>`;
-          document.getElementById('bodyTableReport').innerHTML = conTabla;
+          let tabla = `<tr><td colspan="2">SIN RESULTADOS</td></tr>`;
+          document.getElementById('bodyTableReport').innerHTML = tabla;
         }
       }else{
         //error desconocido
