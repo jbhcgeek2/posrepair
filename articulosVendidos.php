@@ -96,10 +96,18 @@ session_start();
                             
                             $fecha = date('Y-m-d');
                             //consultamos los productos vendidos del dia de ayer
-                            $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
-                            d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
-                            ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
-                            IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+                            // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+                            // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+                            // ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
+                            // IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+
+                            $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
+                            (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
+                            ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
+                            z.fechaVenta = '$fechaAyer' AS vendidos FROM DETALLEVENTA a 
+                            INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS c 
+                            ON a.articuloID = c.idArticulo WHERE b.fechaVenta = '$fechaAyer'";
+
                             try {
                               $query = mysqli_query($conexion,$sql);
                               if(mysqli_num_rows($query) > 0){
