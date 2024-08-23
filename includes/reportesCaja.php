@@ -315,6 +315,50 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar el reporte: '.$th];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['fechaIniVen'])){
+    //metodo para buscar la venta de productos por fechas y sucursal
+    $fechaIni = $_POST['fechaIniVen'];
+    $fechaFin = $_POST['fechaFinVen'];
+    $sucVenta = $_POST['sucVentas'];
+
+    if($fechaFin > $fechaIni){
+      //verificamos si se indico una sucursal o todas
+      $sql = "";
+      if(empty($sucVenta)){
+        //buscamos en todas las sucursales
+        $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+        d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN $fechaIni AND $fechaFin) AND b.empresaID = '$idEmpresaSesion' 
+        AND a.articuloID IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+      }else{
+        //buscamos por sucursal
+        $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+        d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+        ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN $fechaIni AND $fechaFin) AND b.empresaID = '$idEmpresaSesion' 
+        AND a.sucursalID = '$sucVenta' AND a.articuloID 
+        IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+      }
+
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $x = 0;
+        $data = [];
+        while($fetch = mysqli_fetch_assoc($query)){
+          $data[$x] = $fetch;
+          $x++;
+        }//fin del while
+
+        $res = ['status'=>'ok','data'=>$data];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la informacion: '.$th];
+        echo json_encode($res);
+      }
+    }else{
+      //fechas incorrectas
+      $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas validas.'];
+      echo json_encode($res);
+    }
   }
 }else{
   //sin sesion

@@ -55,9 +55,26 @@ session_start();
                         <label for="form-label">Fecha Fin</label>
                         <input type="date" id="fechaFin" class="form-control">
                       </div>
+                      <div class="col-sm-12 col-md-3">
+                        <label for="form-label">Fecha Fin</label>
+                        <select name="sucVenta" id="sucVenta">
+                          <option value="" disabled>Seleccione</option>
+                          <option value="todas">Todas</option>
+                          <?php 
+                            $sqlSuc = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion'";
+                            $querySuc = mysqli_query($conexion, $sqlSuc);
+                            while($fetchSuc = mysqli_fetch_assoc($querySuc)){
+                              $nombreSuc = $fetchSuc['nombreSuc'];
+                              $idSuc = $fetchSuc['idSucursal'];
+
+                              echo "<option value='$idSuc'>$nombreSuc</option>";
+                            }//fin while sucursales
+                          ?>
+                        </select>
+                      </div>
                       
                       <div class="col-sm-12 col-md-3 mt-4">
-                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscar">Buscar</a>
+                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscarVendidos">Buscar</a>
                       </div>
                       
                     </div>
@@ -71,7 +88,7 @@ session_start();
                         <thead>
                           <tr>
                             <th>Producto</th>
-                            <th>Cantidad</th>
+                            <th>Total</th>
                           </tr>
                         </thead>
                         <tbody id="bodyTableReport">
@@ -90,6 +107,8 @@ session_start();
                                   $articulo = strtoupper($fetch['nombreArticulo']);
                                   $articulo = str_replace('&NTILDE;','Ñ',$articulo);
                                   $vendidos = $fetch['vendidos'];
+
+                                  //consultamos las ventas individuales en las sucursales
 
                                   echo "<tr>
                                     <td>$articulo</td>
@@ -118,6 +137,8 @@ session_start();
 
                     
 
+                    
+
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
 			        </div><!--//col-->
@@ -142,7 +163,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/ventasDelDia.js"></script>
+    <script src="assets/js/articulosVendidos.js"></script>
 </body>
 </html> 
 
