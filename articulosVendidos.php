@@ -57,7 +57,7 @@ session_start();
                       </div>
                       <div class="col-sm-12 col-md-3">
                         <label for="form-label">Fecha Fin</label>
-                        <select name="sucVenta" id="sucVenta">
+                        <select name="sucVenta" id="sucVenta" class="form-select">
                           <option value="" disabled>Seleccione</option>
                           <option value="todas">Todas</option>
                           <?php 
