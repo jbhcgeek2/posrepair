@@ -107,7 +107,9 @@ session_start();
                                     <tbody id="resProdBus">
                                       <?php 
                                         for($x = 0; $x < count($productos->data); $x++){
-
+                                          if($x == 50 ){
+                                            break;
+                                          }
                                           $nombreProd = $productos->data[$x]->nombreArticulo;
                                           $precio = number_format($productos->data[$x]->precioUnitario,2);
                                           $existencia = $productos->data[$x]->cantSucur;
