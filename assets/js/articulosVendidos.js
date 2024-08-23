@@ -19,7 +19,7 @@ btnBuscar.addEventListener('click', function(){
     if(envio.status == 200){
       let res = JSON.parse(envio.responseText);
       console.log(res);
-      
+
       let texto = "Se muestran los articulos vendidos del "+fechaIni+" al "+fechaFin;
       document.getElementById('tituloFiltro').innerHTML = texto;
       if(res.status == "ok"){
