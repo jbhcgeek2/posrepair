@@ -321,7 +321,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     $fechaFin = $_POST['fechaFinVen'];
     $sucVenta = $_POST['sucVentas'];
 
-    if($fechaFin > $fechaIni){
+    if($fechaFin >= $fechaIni){
       //verificamos si se indico una sucursal o todas
       $sql = "";
       if($sucVenta != ""){
