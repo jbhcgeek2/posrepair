@@ -653,8 +653,8 @@ session_start();
 
                   <div class="row">
                     <div class="col-md-6 offset-md-3">
-                      <label for="vendedor">Seleccione Vendedor</label>
-                      <select name="vendedor" id="vendedor">
+                      <label for="vendedor" class="form-label">Seleccione Vendedor</label>
+                      <select name="vendedor" id="vendedor" class="form-select">
                         <option value="">Vendedor...</option>
                         <?php 
                           $sqlUsVenta = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion'
