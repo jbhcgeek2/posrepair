@@ -651,6 +651,42 @@ session_start();
                     <span class="text-center">Indique el medoto de pago y la cantidad recibida</span> <br>
                   </div>
 
+                  <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                      <label for="vendedor">Seleccione Vendedor</label>
+                      <select name="vendedor" id="vendedor">
+                        <option value="">Vendedor...</option>
+                        <?php 
+                          $sqlVen = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion' AND statusUsuario = '1' ORDER BY nombreUsuario ASC";
+                          try {
+                            $queryVen = mysqli_query($conexion $sqlVen);
+                            
+                            if(mysqli_num_rows($queryVen) == 1){
+                              //solo cuenta con un usuario, lo marcamos por default
+                              while($fetchVen = mysqli_fetch_array($queryVen)){
+                                $nombreVen = $fetchVen['nombreUsuario']." ".$fetchVen['apPaternoUsuario']." ".$fetchVen['apMaternoUsuario'];
+                                $idVen = $fetchVen['idUsuario'];
+
+                                echo "<option value='$idVen' selected>$nombreVen</option>";
+                              }//fin del while
+                            }else{
+                              //mostramos todos los usuarios, no importa si son vendedores
+                              while($fetchVen = mysqli_fetch_array($queryVen)){
+                                $nombreVen = $fetchVen['nombreUsuario']." ".$fetchVen['apPaternoUsuario']." ".$fetchVen['apMaternoUsuario'];
+                                $idVen = $fetchVen['idUsuario'];
+
+                                echo "<option value='$idVen' selected>$nombreVen</option>";
+                              }//fin del while
+                            }
+                            
+                          } catch (\Throwable $th) {
+                            echo "<option value='nan' selected>Error</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="row text-center">
                     <div class="col-md-3">
                       <img src="../assets/images/dinero.png" alt="Pago en Efectivo" width="90" id="imgpagoEfectivo"><br>
