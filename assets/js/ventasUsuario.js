@@ -29,6 +29,18 @@ btnBuscar.addEventListener('click', function(){
             console.log(res.data[z]);
             let fecha = res.data[z].fechaVenta;
             let prod = res.data[z].nombreArticulo;
+            let classTr = "";
+            if(res.data[z].articuloID != null){
+              //obtenemos los datos del articulo
+              prod = res.data[z]['dataArticulo'].nombreArticulo;
+              classTr = "";
+            }else{
+              //obtenemos los datos del trabajo
+              let auxMarca = res.data[z]['dataTrabajo'].marca;
+              let auxMod = res.data[z]['dataTrabajo'].modelo;
+              prod = res.data[z]['dataTrabajo'].nombreServicio+" "+auxMarca+" "+auxMod;
+              classTr = "table-success";
+            }
             let cant = parseInt(res.data[z].cantidadVenta);
             let total = parseFloat(res.data[z].subtotalVenta);
             let sucursal = res.data[z].nombreSuc;
@@ -36,10 +48,11 @@ btnBuscar.addEventListener('click', function(){
             totalArti = totalArti+cant;
 
             let auxMontoFormato = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            let prodName = prod.toUpperCase();
 
-            contenido = contenido+`<tr>
+            contenido = contenido+`<tr class='${classTr}'>
               <td>${fecha}</td>
-              <td>${prod}</td>
+              <td>${prodName}</td>
               <td>${cant}</td>
               <td>${auxMontoFormato}</td>
               <td>${sucursal}</td>

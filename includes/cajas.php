@@ -1141,8 +1141,11 @@ if(!empty($_SESSION['usuarioPOS'])){
     $idSucursal = json_decode($datosUsuario)->sucursalID;
     $idTrabajo = $_POST['addTrabajoCobro'];
     //verificamos que exista el trabajo
-    $sql = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmprersa' AND 
-    sucursalID = '$idSucursal'";
+    //consulta obsoleta
+    // $sql = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmprersa' AND 
+    // sucursalID = '$idSucursal'";
+    // Se modifica consulta para poder cobrar los servicios de todas las sucursales
+    $sql = "SELECT * FROM TRABAJOS WHERE idTrabajo = '$idTrabajo' AND empresaID = '$idEmprersa'";
     try {
       $query = mysqli_query($conexion, $sql);
       if(mysqli_num_rows($query) == 1){
@@ -1282,7 +1285,7 @@ if(!empty($_SESSION['usuarioPOS'])){
             }
           }else{
             //ya se encuentra agregado, 
-            $respuesta = "DataError+-_-+El servicio ya se encuentra en el carrito";
+            $respuesta = "DataError+-_-+El servicio ya se encuentra en el carrito.";
             echo $respuesta;
           }
         } catch (\Throwable $th) {
@@ -1292,11 +1295,11 @@ if(!empty($_SESSION['usuarioPOS'])){
         }
       }else{
         //trabajo nho localizado
-        echo "No data";
+        echo "DataError+-_-+Trabajo no localizado en sucursal.";
       }
     } catch (\Throwable $th) {
       //throw $th;
-      echo "error";
+      echo "DataError+-_-+Ocurrio un error al consultar el trabajo, reporta a soporte. ".$th;
     }
   }elseif(!empty($_POST['detalleUpdateCaja'])){
     // seccion para actualizart el precio unitario del articulo

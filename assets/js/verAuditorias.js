@@ -19,6 +19,34 @@ btnNuevaAudi.addEventListener('click', function(){
       let envio = new XMLHttpRequest();
       envio.open('POST','../includes/operacionesAuditoria.php',false);
       envio.send(datos);
+
+      if(envio.status == 200){
+        // console.log(envio.responseText);
+        let res = JSON.parse(envio.responseText);
+        if(res.status == "ok"){
+          //proceso completado
+          Swal.fire(
+            'Auditoria Registrada',
+            'ya es posible validar los objetos',
+            'success'
+          ).then(function(){
+            location.reload();
+          })
+        }else{
+          //ocurrio un error
+          Swal.fire(
+            'Ha ocurrido un error',
+            res.mensaje,
+            'error'
+          )
+        }
+      }else{
+        Swal.fire(
+          'Servidor Inalcansable',
+          'Verifica tu conexion a internet',
+          'error'
+        )
+      }
       
 
       

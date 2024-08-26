@@ -8,6 +8,7 @@
     include("usuarios.php");
     include("trabajos.php");
     include("articulos.php");
+    include("cliente.php");
 
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
@@ -88,50 +89,57 @@
 
         if($fechaAlta <= $fechaActual){
           if($fechaEntrega >= $fechaActual){
-            //las fechas son correectas, podemos registrar el producto
-            $nuevoTrabajo = altaTrabajo($cliente,$fechaAlta,$tipoDispo,$tipoServ,$marca,$modeloServicio,
-            $serieDispo,$accesorios,$problema,$observacion,$contraDispo,$fechaEntrega,$costoServ,$anticipo,
-            $usuario,$idSucursalN,$idEmpresaSesion,$idUsuario);
+            //verificamos si el cliente existe
+            $existeCliente = verCliente($cliente,$idEmpresaSesion);
+            if(json_decode($existeCliente)->status == "ok"){
+              //las fechas son correectas, podemos registrar el producto
+              $nuevoTrabajo = altaTrabajo($cliente,$fechaAlta,$tipoDispo,$tipoServ,$marca,$modeloServicio,
+              $serieDispo,$accesorios,$problema,$observacion,$contraDispo,$fechaEntrega,$costoServ,$anticipo,
+              $usuario,$idSucursalN,$idEmpresaSesion,$idUsuario);
 
-            //verificamos la respuesta para registrar el ticket
-            if($anticipo > 0){
-              //el trabajo tiene anticipo, asi que registramos el movimiento en cajas
-              //vamos a ahcer las cosas al revez, primero insertaremos la venta y despues el detalle venta
-              $sqlAux1 = "SELECT COUNT(*) AS numVentasByUser FROM VENTAS WHERE usuarioID = '$idUsuario' AND empresaID = '$idEmpresaSesion'";
-              $queryAux1 = mysqli_query($conexion, $sqlAux1);
-              $fetchAux1 = mysqli_fetch_assoc($queryAux1);
-              $numT = $fetchAux1['numVentasByUser']+1;
+              //verificamos la respuesta para registrar el ticket
+              if($anticipo > 0){
+                //el trabajo tiene anticipo, asi que registramos el movimiento en cajas
+                //vamos a ahcer las cosas al revez, primero insertaremos la venta y despues el detalle venta
+                $sqlAux1 = "SELECT COUNT(*) AS numVentasByUser FROM VENTAS WHERE usuarioID = '$idUsuario' AND empresaID = '$idEmpresaSesion'";
+                $queryAux1 = mysqli_query($conexion, $sqlAux1);
+                $fetchAux1 = mysqli_fetch_assoc($queryAux1);
+                $numT = $fetchAux1['numVentasByUser']+1;
 
-              $sqlAux2 = "INSERT INTO VENTAS (num_comprobante,fechaVenta,horaVenta,totalVenta,montoPago,cambioPago,
-              tipoPago,clienteID,empresaID,usuarioID) VALUES ('$numT','$fechaActual','$horaActual','$anticipo',
-              '$anticipo','0','Efectivo','$cliente','$idEmpresaSesion','$idUsuario')";
-              try {
-                $queryAux2 = mysqli_query($conexion, $sqlAux2);
-                $idVenta = mysqli_insert_id($conexion);
-                $datosTrab = json_decode($nuevoTrabajo);
-                $idTrabajo = $datosTrab->data;
-                //ahora insertamos el detalleventa
-                $sqlAux3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
-                sucursalID,trabajoID,ventaID) VALUES ('1','$anticipo','$anticipo','$usuario','$idSucursalN',
-                '$idTrabajo','$idVenta')";
+                $sqlAux2 = "INSERT INTO VENTAS (num_comprobante,fechaVenta,horaVenta,totalVenta,montoPago,cambioPago,
+                tipoPago,clienteID,empresaID,usuarioID) VALUES ('$numT','$fechaActual','$horaActual','$anticipo',
+                '$anticipo','0','Efectivo','$cliente','$idEmpresaSesion','$idUsuario')";
                 try {
-                  $queryAux3 = mysqli_query($conexion, $sqlAux3);
-                  //hasta aqui podemos tar por terminado el alta del trabajo
-                  echo $nuevoTrabajo;
+                  $queryAux2 = mysqli_query($conexion, $sqlAux2);
+                  $idVenta = mysqli_insert_id($conexion);
+                  $datosTrab = json_decode($nuevoTrabajo);
+                  $idTrabajo = $datosTrab->data;
+                  //ahora insertamos el detalleventa
+                  $sqlAux3 = "INSERT INTO DETALLEVENTA (cantidadVenta,precioUnitario,subtotalVenta,usuarioVenta,
+                  sucursalID,trabajoID,ventaID) VALUES ('1','$anticipo','$anticipo','$usuario','$idSucursalN',
+                  '$idTrabajo','$idVenta')";
+                  try {
+                    $queryAux3 = mysqli_query($conexion, $sqlAux3);
+                    //hasta aqui podemos tar por terminado el alta del trabajo
+                    echo $nuevoTrabajo;
+                  } catch (\Throwable $th) {
+                    //ocurrio un error al insertar el detalleventa
+                    $res =['status'=>'error','mensaje'=>'Ocurrio un error al insertar el detalle de venta: '.$th];
+                    echo json_encode($res);
+                  }
                 } catch (\Throwable $th) {
-                  //ocurrio un error al insertar el detalleventa
-                  $res =['status'=>'error','mensaje'=>'Ocurrio un error al insertar el detalle de venta: '.$th];
+                  //ocurrio un error al insertar la venta
+                  $res =['status'=>'error','mensaje'=>'Ocurrio un error al insertar la venta: '.$th];
                   echo json_encode($res);
                 }
-              } catch (\Throwable $th) {
-                //ocurrio un error al insertar la venta
-                $res =['status'=>'error','mensaje'=>'Ocurrio un error al insertar la venta: '.$th];
-                echo json_encode($res);
+              }else{
+                echo $nuevoTrabajo;
               }
             }else{
-              echo $nuevoTrabajo;
+              //no se indico un cliente correcto
+              $res =['status'=>'error','mensaje'=>'Asegurate de seleccionar el cliente de manera correcta.'];
+              echo json_encode($res);
             }
-            
           }else{
             //fecha de entrega incorrecta
             $res = ['status'=>'error','mensaje'=>'Asegurate de ingresar una fecha de entrega correcta.'];
@@ -289,18 +297,22 @@
       //seccion para buscar trabajos por el estatus y nombre
       $estatus = $_POST['estatusBusqueda'];
       $cliente = $_POST['nombreCli'];
+      $extra = "";
+      if($estatus == "Finalizado"){
+        $extra = " ORDER BY fechaTermino DESC";
+      }
 
       // $sql = "SELECT * FROM TRABAJOS WHERE estatusTrabajo = '$estatus' AND empresaID = '$idEmpresaSesion' 
       // AND sucursalID = '$idSucursalN'";
       if(empty($cliente)){
         $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
         INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
-        a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND a.estatusTrabajo = '$estatus'";
+        a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND a.estatusTrabajo = '$estatus' $extra";
       }else{
         $sql = "SELECT * FROM TRABAJOS a INNER JOIN CLIENTES b ON a.clienteID = b.idClientes 
         INNER JOIN SERVICIOS c ON a.servicioID = c.idServicio WHERE 
         a.empresaID = '$idEmpresaSesion' AND a.sucursalID = '$idSucursalN' AND a.estatusTrabajo = '$estatus' 
-        AND b.nombreCliente LIKE '%$cliente%'";
+        AND b.nombreCliente LIKE '%$cliente%' $extra";
       }
       
       try {
@@ -468,6 +480,46 @@
       } catch (\Throwable $th) {
         //throw $th;
         $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error al actualizar el costo: '.$th];
+        echo json_encode($res);
+      }
+    }elseif(!empty($_POST['newComent'])){
+      //seccion para insertar un comentario en los trabajos
+      $idTrabajo = $_POST['comentDataId'];
+      $comentario = $_POST['newComent'];
+      $fecha = date('Y-m-d');
+      $hora = date('H:i:s');
+
+      //verificamos si tiene todos los datos
+      if(!empty($idTrabajo) && !empty($comentario)){
+        $sql = "INSERT INTO COMENTARIOSTRABAJOS (fechaComentario,usuarioComentario,
+        empresaID,comentario,horaComentario,trabajoID) VALUES ('$fecha','$usuario',
+        '$idEmpresaSesion','$comentario','$hora','$idTrabajo')";
+        try {
+          $query = mysqli_query($conexion, $sql);
+          //si se inserto consultamos los comentario para mostrarlos
+          $sql2 = "SELECT * FROM COMENTARIOSTRABAJOS WHERE trabajoID = '$idTrabajo' 
+          ORDER BY idComentario DESC";
+          try {
+            $query2 = mysqli_query($conexion, $sql2);
+            $data = [];
+            $x = 0;
+            while($fetch2 = mysqli_fetch_assoc($query2)){
+              $data[$x] = $fetch2;
+              $x++;
+            }//fin del while
+            $res = ['status'=>'ok','data'=>$data,'mensaje'=>'operationComplete'];
+            echo json_encode($res);
+          } catch (\Throwable $th) {
+            $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar los comentario.'];
+            echo json_encode($res);
+          }
+        } catch (\Throwable $th) {
+          $res = ['status'=>'error','mensaje'=>'Ocurrio un error al insertar el comentario.'];
+          echo json_encode($res);
+        }
+      }else{
+        //sin datos
+        $res = ['status'=>'error','mensaje'=>'No se detectaron los datos.'];
         echo json_encode($res);
       }
     }

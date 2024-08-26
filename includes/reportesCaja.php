@@ -110,16 +110,17 @@ if(!empty($_SESSION['usuarioPOS'])){
             empresaID = '$idEmpresaSesion'";
             $queryExt = mysqli_query($conexion, $sqlExt);
             $fetchExt = mysqli_fetch_assoc($queryExt);
-            $nombreCosa =  $fetchExt['nombreArticulo'];
+            $nombreCosa =  strtoupper($fetchExt['nombreArticulo']);
             $esServicio = "No";
           }else{
             //se trata de un servicio
             $idServ = $fetch['trabajoID'];
-            $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio FROM TRABAJOS a 
+            $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio,a.marca,a.modelo FROM TRABAJOS a 
             INNER JOIN SERVICIOS b ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idServ' ";
             $queryExt2 = mysqli_query($conexion, $sqlExt2);
             $fetchExt2 = mysqli_fetch_assoc($queryExt2);
-            $nombreCosa = $fetchExt2['nombreServicio'];
+            $nombreCosa = $fetchExt2['nombreServicio']." - ".$fetchExt2['marca']." ".$fetchExt2['modelo'];
+            $nombreCosa = strtoupper($nombreCosa);
             $esServicio = "Si";
           }
           $idVenta = $fetch['idVenta'];
@@ -265,9 +266,13 @@ if(!empty($_SESSION['usuarioPOS'])){
     $fechaFin = $_POST['fecFinUSer'];
     $userVenta = $_POST['repUserVent'];
 
+    // $sql = "SELECT * FROM VENTAS a INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+    // INNER JOIN ARTICULOS c ON b.articuloID = c.idArticulo INNER JOIN SUCURSALES d 
+    // ON b.sucursalID = d.idSucursal WHERE a.usuarioID = '$userVenta' AND
+    // a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
+
     $sql = "SELECT * FROM VENTAS a INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
-    INNER JOIN ARTICULOS c ON b.articuloID = c.idArticulo INNER JOIN SUCURSALES d 
-    ON b.sucursalID = d.idSucursal WHERE a.usuarioID = '$userVenta' AND
+    INNER JOIN SUCURSALES d ON b.sucursalID = d.idSucursal WHERE a.usuarioID = '$userVenta' AND
     a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
     try {
       $query = mysqli_query($conexion, $sql);
@@ -275,7 +280,27 @@ if(!empty($_SESSION['usuarioPOS'])){
         $data = [];
         $x = 0;
         while($fetch = mysqli_fetch_assoc($query)){
+          //verificamos si es trabajo o articulo
+          $tipoV = "";
           $data[$x] = $fetch;
+          if($fetch['articuloID'] != null){
+            //es articulo, lo consultamos
+            $idArti = $fetch['articuloID'];
+            $sqlAux2 = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idArti'";
+            $queryAux2 = mysqli_query($conexion, $sqlAux2);
+            $fetchAux2 = mysqli_fetch_assoc($queryAux2);
+            $data[$x]['dataArticulo'] = $fetchAux2;
+          }else{
+            //es trabajo, lo consultamos
+            $idTrabajo = $fetch['trabajoID'];
+            $sqlAux3 = "SELECT a.idTrabajo,a.marca,a.modelo,b.nombreServicio 
+            FROM TRABAJOS a INNER JOIN SERVICIOS b 
+            ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idTrabajo'";
+            $queryAux3 = mysqli_query($conexion, $sqlAux3);
+            $fetchAux3 = mysqli_fetch_assoc($queryAux3);
+            $data[$x]['dataTrabajo'] = $fetchAux3;
+          }
+          // $data[$x] = $fetch;
           $x++;
         }
         $res = ['status'=>'ok','data'=>$data,'mensaje'=>'operationSuccess'];
@@ -288,6 +313,65 @@ if(!empty($_SESSION['usuarioPOS'])){
     } catch (\Throwable $th) {
       //throw $th;
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar el reporte: '.$th];
+      echo json_encode($res);
+    }
+  }elseif(!empty($_POST['fechaIniVen'])){
+    //metodo para buscar la venta de productos por fechas y sucursal
+    $fechaIni = $_POST['fechaIniVen'];
+    $fechaFin = $_POST['fechaFinVen'];
+    $sucVenta = $_POST['sucVentas'];
+
+    if($fechaFin >= $fechaIni){
+      //verificamos si se indico una sucursal o todas
+      $sql = "";
+      if($sucVenta == "" || $sucVenta == "todas"){
+        //buscamos en todas las sucursales
+        // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+        // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+        // ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
+        // AND a.articuloID IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+        $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
+        (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
+        ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
+        (z.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')) 
+        AS vendidos FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+        INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo WHERE 
+        (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+      }else{
+        //buscamos por sucursal
+        // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
+        // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
+        // ON d.idArticulo = a.articuloID WHERE (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion' 
+        // AND a.sucursalID = '$sucVenta' AND a.articuloID 
+        // IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
+
+        $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
+        (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
+        ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
+        x.sucursalID = '$sucVenta' AND (z.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')) 
+        AS vendidos FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+        INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo WHERE 
+        (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND a.sucursalID = '$sucVenta'";
+      }
+
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $x = 0;
+        $data = [];
+        while($fetch = mysqli_fetch_assoc($query)){
+          $data[$x] = $fetch;
+          $x++;
+        }//fin del while
+
+        $res = ['status'=>'ok','data'=>$data];
+        echo json_encode($res);
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la informacion: '.$th];
+        echo json_encode($res);
+      }
+    }else{
+      //fechas incorrectas
+      $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas validas.'];
       echo json_encode($res);
     }
   }

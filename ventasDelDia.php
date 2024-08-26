@@ -146,14 +146,17 @@ session_start();
                                   $queryExt = mysqli_query($conexion, $sqlExt);
                                   $fetchExt = mysqli_fetch_assoc($queryExt);
                                   $nombreCosa =  $fetchExt['nombreArticulo'];
+                                  $nombreCosa = strtoupper($nombreCosa);
                                 }else{
                                   //es un servicio
                                   $idServ = $fetch['trabajoID'];
-                                  $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio FROM TRABAJOS a INNER JOIN SERVICIOS b ON a.servicioID = b.idServicio 
+                                  $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio,a.marca,a.modelo 
+                                  FROM TRABAJOS a INNER JOIN SERVICIOS b ON a.servicioID = b.idServicio 
                                   WHERE a.idTrabajo = '$idServ'";
                                   $queryExt2 = mysqli_query($conexion, $sqlExt2);
                                   $fetchExt2 = mysqli_fetch_assoc($queryExt2);
-                                  $nombreCosa = $fetchExt2['nombreServicio'];
+                                  $nombreCosa = $fetchExt2['nombreServicio']." - ".$fetchExt2['marca']." ".$fetchExt2['modelo'];
+                                  $nombreCosa = strtoupper($nombreCosa);
                                   $claseTR = 'table-success';
                                 }
 
