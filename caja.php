@@ -655,7 +655,7 @@ session_start();
                     <div class="col-md-6 offset-md-3">
                       <label for="vendedor" class="form-label">Seleccione Vendedor</label>
                       <select name="vendedor" id="vendedor" class="form-select">
-                        <option value="">Vendedor...</option>
+                        <option value="" selected>Vendedor...</option>
                         <?php 
                           $sqlUsVenta = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion'
                           AND statusUsuario = '1' ORDER BY nombreUsuario ASC";
