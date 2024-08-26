@@ -664,7 +664,7 @@ session_start();
                             
                             if(mysqli_num_rows($queryVen) == 1){
                               //solo cuenta con un usuario, lo marcamos por default
-                              while($fetchVen = mysqli_fetch_array($queryVen)){
+                              while($fetchVen = mysqli_fetch_assoc($queryVen)){
                                 $nombreVen = $fetchVen['nombreUsuario']." ".$fetchVen['apPaternoUsuario']." ".$fetchVen['apMaternoUsuario'];
                                 $idVen = $fetchVen['idUsuario'];
 
@@ -672,7 +672,7 @@ session_start();
                               }//fin del while
                             }else{
                               //mostramos todos los usuarios, no importa si son vendedores
-                              while($fetchVen = mysqli_fetch_array($queryVen)){
+                              while($fetchVen = mysqli_fetch_assoc($queryVen)){
                                 $nombreVen = $fetchVen['nombreUsuario']." ".$fetchVen['apPaternoUsuario']." ".$fetchVen['apMaternoUsuario'];
                                 $idVen = $fetchVen['idUsuario'];
 
