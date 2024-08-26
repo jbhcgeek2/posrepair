@@ -660,7 +660,7 @@ session_start();
                           $sqlUsVenta = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion'
                           AND statusUsuario = '1' ORDER BY nombreUsuario ASC";
                           try {
-                            $queryUsVen = mysqli_query($conexion $sqlUsVenta);
+                            $queryUsVen = mysqli_query($conexion, $sqlUsVenta);
                             
                             if(mysqli_num_rows($queryUsVen) == 1){
                               //solo cuenta con un usuario, lo marcamos por default
@@ -672,9 +672,9 @@ session_start();
                               }//fin del while
                             }else{
                               //mostramos todos los usuarios, no importa si son vendedores
-                              while($fetchVen = mysqli_fetch_assoc($queryVen)){
-                                $nombreVen = $fetchVen['nombreUsuario']." ".$fetchVen['apPaternoUsuario']." ".$fetchVen['apMaternoUsuario'];
-                                $idVen = $fetchVen['idUsuario'];
+                              while($fetchUsVen = mysqli_fetch_assoc($queryUsVen)){
+                                $nombreVen = $fetchUsVen['nombreUsuario']." ".$fetchUsVen['apPaternoUsuario']." ".$fetchUsVen['apMaternoUsuario'];
+                                $idVen = $fetchUsVen['idUsuario'];
 
                                 echo "<option value='$idVen' selected>$nombreVen</option>";
                               }//fin del while
