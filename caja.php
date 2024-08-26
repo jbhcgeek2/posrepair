@@ -657,7 +657,8 @@ session_start();
                       <select name="vendedor" id="vendedor">
                         <option value="">Vendedor...</option>
                         <?php 
-                          $sqlVen = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion' AND statusUsuario = '1' ORDER BY nombreUsuario ASC";
+                          $sqlVen = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion'
+                          AND statusUsuario = '1' ORDER BY nombreUsuario ASC";
                           try {
                             $queryVen = mysqli_query($conexion $sqlVen);
                             
