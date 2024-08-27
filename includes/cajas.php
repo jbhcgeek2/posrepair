@@ -755,7 +755,9 @@ if(!empty($_SESSION['usuarioPOS'])){
       if($cantidadVenta > $cantidadExiste){
         //la cantidad supera y no se puede vender
         $pasa = 1;
-        $cantidadSuperada = 1;
+        // $cantidadSuperada = 1;
+        //se desactiva la verificacion de las cantidades para alertar
+        //y verificar manualmente
       }else{
         //la cantidad deseada es igual o menor a la deseada
         //de momento no hacemos nada, pero en la siguiente operacion 
