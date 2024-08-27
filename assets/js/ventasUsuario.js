@@ -72,6 +72,8 @@ btnBuscar.addEventListener('click', function(){
           //sin datos
           contenido = `<tr><td colspan='5' style='text-align:center;'>Sin Datos</td></tr>`;
           document.getElementById('resultBusqueda').innerHTML = contenido;
+          document.getElementById('totArti').innerHTML = "0";
+          document.getElementById('totVenta').innerHTML = "$0.00";
         }
         // insertamos el resultado
         
