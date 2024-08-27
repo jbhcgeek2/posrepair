@@ -19,11 +19,34 @@ btnRefa.addEventListener('click', function(){
       if(res.status == "ok"){
         console.log(res);
 
-        for (let i = 0; i < res.data.length; i++) {
-          let nombre = res.data[i].nombreDetalle;
-          console.log(nombre);
-          
-        }//fin del for
+        let contenido = "";
+        if(res.data.length > 0){
+          for (let i = 0; i < res.data.length; i++) {
+            let nombre = res.data[i].nombreDetalle;
+            let servicio = res.data[i].nombreServicio;
+            let modelo = res.data[i].marca+" "+res.data[i].modelo;
+            let cantidad = res.data[i].cantidad;
+            let trabajo = res.data[i].idTrabajo;
+  
+            contenido += `<tr>
+            <td>${nombre}</td>
+            <td>${servicio}</td>
+            <td>${modelo}</td>
+            <td>${cantidad}</td>
+            </tr>`;
+  
+            
+          }//fin del for
+        }else{
+          //sin datos
+          contenido += `<tr>
+            <td colspan='4'>SIN DATOS</td>
+            </tr>`;
+        }
+
+        document.getElementById('bodyTableReport').innerHTML = contenido;
+
+
       }else{
         //ha ocurrido un error
         Swal.fire(
