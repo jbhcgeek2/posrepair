@@ -64,7 +64,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $dataCliente = verCliente($cliente,$idEmprersa);
       // $cliente = $venta->venta->clienteID;
       $dataCliente = json_decode($dataCliente);
-      $cliente = $dataCliente->data->nombreCliente;
+      $cliente = strtolower($dataCliente->data->nombreCliente);
     }
     ?> 
     <!DOCTYPE html>
