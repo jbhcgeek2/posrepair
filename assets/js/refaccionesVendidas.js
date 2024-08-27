@@ -9,7 +9,7 @@ btnRefa.addEventListener('click', function(){
     datos.append('fechaIniRefa', fechaIni);
     datos.append('fechaFinRefa', fechaFin);
 
-    let envio = new FormData();
+    let envio = new XMLHttpRequest();
     envio.open('POST','../includes/reportesCaja.php',false);
     envio.send(datos);
 
