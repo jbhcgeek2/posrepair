@@ -279,7 +279,7 @@ if(!empty($_SESSION['usuarioPOS'])){
     // a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
 
     $sql = "SELECT * FROM VENTAS a INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
-    INNER JOIN SUCURSALES d ON b.sucursalID = d.idSucursal WHERE a.usuarioID = '$userVenta' AND
+    INNER JOIN SUCURSALES d ON b.sucursalID = d.idSucursal WHERE a.usuarioVenta = '$userVenta' AND
     a.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin'";
     try {
       $query = mysqli_query($conexion, $sql);
