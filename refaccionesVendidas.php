@@ -72,7 +72,9 @@ session_start();
                         <thead>
                           <tr>
                             <th>Producto</th>
-                            <th>Total</th>
+                            <th>Servicio</th>
+                            <th>Modelo</th>
+                            <th>Cantidad</th>
                           </tr>
                         </thead>
                         <tbody id="bodyTableReport">
@@ -94,10 +96,15 @@ session_start();
                               if(mysqli_num_rows($query) > 0){
                                 while($fetch = mysqli_fetch_assoc($query)){
                                   $nombreArti = $fetch['nombreDetalle'];
+                                  $nombreServi = $fetch['nombreServicio'];
+                                  $modelo = $fetch['tipoDispositivo']." ".$fetch['marca']." ".$fetch['modelo'];
+                                  $cantidad = $fetch['cantidad'];
 
                                   echo "<tr>
                                     <td>$nombreArti</td>
-                                    <td></td>
+                                    <td>$nombreServi</td>
+                                    <td>$modelo</td>
+                                    <td>$cantidad</td>
                                   </tr>";
                                   
                                 }//fin del while articulos agrupados
