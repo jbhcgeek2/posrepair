@@ -56,7 +56,7 @@ session_start();
                         <input type="date" id="fechaFin" class="form-control">
                       </div>
                       <div class="col-sm-12 col-md-3">
-                        <label for="form-label">Fecha Fin</label>
+                        <label for="form-label">Sucursal</label>
                         <select name="sucVenta" id="sucVenta" class="form-select">
                           <option value="" disabled>Seleccione</option>
                           <option value="todas">Todas</option>
