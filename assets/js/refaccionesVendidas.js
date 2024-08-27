@@ -18,6 +18,12 @@ btnRefa.addEventListener('click', function(){
 
       if(res.status == "ok"){
         console.log(res);
+
+        for (let i = 0; i < res.data.length; i++) {
+          let nombre = res.data[i].nombreDetalle;
+          console.log(nombre);
+          
+        }//fin del for
       }else{
         //ha ocurrido un error
         Swal.fire(
