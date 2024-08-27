@@ -87,7 +87,7 @@ session_start();
 
                             $sql = "SELECT * FROM DETALLETRABAJO a INNER JOIN ARTICULOS b ON a.articuloID = b.idArticulo 
                             INNER JOIN TRABAJOS c ON a.trabajoID = c.idTrabajo INNER JOIN SERVICIOS d ON c.servicioID = d.idServicio
-                            WHERE a.fechaMovimiento = '$fecha'";
+                            WHERE a.fechaMovimiento >= '2024-08-01'";
 
                             try {
                               $query = mysqli_query($conexion,$sql);
