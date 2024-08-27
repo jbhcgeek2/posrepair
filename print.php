@@ -54,6 +54,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     }else{
       $usuarioVenta = strtoupper($nombreUsuario);
     }
+
+    $usuarioVenta = strtolower($usuarioVenta);
     
     if($cliente == 1){
       //publico en general
