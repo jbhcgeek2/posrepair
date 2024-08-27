@@ -112,13 +112,13 @@ session_start();
                               }else{
                                 //sin articulos vendidos
                                 echo "<tr>
-                                  <td colspan='2' style='text-align:center;'>SIN DATOS PARA MOSTRAR</td>
+                                  <td colspan='4' style='text-align:center;'>SIN DATOS PARA MOSTRAR</td>
                                 </tr>";
                               }
                             } catch (\Throwable $th) {
                               //error al consultar los articulos agrupados
                               echo "<tr>
-                                  <td colspan='2'>$th</td>
+                                  <td colspan='4'>$th</td>
                                 </tr>";
                             }
                             
