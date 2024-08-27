@@ -112,7 +112,7 @@ session_start();
                               }else{
                                 //sin articulos vendidos
                                 echo "<tr>
-                                  <td colspan='2'>SIN DATOS PARA MOSTRAR</td>
+                                  <td colspan='2' style='text-align:center;'>SIN DATOS PARA MOSTRAR</td>
                                 </tr>";
                               }
                             } catch (\Throwable $th) {
