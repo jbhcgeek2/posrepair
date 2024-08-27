@@ -89,7 +89,7 @@ session_start();
 
                             $sql = "SELECT * FROM DETALLETRABAJO a INNER JOIN TRABAJOS c 
                             ON a.trabajoID = c.idTrabajo INNER JOIN SERVICIOS d ON c.servicioID = d.idServicio
-                            WHERE a.fechaMovimiento >= '2024-08-01'";
+                            WHERE a.fechaMovimiento >= '2024-08-01' AND a.empresaID = '$idEmpresaSesion'";
 
                             try {
                               $query = mysqli_query($conexion,$sql);
