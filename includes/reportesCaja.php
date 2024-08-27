@@ -381,7 +381,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas validas.'];
       echo json_encode($res);
     }
-  }elseif(!emty($_POST['fechaIniRefa'])){
+  }elseif(!empty($_POST['fechaIniRefa'])){
     //metodo para buscar refacciones en trabajos
     $fechaIni = $_POST['fechaIniRefa'];
     $fechaFin = $_POST['fechaFinRefa'];
