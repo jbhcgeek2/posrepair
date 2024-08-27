@@ -381,6 +381,40 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas validas.'];
       echo json_encode($res);
     }
+  }elseif(!emty($_POST['fechaIniRefa'])){
+    //metodo para buscar refacciones en trabajos
+    $fechaIni = $_POST['fechaIniRefa'];
+    $fechaFin = $_POST['fechaFinRefa'];
+
+    //primero verificamos que las fechas sean validas
+    if($fechaFin >= $fechaIni){
+      //buscamos
+      $sql = "SELECT * FROM DETALLETRABAJO a INNER JOIN TRABAJOS c 
+      ON a.trabajoID = c.idTrabajo INNER JOIN SERVICIOS d ON c.servicioID = d.idServicio
+      WHERE (a.fechaMovimiento BETWEEN '$fechaIni' AND '$fechaFin') AND a.empresaID = '$idEmpresaSesion'";
+
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $data = [];
+        $x = 0;
+        while($fetch = mysqli_fetch_assoc($query)){
+          $data[$x] = $fetch;
+          $x++;
+        }//fin del while
+
+        $res = ['status'=>'ok','data'=>$data,'mensaje'=>'operationComplete'];
+        echo json_encode($res);
+
+      } catch (\Throwable $th) {
+        //error de base de datos
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error: '.$th];
+        echo json_encode($res);
+      }
+    }else{
+      //fechas invalidas
+      $res = ['status'=>'error','mensaje'=>'Indique fechas validas'];
+      echo json_encode($res);
+    }
   }
 }else{
   //sin sesion
