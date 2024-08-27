@@ -37,6 +37,12 @@ if(!empty($_SESSION['usuarioPOS'])){
     //para obtener los datos del cliente
     $cliente = $venta->venta->clienteID;
     $idUsuarioVenta = $venta->venta->usuarioID;
+    if($venta->venta->usuarioVenta == null || $venta->venta->usuarioVenta == ""){
+      //sin vendedor, tomamos el de la sesion
+      $idUsuarioVenta = $venta->venta->usuarioID;
+    }else{
+      $idUsuarioVenta = $venta->venta->usuarioVenta;
+    }
     //consultamos el usuario de venta
     $sqlUs = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuarioVenta'";
     $queryUs = mysqli_query($conexion, $sqlUs);
@@ -48,6 +54,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     }else{
       $usuarioVenta = strtoupper($nombreUsuario);
     }
+
+    $usuarioVenta = strtolower($usuarioVenta);
     
     if($cliente == 1){
       //publico en general
@@ -56,7 +64,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $dataCliente = verCliente($cliente,$idEmprersa);
       // $cliente = $venta->venta->clienteID;
       $dataCliente = json_decode($dataCliente);
-      $cliente = $dataCliente->data->nombreCliente;
+      $cliente = strtolower($dataCliente->data->nombreCliente);
     }
     ?> 
     <!DOCTYPE html>
@@ -114,7 +122,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                 for($x = 0; $x < count($venta->detalleVenta); $x++){
                   if($venta->detalleVenta[$x]->trabajoID > 0){
                     // $nombreArti = "Cobro de Servicio";
-                    $nombreArti = $venta->detalleVenta[$x]->nombreServicio;
+                    $nombreArti = $venta->detalleVenta[$x]->nombreServicio." ".
+                    $venta->detalleVenta[$x]->marca." ".$venta->detalleVenta[$x]->modelo;
                   }else{
                     $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
                   }

@@ -88,7 +88,7 @@ function verTicket($ticket,$idUsuario){
           }else{
             $idTrabajo = $fetch2['trabajoID'];
             //es trabajo/servicio, consultamos el nombre del servicio para agregarlo al ticket
-            $sqlExt3 = "SELECT a.*,c.nombreServicio FROM DETALLEVENTA a INNER JOIN TRABAJOS b ON a.trabajoID = b.idTrabajo 
+            $sqlExt3 = "SELECT a.*,c.nombreServicio,b.tipoDispositivo,b.marca,b.modelo FROM DETALLEVENTA a INNER JOIN TRABAJOS b ON a.trabajoID = b.idTrabajo 
             INNER JOIN SERVICIOS c ON b.servicioID = c.idServicio 
             WHERE a.ventaID = '$ticket' AND b.idTrabajo = $idTrabajo";
             $queryExt3 = mysqli_query($conexion, $sqlExt3);

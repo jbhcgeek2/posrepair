@@ -714,11 +714,18 @@ if(!empty($_SESSION['usuarioPOS'])){
     $datosUsuario = getDataUser($usuario,$idEmprersa);
     $idSucursal = json_decode($datosUsuario)->sucursalID;
     $idUsuario = json_decode($datosUsuario)->idUsuario;
+    $usuarioVenta = "";
 
     //seccion para realizar el cobro de la venta
     $cliente = $_POST['clienteVenta'];
     $totalCobro = $_POST['totalPago'];
     $descuento = $_POST['descuentoPago'];
+    //verificamos si se indico un usuario de venta, si no seleccionamos al usuario actual
+    if(!empty($_POST['usuarioVenta'])){
+      $usuarioVenta = $_POST['usuarioVenta'];
+    }else{
+      $usuarioVenta = $idUsuario;
+    }
     $montoPagoTotal = "";
 
     //solo se puede definir un tipo de pago
@@ -747,8 +754,10 @@ if(!empty($_SESSION['usuarioPOS'])){
       $cantidadExiste = $fetchAux['existenciaSucursal'];
       if($cantidadVenta > $cantidadExiste){
         //la cantidad supera y no se puede vender
-        $pasa = 1;
-        $cantidadSuperada = 1;
+        // $pasa = 1;
+        // $cantidadSuperada = 1;
+        //se desactiva la verificacion de las cantidades para alertar
+        //y verificar manualmente
       }else{
         //la cantidad deseada es igual o menor a la deseada
         //de momento no hacemos nada, pero en la siguiente operacion 
@@ -769,8 +778,9 @@ if(!empty($_SESSION['usuarioPOS'])){
         $feria = $montoPagoTotal - $totalCobro;
 
         $sql2 = "INSERT INTO VENTAS (num_comprobante,fechaVenta,horaVenta,totalVenta,estatusVenta,descuentoVenta,
-        montoPago,cambioPago,tipoPago,clienteID,empresaID,usuarioID) VALUES ('$numVenta','$fecha','$hora',
-        '$totalCobro','Finalizada','$descuento','$montoPagoTotal','$feria','$tipoPago','$cliente','$idEmprersa','$idUsuario')";
+        montoPago,cambioPago,tipoPago,clienteID,empresaID,usuarioID,usuarioVenta) VALUES ('$numVenta','$fecha','$hora',
+        '$totalCobro','Finalizada','$descuento','$montoPagoTotal','$feria','$tipoPago','$cliente','$idEmprersa',
+        '$idUsuario','$usuarioVenta')";
         try {
           $query2 = mysqli_query($conexion, $sql2);
           //se inserto correctamente la venta, mostramos el id de la venta

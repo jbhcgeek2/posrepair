@@ -501,6 +501,7 @@ btnCobro.addEventListener('click', function(){
       let montoPagoTransferencia = document.getElementById("pagoTransferencia").value;
       let montoPagoCredito = document.getElementById("pagoCredito").value;
       let clienteVenta = document.getElementById("clienteVenta").value;
+      let usuarioVenta = document.getElementById("vendedor").value;
 
       let total = document.getElementById("totalCobroVenta").value;
       let descuento = document.getElementById("descuentoVenta").value;
@@ -515,6 +516,7 @@ btnCobro.addEventListener('click', function(){
       datos.append("descuentoPago",descuento);
       datos.append("ivaPago",iva);
       datos.append("clienteVenta",clienteVenta);
+      datos.append("usuarioVenta",usuarioVenta);
 
       let envio = new XMLHttpRequest();
       envio.open("POST","../includes/cajas.php",false);
