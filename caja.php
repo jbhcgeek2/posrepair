@@ -652,9 +652,9 @@ session_start();
                   </div>
 
                   <div class="row">
-                    <div class="col-md-6 offset-md-3">
+                    <div class="col-md-6 offset-md-3 mb-5">
                       <label for="vendedor" class="form-label">Seleccione Vendedor</label>
-                      <select name="vendedor" id="vendedor" class="form-select">
+                      <select name="vendedor" id="vendedor" class="form-select" style="background-color:#c8e6c9;">
                         <option value="" selected>Vendedor...</option>
                         <?php 
                           $sqlUsVenta = "SELECT * FROM USUARIOS WHERE empresaID = '$idEmpresaSesion'
@@ -676,7 +676,7 @@ session_start();
                                 $nombreVen = $fetchUsVen['nombreUsuario']." ".$fetchUsVen['apPaternoUsuario']." ".$fetchUsVen['apMaternoUsuario'];
                                 $idVen = $fetchUsVen['idUsuario'];
 
-                                echo "<option value='$idVen' selected>$nombreVen</option>";
+                                echo "<option value='$idVen'>$nombreVen</option>";
                               }//fin del while
                             }
                             
