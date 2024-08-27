@@ -122,7 +122,8 @@ if(!empty($_SESSION['usuarioPOS'])){
                 for($x = 0; $x < count($venta->detalleVenta); $x++){
                   if($venta->detalleVenta[$x]->trabajoID > 0){
                     // $nombreArti = "Cobro de Servicio";
-                    $nombreArti = $venta->detalleVenta[$x]->nombreServicio;
+                    $nombreArti = $venta->detalleVenta[$x]->nombreServicio." ".
+                    $venta->detalleVenta[$x]->marca." ".$venta->detalleVenta[$x]->modelo;
                   }else{
                     $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
                   }
