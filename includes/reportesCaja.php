@@ -333,10 +333,10 @@ if(!empty($_SESSION['usuarioPOS'])){
         $sql = "SELECT DISTINCT(a.articuloID),c.nombreArticulo, 
         (SELECT SUM(x.cantidadVenta) FROM DETALLEVENTA x INNER JOIN VENTAS z 
         ON x.ventaID = z.idVenta WHERE x.articuloID = a.articuloID AND 
-        (z.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')) 
+        (z.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND z.empresaID = '$idEmpresaSesion') 
         AS vendidos FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
         INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo WHERE 
-        (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin')";
+        (b.fechaVenta BETWEEN '$fechaIni' AND '$fechaFin') AND b.empresaID = '$idEmpresaSesion'";
       }else{
         //buscamos por sucursal
         // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
