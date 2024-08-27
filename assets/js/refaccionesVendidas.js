@@ -33,7 +33,7 @@ btnRefa.addEventListener('click', function(){
             <td>${servicio}</td>
             <td>${modelo}</td>
             <td>${cantidad}</td>
-            </tr>`;
+            </tr>`; 
   
             
           }//fin del for
