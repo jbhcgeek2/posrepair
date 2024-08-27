@@ -17,4 +17,7 @@
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
     <link id="theme-style" rel="stylesheet" href="assets/css/prop.css">
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5183563409044723"
+     crossorigin="anonymous"></script>
+
 </head> 
