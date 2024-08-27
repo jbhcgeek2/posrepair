@@ -93,6 +93,12 @@ session_start();
                               $query = mysqli_query($conexion,$sql);
                               if(mysqli_num_rows($query) > 0){
                                 while($fetch = mysqli_fetch_assoc($query)){
+                                  $nombreArti = $fetch['nombreDetalle'];
+
+                                  echo "<tr>
+                                    <td>$nombreArti</td>
+                                    <td></td>
+                                  </tr>";
                                   
                                 }//fin del while articulos agrupados
                               }else{
