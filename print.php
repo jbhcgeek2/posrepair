@@ -37,6 +37,12 @@ if(!empty($_SESSION['usuarioPOS'])){
     //para obtener los datos del cliente
     $cliente = $venta->venta->clienteID;
     $idUsuarioVenta = $venta->venta->usuarioID;
+    if($venta->venta->usuarioVenta == null || $venta->venta->usuarioVenta == ""){
+      //sin vendedor, tomamos el de la sesion
+      $idUsuarioVenta = $venta->venta->usuarioID;
+    }else{
+      $idUsuarioVenta = $venta->venta->usuarioVenta;
+    }
     //consultamos el usuario de venta
     $sqlUs = "SELECT * FROM USUARIOS WHERE idUsuario = '$idUsuarioVenta'";
     $queryUs = mysqli_query($conexion, $sqlUs);
