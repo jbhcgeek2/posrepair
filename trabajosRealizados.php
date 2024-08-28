@@ -91,7 +91,7 @@ session_start();
 
                             $sql = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
                             a.servicioID = b.idServicio WHERE a.fechaTermino = '$fecha' 
-                            AND empresaID = '$idEmpresaSesion'";
+                            AND a.empresaID = '$idEmpresaSesion'";
 
                             try {
                               $query = mysqli_query($conexion,$sql);
