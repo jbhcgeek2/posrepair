@@ -20,10 +20,12 @@ btnRefa.addEventListener('click', function(){
         // console.log(res);
 
         let contenido = "";
+        let servicios = {};
+        let modelos = {};
+        
         if(res.data.length > 0){
           //trataremos de crear un resumen de los prncipales servicios
-          let servicios = {};
-          let modelos = {};
+          
 
           for (let i = 0; i < res.data.length; i++) {
             let nombre = res.data[i].nombreDetalle.toUpperCase();
@@ -61,6 +63,7 @@ btnRefa.addEventListener('click', function(){
 
         document.getElementById('bodyTableReport').innerHTML = contenido;
         let serviciosJSON = JSON.stringify(servicios);
+        console.log(servicios);
         console.log(serviciosJSON);
 
       }else{
