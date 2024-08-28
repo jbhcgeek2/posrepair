@@ -34,6 +34,10 @@ btnRefa.addEventListener('click', function(){
             <td>${servicio}</td>
             <td>${modelo}</td>
             <td>${cantidad}</td>
+            <td>
+              <a href='verInfoTrabajo.php?data=${trabajo}' 
+              class='btn btn-success'>Ver</a>
+            </td>
             </tr>`; 
   
             

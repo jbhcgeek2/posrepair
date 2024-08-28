@@ -75,6 +75,7 @@ session_start();
                             <th>Servicio</th>
                             <th>Modelo</th>
                             <th>Cantidad</th>
+                            <th>Ver</th>
                           </tr>
                         </thead>
                         <tbody id="bodyTableReport">
@@ -100,12 +101,16 @@ session_start();
                                   $modelo = $fetch['tipoDispositivo']." ".$fetch['marca']." ".$fetch['modelo'];
                                   $modelo = ucfirst(strtoupper($modelo));
                                   $cantidad = $fetch['cantidad'];
+                                  $idTrabajo = $fetch['idTrabajo'];
 
                                   echo "<tr>
                                     <td>$nombreArti</td>
                                     <td>$nombreServi</td>
                                     <td>$modelo</td>
                                     <td>$cantidad</td>
+                                    <td>
+                                      <a href='verInfoTrabajo.php?data=$idTrabajo' class='btn btn-success'>Ver</a>
+                                    </td>
                                   </tr>";
                                   
                                 }//fin del while articulos agrupados
