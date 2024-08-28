@@ -22,11 +22,12 @@ btnRefa.addEventListener('click', function(){
         let contenido = "";
         if(res.data.length > 0){
           for (let i = 0; i < res.data.length; i++) {
-            let nombre = res.data[i].nombreDetalle;
-            let servicio = res.data[i].nombreServicio;
+            let nombre = res.data[i].nombreDetalle.toUpperCase();
+            let servicio = res.data[i].nombreServicio.toUpperCase();
             let modelo = res.data[i].marca+" "+res.data[i].modelo;
             let cantidad = res.data[i].cantidad;
             let trabajo = res.data[i].idTrabajo;
+            modelo = modelo.toUpperCase();
   
             contenido += `<tr>
             <td>${nombre}</td>
