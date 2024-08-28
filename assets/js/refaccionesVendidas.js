@@ -21,6 +21,10 @@ btnRefa.addEventListener('click', function(){
 
         let contenido = "";
         if(res.data.length > 0){
+          //trataremos de crear un resumen de los prncipales servicios
+          let servicios = {};
+          let modelos = {};
+
           for (let i = 0; i < res.data.length; i++) {
             let nombre = res.data[i].nombreDetalle.toUpperCase();
             let servicio = res.data[i].nombreServicio.toUpperCase();
@@ -28,6 +32,12 @@ btnRefa.addEventListener('click', function(){
             let cantidad = res.data[i].cantidad;
             let trabajo = res.data[i].idTrabajo;
             modelo = modelo.toUpperCase();
+
+            if (servicios[servicio]) {
+              servicios[servicio] += 1;
+            } else {
+              servicios[servicio] = 1;
+            }
   
             contenido += `<tr>
             <td>${nombre}</td>
@@ -50,7 +60,8 @@ btnRefa.addEventListener('click', function(){
         }
 
         document.getElementById('bodyTableReport').innerHTML = contenido;
-
+        let serviciosJSON = JSON.stringify(servicios);
+        console.log(serviciosJSON);
 
       }else{
         //ha ocurrido un error
