@@ -66,10 +66,15 @@ btnRefa.addEventListener('click', function(){
         document.getElementById('tituloFiltro').innerHTML = texto;
         
         console.log(servicios);
+        let servicioPopulares = "<ul>";
         for(let key in servicios){
 
-          console.log(key + ": " + servicios[key]);
+          servicioPopulares = servicioPopulares+"<li>"+key+": "+servicios[key]+"</li>";
+          // console.log(key + ": " + servicios[key]);
         }
+        servicioPopulares = servicioPopulares+"</ul>";
+
+        document.getElementById('servPopulares').innerHTML = servicioPopulares;
 
       }else{
         //ha ocurrido un error

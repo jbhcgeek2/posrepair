@@ -66,6 +66,7 @@ session_start();
                     <hr clas="my-4">
 
                     <h5 id="tituloFiltro">Se muestran los articulos vendidos el dia: <?php echo $fechaAyer; ?></h5><br>
+                    <div id="servPopulares"></div>
 
                     <div style="max-height:500px;overflow-y: scroll;">
                       <table class="table">
