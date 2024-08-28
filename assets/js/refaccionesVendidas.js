@@ -68,6 +68,10 @@ btnRefa.addEventListener('click', function(){
         console.log(servicios);
         console.log(serviciosJSON);
 
+        for(let key in serviciosJSON){
+          console.log(key + ": " + miJson[key]);
+        }
+
       }else{
         //ha ocurrido un error
         Swal.fire(
