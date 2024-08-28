@@ -22,7 +22,8 @@ btnRefa.addEventListener('click', function(){
         let contenido = "";
         let servicios = {};
         let modelos = {};
-        
+        let texto = "Se muestran los articulos vendidos el dia: "+fechaIni+" "+fechaFin;
+
         if(res.data.length > 0){
           //trataremos de crear un resumen de los prncipales servicios
           
@@ -62,6 +63,7 @@ btnRefa.addEventListener('click', function(){
         }
 
         document.getElementById('bodyTableReport').innerHTML = contenido;
+        document.getElementById('tituloFiltro').innerHTML = texto;
         let serviciosJSON = JSON.stringify(servicios);
         console.log(servicios);
         console.log(serviciosJSON);
