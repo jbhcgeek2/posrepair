@@ -22,7 +22,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Articulos y Refacciones Utilizados</h1>
+			    <h1 class="app-page-title">Trabajos realizados</h1>
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -88,9 +88,10 @@ session_start();
                             // ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
                             // IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
 
-                            $sql = "SELECT * FROM DETALLETRABAJO a INNER JOIN TRABAJOS c 
-                            ON a.trabajoID = c.idTrabajo INNER JOIN SERVICIOS d ON c.servicioID = d.idServicio
-                            WHERE a.fechaMovimiento = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
+
+                            $sql = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
+                            a.servicioID = b.idServicio WHERE a.fechaTermino = '$fecha' 
+                            AND empresaID = '$idEmpresaSesion'";
 
                             try {
                               $query = mysqli_query($conexion,$sql);
