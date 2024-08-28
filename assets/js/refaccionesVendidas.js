@@ -64,12 +64,10 @@ btnRefa.addEventListener('click', function(){
 
         document.getElementById('bodyTableReport').innerHTML = contenido;
         document.getElementById('tituloFiltro').innerHTML = texto;
-        let serviciosJSON = JSON.stringify(servicios);
+        
         console.log(servicios);
-        console.log(serviciosJSON);
-
         for(let key in servicios){
-          
+
           console.log(key + ": " + servicios[key]);
         }
 
