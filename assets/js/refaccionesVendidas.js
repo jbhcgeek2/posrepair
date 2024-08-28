@@ -20,7 +20,7 @@ btnRefa.addEventListener('click', function(){
         // console.log(res);
 
         let contenido = "";
-        let servicios = {};
+        const servicios = {};
         let modelos = {};
         let texto = "Se muestran los articulos vendidos el dia: "+fechaIni+" "+fechaFin;
 
