@@ -68,7 +68,8 @@ btnRefa.addEventListener('click', function(){
         console.log(servicios);
         console.log(serviciosJSON);
 
-        for(let key in servicios){ 
+        for(let key in servicios){
+          
           console.log(key + ": " + servicios[key]);
         }
 
