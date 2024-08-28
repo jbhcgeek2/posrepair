@@ -17,7 +17,7 @@ btnRefa.addEventListener('click', function(){
       let res = JSON.parse(envio.responseText);
 
       if(res.status == "ok"){
-        console.log(res);
+        // console.log(res);
 
         let contenido = "";
         if(res.data.length > 0){
@@ -45,7 +45,7 @@ btnRefa.addEventListener('click', function(){
         }else{
           //sin datos
           contenido += `<tr>
-            <td colspan='4'>SIN DATOS</td>
+            <td colspan='5' style='text-align:center;'>SIN DATOS</td>
             </tr>`;
         }
 
