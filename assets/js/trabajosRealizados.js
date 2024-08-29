@@ -21,9 +21,13 @@ btnFiltro.addEventListener('click', function(){
         console.log(res);
         let contenido = "";
         let texto = "Se muestran los trabajos finalizados el periodo "+fechaIni+" al "+fechaFin;
+        const servicios = {};
+        
+
 
         if(res.data.length > 0){
           let suma = parseFloat(0);
+
           for (let x = 0; x < res.data.length; x++) {
             let servicio = res.data[x].nombreServicio;
             let equipo = res.data[x].tipoDispositivo+" "+res.data[x].marca+" "+res.data[x].modelo;
@@ -31,6 +35,12 @@ btnFiltro.addEventListener('click', function(){
             let fechaTermino = res.data[x].fechaTermino;
             let idTrab = res.data[x].idTrabajo;
             suma = suma+precio;
+
+            if(servicios[servicio]){
+              servicios[servicio] += 1;
+            }else{
+              servicios[servicio] = 1;
+            }
             
 
             contenido = contenido+`<tr>
@@ -56,6 +66,8 @@ btnFiltro.addEventListener('click', function(){
         }
         document.getElementById('bodyTableReport').innerHTML = contenido;
         document.getElementById('tituloFiltro').innerHTML = texto;
+        document.getElementById('totalServicios').innerHTML = res.data.length;
+        document.getElementById('totalCobro').innerHTML = suma.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
       }else{
         Swal.fire(
