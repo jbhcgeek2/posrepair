@@ -96,6 +96,7 @@ session_start();
 
                             try {
                               $query = mysqli_query($conexion,$sql);
+                              $suma = 0;
                               if(mysqli_num_rows($query) > 0){
                                 while($fetch = mysqli_fetch_assoc($query)){
                                   $nombreServi = strtoupper($fetch['nombreServicio']);
@@ -105,6 +106,7 @@ session_start();
                                   $idTrabajo = $fetch['idTrabajo'];
                                   $costo = $fetch['costoFinal'];
                                   $fechaTermino = $fetch['fechaTermino'];
+                                  $suma = $suma + $costo;
 
                                   echo "<tr>
                                     <td>$nombreServi</td>
@@ -117,6 +119,11 @@ session_start();
                                   </tr>";
                                   
                                 }//fin del while articulos agrupados
+                                echo "<tr>
+                                  <td colspan='2' style='text-align:right;'>TOTAL</td>
+                                  <td style='text-align:left;'><strong>$suma</strong></td>
+                                  <td></td>
+                                </tr>";
                               }else{
                                 //sin articulos vendidos
                                 echo "<tr>
