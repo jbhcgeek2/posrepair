@@ -20,6 +20,7 @@ btnFiltro.addEventListener('click', function(){
       if(res.status == "ok"){
         console.log(res);
         let contenido = "";
+        let texto = "Se muestran los trabajos finalizados el periodo "+fechaIni+" al "+fechaFin;
 
         if(res.data.length > 0){
           let suma = parseFloat(0);
@@ -44,7 +45,7 @@ btnFiltro.addEventListener('click', function(){
           }//fin del for
           contenido = contenido+`<tr>
             <td colspan='2' style='text-align:right;'>TOTAL</td>
-            <td style='text-align:left;'>${suma.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}}</td>
+            <td style='text-align:left;'>${suma.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
             <td colspan='2'></td>
           </tr>`;
         }else{
@@ -54,6 +55,8 @@ btnFiltro.addEventListener('click', function(){
           </tr>`;
         }
         document.getElementById('bodyTableReport').innerHTML = contenido;
+        document.getElementById('tituloFiltro').innerHTML = texto;
+
       }else{
         Swal.fire(
           'Ha ocurrido un error',
