@@ -148,7 +148,7 @@ session_start();
 
                     <div class="row">
                       <div class="col-sm-12">
-                         <h3>No Servicios: </h3><?php echo $nServicios; ?>
+                         <h3>No Servicios: <span class='danger-text'><?php echo $nServicios; ?></span> </h3>
                          <h3>Cobro Total:</h3>
                       </div>
                     </div>
