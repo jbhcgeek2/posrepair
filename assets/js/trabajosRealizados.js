@@ -22,14 +22,15 @@ btnFiltro.addEventListener('click', function(){
         let contenido = "";
 
         if(res.data.length > 0){
-          let suma = 0;
+          let suma = parseFloat(0);
           for (let x = 0; x < res.data.length; x++) {
             let servicio = res.data[x].nombreServicio;
             let equipo = res.data[x].tipoDispositivo+" "+res.data[x].marca+" "+res.data[x].modelo;
-            let precio = res.data[x].costoFinal;
+            let precio = parseFloat(res.data[x].costoFinal);
             let fechaTermino = res.data[x].fechaTermino;
             let idTrab = res.data[x].idTrabajo;
             suma = suma+precio;
+            
 
             contenido = contenido+`<tr>
               <td>${servicio}</td>
