@@ -19,6 +19,40 @@ btnFiltro.addEventListener('click', function(){
       let res = JSON.parse(envio.responseText);
       if(res.status == "ok"){
         console.log(res);
+        let contenido = "";
+
+        if(res.data.length > 0){
+          let suma = 0;
+          for (let x = 0; x < res.data.length; x++) {
+            let servicio = res.data[x].nombreServicio;
+            let equipo = res.data[x].tipoDispositivo+" "+res.data[x].marca+" "+res.data[x].modelo;
+            let precio = res.data[x].costoFinal;
+            let fechaTermino = res.data[x].fechaTermino;
+            let idTrab = res.data[x].idTrabajo;
+            suma = suma+precio;
+
+            contenido = contenido+`<tr>
+              <td>${servicio}</td>
+              <td>${equipo}</td>
+              <td>${precio}</td>
+              <td>${fechaTermino}</td>
+              <td>
+                <a href="verInfoTrabajo.php?data=${idTrab}" class="btn btn-success">Ver</a>
+              </td>
+            </tr>`;
+          }//fin del for
+          contenido = contenido+`<tr>
+            <td colspan='2' style='text-align:right;'>TOTAL</td>
+            <td style='text-align:left;'>$${suma}</td>
+            <td colspan='2'></td>
+          </tr>`;
+        }else{
+          //sin datos de consulta
+          contenido = `<tr>
+            <td colspan="5" style="text-align:center;">SIN RESULTADOS</td>
+          </tr>`;
+        }
+        document.getElementById('bodyTableReport').innerHTML = contenido;
       }else{
         Swal.fire(
           'Ha ocurrido un error',
