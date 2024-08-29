@@ -24,12 +24,12 @@ btnFiltro.addEventListener('click', function(){
         const servicios = {};
         let suma = parseFloat(0);
 
-
         if(res.data.length > 0){
 
           for (let x = 0; x < res.data.length; x++) {
-            let servicio = res.data[x].nombreServicio;
+            let servicio = res.data[x].nombreServicio.toUpperCase();
             let equipo = res.data[x].tipoDispositivo+" "+res.data[x].marca+" "+res.data[x].modelo;
+            equipo = equipo.toUpperCase();
             let precio = parseFloat(res.data[x].costoFinal);
             let fechaTermino = res.data[x].fechaTermino;
             let idTrab = res.data[x].idTrabajo;
