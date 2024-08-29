@@ -35,7 +35,7 @@ btnFiltro.addEventListener('click', function(){
             contenido = contenido+`<tr>
               <td>${servicio}</td>
               <td>${equipo}</td>
-              <td>$${precio.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+              <td>${precio.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
               <td>${fechaTermino}</td>
               <td>
                 <a href="verInfoTrabajo.php?data=${idTrab}" class="btn btn-success">Ver</a>
@@ -44,7 +44,7 @@ btnFiltro.addEventListener('click', function(){
           }//fin del for
           contenido = contenido+`<tr>
             <td colspan='2' style='text-align:right;'>TOTAL</td>
-            <td style='text-align:left;'>$${suma}</td>
+            <td style='text-align:left;'>${suma.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}}</td>
             <td colspan='2'></td>
           </tr>`;
         }else{
