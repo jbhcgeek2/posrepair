@@ -423,7 +423,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       
       $sql = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
       a.servicioID = b.idServicio WHERE (a.fechaTermino BETWEEN '$fechaIniTrab' AND '$fechaFinTrab' )
-      AND a.empresaID = '$idEmpresaSesion'";
+      AND a.empresaID = '$idEmpresaSesion' ORDER BY a.fechaTermino DESC";
 
       try {
         $query = mysqli_query($conexion, $sql);

@@ -35,7 +35,7 @@ btnFiltro.addEventListener('click', function(){
             contenido = contenido+`<tr>
               <td>${servicio}</td>
               <td>${equipo}</td>
-              <td>${precio}</td>
+              <td>$${precio.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
               <td>${fechaTermino}</td>
               <td>
                 <a href="verInfoTrabajo.php?data=${idTrab}" class="btn btn-success">Ver</a>
