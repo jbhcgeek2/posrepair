@@ -415,6 +415,36 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Indique fechas validas'];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['fechaIniTrab'])){
+    //seccion para ver los trabajos realizados
+    $fechaIniTrab = $_POST['fechaIniTrab'];
+    $fechaFinTrab = $_POST['fechaFinTrab'];
+    if($fechaFinTrab >= $fechaIniTrab){
+      
+      $sql = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
+      a.servicioID = b.idServicio WHERE (a.fechaTermino BETWEEN '$fechaIniTrab' AND '$fechaFinTrab' )
+      AND a.empresaID = '$idEmpresaSesion'";
+
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $datos = [];
+        $x = 0;
+        while($fetch = mysqli_fetch_assoc($query)){
+          $datos[$x] = $fetch;
+          $x++;
+        }//fin del while
+
+        $res = ['status'=>'ok','data'=>$datos,'mensaje'=>'operationComplete'];
+        echo json_encode($res);
+
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error interno: '.$th];
+        echo json_encode($res);  
+      }
+    }else{
+      $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas correctas.'];
+      echo json_encode($res);
+    }
   }
 }else{
   //sin sesion

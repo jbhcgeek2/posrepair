@@ -59,7 +59,7 @@ session_start();
                       
                       
                       <div class="col-sm-12 col-md-3 mt-4">
-                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscarVendidos">Buscar</a>
+                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscarTrabajos">Buscar</a>
                       </div>
                       
                     </div>
