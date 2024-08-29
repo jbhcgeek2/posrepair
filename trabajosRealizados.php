@@ -97,6 +97,7 @@ session_start();
                             try {
                               $query = mysqli_query($conexion,$sql);
                               $suma = 0;
+                              $nServicios = 0;
                               if(mysqli_num_rows($query) > 0){
                                 while($fetch = mysqli_fetch_assoc($query)){
                                   $nombreServi = strtoupper($fetch['nombreServicio']);
@@ -107,6 +108,7 @@ session_start();
                                   $costo = $fetch['costoFinal'];
                                   $fechaTermino = $fetch['fechaTermino'];
                                   $suma = $suma + $costo;
+                                  $nServicios = $nServicios+1;
 
                                   echo "<tr>
                                     <td>$nombreServi</td>
@@ -146,7 +148,7 @@ session_start();
 
                     <div class="row">
                       <div class="col-sm-12">
-                         <h3>No Servicios: </h3>
+                         <h3>No Servicios: </h3><?php echo $nServicios; ?>
                          <h3>Cobro Total:</h3>
                       </div>
                     </div>
