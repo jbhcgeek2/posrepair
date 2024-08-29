@@ -22,11 +22,10 @@ btnFiltro.addEventListener('click', function(){
         let contenido = "";
         let texto = "Se muestran los trabajos finalizados el periodo "+fechaIni+" al "+fechaFin;
         const servicios = {};
-        
+        let suma = parseFloat(0);
 
 
         if(res.data.length > 0){
-          let suma = parseFloat(0);
 
           for (let x = 0; x < res.data.length; x++) {
             let servicio = res.data[x].nombreServicio;
