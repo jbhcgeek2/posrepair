@@ -73,7 +73,7 @@ session_start();
                         <thead>
                           <tr>
                             <th>Servicio</th>
-                            <th>Modelo</th>
+                            <th>Equipo</th>
                             <th>Precio</th>
                             <th>Fecha Termino</th>
                             <th>Ver</th>
@@ -107,7 +107,6 @@ session_start();
                                   $fechaTermino = $fetch['fechaTermino'];
 
                                   echo "<tr>
-                                    <td>$nombreArti</td>
                                     <td>$nombreServi</td>
                                     <td>$modelo</td>
                                     <td>$$costo</td>
