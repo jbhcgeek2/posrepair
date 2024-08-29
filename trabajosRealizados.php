@@ -147,9 +147,12 @@ session_start();
                     </div>
 
                     <div class="row">
-                      <div class="col-sm-12">
+                      <div class="col-sm-12 col-md-4">
                          <h3>No Servicios: <span class='text-danger' id="totalServicios"><?php echo $nServicios; ?></span> </h3>
                          <h3>Cobro Total: <span class="text-danger" id="totalCobro">$<?php echo number_format($suma,2); ?></span> </h3>
+                      </div>
+                      <div class="col-sm-12 col-md-8">
+                        <div><canvas id="servicioRealizados"></canvas></div>
                       </div>
                     </div>
 
