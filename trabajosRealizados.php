@@ -121,7 +121,7 @@ session_start();
                                 }//fin del while articulos agrupados
                                 echo "<tr>
                                   <td colspan='2' style='text-align:right;'>TOTAL</td>
-                                  <td style='text-align:left;'><strong>$suma</strong></td>
+                                  <td style='text-align:left;'><strong>".number_format($suma,2)."</strong></td>
                                   <td></td>
                                 </tr>";
                               }else{
