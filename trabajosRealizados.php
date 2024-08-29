@@ -15,6 +15,7 @@ session_start();
     include("includes/articulos.php");
     include("includes/ventas.php");
     $fechaAyer = date('Y-m-d', strtotime('-1 day'));
+    $fecha = date('Y-m-d');
   ?>
     
     <div class="app-wrapper">
@@ -65,23 +66,23 @@ session_start();
 
                     <hr clas="my-4">
 
-                    <h5 id="tituloFiltro">Se muestran los articulos vendidos el dia: <?php echo $fechaAyer; ?></h5><br>
+                    <h5 id="tituloFiltro">Se muestran los trabajos finalizados el dia: <?php echo $fecha; ?></h5><br>
 
                     <div style="max-height:500px;overflow-y: scroll;">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Producto</th>
                             <th>Servicio</th>
                             <th>Modelo</th>
-                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Fecha Termino</th>
                             <th>Ver</th>
                           </tr>
                         </thead>
                         <tbody id="bodyTableReport">
                           <?php 
                             
-                            $fecha = date('Y-m-d');
+                            
                             //consultamos los productos vendidos del dia de ayer
                             // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
                             // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
@@ -97,18 +98,20 @@ session_start();
                               $query = mysqli_query($conexion,$sql);
                               if(mysqli_num_rows($query) > 0){
                                 while($fetch = mysqli_fetch_assoc($query)){
-                                  $nombreArti = strtoupper($fetch['nombreDetalle']);
                                   $nombreServi = strtoupper($fetch['nombreServicio']);
                                   $modelo = $fetch['tipoDispositivo']." ".$fetch['marca']." ".$fetch['modelo'];
                                   $modelo = strtoupper($modelo);
                                   $cantidad = $fetch['cantidad'];
                                   $idTrabajo = $fetch['idTrabajo'];
+                                  $costo = $fetch['costoFinal'];
+                                  $fechaTermino = $fetch['fechaTermino'];
 
                                   echo "<tr>
                                     <td>$nombreArti</td>
                                     <td>$nombreServi</td>
                                     <td>$modelo</td>
-                                    <td>$cantidad</td>
+                                    <td>$$costo</td>
+                                    <td>$fechaTermino</td>
                                     <td>
                                       <a href='verInfoTrabajo.php?data=$idTrabajo' class='btn btn-success'>Ver</a>
                                     </td>
@@ -163,7 +166,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/refaccionesVendidas.js"></script>
+    <script src="assets/js/trabajosRealizados.js"></script>
 </body>
 </html> 
 
