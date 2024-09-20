@@ -102,9 +102,13 @@ session_start();
                           }else{
                             //el usuario encargado podra ver las ventas de todos
                             //los usuarios, pero solo de su susucrsal
+                            // $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            // INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
+                            // WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
+
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
-                            INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
-                            WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
+                            WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
+                            AND a.sucursalID = '$idSucursalN'";
 
                             $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
                             empresaMovID = '$idEmpresaSesion' AND sucursalMovID = '$idSucursalN' AND conceptoMov IN ('15','2')";
