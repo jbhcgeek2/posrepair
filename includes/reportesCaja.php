@@ -381,6 +381,70 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas validas.'];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['fechaIniRefa'])){
+    //metodo para buscar refacciones en trabajos
+    $fechaIni = $_POST['fechaIniRefa'];
+    $fechaFin = $_POST['fechaFinRefa'];
+
+    //primero verificamos que las fechas sean validas
+    if($fechaFin >= $fechaIni){
+      //buscamos
+      $sql = "SELECT * FROM DETALLETRABAJO a INNER JOIN TRABAJOS c 
+      ON a.trabajoID = c.idTrabajo INNER JOIN SERVICIOS d ON c.servicioID = d.idServicio
+      WHERE (a.fechaMovimiento BETWEEN '$fechaIni' AND '$fechaFin') AND a.empresaID = '$idEmpresaSesion'";
+
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $data = [];
+        $x = 0;
+        while($fetch = mysqli_fetch_assoc($query)){
+          $data[$x] = $fetch;
+          $x++;
+        }//fin del while
+
+        $res = ['status'=>'ok','data'=>$data,'mensaje'=>'operationComplete'];
+        echo json_encode($res);
+
+      } catch (\Throwable $th) {
+        //error de base de datos
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error: '.$th];
+        echo json_encode($res);
+      }
+    }else{
+      //fechas invalidas
+      $res = ['status'=>'error','mensaje'=>'Indique fechas validas'];
+      echo json_encode($res);
+    }
+  }elseif(!empty($_POST['fechaIniTrab'])){
+    //seccion para ver los trabajos realizados
+    $fechaIniTrab = $_POST['fechaIniTrab'];
+    $fechaFinTrab = $_POST['fechaFinTrab'];
+    if($fechaFinTrab >= $fechaIniTrab){
+      
+      $sql = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
+      a.servicioID = b.idServicio WHERE (a.fechaTermino BETWEEN '$fechaIniTrab' AND '$fechaFinTrab' )
+      AND a.empresaID = '$idEmpresaSesion' ORDER BY a.fechaTermino DESC";
+
+      try {
+        $query = mysqli_query($conexion, $sql);
+        $datos = [];
+        $x = 0;
+        while($fetch = mysqli_fetch_assoc($query)){
+          $datos[$x] = $fetch;
+          $x++;
+        }//fin del while
+
+        $res = ['status'=>'ok','data'=>$datos,'mensaje'=>'operationComplete'];
+        echo json_encode($res);
+
+      } catch (\Throwable $th) {
+        $res = ['status'=>'error','mensaje'=>'Ha ocurrido un error interno: '.$th];
+        echo json_encode($res);  
+      }
+    }else{
+      $res = ['status'=>'error','mensaje'=>'Asegurate de indicar fechas correctas.'];
+      echo json_encode($res);
+    }
   }
 }else{
   //sin sesion

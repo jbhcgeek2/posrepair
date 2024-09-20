@@ -15,6 +15,7 @@ session_start();
     include("includes/articulos.php");
     include("includes/ventas.php");
     $fechaAyer = date('Y-m-d', strtotime('-1 day'));
+    $fecha = date('Y-m-d');
   ?>
     
     <div class="app-wrapper">
@@ -22,7 +23,7 @@ session_start();
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 			    
-			    <h1 class="app-page-title">Articulos y Refacciones Utilizados</h1>
+			    <h1 class="app-page-title">Trabajos realizados</h1>
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -58,63 +59,73 @@ session_start();
                       
                       
                       <div class="col-sm-12 col-md-3 mt-4">
-                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscarVendidos">Buscar</a>
+                        <a href="#!" class="btn btn-primary" role="buttom" id="btnBuscarTrabajos">Buscar</a>
                       </div>
                       
                     </div>
 
                     <hr clas="my-4">
 
-                    <h5 id="tituloFiltro">Se muestran los articulos vendidos el dia: <?php echo $fechaAyer; ?></h5><br>
-                    <div id="servPopulares"></div>
+                    <h5 id="tituloFiltro">Se muestran los trabajos finalizados el dia: <?php echo $fecha; ?></h5><br>
 
                     <div style="max-height:500px;overflow-y: scroll;">
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Producto</th>
                             <th>Servicio</th>
-                            <th>Modelo</th>
-                            <th>Cantidad</th>
+                            <th>Equipo</th>
+                            <th>Precio</th>
+                            <th>Fecha Termino</th>
                             <th>Ver</th>
                           </tr>
                         </thead>
                         <tbody id="bodyTableReport">
                           <?php 
                             
-                            $fecha = date('Y-m-d');
+                            
                             //consultamos los productos vendidos del dia de ayer
                             // $sql = "SELECT a.articuloID,(SELECT COUNT(*) FROM DETALLEVENTA c WHERE c.articuloID = a.articuloID) AS vendidos,
                             // d.nombreArticulo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta INNER JOIN ARTICULOS d 
                             // ON d.idArticulo = a.articuloID WHERE b.fechaVenta = '$fechaAyer' AND b.empresaID = '$idEmpresaSesion' AND a.articuloID 
                             // IS NOT NULL GROUP BY a.articuloID ORDER BY d.nombreArticulo ASC";
 
-                            $sql = "SELECT * FROM DETALLETRABAJO a INNER JOIN TRABAJOS c 
-                            ON a.trabajoID = c.idTrabajo INNER JOIN SERVICIOS d ON c.servicioID = d.idServicio
-                            WHERE a.fechaMovimiento = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
+
+                            $sql = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
+                            a.servicioID = b.idServicio WHERE a.fechaTermino = '$fecha' 
+                            AND a.empresaID = '$idEmpresaSesion'";
 
                             try {
                               $query = mysqli_query($conexion,$sql);
+                              $suma = 0;
+                              $nServicios = 0;
                               if(mysqli_num_rows($query) > 0){
                                 while($fetch = mysqli_fetch_assoc($query)){
-                                  $nombreArti = strtoupper($fetch['nombreDetalle']);
                                   $nombreServi = strtoupper($fetch['nombreServicio']);
                                   $modelo = $fetch['tipoDispositivo']." ".$fetch['marca']." ".$fetch['modelo'];
                                   $modelo = strtoupper($modelo);
                                   $cantidad = $fetch['cantidad'];
                                   $idTrabajo = $fetch['idTrabajo'];
+                                  $costo = $fetch['costoFinal'];
+                                  $fechaTermino = $fetch['fechaTermino'];
+                                  $suma = $suma + $costo;
+                                  $nServicios = $nServicios+1;
 
                                   echo "<tr>
-                                    <td>$nombreArti</td>
                                     <td>$nombreServi</td>
                                     <td>$modelo</td>
-                                    <td>$cantidad</td>
+                                    <td>$$costo</td>
+                                    <td>$fechaTermino</td>
                                     <td>
                                       <a href='verInfoTrabajo.php?data=$idTrabajo' class='btn btn-success'>Ver</a>
                                     </td>
                                   </tr>";
                                   
                                 }//fin del while articulos agrupados
+                                echo "<tr>
+                                  <td colspan='2' style='text-align:right;'>TOTAL</td>
+                                  <td style='text-align:left;'><strong>$".number_format($suma,2)."</strong></td>
+                                  <td colspan='2'></td>
+                                </tr>";
                               }else{
                                 //sin articulos vendidos
                                 echo "<tr>
@@ -133,6 +144,16 @@ session_start();
                           ?>
                         </tbody>
                       </table>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4">
+                         <h3>No Servicios: <span class='text-danger' id="totalServicios"><?php echo $nServicios; ?></span> </h3>
+                         <h3>Cobro Total: <span class="text-danger" id="totalCobro">$<?php echo number_format($suma,2); ?></span> </h3>
+                      </div>
+                      <div class="col-sm-12 col-md-8">
+                        <div><canvas id="servicioRealizados"></canvas></div>
+                      </div>
                     </div>
 
                     
@@ -163,7 +184,7 @@ session_start();
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
-    <script src="assets/js/refaccionesVendidas.js"></script>
+    <script src="assets/js/trabajosRealizados.js"></script>
 </body>
 </html> 
 
