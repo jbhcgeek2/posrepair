@@ -706,7 +706,7 @@ function addTrabajo(trabajo){
 function modPreUnit(detalleVenta){
   //validamos la emprresa para ver si esta habilitada para modificar precios
   let empresa = document.getElementById('datotEmpresaCaja').value;
-  if(empresa == "" || empresa == 7){
+  if(empresa == "" || empresa == 7 || empresa == 1){
     //empresa con la funcion blokeada
     Swal.fire(
       'Funcion No habilitada',
