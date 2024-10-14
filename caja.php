@@ -382,6 +382,7 @@ session_start();
                       <label for="clienteVenta">Cliente</label>
                     </div>
                   </div>
+                  <input type="hidden" id="datotEmpresaCaja" value="<?php echo $idEmpresaSesion; ?>">
 
                 </div><!--row-->
                   
