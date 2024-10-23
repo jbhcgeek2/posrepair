@@ -1,7 +1,7 @@
 <?php
 
   $us = "u427759545_adminRepair";
-  $pw = "#Benja.GeeK0";
+  $pw = "Af=c[KM3Kn.d7uf4*";
   $ht = "localhost";
   $db = "u427759545_postrepair";
 

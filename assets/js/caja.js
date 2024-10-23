@@ -704,52 +704,65 @@ function addTrabajo(trabajo){
 }
 
 function modPreUnit(detalleVenta){
-  let detalleVen = detalleVenta;
-  let montoNuevo = 0;
-  Swal.fire({
-    title: 'Modificar Precio Unitario',
-    input: 'number',
-    showDenyButton: true,
-    confirmButtonText: 'Modificar',
-    denyButtonText: 'Cancelar',
-    preConfirm: async(montoNuevoInput) => {
-      montoNuevo = montoNuevoInput;
-      // console.log(montoNuevo);
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-  }).then((result)=>{
-    if(result.isConfirmed){
-      //se manda la modificacion
-      let datos = new FormData;
-      datos.append('detalleUpdateCaja',detalleVen);
-      datos.append('montoUpdateDetalle',montoNuevo);
+  //validamos la emprresa para ver si esta habilitada para modificar precios
+  let empresa = document.getElementById('datotEmpresaCaja').value;
+  if(empresa == "" || empresa == 7 || empresa == 1){
+    //empresa con la funcion blokeada
+    Swal.fire(
+      'Funcion No habilitada',
+      'Si cree que es un error, contacte al area de soporrte teccnico',
+      'error'
+    )
+  }else{
+    //se tiene permitido modificar precios
+    let detalleVen = detalleVenta;
+    let montoNuevo = 0;
+    Swal.fire({
+      title: 'Modificar Precio Unitario',
+      input: 'number',
+      showDenyButton: true,
+      confirmButtonText: 'Modificar',
+      denyButtonText: 'Cancelar',
+      preConfirm: async(montoNuevoInput) => {
+        montoNuevo = montoNuevoInput;
+        // console.log(montoNuevo);
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //se manda la modificacion
+        let datos = new FormData;
+        datos.append('detalleUpdateCaja',detalleVen);
+        datos.append('montoUpdateDetalle',montoNuevo);
 
-      let envio = new XMLHttpRequest();
-      envio.open('POST','../includes/cajas.php',false);
-      envio.send(datos);
+        let envio = new XMLHttpRequest();
+        envio.open('POST','../includes/cajas.php',false);
+        envio.send(datos);
 
-      if(envio.status == 200){
-        let res = JSON.parse(envio.responseText);
-        if(res.status == "ok"){
-          //proceso completo
-          location.reload();
+        if(envio.status == 200){
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            //proceso completo
+            location.reload();
+          }else{
+            //ocurrio algun error
+            let err = res.mensaje;
+            Swal.fire(
+              'Ha ocurrido un error',
+              'Verificar: '+mensaje,
+              'error'
+            )
+          }
         }else{
-          //ocurrio algun error
-          let err = res.mensaje;
+          //error de comunicacion
           Swal.fire(
-            'Ha ocurrido un error',
-            'Verificar: '+mensaje,
+            'Servidor Inalcansable',
+            'Verifica tu conexion a internet',
             'error'
           )
         }
-      }else{
-        //error de comunicacion
-        Swal.fire(
-          'Servidor Inalcansable',
-          'Verifica tu conexion a internet',
-          'error'
-        )
       }
-    }
-  })
+    })
+  }
+  
 }
