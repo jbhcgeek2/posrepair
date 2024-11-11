@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <?php
-session_start();
+// session_start();
 
 
  	include("includes/head.php");
@@ -88,11 +88,29 @@ session_start();
                                 //WHERE b.ventaID = a.idVenta) AS sucursalVenta FROM VENTAS a WHERE 
                                 //a.fechaVenta = '$fecha' AND a.usuarioID = '$idUsuario' AND a.empresaID = '$idEmprersa'";
 
+                                //consultamos los posible precortes que tenga realizados
+                                $sqlA = "SELECT SUM(montoMov) AS montoPreCorte FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND usuarioMov = '$idUsuario' 
+                                AND conceptoMov = '16' AND empresaMovID = '$idEmprersa'";
+                                $queryA = mysqli_query($conexion, $sqlA);
+                                $fetchA = mysqli_fetch_assoc($queryA);
+                                $precorte = $fetchA['montoPreCorte'];
+
+
+                                // $sqlMov3 = "SELECT *,(SELECT DISTINCT(b.sucursalID) FROM DETALLEVENTA b 
+                                // WHERE b.ventaID = a.idVenta LIMIT 1) AS sucursalVenta,(SELECT DISTINCT(e.nombreServicio) FROM DETALLEVENTA c 
+                                // INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e ON d.servicioID = e.idServicio 
+                                // WHERE c.ventaID = a.idVenta LIMIT 1) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
+                                // '$idUsuario' AND a.empresaID = '$idEmprersa'";
+
                                 $sqlMov3 = "SELECT *,(SELECT DISTINCT(b.sucursalID) FROM DETALLEVENTA b 
-                                WHERE b.ventaID = a.idVenta LIMIT 1) AS sucursalVenta,(SELECT DISTINCT(e.nombreServicio) FROM DETALLEVENTA c 
-                                INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e ON d.servicioID = e.idServicio 
-                                WHERE c.ventaID = a.idVenta LIMIT 1) AS trabajoVenta FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = 
-                                '$idUsuario' AND a.empresaID = '$idEmprersa'";
+                                WHERE b.ventaID = a.idVenta LIMIT 1) AS sucursalVenta,(SELECT DISTINCT(e.nombreServicio) 
+                                FROM DETALLEVENTA c INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN 
+                                SERVICIOS e ON d.servicioID = e.idServicio WHERE c.ventaID = a.idVenta LIMIT 1) 
+                                AS trabajoVenta, (SELECT CONCAT(d.marca,' ',d.modelo) FROM DETALLEVENTA c 
+                                INNER JOIN TRABAJOS d ON c.trabajoID = d.idTrabajo INNER JOIN SERVICIOS e 
+                                ON d.servicioID = e.idServicio WHERE c.ventaID = a.idVenta LIMIT 1) AS modeloVenta 
+                                FROM VENTAS a WHERE a.fechaVenta = '$fecha' AND a.usuarioID = '$idUsuario' 
+                                AND a.empresaID = '$idEmprersa'";
 
                                 // $sqlMov3 = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                                 // WHERE b.fechaVenta = '$fecha' AND b.usuarioID = '$idUsuario' 
@@ -115,7 +133,7 @@ session_start();
                                         $nombreClie = json_decode($dataCliente)->data->nombreCliente;
                                       }else{
                                         //se trata de un trabajo
-                                        $nombreClie = $fetchMov3['trabajoVenta'];
+                                        $nombreClie = $fetchMov3['trabajoVenta']." ".$fetchMov3['modeloVenta'];
                                         $claseTR = 'table-success';
                                       }
 
@@ -172,7 +190,7 @@ session_start();
             </div><!--//col 7-->
 
             <div class="col-5 col-lg-5">
-              <div class="app-card  h-100 shadow-sm" style="">
+              <div class="app-card  h-100 shadow-sm" >
                 <div class="app-card-header p-3">
                   <div class="row justify-content-between align-items-center">
 
@@ -296,11 +314,13 @@ session_start();
                   <div class="col-sm-12">
                     <span class="fs-4 fw-bold" id="totalDiferencia">Diferencia: $<span id="montoDife">0.00</span></span> <br>
                     <span class="fs-4 fw-bold text-danger" id="montoGastos">Gastos: $<?php echo number_format($gastoCaja,2); ?></span> <br>
+                    <span class="fs-4 fw-bold text-danger" id="montoPrecorte">Pre-cortes: $<?php echo number_format($precorte,2); ?></span> <br>
                     <span class="fs-4 fw-bold" id="montoGastos">Otros Ingresos: $<?php echo number_format($entradaCaja,2); ?></span> <br>
                     <input type="hidden" id="gastoCaja" value="<?php echo $gastoCaja; ?>">
                     <input type="hidden" id="entradaCaja" value="<?php echo $entradaCaja ?>">
-                    <span class="fs-4 fw-bold text-primary" id="saldoTotal">Total en Efectivo: $<?php echo number_format($totalCaja,2); ?></span> <br>
-                    <input type="hidden" id="totalCajaSaldo" value="<?php echo $totalCaja; ?>">
+                    <input type="hidden" id="precortes" value="<?php echo $precorte ?>">
+                    <span class="fs-4 fw-bold text-primary" id="saldoTotal">Total en Efectivo: $<?php echo number_format(($totalCaja-$precorte),2); ?></span> <br>
+                    <input type="hidden" id="totalCajaSaldo" value="<?php echo ($totalCaja-$precorte); ?>">
                     <span class="fs-4 fw-bold ">Efectivo Final en Caja: $<span id="saldoDeja">0.00</span></span> <br>
                     <input type="hidden" id="ventaTotalDia" value="<?php echo $totalVenta; ?>">
                   </div>
@@ -310,6 +330,7 @@ session_start();
 
                 <div class="row m-2" style="<?php echo $controlCierre; ?>">
                   <a href="#!" class="btn btn-warning" id="btnCerrarDia">Cerrar Dia</a>
+                  <a href="#!" class="btn btn-danger mt-3" id="btnPreCorte">Pre-Corte</a>
                 </div>
                 
 

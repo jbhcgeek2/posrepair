@@ -926,6 +926,15 @@ if(!empty($_SESSION['usuarioPOS'])){
     $ingresoCajero = verIngresos($idUsuario,$idEmprersa,$fecha);
     $ingresoCajero = json_decode($ingresoCajero)->data;
 
+    //consultamos si tiene precortes
+    $sqlPre = "SELECT SUM(montoMov) AS montoPrecorte FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
+    conceptoMov = '16' AND usuarioMov = '$idUsuario' AND empresaMovID = '$idEmprersa'";
+    $queryPre = mysqli_query($conexion, $sqlPre);
+    $fetchPre = mysqli_fetch_assoc($queryPre);
+
+    $montoPrecorte = $fetchPre['montoPrecorte'];
+    
+
 
 
     $efecTivoTot = $_POST['efectivoTotCaja'];
@@ -1074,6 +1083,12 @@ if(!empty($_SESSION['usuarioPOS'])){
           //el cajero tiene gastos
           $montoTotalCajeroReal = $montoTotalCajeroReal - $gastoCajero;
         }
+        
+        //ahora consultamos si tiene precortes
+        if($montoPrecorte > 0){
+          $montoTotalCajeroReal = $montoTotalCajeroReal - $montoPrecorte;
+        }
+
 
         
         

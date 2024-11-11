@@ -6,6 +6,7 @@ function calculaTotal(dato){
     let montoEfe = document.getElementById('ventaEfectivo').value;
     let montoGas = document.getElementById('gastoCaja').value;
     let montoEnt = document.getElementById('entradaCaja').value;
+    let precortes = document.getElementById('precortes').value;
     if(montoEfe == ""){
       montoEfe = 0;
     }
@@ -16,10 +17,11 @@ function calculaTotal(dato){
     montoEfe = parseFloat(montoEfe);
     montoGas = parseFloat(montoGas);
     montoEnt = parseFloat(montoEnt);
+    precortes = parseFloat(precortes);
 
     dato = parseFloat(dato);
 
-    let montoTotal = (inicial+montoEfe) - montoGas + montoEnt;
+    let montoTotal = (inicial+montoEfe) - montoGas + montoEnt - precortes;
     let diferencia = parseFloat(montoTotal - dato);
 
     // let suma = dato + inicial;
@@ -399,3 +401,59 @@ function cerrarCaja(){
     )
   }
 }
+
+let btnPrecorte = document.getElementById('btnPreCorte');
+btnPrecorte.addEventListener('click',function(){
+  let totalEfectivo = document.getElementById('totalCajaSaldo').value;
+
+  Swal.fire({
+    title: 'Pre-Corte de Caja',
+    text: 'Ingresa el monto a retirar',
+    input: 'number',
+    showCancelButton: true,
+    confirmButtonText: 'Procesar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      console.log(result.value);
+      let retira = result.value;
+      if(retira <= totalEfectivo){
+        let datos = new FormData();
+        datos.append('montoRetiraPreCorte',retira);
+        datos.append('montoEfePrecorte',totalEfectivo);
+
+        let envio = new XMLHttpRequest();
+        envio.open('POST','../includes/precorteCaja.php',false);
+        envio.send(datos);
+
+        if(envio.status == 200){
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            location.reload();
+          }else{
+            //ocurrio un error
+            Swal.fire(
+              'Ha ocurrido un error',
+              res.mensaje,
+              'error'
+            )
+          }
+        }else{
+          //error al procesar
+          Swal.fire(
+            'Servidor Inalcansable',
+            'Verifica tu conexion a internet',
+            'error'
+          )
+        }
+      }else{
+        Swal.fire({
+          title: 'Movimiento Incorrecto',
+          text: 'No puedes retirar mas del efectivo existente',
+          icon: 'error'
+        })
+      }
+    }else{
+      //no hacemos nada
+    }
+  })
+})

@@ -698,3 +698,54 @@ inputComent.addEventListener('change', function(){
 
   }
 })
+
+if(document.getElementById('enviarCorreo')){
+  let btnEnviaMail = document.getElementById('enviarCorreo');
+  btnEnviaMail.addEventListener('click', function(){
+    Swal.fire({
+      title: 'Enviar Correo?',
+      text: 'Se enviara un correo de cambio de estatus al cliente',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Enviar'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //enviamos el correo
+        let idTrabajo = document.getElementById('datoTrabajo').value;
+  
+        let datos = new FormData();
+        datos.append('dataTrabajo',idTrabajo);
+  
+        let envio = new XMLHttpRequest();
+        envio.open('POST','enviarCorreoTrabajo.php',false);
+        envio.send(datos);
+  
+        if(envio.status == 200){
+          let res = JSON.parse(envio.responseText);
+          if(res.status == "ok"){
+            Swal.fire(
+              'Correo Enviado',
+              'Se envio correctamente la notificacion al cliente',
+              'success'
+            )
+          }else{
+            //ocurrio un error
+            Swal.fire(
+              'Ha ocurrido un error',
+              res.mensaje,
+              'error'
+            )
+          }
+        }else{
+          Swal.fire(
+            'Servidor Inalcansable',
+            'Verifica tu conexion a internet',
+            'error'
+          )
+        }
+  
+        // console.log(envio.responseText);
+      }
+    })
+  })
+}
