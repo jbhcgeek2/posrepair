@@ -70,6 +70,9 @@
                       <?php 
                         //buscamos los datos de venta
                         $fecha = date('Y-m-d');
+                        $montoInicio = 0;
+                        $totalEfectivo = 0;
+                        $totalVenta = 0;
                         $sqlMov = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND conceptoMov = '1' AND 
                         sucursalMovID = '$idSucursal' AND usuarioMov = '$idUsuario'";
                         try {
