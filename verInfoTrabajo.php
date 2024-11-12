@@ -107,7 +107,16 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
-                          <a href="printTrabajo.php?t=<?php echo $idTicket; ?>" target='_blank' class="btn btn-danger">Ver Ticket</a> 
+                          <?php 
+                            if($idEmpresaSesion == "3" || $idEmpresaSesion == "1"){
+                              ?>
+                                <a href="#!" id="enviarCorreo" class="btn btn-success me-3">Notificar Por Email</a>
+                              <?php
+                            }else{
+                              //no tiene ahbilitado el modulo
+                            }
+                          ?>
+                          <a href="printTrabajo.php?t=<?php echo $idTicket; ?>" target='_blank' class="btn btn-danger me-3">Ver Ticket</a> 
 									        <a href="verTrabajos.php">Ver Trabajos</a>
 								        </div><!--//card-header-actions-->
 							        </div><!--//col-->

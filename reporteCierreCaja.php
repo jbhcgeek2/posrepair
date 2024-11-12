@@ -71,12 +71,12 @@ if(!empty($_SESSION['usuarioPOS'])){
             }else{
               //se trata de un servicio
               $idTrabajo = $fetch2['trabajoID'];
-              $sql4 = "SELECT a.idTrabajo,b.nombreServicio FROM TRABAJOS a INNER JOIN SERVICIOS b 
+              $sql4 = "SELECT a.idTrabajo,b.nombreServicio,a.marca,a.modelo FROM TRABAJOS a INNER JOIN SERVICIOS b 
               ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idTrabajo'";
               try {
                 $query4 = mysqli_query($conexion, $sql4);
                 $fetch4 = mysqli_fetch_assoc($query4);
-                $nombreCosa = $fetch4['nombreServicio'];
+                $nombreCosa = $fetch4['nombreServicio']." ".$fetch4['marca']." ".$fetch4['modelo'];
               } catch (\Throwable $th) {
                 //throw $th;
               }
@@ -87,12 +87,30 @@ if(!empty($_SESSION['usuarioPOS'])){
 
           }//fin del while detalleventa
 
+          //consultamos los gastos
+          $sql5 = "SELECT SUM(montoMov) AS montoGastos FROM MOVCAJAS WHERE usuarioMov = '$idUsuario' AND 
+          conceptoMov = '15' AND empresaMovID = '$idEmprersa' AND 
+          fechaMovimiento = '$fecha'";
+          $query5 = mysqli_query($conexion, $sql5);
+          $fetch5 = mysqli_fetch_assoc($query5);
+          $montoGasto = $fetch5['montoGastos'];
+
+          $sql6 = "SELECT SUM(montoMov) AS montoPrecortes FROM MOVCAJAS WHERE 
+          usuarioMov = '$idUsuario' AND conceptoMov = '16' AND empresaMovId ='$idEmprersa'";
+          $query6 = mysqli_query($conexion, $sql6);
+          $fetch6 = mysqli_fetch_assoc($query6);
+          $montoPrecortes = $fetch6['montoPrecortes'];
+
+          $efectivoEntrega = $ventaEfectivo - $montoGasto -$montoPrecortes;
+
+
         }else{
           //el usuario no realizo ventas
           $ventaEfectivo = 0;
           $ventaDigital = 0;
           $numArticulos = 0;
           $totalVenta = 0;
+          $efectivoEntrega = 0;
         }
 
         // Mostramos el formato de reporte\
@@ -160,6 +178,33 @@ if(!empty($_SESSION['usuarioPOS'])){
                       </tr>
                       <tr>
                         <td colspan="2" style="text-align:right;">$<?php echo number_format($totalVenta,2); ?></td>
+                      </tr>
+                      <tr>
+                        <th colspan="2" style="border-top: 1px dotted;"></th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-weight:bold;">Monto Gastos:</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="text-align:right;">$<?php echo number_format($montoGasto,2); ?></td>
+                      </tr>
+                      <tr>
+                        <th colspan="2" style="border-top: 1px dotted;"></th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-weight:bold;">Pre-cortes:</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="text-align:right;">$<?php echo number_format($montoPrecortes,2); ?></td>
+                      </tr>
+                      <tr>
+                        <th colspan="2" style="border-top: 1px dotted;"></th>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="font-weight:bold;">Efectivo a Entregar</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="text-align:right;font-weight:bold;">$<?php echo number_format($efectivoEntrega,2); ?></td>
                       </tr>
 
                       <tr>
