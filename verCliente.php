@@ -184,6 +184,73 @@ session_start();
                 </div>
               </div>
             </div>
+
+            <div class="col-auto">
+              <h4 class="text-center">Reparaciones del Cliente</h4>
+            </div><!--//col-->
+
+            <div class="app-card-body p-3 p-lg-4" >
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>No. Servicio</th>
+                        <th>Fecha Registro</th>
+                        <th>Fecha Entrega</th>
+                        <th>Modelo</th>
+                        <th>Servicio</th>
+                        <th>Ver</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php 
+                        //consultaremos las ventas del cliente
+                        $sqlT = "SELECT * FROM TRABAJOS a INNER JOIN SERVICIOS b ON 
+                        a.servicioID = b.idServicio WHERE a.empresaID = ? AND a.clienteID = ? 
+                        ORDER BY a.fechaRegistro DESC";
+                        try {
+                          $queryT = mysqli_prepare($conexion, $sqlT);
+                          mysqli_stmt_bind_param($queryT,"ii",$idEmpresaSesion,$idCliente);
+                          mysqli_stmt_execute($queryT);
+                          $resultT = mysqli_stmt_get_result($queryT);
+                          if(mysqli_num_rows($resultT) > 0){
+                            while($fetchT = mysqli_fetch_assoc($resultT)){
+                              $nServ = $fetchT['numTrabajo'];
+                              $fechaReg = $fetchT['fechaRegistro'];
+                              $fechaEnt = $fetchT['fechaEntrega'];
+                              $modelo = $fetchT['marca']." ".$fetchT['modelo'];
+                              $modelo = strtoupper($modelo);
+                              $servicio = $fetchT['nombreServicio'];
+                              $servicio = strtoupper($servicio);
+                              $idTrabajo = $fetchT['idTrabajo'];
+
+                              echo "<tr>
+                                <td>$nServ</td>
+                                <td>$fechaReg</td>
+                                <td>$fechaEnt</td>
+                                <td>$modelo</td>
+                                <td>$servicio</td>
+                                <td>
+                                  <a href='verInfoTrabajo.php?data=$idTrabajo' class='btn btn-success'>Ver</a>
+                                </td>
+                              </tr>";
+                            }//fin del while
+                          }else{
+                            //sin reapraciones
+                            echo "<tr><td colspan='6'><h5>SIN REPARACIONES</h5></td></tr>";
+                          }
+
+                        } catch (\Throwable $th) {
+                          //throw $th;
+                        }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
 
 			    
