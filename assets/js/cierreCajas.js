@@ -7,6 +7,7 @@ function calculaTotal(dato){
     let montoGas = document.getElementById('gastoCaja').value;
     let montoEnt = document.getElementById('entradaCaja').value;
     let precortes = document.getElementById('precortes').value;
+    
     if(montoEfe == ""){
       montoEfe = 0;
     }
@@ -370,44 +371,59 @@ function cerrarCaja(){
   }
   let saldoTotalCaja = (document.getElementById('totalCajaSaldo').value);
 
-  let datos = new FormData();
-  datos.append("efectivoTotCaja",efectivoCaja);
-  datos.append("montoRetiraEfe",montoRetiro);
-  datos.append("observCierre",observMov);
-  datos.append("montoDigital",montoDig);
-
-  let envio = new XMLHttpRequest();
-  envio.open("POST","../includes/cajas.php",false);
-  envio.send(datos);
-
-  // console.log(envio.responseText);
-  if(envio.status == 200){
-    let res = JSON.parse(envio.responseText);
-    if(res.status == "ok"){
-      Swal.fire(
-        'Cierre aplicado',
-        'No olvides imprimir tus reportes',
-        'success'
-      ).then(function(){
-        //redireccionamos a los reportes
-        window.location = "reportesCaja.php";
-      })
+  if(observMov.trim().length > 2){
+    let datos = new FormData();
+    datos.append("efectivoTotCaja",efectivoCaja);
+    datos.append("montoRetiraEfe",montoRetiro);
+    datos.append("observCierre",observMov);
+    datos.append("montoDigital",montoDig);
+  
+    let envio = new XMLHttpRequest();
+    envio.open("POST","../includes/cajas.php",false);
+    envio.send(datos);
+  
+    // console.log(envio.responseText);
+    if(envio.status == 200){
+      let res = JSON.parse(envio.responseText);
+      if(res.status == "ok"){
+        Swal.fire(
+          'Cierre aplicado',
+          'No olvides imprimir tus reportes',
+          'success'
+        ).then(function(){
+          //redireccionamos a los reportes
+          // window.location = "reportesCaja.php";
+          location.reload();
+        })
+      }else{
+        let err = res.mensaje;
+        Swal.fire(
+          'Ha ocurrido un error',
+          'Verificar: '+err,
+          'error'
+        )
+      }
     }else{
-      let err = res.mensaje;
+      //error
       Swal.fire(
-        'Ha ocurrido un error',
-        'Verificar: '+err,
+        'Servidor Inalcansable',
+        'Verifica tu conexion a internet',
         'error'
       )
     }
   }else{
-    //error
-    Swal.fire(
-      'Servidor Inalcansable',
-      'Verifica tu conexion a internet',
-      'error'
-    )
+    const observacion = document.getElementById('obervacionCierre');
+    const feedbackElement = document.getElementById('obervCierreMal');
+    observacion.classList.add('is-invalid');
+    observacion.classList.remove('is-valid');
+    feedbackElement.style.display = 'block';
+    Swal.fire({
+      title: 'Observacion Invalida',
+      text: 'Asegurate de capturar el campo observacion',
+      icon: 'error'
+    })
   }
+  
 }
 
 let btnPrecorte = document.getElementById('btnPreCorte');

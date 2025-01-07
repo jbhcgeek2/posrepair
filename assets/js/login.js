@@ -2,7 +2,17 @@ let btnLog = document.getElementById('brtSession');
 
 btnLog.addEventListener('click', function(){
   //verificamos que contenga dastos correctos
+  log();
+  
+});
 
+let pass = document.getElementById('passLog');
+pass.addEventListener('change',function(){
+  log();
+})
+
+
+function log(){
   let mailLog = document.getElementById('userName').value;
   let passLog = document.getElementById('passLog').value;
 
@@ -46,4 +56,4 @@ btnLog.addEventListener('click', function(){
       'error'
     )
   }
-});
+}

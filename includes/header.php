@@ -158,7 +158,7 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/logo-postRepair.png" alt="logo"><span class="logo-text">PORTAL</span></a>
+		            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/logo.png" alt="logo"><span class="logo-text">POSTRepair</span></a>
 		        </div><!--//app-branding-->  
 		        
 			    	<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">

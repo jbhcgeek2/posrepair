@@ -15,6 +15,9 @@ if(!empty($_SESSION['usuarioPOS'])){
   $idSucursal = json_decode($datosUsuario)->sucursalID;
   $idUsuario = json_decode($datosUsuario)->idUsuario;
   $fecha = date('Y-m-d');
+  $montoGasto = "0";
+  $montoPrecortes = "0";
+  $contenidoTabla = "";
 
   $nombreEmpresa = datoEmpresaSesion($usuario,"nombre");
   $nombreEmpresa = json_decode($nombreEmpresa)->dato;
@@ -44,48 +47,55 @@ if(!empty($_SESSION['usuarioPOS'])){
           $totalVenta = 0;
           $contenidoTabla = "";
 
-          while($fetch2 = mysqli_fetch_assoc($query2)){
-            $venta = $fetch2['subtotalVenta'];
-            $tipoVenta = $fetch2['tipoPago'];
-            $totalVenta = $totalVenta + $venta;
-            if($tipoVenta == "Efectivo"){
-              $ventaEfectivo = $ventaEfectivo + $venta;
-            }else{
-              $ventaDigital = $ventaDigital + $venta;
-            }
-
-            //consultamos las cosas vendidas
-            $nombreCosa = "";
-            if($fetch2['articuloID'] != NULL){
-              //se trata de un articulo
-              $idArti = $fetch2['articuloID'];
-              $sql3 = "SELECT a.nombreArticulo FROM ARTICULOS a WHERE 
-              a.idArticulo = '$idArti' AND a.empresaID = '$idEmprersa'";
-              try {
-                $query3 = mysqli_query($conexion, $sql3);
-                $fetch3 = mysqli_fetch_assoc($query3);
-                $nombreCosa = $fetch3['nombreArticulo'];
-              } catch (\Throwable $th) {
-                //error al consultar el producto
+          if(mysqli_num_rows($query2) > 0){
+            while($fetch2 = mysqli_fetch_assoc($query2)){
+              $venta = $fetch2['subtotalVenta'];
+              $tipoVenta = $fetch2['tipoPago'];
+              $totalVenta = $totalVenta + $venta;
+              if($tipoVenta == "Efectivo"){
+                $ventaEfectivo = $ventaEfectivo + $venta;
+              }else{
+                $ventaDigital = $ventaDigital + $venta;
               }
-            }else{
-              //se trata de un servicio
-              $idTrabajo = $fetch2['trabajoID'];
-              $sql4 = "SELECT a.idTrabajo,b.nombreServicio,a.marca,a.modelo FROM TRABAJOS a INNER JOIN SERVICIOS b 
-              ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idTrabajo'";
-              try {
-                $query4 = mysqli_query($conexion, $sql4);
-                $fetch4 = mysqli_fetch_assoc($query4);
-                $nombreCosa = $fetch4['nombreServicio']." ".$fetch4['marca']." ".$fetch4['modelo'];
-              } catch (\Throwable $th) {
-                //throw $th;
+  
+              //consultamos las cosas vendidas
+              $nombreCosa = "";
+              if($fetch2['articuloID'] != NULL){
+                //se trata de un articulo
+                $idArti = $fetch2['articuloID'];
+                $sql3 = "SELECT a.nombreArticulo FROM ARTICULOS a WHERE 
+                a.idArticulo = '$idArti' AND a.empresaID = '$idEmprersa'";
+                try {
+                  $query3 = mysqli_query($conexion, $sql3);
+                  $fetch3 = mysqli_fetch_assoc($query3);
+                  $nombreCosa = $fetch3['nombreArticulo'];
+                } catch (\Throwable $th) {
+                  //error al consultar el producto
+                }
+              }else{
+                //se trata de un servicio
+                $idTrabajo = $fetch2['trabajoID'];
+                $sql4 = "SELECT a.idTrabajo,b.nombreServicio,a.marca,a.modelo FROM TRABAJOS a INNER JOIN SERVICIOS b 
+                ON a.servicioID = b.idServicio WHERE a.idTrabajo = '$idTrabajo'";
+                try {
+                  $query4 = mysqli_query($conexion, $sql4);
+                  $fetch4 = mysqli_fetch_assoc($query4);
+                  $nombreCosa = $fetch4['nombreServicio']." ".$fetch4['marca']." ".$fetch4['modelo'];
+                } catch (\Throwable $th) {
+                  //throw $th;
+                }
               }
-            }
+  
+              $contenidoTabla .= "<tr><th style='font-weight:normal;'>".
+              strtolower($nombreCosa)."</th><th> $".number_format($venta,2)."</th></tr>";
+  
+            }//fin del while detalleventa
+          }else{
+            //sin ventas en el dia
+            $contenidoTabla = "<tr><th style='font-weight:bold;'>SIN VENTAS</th></tr>";
+          }
 
-            $contenidoTabla .= "<tr><th style='font-weight:normal;'>".
-            strtolower($nombreCosa)."</th><th> $".number_format($venta,2)."</th></tr>";
-
-          }//fin del while detalleventa
+          
 
           //consultamos los gastos
           $sql5 = "SELECT SUM(montoMov) AS montoGastos FROM MOVCAJAS WHERE usuarioMov = '$idUsuario' AND 
@@ -93,7 +103,12 @@ if(!empty($_SESSION['usuarioPOS'])){
           fechaMovimiento = '$fecha'";
           $query5 = mysqli_query($conexion, $sql5);
           $fetch5 = mysqli_fetch_assoc($query5);
-          $montoGasto = $fetch5['montoGastos'];
+          if(!empty($fetch5['montoGastos'])){
+            $montoGasto = $fetch5['montoGastos'];
+          }else{
+            $montoGasto = "0";
+          }
+          
 
           $sql6 = "SELECT SUM(montoMov) AS montoPrecortes FROM MOVCAJAS WHERE 
           usuarioMov = '$idUsuario' AND conceptoMov = '16' AND empresaMovId ='$idEmprersa'";
@@ -111,6 +126,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           $numArticulos = 0;
           $totalVenta = 0;
           $efectivoEntrega = 0;
+          $contenidoTabla = "<tr><th style='font-weight:bold;text-align:center;'>SIN VENTAS</th></tr>";
         }
 
         // Mostramos el formato de reporte\

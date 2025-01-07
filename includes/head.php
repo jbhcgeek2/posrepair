@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="description" content="ERP para talleres de reparacion celular">
-    <meta name="author" content="Joel Benjamin Hernandez Cueto">    
-    <link rel="shortcut icon" href="assets/images/logo-postRepair.png"> 
+    <meta name="author" content="Tecuanisoft">    
+    <link rel="shortcut icon" href="assets/images/logo.png"> 
     
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>

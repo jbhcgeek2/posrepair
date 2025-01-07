@@ -747,140 +747,148 @@ if(!empty($_SESSION['usuarioPOS'])){
     a.articuloID = b.articuloID WHERE b.sucursalID = '$idSucursal' AND a.ventaID IS NULL AND a.usuarioVenta = '$usuario'";
     $queryAux = mysqli_query($conexion, $sqlAux);
     $cantidadSuperada = 0;
-    while($fetchAux = mysqli_fetch_assoc($queryAux)){
-      //buscaremos en los productos, si soporta la cantidad indicada
-      // $articulo = $fetchAux['articulo'];
-      $cantidadVenta = $fetchAux['cantidadVenta'];
-      $cantidadExiste = $fetchAux['existenciaSucursal'];
-      if($cantidadVenta > $cantidadExiste){
-        //la cantidad supera y no se puede vender
-        // $pasa = 1;
-        // $cantidadSuperada = 1;
-        //se desactiva la verificacion de las cantidades para alertar
-        //y verificar manualmente
-      }else{
-        //la cantidad deseada es igual o menor a la deseada
-        //de momento no hacemos nada, pero en la siguiente operacion 
-        //actualizaremos la cantidad
-        
-      }
-    }//fin del while
 
-    if($pasa == 0){
-      //consultamos el consecutivo del ticket el cual estara compuesto por
-      $sql = "SELECT COUNT(*) AS numVentasByUser FROM VENTAS WHERE usuarioID = '$idUsuario' AND empresaID = '$idEmprersa'";
-      try {
-        $query = mysqli_query($conexion, $sql);
-        $fetch = mysqli_fetch_assoc($query);
-        $numVenta = $fetch['numVentasByUser']+1;
-        $fecha = date('Y-m-d');
-        $hora = date('H:m:i');
-        $feria = $montoPagoTotal - $totalCobro;
-
-        $sql2 = "INSERT INTO VENTAS (num_comprobante,fechaVenta,horaVenta,totalVenta,estatusVenta,descuentoVenta,
-        montoPago,cambioPago,tipoPago,clienteID,empresaID,usuarioID,usuarioVenta) VALUES ('$numVenta','$fecha','$hora',
-        '$totalCobro','Finalizada','$descuento','$montoPagoTotal','$feria','$tipoPago','$cliente','$idEmprersa',
-        '$idUsuario','$usuarioVenta')";
+    if(mysqli_num_rows($queryAux) > 0){
+      while($fetchAux = mysqli_fetch_assoc($queryAux)){
+        //buscaremos en los productos, si soporta la cantidad indicada
+        // $articulo = $fetchAux['articulo'];
+        $cantidadVenta = $fetchAux['cantidadVenta'];
+        $cantidadExiste = $fetchAux['existenciaSucursal'];
+        if($cantidadVenta > $cantidadExiste){
+          //la cantidad supera y no se puede vender
+          // $pasa = 1;
+          // $cantidadSuperada = 1;
+          //se desactiva la verificacion de las cantidades para alertar
+          //y verificar manualmente
+        }else{
+          //la cantidad deseada es igual o menor a la deseada
+          //de momento no hacemos nada, pero en la siguiente operacion 
+          //actualizaremos la cantidad
+          
+        }
+      }//fin del while
+  
+      if($pasa == 0){
+        //consultamos el consecutivo del ticket el cual estara compuesto por
+        $sql = "SELECT COUNT(*) AS numVentasByUser FROM VENTAS WHERE usuarioID = '$idUsuario' AND empresaID = '$idEmprersa'";
         try {
-          $query2 = mysqli_query($conexion, $sql2);
-          //se inserto correctamente la venta, mostramos el id de la venta
-          $idVenta = mysqli_insert_id($conexion);
-          //una vez obtenido el id de la venta, actualizaremos el
-          $sql3 = "UPDATE DETALLEVENTA SET ventaID = '$idVenta' WHERE usuarioVenta = '$usuario' AND ventaID IS NULL";
+          $query = mysqli_query($conexion, $sql);
+          $fetch = mysqli_fetch_assoc($query);
+          $numVenta = $fetch['numVentasByUser']+1;
+          $fecha = date('Y-m-d');
+          $hora = date('H:m:i');
+          $feria = $montoPagoTotal - $totalCobro;
+  
+          $sql2 = "INSERT INTO VENTAS (num_comprobante,fechaVenta,horaVenta,totalVenta,estatusVenta,descuentoVenta,
+          montoPago,cambioPago,tipoPago,clienteID,empresaID,usuarioID,usuarioVenta) VALUES ('$numVenta','$fecha','$hora',
+          '$totalCobro','Finalizada','$descuento','$montoPagoTotal','$feria','$tipoPago','$cliente','$idEmprersa',
+          '$idUsuario','$usuarioVenta')";
           try {
-            $query3 = mysqli_query($conexion, $sql3);
-            //una vez proc4esado el ticket, se actualizaran las cantidades en el inventario
-            //para ello realizaremos la consulta anterior
-            $sqlAux2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
-            a.articuloID = b.articuloID WHERE a.ventaID = '$idVenta' AND a.usuarioVenta = '$usuario' AND b.sucursalID = '$idSucursal'";
-            $queryAux2 = mysqli_query($conexion, $sqlAux2);
-            $tieneChip = 0;
-            $vanChip = 0;
-            $canChipExisten = 0;
-            while($fetchAux2 = mysqli_fetch_assoc($queryAux2)){
-              //obtendremos los datos de los articulos
-              $cantidadVenta = $fetchAux2['cantidadVenta'];
-              $cantidadExiste = $fetchAux2['existenciaSucursal'];
-              $nuevaCantidad = $cantidadExiste-$cantidadVenta;
-              $idArticulo = $fetchAux2['articuloID'];
-              if($fetchAux2['chipID'] > 0){
-                //se trata de un chip
-                $idChip = $fetchAux2['chipID'];
-                $sqlChip = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha', 
-                ventaID = '$idVenta' WHERE idChip = '$idChip'";
-                $queryChip = mysqli_query($conexion, $sqlChip);
+            $query2 = mysqli_query($conexion, $sql2);
+            //se inserto correctamente la venta, mostramos el id de la venta
+            $idVenta = mysqli_insert_id($conexion);
+            //una vez obtenido el id de la venta, actualizaremos el
+            $sql3 = "UPDATE DETALLEVENTA SET ventaID = '$idVenta' WHERE usuarioVenta = '$usuario' AND ventaID IS NULL";
+            try {
+              $query3 = mysqli_query($conexion, $sql3);
+              //una vez proc4esado el ticket, se actualizaran las cantidades en el inventario
+              //para ello realizaremos la consulta anterior
+              $sqlAux2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
+              a.articuloID = b.articuloID WHERE a.ventaID = '$idVenta' AND a.usuarioVenta = '$usuario' AND b.sucursalID = '$idSucursal'";
+              $queryAux2 = mysqli_query($conexion, $sqlAux2);
+              $tieneChip = 0;
+              $vanChip = 0;
+              $canChipExisten = 0;
+              while($fetchAux2 = mysqli_fetch_assoc($queryAux2)){
+                //obtendremos los datos de los articulos
+                $cantidadVenta = $fetchAux2['cantidadVenta'];
+                $cantidadExiste = $fetchAux2['existenciaSucursal'];
+                $nuevaCantidad = $cantidadExiste-$cantidadVenta;
+                $idArticulo = $fetchAux2['articuloID'];
+                if($fetchAux2['chipID'] > 0){
+                  //se trata de un chip
+                  $idChip = $fetchAux2['chipID'];
+                  $sqlChip = "UPDATE DETALLECHIP SET estatusChip = 'Vendido', fechaVenta = '$fecha', 
+                  ventaID = '$idVenta' WHERE idChip = '$idChip'";
+                  $queryChip = mysqli_query($conexion, $sqlChip);
+                  
+                  $sqlUpChip = "SELECT COUNT(*) AS existenciaChip FROM DETALLECHIP WHERE productoID = '$idArticulo' 
+                  AND estatusChip = 'Activo' AND sucursalID = '$idSucursal'";
+                  $queryUpChip = mysqli_query($conexion, $sqlUpChip);
+                  $fetchUpChip = mysqli_fetch_assoc($queryUpChip);
+                  $existeChip = $fetchUpChip['existenciaChip'];
+  
+                  $sqlCantAux = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$existeChip' 
+                  WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
+                  $queryCantAux = mysqli_query($conexion, $sqlCantAux);
+                }else{
+                  //es un producto cualquiera
+                  //hacemos el update a la sucursal
+                  $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
+                  WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
+                  $queryCant = mysqli_query($conexion, $sqlCant);
+                }
                 
-                $sqlUpChip = "SELECT COUNT(*) AS existenciaChip FROM DETALLECHIP WHERE productoID = '$idArticulo' 
-                AND estatusChip = 'Activo' AND sucursalID = '$idSucursal'";
-                $queryUpChip = mysqli_query($conexion, $sqlUpChip);
-                $fetchUpChip = mysqli_fetch_assoc($queryUpChip);
-                $existeChip = $fetchUpChip['existenciaChip'];
-
-                $sqlCantAux = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$existeChip' 
-                WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
-                $queryCantAux = mysqli_query($conexion, $sqlCantAux);
+              }//fin del whileAux2
+  
+              //antes de finalizar el proceso, consultamos si se cuenta con servicios
+              $sqlTra = "SELECT * FROM DETALLEVENTA WHERE ventaID = '$idVenta' AND trabajoID IS NOT NULL";
+              $queryTra = mysqli_query($conexion, $sqlTra);
+              if(mysqli_num_rows($queryTra) > 0){
+                //si se detectaron trabajos, los actualizamos la fecha de cobro
+                while($fetchTra = mysqli_fetch_assoc($queryTra)){
+                  $idTrabajo = $fetchTra['trabajoID'];
+                  $fechaTra = date('Y-m-d');
+                  $horaTra = date('H:i:s');
+  
+                  $sqlUpdateTra = "UPDATE TRABAJOS SET fechaCobro = '$fechaTra', horaCobro = '$horaTra', 
+                  usuarioCobro = '$usuario' WHERE idTrabajo = '$idTrabajo'";
+                  $queryUpdateTra = mysqli_query($conexion, $sqlUpdateTra);
+                }//fin del while
+                //ahora si se completo el proceso de guardar la ficha
+                $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+                echo json_encode($res);
               }else{
-                //es un producto cualquiera
-                //hacemos el update a la sucursal
-                $sqlCant = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$nuevaCantidad' 
-                WHERE articuloID = '$idArticulo' AND sucursalID = '$idSucursal'";
-                $queryCant = mysqli_query($conexion, $sqlCant);
+                //no se localizaron trabajos en esta venta, podemos dar por terminado el proceso
+                $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+                echo json_encode($res);
               }
-              
-            }//fin del whileAux2
-
-            //antes de finalizar el proceso, consultamos si se cuenta con servicios
-            $sqlTra = "SELECT * FROM DETALLEVENTA WHERE ventaID = '$idVenta' AND trabajoID IS NOT NULL";
-            $queryTra = mysqli_query($conexion, $sqlTra);
-            if(mysqli_num_rows($queryTra) > 0){
-              //si se detectaron trabajos, los actualizamos la fecha de cobro
-              while($fetchTra = mysqli_fetch_assoc($queryTra)){
-                $idTrabajo = $fetchTra['trabajoID'];
-                $fechaTra = date('Y-m-d');
-                $horaTra = date('H:i:s');
-
-                $sqlUpdateTra = "UPDATE TRABAJOS SET fechaCobro = '$fechaTra', horaCobro = '$horaTra', 
-                usuarioCobro = '$usuario' WHERE idTrabajo = '$idTrabajo'";
-                $queryUpdateTra = mysqli_query($conexion, $sqlUpdateTra);
-              }//fin del while
               //ahora si se completo el proceso de guardar la ficha
-              $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
-              echo json_encode($res);
-            }else{
-              //no se localizaron trabajos en esta venta, podemos dar por terminado el proceso
-              $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+              // $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
+              // echo json_encode($res);
+            } catch (\Throwable $th) {
+              //error al actuaslizar el detalle de ficha
+              $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al procesar el detalle de venta: ".$th];
               echo json_encode($res);
             }
-            //ahora si se completo el proceso de guardar la ficha
-            // $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idVenta];
-            // echo json_encode($res);
+            
           } catch (\Throwable $th) {
-            //error al actuaslizar el detalle de ficha
-            $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al procesar el detalle de venta: ".$th];
+            //error al inserta la venta
+            $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al guardar la venta: ".$th];
             echo json_encode($res);
           }
           
         } catch (\Throwable $th) {
-          //error al inserta la venta
-          $res = ["status"=>"error","mensaje"=>"Ha ocurrido un error al guardar la venta: ".$th];
+          //error al consultar el numero de ticket
+        }
+  
+      }else{
+        if($cantidadSuperada == 1){
+          //la cantidad del inventario no coincide
+          $res = ["status"=>"error","mensaje"=>"Las cantidades indicadas superan el inventario actual."];
+          echo json_encode($res);
+        }else{
+          //no se indico un monto correcto
+          $res = ["status"=>"error","mensaje"=>"No se indico un monto valido para cubrir el pago."];
           echo json_encode($res);
         }
-        
-      } catch (\Throwable $th) {
-        //error al consultar el numero de ticket
       }
-
     }else{
-      if($cantidadSuperada == 1){
-        //la cantidad del inventario no coincide
-        $res = ["status"=>"error","mensaje"=>"Las cantidades indicadas superan el inventario actual."];
-        echo json_encode($res);
-      }else{
-        //no se indico un monto correcto
-        $res = ["status"=>"error","mensaje"=>"No se indico un monto valido para cubrir el pago."];
-        echo json_encode($res);
-      }
+      $res = ["status"=>"error","mensaje"=>"Sin articulos que procesar."];
+      echo json_encode($res);
     }
+
+    
     
   }elseif(!empty($_POST['usuarioMov'])){
     $usuario = $_SESSION['usuarioPOS'];
@@ -908,8 +916,9 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ["status"=>"error","mensaje"=>"Incongruencia en el usuario"];
       echo json_encode($res);
     }
-  }elseif(!empty($_POST['efectivoTotCaja'])){
+  }elseif(!empty($_POST['observCierre'])){
     //seccion para realizar el cierre de un cajero
+    
     $usuario = $_SESSION['usuarioPOS'];
     $empresa = datoEmpresaSesion($usuario,"id");
     $idEmprersa = json_decode($empresa)->dato;
@@ -919,9 +928,11 @@ if(!empty($_SESSION['usuarioPOS'])){
 
     $fecha = date('Y-m-d');
     $hora = date('H:i:s');
+    
 
     $gastoCajero = verGastos($idUsuario,$idEmprersa,$fecha);
     $gastoCajero = json_decode($gastoCajero)->data;
+    
 
     $ingresoCajero = verIngresos($idUsuario,$idEmprersa,$fecha);
     $ingresoCajero = json_decode($ingresoCajero)->data;
@@ -948,7 +959,12 @@ if(!empty($_SESSION['usuarioPOS'])){
     if($obserCierre == ""){
       $obserCierre = "Cierre del dia default";
     }
-    $totalVenta = $_POST['totalVenta'];
+    if(!empty($_POST['totalVenta'])){
+      $totalVenta = $_POST['totalVenta'];
+    }else{
+      $totalVenta = "0";
+    }
+    
     $montoDig = $_POST['montoDigital'];
     
     
@@ -1384,6 +1400,9 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ['status'=>'error','mensaje'=>'Ocurrio un error al consultar la venta'];
       echo json_encode($res);
     }
+  }else{
+    $res = ['status'=>'error','mensaje'=>'Metodo no detectado, asegurate de capturar los datos correctamente.'];
+    echo json_encode($res);
   }
 }
 
