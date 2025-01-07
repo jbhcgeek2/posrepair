@@ -931,8 +931,13 @@ if(!empty($_SESSION['usuarioPOS'])){
     conceptoMov = '16' AND usuarioMov = '$idUsuario' AND empresaMovID = '$idEmprersa'";
     $queryPre = mysqli_query($conexion, $sqlPre);
     $fetchPre = mysqli_fetch_assoc($queryPre);
+    if($fetchPre['montoPrecorte'] > 0){
+      $montoPrecorte = $fetchPre['montoPrecorte'];
+    }else{
+      $montoPrecorte = 0;
+    }
 
-    $montoPrecorte = $fetchPre['montoPrecorte'];
+    
     
 
 
@@ -1135,7 +1140,7 @@ if(!empty($_SESSION['usuarioPOS'])){
           $paso3 = 1;
         }
 
-
+        
         if($paso1 == 1 && $paso2 == 1 && $paso3 == 1){
           $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
           echo json_encode($res);
