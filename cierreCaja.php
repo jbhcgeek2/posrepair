@@ -96,7 +96,12 @@
                                 AND conceptoMov = '16' AND empresaMovID = '$idEmprersa'";
                                 $queryA = mysqli_query($conexion, $sqlA);
                                 $fetchA = mysqli_fetch_assoc($queryA);
-                                $precorte = $fetchA['montoPreCorte'];
+                                if($fetchA['montoPreCorte'] > 0){
+                                  $precorte = $fetchA['montoPreCorte'];
+                                }else{
+                                  $precorte = 0;
+                                }
+                                
 
 
                                 // $sqlMov3 = "SELECT *,(SELECT DISTINCT(b.sucursalID) FROM DETALLEVENTA b 
@@ -320,8 +325,8 @@
                     <span class="fs-4 fw-bold text-danger" id="montoPrecorte">Pre-cortes: $<?php echo number_format($precorte,2); ?></span> <br>
                     <span class="fs-4 fw-bold" id="montoGastos">Otros Ingresos: $<?php echo number_format($entradaCaja,2); ?></span> <br>
                     <input type="hidden" id="gastoCaja" value="<?php echo $gastoCaja; ?>">
-                    <input type="hidden" id="entradaCaja" value="<?php echo $entradaCaja ?>">
-                    <input type="hidden" id="precortes" value="<?php echo $precorte ?>">
+                    <input type="hidden" id="entradaCaja" value="<?php echo $entradaCaja; ?>">
+                    <input type="hidden" id="precortes" value="<?php echo $precorte; ?>">
                     <span class="fs-4 fw-bold text-primary" id="saldoTotal">Total en Efectivo: $<?php echo number_format(($totalCaja-$precorte),2); ?></span> <br>
                     <input type="hidden" id="totalCajaSaldo" value="<?php echo ($totalCaja-$precorte); ?>">
                     <span class="fs-4 fw-bold ">Efectivo Final en Caja: $<span id="saldoDeja">0.00</span></span> <br>
