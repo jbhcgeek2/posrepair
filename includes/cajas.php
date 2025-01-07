@@ -945,6 +945,9 @@ if(!empty($_SESSION['usuarioPOS'])){
     $efecTivoTot = $_POST['efectivoTotCaja'];
     $montoRetira = $_POST['montoRetiraEfe'];
     $obserCierre = $_POST['observCierre'];
+    if($obserCierre == ""){
+      $obserCierre = "Cierre del dia default";
+    }
     $totalVenta = $_POST['totalVenta'];
     $montoDig = $_POST['montoDigital'];
     
