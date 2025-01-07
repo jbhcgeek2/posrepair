@@ -238,10 +238,10 @@
                     </div>
 
                     <div class="col-sm-12 col-md-12 mb-3">
-                      <label for="montoEfectivo" class="form-label">Efectivo total en Caja</label>
+                      <label for="montoEfectivo" class="form-label"><strong class="text-warning">*</strong> Efectivo total en Caja</label>
                       <div class="input-group">
                         <span class="input-group-text">$</span>
-                        <input type="number" id="montoEfectivo" class="form-control" onkeyup="calculaTotal(this.value)">
+                        <input type="number" id="montoEfectivo" value="0.00" class="form-control" onkeyup="calculaTotal(this.value)">
                         <div class="invalid-feedback" id="montoEfectivoMal">Indique un monto valido</div>
                       </div>
                     </div>
@@ -255,13 +255,13 @@
                             <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5V3H.5a.5.5 0 0 0 0 1H1v4H.5a.5.5 0 0 0 0 1H1v4H.5a.5.5 0 0 0 0 1H1v.5A1.5 1.5 0 0 0 2.5 16h12a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 14.5 1zm6 3a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9"/>
                           </svg>
                         </span>
-                        <input type="number" id="montoRetiroEfe" class="form-control" onkeyup="calculaMontoResta(this.value)">
+                        <input type="number" id="montoRetiroEfe" value="0.00" class="form-control" onkeyup="calculaMontoResta(this.value)">
                         <div class="invalid-feedback" id="montoRetiroEfeMal">Indique un monto correcto</div>
                       </div>
                     </div>
 
                     <div class="col-sm-12 col-md-12 mb-3">
-                      <label for="obervacionCierre" class="form-label">Observacion</label>
+                      <label for="obervacionCierre" class="form-label"> <strong class="text-warning">*</strong> Observacion</label>
                       <div class="input-group">
                         <span class="input-group-text">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
