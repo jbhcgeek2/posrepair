@@ -20,9 +20,11 @@ function calculaTotal(dato){
     precortes = parseFloat(precortes);
 
     dato = parseFloat(dato);
+    console.log(dato);
 
     let montoTotal = (inicial+montoEfe) - montoGas + montoEnt - precortes;
     montoTotal = parseFloat(montoTotal);
+    console.log(montoTotal);
     let diferencia = parseFloat(montoTotal - dato);
 
     // let suma = dato + inicial;
