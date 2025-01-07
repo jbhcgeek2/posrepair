@@ -21,6 +21,11 @@ function calculaTotal(dato){
 
     dato = parseFloat(dato);
     console.log(dato);
+    console.log(inicial);
+    console.log(montoEfe);
+    console.log(montoGas);
+    console.log(montoEnt);
+    console.log(precortes);
 
     let montoTotal = (inicial+montoEfe) - montoGas + montoEnt - precortes;
     montoTotal = parseFloat(montoTotal);
