@@ -435,7 +435,9 @@ btnPrecorte.addEventListener('click',function(){
               'Ha ocurrido un error',
               res.mensaje,
               'error'
-            )
+            ).then(function(){
+              location.reload();
+            })
           }
         }else{
           //error al procesar
