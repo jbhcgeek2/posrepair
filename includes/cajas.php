@@ -743,13 +743,18 @@ if(!empty($_SESSION['usuarioPOS'])){
     }//fin del for
 
     //antes de continuar, verificamos si las cantidades indicadas existen en la empresa
-    $sqlAux = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
-    a.articuloID = b.articuloID WHERE b.sucursalID = '$idSucursal' AND a.ventaID IS NULL AND a.usuarioVenta = '$usuario'";
+    
+
+    $sqlAux = "SELECT * FROM DETALLEVENTA a WHERE a.ventaID IS NULL AND a.usuarioVenta = '$usuario'";
     $queryAux = mysqli_query($conexion, $sqlAux);
+
     $cantidadSuperada = 0;
 
     if(mysqli_num_rows($queryAux) > 0){
-      while($fetchAux = mysqli_fetch_assoc($queryAux)){
+      $sqlAux2 = "SELECT * FROM DETALLEVENTA a INNER JOIN ARTICULOSUCURSAL b ON 
+      a.articuloID = b.articuloID WHERE b.sucursalID = '$idSucursal' AND a.ventaID IS NULL AND a.usuarioVenta = '$usuario'";
+      $queryAux2 = mysqli_query($conexion, $sqlAux2);
+      while($fetchAux = mysqli_fetch_assoc($queryAux2)){
         //buscaremos en los productos, si soporta la cantidad indicada
         // $articulo = $fetchAux['articulo'];
         $cantidadVenta = $fetchAux['cantidadVenta'];
