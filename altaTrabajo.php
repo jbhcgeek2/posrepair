@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <?php
-session_start();
+// session_start();
 
 
  	include("includes/head.php");
@@ -23,6 +23,32 @@ session_start();
 		    <div class="container-xl">
 			    
 			    <h1 class="app-page-title">Registrar Nuevo Trabajo</h1>
+
+          <noscript>
+						<div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
+							<div class="inner">
+								<div class="app-card-body p-3 p-lg-4">
+									<h3 class="mb-3">JavaScript está desactivado en tu navegador.</h3>
+									<div class="row gx-5 gy-3">
+										<div class="col-12 col-lg-9">
+											<div style="background-color: #ffecec; color: #ff6b6b; padding: 15px; text-align: center; border: 1px solid #ff6b6b; font-family: Arial, sans-serif;">
+												Este sitio requiere JavaScript para funcionar correctamente. Por favor, 
+												habilítalo en la configuración de tu navegador y recarga la página para continuar.
+											</div>
+										</div><!--//col-->
+										<div class="col-12 col-lg-3">
+											<a class="btn app-btn-primary" href="#!" id="reloadButton">
+												Recargar
+											</a>
+										</div><!--//col-->
+									</div><!--//row-->
+									<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+								</div><!--//app-card-body-->
+
+								
+							</div><!--//inner-->
+						</div><!--//app-card-->
+					</noscript><!--Notificamos que tiene que activar su javascript-->
 			    
 			    
 			        <div class="col-12 col-lg-12">
@@ -54,6 +80,9 @@ session_start();
                       <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                           <label for="NombreclienteTrabajo" class="form-label">Cliente <span class='text-danger fw-bold'>*<span></label>
                           <input type="text" id="NombreclienteTrabajo" name="NombreclienteTrabajo" list="clienteList" class="form-control" autocomplete="off">
+                            <div id="NombreclienteTrabajoFeedback" class="invalid-feedback">
+                              Selecciona un cliente valido.
+                            </div>
                             <datalist id="clienteList">
                             <?php 
                               $clientes = verClientes($idEmpresaSesion);
@@ -263,6 +292,15 @@ session_start();
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
     <script src="assets/js/altaTrabajo.js"></script>
+    <script>
+      document.getElementById('reloadButton').addEventListener('click', function () {
+        // Agregar un parámetro temporal único a la URL para forzar la recarga
+        const currentUrl = window.location.href.split('?')[0]; // Obtener la URL base sin parámetros
+        const uniqueParam = `cachebuster=${new Date().getTime()}`; // Generar un parámetro único basado en el tiempo actual
+        console.log(uniqueParam);
+        window.location.href = `${currentUrl}?${uniqueParam}`;
+      });
+    </script>
 </body>
 </html> 
 

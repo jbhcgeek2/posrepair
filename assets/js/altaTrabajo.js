@@ -224,3 +224,29 @@ autoCom.addEventListener('change', function(){
   autoCom.value = selectedOpt.textContent;
 })
 
+autoCom.addEventListener('focusout', function(){
+  let valorCliente = document.getElementById('clienteTrabajo').value;
+  if(valorCliente > 0){
+    document.getElementById('NombreclienteTrabajo').classList.remove('is-invalid');
+    document.getElementById('NombreclienteTrabajo').classList.add('is-valid');
+  }else{
+    //no se idico un nombre valido
+    document.getElementById('NombreclienteTrabajo').classList.add('is-invalid');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 4000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "error",
+      title: "Cliente no seleccionado"
+    });
+  }
+})
+
