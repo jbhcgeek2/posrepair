@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-session_start();
+//session_start();
 
 
  	include("includes/head.php");
@@ -109,6 +109,7 @@ session_start();
                   </div>
                 </div>
                 <div class="modal-footer">
+                  <a href="../" class="btn btn-danger">Salir</a>
                   <button type="button" class="btn btn-primary" id="enviaApertura">Registrar</button>
                 </div>
               </div>
@@ -174,7 +175,7 @@ session_start();
 		    <div class="container-xl">
           <div class="row">
             
-            <div class="col-7 col-lg-7">
+            <div class="col-lg-7 col-md-7 col-sm-12">
               <div class="app-card app-card-chart h-100 shadow-sm">
                 <div class="app-card-header p-3">
                   <div class="row justify-content-between align-items-center">
@@ -266,7 +267,7 @@ session_start();
 
                 <hr class="my-4">
 
-                <div class="row m-1" id="resultBusqueda" style="height: 500px; overflow-y:scroll;">
+                <div class="row m-1 d-none d-lg-block" id="resultBusqueda" style="height: 500px; overflow-y:scroll;">
 
                   <?php 
                     //consultamos el listado de productos
@@ -347,7 +348,7 @@ session_start();
               </div><!--//app-card-->
             </div><!--//col 7-->
 
-            <div class="col-5 col-lg-5">
+            <div class="col-lg-5 col-md-5 col-sm-12">
               <div class="app-card  h-100 shadow-sm">
                 <div class="app-card-header p-3">
                   <div class="row justify-content-between align-items-center">

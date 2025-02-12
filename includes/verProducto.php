@@ -98,8 +98,25 @@ if(!empty($_SESSION['usuarioPOS'])){
                 }
             
             }else{
-                //sin datos
-                $res = "NoData";
+                //sin datos, puede tratarse de un chip
+                $sql2 = "SELECT *,(SELECT SUM(c.existenciaSucursal) FROM ARTICULOSUCURSAL 
+                c WHERE c.articuloID = a.idArticulo) AS existencia FROM ARTICULOS a INNER JOIN PROVEEDORES b 
+                ON a.proveedorID = b.idProveedor INNER JOIN DETALLECHIP d ON a.idArticulo = d.productoID WHERE 
+                a.empresaID = '$idEmpresaSesion' AND d.codigoChip = '$codigo' ORDER BY nombreArticulo ASC";
+                $query2 = mysqli_query($conexion,$sql2);
+                $res = [];
+                $x2 =0;
+                if(mysqli_num_rows($query2) > 0){
+                    
+                    while($fetch2 = mysqli_fetch_assoc($query2)){
+                        $res[$x2] = $fetch2;
+                        $x2++;
+                    }
+                }else{
+                $res = "NoData";    
+                }
+
+                //$res = "NoData";
             }
             $data = ["status"=>'ok',"data"=>$res];
             echo json_encode($data);

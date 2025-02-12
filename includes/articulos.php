@@ -298,7 +298,7 @@ function setCantidad($cantidad,$articulo,$sucursal){
   }
 }
 
-function procesaMovsProd($cambia,$nuevoPre,$precioCompra,$idProd,$idEmpresa){
+function procesaMovsProd($cambia,$nuevoPre,$precioCompra,$idProd,$idEmpresa){ 
   require('conexion.php');
   $res = [];
   if(!$conexion){
@@ -626,6 +626,105 @@ function traspaso($producto,$sucOrigi,$sucDesti,$cantidad,$comproTras,$fechaTras
     return json_encode($res);
   }
 }
+
+function setEntradaArti($precioCompra,$cantidad,$sucursal,$empresa,$articulo,$usuario){
+ //funcion para hacer la entrada de un articulo
+ require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+
+  $comprobante =  date('YmdHis');
+  $tipoCom = "Ticket";
+  $fecha = date('Y-m-d');
+  $hora = date('H:i:s');
+  $totIngre = $cantidad * $precioCompra;
+  $totIngre = number_format($totIngre,2);
+  $tipoMov = "Entrada";
+  
+  //iniciamos el procedimiento
+  mysqli_begin_transaction($conexion);
+  try {
+    $sql = "INSERT INTO INGRESO (numComprobante,tipoComprobante,fechaIngreso,horaIngreso,totalIngreso,
+    totArticulos,empresaID) VALUES (?,?,?,?,?,?,?)";
+    $query = mysqli_prepare($conexion, $sql);
+    mysqli_stmt_bind_param($query,"ssssdii",$comprobante,$tipoCom,$fecha,$hora,$totIngre,$cantidad,$empresa);
+    mysqli_stmt_execute($query);
+    //se inserto ahora insertamos el detalle de ingreso
+    $idIngreso = mysqli_insert_id($conexion);
+
+    $sql2 = "INSERT INTO DETALLEINGRESO (cantidad,precioCompra,ingresoID,sucursalID,fechaMov,usuarioMov,
+    tipoMov,prodMov) VALUES (?,?,?,?,?,?,?,?)";
+    $query2 = mysqli_prepare($conexion, $sql2);
+    mysqli_stmt_bind_param($query2,"idiisssi",$cantidad,$precioCompra,$idIngreso,$sucursal,$fecha,$usuario,
+    $tipoMov,$articulo);
+    mysqli_stmt_execute($query2);
+    //si se ejecuta, podemos dar por terminado el proceso de ingreso
+    
+    mysqli_commit($conexion);
+    $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+    return json_encode($res);
+  } catch (\Throwable $th) {
+    //throw $th;
+    mysqli_rollback($conexion);
+    $res = ['status'=>'error','mensaje'=>'Ocurrio un error al procesar la entrada'];
+    return json_encode($res);
+  }
+  
+}//fin funcion setEntradaArti
+
+function setSalidaArti($numComp,$tipoComp,$montoUnitario,$nArti,$idProveedor,$preCompra,$sucID,$empID,$usuario,$idProd){
+  //fujncion para procesar la salida de un articulo o un chip
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
+  $fecha = date('Y-m-d');
+  $hora = date('H:i:s');
+  $montoSalida = $montoUnitario * $nArti;
+  $tipoMov = "Salida";
+
+  mysqli_begin_transaction($conexion);
+
+  $sql = "INSERT INTO INGRESO (numComprobante,tipoComprobante,fechaIngreso,horaIngreso,totalIngreso,
+  totArticulos,proveedorID,empresaID) VALUES (?,?,?,?,?,?,?,?)";
+  try {
+    $query = mysqli_prepare($conexion, $sql);
+    mysqli_stmt_bind_param($query,"ssssdiii",$numComp,$tipoComp,$fecha,$hora,$montoSalida,$nArti,
+    $idProveedor,$empID);
+    mysqli_stmt_execute($query);
+    $idMov = mysqli_insert_id($conexion);
+
+    $sql2 = "INSERT INTO DETALLEINGRESO (cantidad,precioCompra,ingresoID,sucursalID,fechaMov,usuarioMov,
+    tipoMov,prodMov) VALUES (?,?,?,?,?,?,?,?)";
+    $query2 = mysqli_prepare($conexion, $sql2);
+    mysqli_stmt_bind_param($query2,"idiisssi",$nArti,$preCompra,$idMov,$sucID,$fecha,$usuario,$tipoMov,$idProd);
+    mysqli_stmt_execute($query2);
+    //se termino el proceso
+    mysqli_commit($conexion);
+    $res = ['status'=>'Ok','mensaje'=>'operationComplete'];
+    return json_encode($res);
+  } catch (\Throwable $th) {
+    // error al consultar las sentencias sql
+    mysqli_rollback($conexion);
+    $res = ['status'=>'error','mensaje'=>'Ocurrio un error al procesar el traspaso. '.$th];
+    return json_encode($res);
+  }
+  
+
+
+
+}//fin funcion setSalidaArti
+
+
 // precioUnitario = 17
 // precioCOmpra = 12.20
 // existencia = 150

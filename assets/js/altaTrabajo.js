@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //verificamos que los datos requeridos esten cargados
         let pasa = 0;
         let camposReq = ['clienteTrabajo','fechaServicio','sucursalServicio','tipoDispositivo','tipoServicio',
-        'marcaServicio','modeloServicio','numberDevice','descripcionProblema','fechaEntrega'];
+        'marcaServicio','modeloServicio','descripcionProblema','fechaEntrega'];
         datos.forEach(function(valor, clave){
           console.log('Valor: '+valor+' del campo '+clave);
           //si el campo esta vacio lo marcaremos como valido

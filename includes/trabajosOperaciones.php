@@ -55,7 +55,7 @@
       //seccion para dar de alta un nuevo trabajo
       //verificamos que esten capturados todos los campos
       $requeridos = ['clienteTrabajo','fechaServicio','tipoDispositivo','tipoServicio','marcaServicio',
-      'modeloServicio','numberDevice','descripcionProblema'];
+      'modeloServicio','descripcionProblema'];
       $pasa = 0;
 
       for ($i=0; $i < count($requeridos); $i++) { 

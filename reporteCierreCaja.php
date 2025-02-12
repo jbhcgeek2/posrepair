@@ -99,8 +99,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
           //consultamos los gastos
           $sql5 = "SELECT SUM(montoMov) AS montoGastos FROM MOVCAJAS WHERE usuarioMov = '$idUsuario' AND 
-          conceptoMov = '15' AND empresaMovID = '$idEmprersa' AND 
-          fechaMovimiento = '$fecha'";
+          conceptoMov = '15' AND empresaMovID = '$idEmprersa' AND fechaMovimiento = '$fecha'";
           $query5 = mysqli_query($conexion, $sql5);
           $fetch5 = mysqli_fetch_assoc($query5);
           if(!empty($fetch5['montoGastos'])){
@@ -111,7 +110,8 @@ if(!empty($_SESSION['usuarioPOS'])){
           
 
           $sql6 = "SELECT SUM(montoMov) AS montoPrecortes FROM MOVCAJAS WHERE 
-          usuarioMov = '$idUsuario' AND conceptoMov = '16' AND empresaMovId ='$idEmprersa'";
+          usuarioMov = '$idUsuario' AND conceptoMov = '16' AND empresaMovId ='$idEmprersa'
+          AND fechaMovimiento = '$fecha'";
           $query6 = mysqli_query($conexion, $sql6);
           $fetch6 = mysqli_fetch_assoc($query6);
           $montoPrecortes = $fetch6['montoPrecortes'];

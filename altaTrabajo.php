@@ -191,9 +191,8 @@
                           <div class="invalid-feedback">indique un modelo valido</div>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3 mb-3">
-                          <label for="numberDevice" class="form-label">IMEI / ESN / SN <span class='text-danger fw-bold'>*<span></label>
+                          <label for="numberDevice" class="form-label">IMEI / ESN / SN</label>
                           <input type="text" name="numberDevice" id="numberDevice" class="form-control" required>
-                          <div class="invalid-feedback">Indique un dato valido</div>
                         </div>
 
                         <div class="col-sm-12 col-md-9 col-lg-7 mb-3">
