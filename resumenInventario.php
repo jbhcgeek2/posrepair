@@ -323,6 +323,7 @@
 
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
+		<script src="assets/js/validaDispositivo.js"></script>
 
 </body>
 </html> 

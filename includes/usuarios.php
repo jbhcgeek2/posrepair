@@ -217,4 +217,37 @@
     }
   }
 
+  function getDispositivo($idUsuario,$dispo){
+    require('conexion.php');
+    $res = [];
+    if(!$conexion){
+      require('../conexion.php');
+      if(!$conexion){
+        require('../includes/conexion.php');
+      }
+    }
+
+    $sql = "SELECT * FROM DISPOSITIVOS WHERE usuarioID = ? AND diviceID = ?";
+    try {
+      $query = mysqli_prepare($conexion, $sql);
+      mysqli_stmt_bind_param($query,"is",$idUsuario,$dispo);
+      mysqli_stmt_execute($query);
+      $res = mysqli_stmt_get_result($query);
+      if(mysqli_num_rows($res) == 1){
+        //si se encontro el dispositivo
+        $fetch = mysqli_fetch_assoc($res);
+        $data = ['status'=>'ok','data'=>$fetch,'mensaje'=>'operationComplete'];
+        return json_encode($data);
+      }else{
+        //dispositrivo no localizado
+        $data = ['status'=>'error','mensaje'=>'Dispositivo No Localizado'];
+        return json_encode($data);
+      }
+    } catch (\Throwable $th) {
+      //throw $th;
+      $data = ['status'=>'error','mensaje'=>'Error al consultar el dispositivo'];
+      return json_encode($data);
+    }
+  }
+
 ?>

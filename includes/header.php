@@ -42,6 +42,26 @@
 			$rolUsuario = "error";
 		}
 
+		$dispo = md5($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
+
+		$getDispo = getDispositivo($idUsuarioN,$dispo);
+		$getDispo = json_decode($getDispo);
+		$autorizado = "";
+		if($getDispo->status == "ok"){
+			if($getDispo->data->estatusDispo == '0'){
+				//no esta autorizado
+				$autorizado = "<input type='hidden' id='dispositivoAutorizado' value='no'>";
+			}else{
+				$autorizado = "<input type='hidden' id='dispositivoAutorizado' value='si'>";
+			}
+		}else{
+			//error al consultyar la autorizacion del dispositivo
+			$mensaje = $dispo;
+			$autorizado = "<input type='hidden' id='dispositivoAutorizado' value='error'>
+			<input type='hidden' id='dispositivoData' value='Error al consultar el dispositivo ".$mensaje."'>";
+			
+		}
+		// print_r($getDispo);
 		// $datosUsuario = json_decode(getDataUser($usuario));
 		// if($datosUsuario->status == "ok"){
 			
@@ -136,6 +156,8 @@
 										//para ver la seccion de configuracion
 										if($rolUsuario == "Administrador"){
 											echo '<li><a class="dropdown-item" href="settings.php">Configuracion</a></li>';
+											echo '<li><a class="dropdown-item" href="misDispositivos.php">Ver Dispositivos</a></li>';
+											
 										}
 									?>
                   
@@ -475,6 +497,7 @@
 		       
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
+			<?php echo $autorizado; ?>
     </header><!--//app-header-->
 
 		<script>

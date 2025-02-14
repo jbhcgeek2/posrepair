@@ -383,6 +383,7 @@
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
     <script src="assets/js/cierreCajas.js"></script>
+    <script src="assets/js/validaDispositivo.js"></script>
 
 </body>
 </html> 

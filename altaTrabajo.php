@@ -140,7 +140,7 @@
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
-                          <label for="fechaEntrega" class="form-label">Fecha de Entrega a Cliente <span class='text-danger fw-bold'>*<span></label>
+                          <label for="fechaEntrega" class="form-label">Fecha de Entrega<span class='text-danger fw-bold'>*<span></label>
                           <input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
                           <div class="invalid-feedback">Indique una fecha aproximada de entrega</div>
                         </div>
@@ -174,6 +174,7 @@
                             <option value="Desktop">Desktop</option>
                             <option value="Smartwatch">Smartwatch</option>
                             <option value="Bocina">Bocina</option>
+                            <option value="Concolas">Consolas</option>
                           </select>
                           <div id="tipoDispositivoFeedBack" class="invalid-feedback">Selecciona un dispositivo valido</div>
                         </div>
@@ -201,12 +202,10 @@
                         </div>
 
                         <div class="col-sm-12 mb-3">
-                          <div class="input-group">
-                            <span class="input-group-text p-3">Descripcion del Problema <span class='text-danger fw-bold'>*</span></span>
-                            <textarea name="descripcionProblema" id="descripcionProblema" style="height:70px;"
-                            class="form-control" required></textarea>
+                            <label for="descripcionProblema" class="orm-label">Descripcion del Problema <span class='text-danger fw-bold'>*</span></label>
+                            <input type="text" name="descripcionProblema" id="descripcionProblema" class="form-control" required>
                             <div class="invalid-feedback">Indique la problematica que presenta el dispositivo</div>
-                          </div>
+                          
                         </div>
 
                         <div class="col-sm-12 mb-3">
@@ -291,6 +290,7 @@
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
     <script src="assets/js/altaTrabajo.js"></script>
+    <script src="assets/js/validaDispositivo.js"></script>
     <script>
       document.getElementById('reloadButton').addEventListener('click', function () {
         // Agregar un parámetro temporal único a la URL para forzar la recarga

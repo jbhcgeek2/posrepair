@@ -563,13 +563,22 @@ btnCobro.addEventListener('click', function(){
 
 
 if(document.getElementById('modalAperturaDia')){
-  //no se ha registrado el inicio del dia
-  const myModal = new bootstrap.Modal('#modalAperturaDia',{
-    keyboard: false,
-    focus: true
-  });
-  const modalApertura = document.getElementById('modalAperturaDia');
-  myModal.show(modalApertura);
+  //no se ha registrado el inicio del dia,
+  //pero no lo activaremos hasta que el dispositivo este validado
+
+  if(document.getElementById('dispositivoAutorizado').value == "si"){
+    //el dispositivo esta autorizado, podemos continuar
+    const myModal = new bootstrap.Modal('#modalAperturaDia',{
+      keyboard: false,
+      focus: true
+    });
+    const modalApertura = document.getElementById('modalAperturaDia');
+    myModal.show(modalApertura);
+  }else{
+    //no esta autorizado, no hacemos nada, hasta que lo autoricen
+  }
+
+  
 
 
   let btnEnviar = document.getElementById('enviaApertura');  

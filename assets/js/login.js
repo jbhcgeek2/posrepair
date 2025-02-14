@@ -7,9 +7,15 @@ btnLog.addEventListener('click', function(){
 });
 
 let pass = document.getElementById('passLog');
-pass.addEventListener('change',function(){
-  log();
-})
+//pass.addEventListener('change',function(){
+//  log();
+//})
+pass.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Evitar el envío del formulario
+    log(); // Ejecutar la función de login
+  }
+});
 
 
 function log(){
@@ -37,7 +43,7 @@ function log(){
       }else{
         Swal.fire(
           'Datos incorrectos',
-          'Usuario y/o contrasena incorrectos',
+          res.mensaje,
           'error'
         )
       }

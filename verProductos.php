@@ -505,6 +505,7 @@
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
     <script src="assets/js/verProductos.js"></script>
+    <script src="assets/js/validaDispositivo.js"></script>
 </body>
 </html>
 

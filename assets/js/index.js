@@ -4,3 +4,4 @@ document.getElementById('reloadButton').addEventListener('click', function () {
   const uniqueParam = `cachebuster=${new Date().getTime()}`; // Generar un parámetro único basado en el tiempo actual
   window.location.href = `${currentUrl}?${uniqueParam}`;
 });
+

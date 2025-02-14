@@ -267,7 +267,8 @@
 
                 <hr class="my-4">
 
-                <div class="row m-1 d-none d-lg-block" id="resultBusqueda" style="height: 500px; overflow-y:scroll;">
+                <div class="d-none d-lg-block">
+                <div class="row m-1" id="resultBusqueda" style="height: 500px; overflow-y:scroll;">
 
                   <?php 
                     //consultamos el listado de productos
@@ -342,7 +343,9 @@
 
                   ?>
 
-                </div>
+                  </div>
+                </div><!--FIN CARD BLOCK-->
+                
 
                 
               </div><!--//app-card-->
@@ -751,6 +754,7 @@
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/swetAlert.js"></script>
     <script src="assets/js/caja.js"></script>
+    <script src="assets/js/validaDispositivo.js"></script>
 
 </body>
 </html> 
