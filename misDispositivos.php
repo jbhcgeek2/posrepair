@@ -53,8 +53,8 @@
 					        </div><!--//app-card-header-->
 
                   
-					        <div class="app-card-body p-3 p-lg-4" id="reportes">
-                    <table class="table">
+					        <div class="app-card-body p-3 p-lg-4 table-responsive" id="reportes">
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th>Usuario</th>

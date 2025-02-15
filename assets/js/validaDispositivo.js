@@ -88,6 +88,8 @@ if(document.getElementById('dispositivoAutorizado')){
       title: 'Error de Autorizacion',
       text: 'Verificar: '+mensajeErr,
       icon: 'error'
+    }).then(function(){
+      window.location = "logOut.php";
     })
   }
   }
