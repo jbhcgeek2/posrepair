@@ -209,11 +209,9 @@
                         </div>
 
                         <div class="col-sm-12 mb-3">
-                          <div class="input-group">
-                            <span class="input-group-text">Observaciones</span>
-                            <textarea name="observServicio" id="observServicio" style="height:70px;"
-                            class="form-control"></textarea>
-                          </div>
+                            <label for="observServicio">Observaciones</label>
+                            <input type="text" name="observServicio" id="observServicio" class="form-control">
+                            
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 mb-3">

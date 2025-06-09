@@ -50,7 +50,7 @@
 		if($getDispo->status == "ok"){
 			if($getDispo->data->estatusDispo == '0'){
 				//no esta autorizado
-				$autorizado = "<input type='hidden' id='dispositivoAutorizado' value='no'>";
+				$autorizado = "<input type='hidden' id='dispositivoAutorizado' value='si'>";
 			}else{
 				$autorizado = "<input type='hidden' id='dispositivoAutorizado' value='si'>";
 			}

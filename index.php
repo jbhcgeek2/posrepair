@@ -54,7 +54,8 @@
 		$fechaHoy = date('Y-m-d');
 		//realizamos las consultas para ver las ventas totales en el mes
 		$sqlVentas = "SELECT SUM(totalVenta) AS ventasEnMes FROM VENTAS 
-		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(CURDATE())";
+		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(CURDATE()) 
+		AND YEAR(fechaVenta) = YEAR(CURDATE())";
 		try {
 			$queryVentas = mysqli_query($conexion, $sqlVentas);
 			$fetchVentas = mysqli_fetch_assoc($queryVentas);
@@ -64,9 +65,11 @@
 			$totVentas = "1";
 		}
 		
-		$sqlVentasAnt = "SELECT SUM(totalVenta) AS ventasMesAnt FROM VENTAS
-		WHERE empresaID = '$idEmpresaSesion' AND MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
-		AND YEAR(fechaVenta) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
+		$sqlVentasAnt = "SELECT SUM(totalVenta) AS ventasMesAnt 
+    FROM VENTAS
+    WHERE empresaID = '$idEmpresaSesion' 
+      AND MONTH(fechaVenta) = MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))
+      AND YEAR(fechaVenta) = YEAR(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))";
 		try {
 			$queryVentasAnt = mysqli_query($conexion, $sqlVentasAnt);
 			$fetchVentasAnt = mysqli_fetch_assoc($queryVentasAnt);
