@@ -32,6 +32,7 @@ if(empty($_SESSION['usuarioPOS'])){
           
             //no tiene sesiones activas
             $_SESSION['usuarioPOS'] = $fetch['userName'];
+            $_SESSION['empresaPOS'] = $fetch['empresaID'];
             $sql2 = "SELECT * FROM DISPOSITIVOS WHERE usuarioID = ? AND empresaID = ? AND diviceID = ?";
             $query2 = mysqli_prepare($conexion,$sql2);
             mysqli_stmt_bind_param($query2,"iis",$idUsuario,$idEmpresa,$dispositivoID);
