@@ -88,12 +88,15 @@
     $anio = $_GET['year'];
 
     // DATOPS DE CONEXION
-      $us = "root";
-      $pw = "#Tecuani.Joel";
       if(gethostname() == "DESKTOP-AUI7NQT"){
+        $us = "root";
+        $pw = "#Tecuani.Joel";
         $ht = "localhost";
+        // $db = "cierre agosto 25";
       }else{
-        $ht = "187.192.151.85";
+        $us = "u427759545_cierre082025";
+        $pw = "#Tecuani.Joel1";
+        $ht = "localhost";
       }
     // FIN DATOSS DE CONEXION
 
@@ -102,7 +105,7 @@
     }else{
       //cargamos la conexion depende del mes
       if($mes == "08" && $anio == "2025"){
-        $db = "cierre agosto 25";
+        $db = "u427759545_cierre082025";
         $conexion = mysqli_connect($ht,$us,$pw)or die
         ("Ocurrio un error al comunicarse con la base de datos: ".mysqli_error($conexion));
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
