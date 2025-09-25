@@ -150,7 +150,7 @@ include("includes/head.php");
                   </div>
 
                   <div class="col-12">
-                    <div class="list-group">
+                    <div class="list-group"> 
                       <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         <div>
                           <h6 class="mb-1">Cierre Agosto 2025</h6>
