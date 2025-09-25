@@ -985,101 +985,7 @@
 
   <!-- ================= SCRIPT: datos de prueba, cálculos y gráficos ================= -->
   <script>
-    /*************************************************************************
-     * DATOS DE EJEMPLO (reemplázalos con JSON desde PHP/MySQL)
-     * Estructuras simples: currentMonth / previousMonth con:
-     * - days: [{date:'2025-08-01', sales:..., repairs:..., accessories:...}, ...]
-     * - branches: {Central:..., Norte:..., Sur:...}
-     * - statuses: {Pendiente:..., 'En Proceso':..., Completado:...}
-     * - categories: {Cargadores:..., Fundas:..., Pantallas:..., Baterias:...}
-     * - topItems: [{name, units, revenue, marginPct}, ...]
-     *************************************************************************/
     
-
-    // Fill header info
-    // document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
-    // document.getElementById('kpiSales').textContent = formatMoney(totalSalesCurr);
-    // document.getElementById('kpiExpenses').textContent = formatMoney(expensesCurrent);
-    // document.getElementById('kpiProfit').textContent = formatMoney(profit);
-    // document.getElementById('kpiRepairs').textContent = totalRepairsCurr.toLocaleString();
-
-    /****************************
-     * TEXT TEMPLATES (GENERIC)
-     * These texts are generic and can be used as base paragraphs.
-     ****************************/
-    // function formatMoney(n){ return '$' + Number(n).toLocaleString(); }
-
-    // function textVentasTotales(){
-    //   const g = growthPct;
-    //   return `Las ventas totales del mes alcanzaron ${formatMoney(totalSalesCurr)}. Esto representa ${g >= 0 ? '+' : ''}${g.toFixed(1)}% respecto al mes anterior (${formatMoney(prevAgg.sales)}). Revisa las fechas con mayor movimiento en el gráfico de ventas diarias para identificar picos y campañas efectivas.`;
-    // }
-
-    // function textVentasPorSucursal(){
-    //   const entries = Object.entries(currentMonth.branches).map(([k,v])=>`${k}: ${formatMoney(v)}`);
-    //   return `Ventas por sucursal — ${entries.join(' · ')}. Prioriza reposición y promociones en sucursales con menor desempeño para mejorar cobertura.`;
-    // }
-
-    // function textServiciosRegistrados(){
-    //   return `Se registraron ${totalRepairsCurr} servicios en el mes. El ticket promedio por reparación fue de ${formatMoney(avgTicket)}. Ajusta horarios y personal según semanas con mayor carga.`;
-    // }
-
-    
-    // function textVentasPorCategoria(){
-    //   const totalCat = Object.values(currentMonth.categories).reduce((a,b)=>a+b,0);
-    //   const parts = Object.entries(currentMonth.categories).map(([k,v])=>`${k} (${Math.round((v/totalCat)*100)}%)`);
-    //   return `Las ventas por categoría totalizan ${formatMoney(totalCat)}. Principales: ${parts.join(' · ')}. Considera promociones cruzadas en categorías con menor participación.`;
-    // }
-
-    // function textTopArticulos(){
-    //   return `Top artículos: ${currentMonth.topItems.map(t=>`${t.name} (${t.units} uds, ${formatMoney(t.revenue)})`).join(' · ')}. Mantén stock de estos para evitar rupturas.`;
-    // }
-
-    // function textComparativaServiciosVsArticulos(){
-    //   const repairs = totalRepairsCurr;
-    //   const accessories = accessorySalesCurr;
-    //   return `Comparativa: ${repairs} servicios vs ${formatMoney(accessories)} en ventas de artículos. Las acciones combinadas (servicio + accesorio) ayudan a incrementar el ticket promedio.`;
-    // }
-
-    // function textResumenGeneral(){
-    //   return `Resumen: Ventas ${formatMoney(totalSalesCurr)} (${growthPct>=0?'+':''}${growthPct.toFixed(1)}% vs mes anterior), Utilidad estimada ${formatMoney(profit)}, ${totalRepairsCurr} servicios registrados. Recomendación: ${generateRecommendation()}.`;
-    // }
-
-    // function generateRecommendation(){
-    //   if(growthPct >= 8) return 'Aumentar stock de top artículos y evaluar promociones pagadas';
-    //   if(growthPct < 0 && accessoryPct < 20) return 'Promocionar paquetes servicio + accesorio para elevar ticket';
-    //   if(growthPct < 0) return 'Revisar precios y campañas de retención';
-    //   return 'Mantener estrategia y optimizar inventario';
-    // }
-
-    // Insert text paragraphs
-    // document.getElementById('textSalesTotal').textContent = textVentasTotales();
-    // document.getElementById('textSalesByBranch').textContent = textVentasPorSucursal();
-    // document.getElementById('textServicesRegistered').textContent = textServiciosRegistrados();
-    // document.getElementById('textSalesByCategory').textContent = textVentasPorCategoria();
-    // document.getElementById('textTopItems').textContent = textTopArticulos();
-    // document.getElementById('textServicesVsItems').textContent = textComparativaServiciosVsArticulos();
-    // document.getElementById('summaryText').textContent = textResumenGeneral();
-
-    /****************************
-     * Fill products table
-     ****************************/
-    // const products = currentMonth.topItems.map(p => ({ name: p.name, units: p.units, revenue: p.revenue, margin: (p.marginPct || 35) + '%' }));
-    // const tbody = document.getElementById('productsTableBody');
-    // products.forEach(p=>{
-    //   const tr = document.createElement('tr');
-    //   tr.innerHTML = `<td>${p.name}</td>
-    //                   <td class="text-end">${p.units}</td>
-    //                   <td class="text-end">${formatMoney(p.revenue)}</td>
-    //                   <td class="text-end">${p.margin}</td>`;
-    //   tbody.appendChild(tr);
-    //   // console.log('si');
-    // });
-
-    /****************************
-     * CREATE CHARTS
-     ****************************/
-    // Daily sales chart (bars) - compare current vs previous (align by index)
-    // 🔹 Array global donde guardamos las instancias
 const charts = {};
 
 // 🔹 Función para crear o actualizar
@@ -1159,20 +1065,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // ========================
-  // 4. Servicios por Estatus
-  // ========================
-  // createOrUpdateChart("servicesStatusChart", {
-  //   type: "doughnut",
-  //   data: {
-  //     labels: ["Pendiente", "En Proceso", "Completado"],
-  //     datasets: [{
-  //       data: [20, 35, 95],
-  //       backgroundColor: ["#8FD1FF", "#0B74D1", "#444"]
-  //     }]
-  //   },
-  //   options: { responsive: true }
-  // });
   const chartEstatusTrab = <?php echo $chartEstatusTrabajo; ?>;
     
   const ctxEst = document.getElementById('servicesStatusChart').getContext('2d');
@@ -1214,85 +1106,10 @@ document.addEventListener("DOMContentLoaded", () => {
       options: chartDataSuc.options
   });
 
-  // createOrUpdateChart("articlesByCategoryChart", {
-  //   type: "bar",
-  //   data: {
-  //     labels: ["Cargadores", "Fundas", "Audífonos", "Pantallas"],
-  //     datasets: [{
-  //       label: "Ventas por Categoría ($)",
-  //       data: [3000, 2500, 4000, 2000],
-  //       backgroundColor: "rgba(11,116,209,0.7)"
-  //     }]
-  //   },
-  //   options: { responsive: true }
-  // });
-
-  // ========================
-  // 6. Top Artículos Vendidos (horizontal)
-  // ========================
-  // createOrUpdateChart("topArticlesChart", {
-  //   type: "bar",
-  //   data: {
-  //     labels: ["Cargador USB-C", "Funda iPhone", "Audífonos BT", "Protector Pantalla"],
-  //     datasets: [{
-  //       label: "Unidades Vendidas",
-  //       data: [120, 95, 80, 75],
-  //       backgroundColor: "#0B74D1"
-  //     }]
-  //   },
-  //   options: {
-  //     responsive: true,
-  //     indexAxis: "y"
-  //   }
-  // });
-
-  // ========================
-  // 7. Servicios vs Artículos
-  // ========================
-  // createOrUpdateChart("servicesVsArticlesChart", {
-  //   type: "bar",
-  //   data: {
-  //     labels: ["Servicios", "Artículos"],
-  //     datasets: [{
-  //       label: "Comparativa",
-  //       data: [150, 320],
-  //       backgroundColor: ["#0B74D1", "#8FD1FF"]
-  //     }]
-  //   },
-  //   options: { responsive: true }
-  // });
+  
 
 });
 
-  // let texto = document.getElementById('textSalesTotal').textContent;
-
-  // let datos = new FormData();
-  // datos.append('texto',texto);
-
-  // fetch('../includes/solicitud-IA.php',{
-  //   method: 'POST',
-  //   body: datos
-  // }).then(function(res){
-  //   return res.json();
-  // }).then(function(result){
-  //   console.log(result);
-  // })
-
-    // (No infinite loops) - charts created once. If you fetch new data, call updateCharts(newPrev, newCurr).
-
-    /****************************
-     * OPTIONAL: function to update charts with real data (call after fetching)
-     * Example: updateCharts(prevObj, currObj)
-     ****************************/
-    // function updateCharts(prev, curr){
-    //   // Update KPIs, texts and datasets — straightforward; not automatically triggered anywhere
-    //   // Implement as needed when integrating with backend.
-    //   console.warn('updateCharts() called — integrate this with your backend to update charts dynamically.');
-    // }
-
-    /****************************
-     * FINAL: (already populated texts above)
-     ****************************/
   </script>
 
   <!-- Bootstrap JS -->
