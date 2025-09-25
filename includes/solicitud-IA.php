@@ -4,7 +4,6 @@ session_start();
 if(!empty($_SESSION['usuarioPOS'])){
 
   // API KEY Gemini
-  // AIzaSyDFasXK4w-MQV6kNhs1YZsaWAi1k3VKmf0
 
   // URL de la API local que proporciona LM Studio
   $apiUrl = 'http://localhost:1234/v1/chat/completions';
