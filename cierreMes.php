@@ -106,8 +106,7 @@
       //cargamos la conexion depende del mes
       if($mes == "08" && $anio == "2025"){
         $db = "u427759545_cierre082025";
-        $conexion = mysqli_connect($ht,$us,$pw)or die
-        ("Ocurrio un error al comunicarse con la base de datos: ".mysqli_error($conexion));
+        $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
       }else{
