@@ -109,6 +109,15 @@
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
+        $mesNombre = "Agosto";
+      $mesAnterior = "Julio";
+      }elseif($mes == "09" && $anio == "2025"){
+        $db = "u427759545_cierre092025";
+        $conexion = mysqli_connect($ht,$us,$pw);
+        mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
+        mysqli_set_charset($conexion, "utf8");
+        $mesNombre = "Septiembre";
+        $mesAnterior = "Agosto";
       }else{
       header('location:reportesCaja.php');
         //reporte no cargado
@@ -310,8 +319,7 @@
     }
     
     // TEXTOS PRIMERA GRAFICA
-    $mesNombre = "Agosto";
-    $mesAnterior = "Julio";
+    
     $cambio = "";
     $tendencia = "";
     if($totalVenta > $totalAnterior){
@@ -680,11 +688,11 @@
       </div>
       <div>
         <h3 class="mb-0">REPORTE FINANCIERO</h3>
-        <div class="small-muted">Agosto 2025 — Talleres y ventas de accesorios</div>
+        <div class="small-muted"><?php echo $mesNombre; ?> 2025 — Talleres y ventas de accesorios</div>
       </div>
       <div class="ms-auto d-flex gap-2 align-items-center">
-        <div class="chip"><i class="bi bi-calendar-event"></i>&nbsp; Mes: Agosto 2025</div>
-        <div class="small-muted">Última actualización: <strong id="lastUpdate">06/09/2025 - 23:54:08</strong></div>
+        <div class="chip"><i class="bi bi-calendar-event"></i>&nbsp; Mes: <?php echo $mesNombre; ?> 2025</div>
+        <div class="small-muted">Última actualización: <strong id="lastUpdate">05/10/2025 - 10:30:15</strong></div>
       </div>
     </div>
 

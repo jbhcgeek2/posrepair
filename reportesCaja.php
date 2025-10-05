@@ -153,6 +153,18 @@ include("includes/head.php");
                     <div class="list-group"> 
                       <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         <div>
+                          <h6 class="mb-1">Cierre Septiembre 2025</h6>
+                          <small class="text-muted">Procesado el 05/10/2025</small>
+                        </div>
+                        <div>
+                          <a href="cierreMes.php?mes=09&year=2025" target="_blank" class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-eye me-1"></i>Ver Detalle
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
                           <h6 class="mb-1">Cierre Agosto 2025</h6>
                           <small class="text-muted">Procesado el 06/09/2025</small>
                         </div>
