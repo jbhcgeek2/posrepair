@@ -94,7 +94,7 @@
         $ht = "localhost";
         // $db = "cierre agosto 25";
       }else{
-        $us = "u427759545_cierre082025";
+        
         $pw = "#Tecuani.Joel1";
         $ht = "localhost";
       }
@@ -106,6 +106,7 @@
       //cargamos la conexion depende del mes
       if($mes == "08" && $anio == "2025"){
         $db = "u427759545_cierre082025";
+        $us = "u427759545_cierre082025";
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
@@ -113,6 +114,7 @@
       $mesAnterior = "Julio";
       }elseif($mes == "09" && $anio == "2025"){
         $db = "u427759545_cierre092025";
+        $us = "u427759545_cierre092025";
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
