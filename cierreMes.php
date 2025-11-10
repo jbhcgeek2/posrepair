@@ -120,6 +120,15 @@
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Septiembre";
         $mesAnterior = "Agosto";
+      }elseif($mes == "10" && $anio == "2025"){
+        $db = "u427759545_cierre102025";
+        $us = "u427759545_cierre102025";
+        $conexion = mysqli_connect($ht,$us,$pw);
+        mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
+        mysqli_set_charset($conexion, "utf8");
+        $mesNombre = "Octubre";
+        $mesAnterior = "Septiembre";
+
       }else{
       header('location:reportesCaja.php');
         //reporte no cargado
