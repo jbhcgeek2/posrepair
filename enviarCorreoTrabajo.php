@@ -45,7 +45,7 @@ if(!empty($_SESSION['usuarioPOS'])){
       $mail->SMTPAuth = true;
       $mail->Username = "contacto@tecuanisoft.com";
       // $mail->Password = "hecj920331";
-      $mail->Password = "#Benja.GeeK0";
+      $mail->Password = "#Tecuani.Joel1";
       $mail->SMTPSecure = "ssl";
       $mail->Port = 465;
       $mail->From = "contacto@tecuanisoft.com";

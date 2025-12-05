@@ -129,6 +129,22 @@
         $mesNombre = "Octubre";
         $mesAnterior = "Septiembre";
 
+      }elseif($mes == "11" && $anio == "2025"){
+        if(gethostname() == "DESKTOP-AUI7NQT"){
+          $db = "u427759545_cierre112025";
+          $us = "root";
+          $pw = "#Tecuani.Joel";
+        }else{
+          $db = "u427759545_cierre112025";
+          $us = "u427759545_cierre112025";
+        }
+        
+        $conexion = mysqli_connect($ht,$us,$pw);
+        mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
+        mysqli_set_charset($conexion, "utf8");
+        $mesNombre = "Noviembre";
+        $mesAnterior = "Octubre";
+
       }else{
       header('location:reportesCaja.php');
         //reporte no cargado
