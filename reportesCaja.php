@@ -119,6 +119,15 @@ include("includes/head.php");
                   </div><!--//app-card-->
                 </div><!--//col-->
 
+                <div class="col-6 col-lg-3 mb-3">
+                  <div class="app-card app-card-stat shadow-sm h-100" style="background-color:#e0f2f1;" data-bs-toggle="modal" data-bs-target="#reporteInventario">
+                    <div class="app-card-body p-3 p-lg-4">
+                      <h5 class="stats-type mb-1">Inventario</h5>
+                    </div><!--//app-card-body-->
+                    <a class="app-card-link-mask" href="#!"></a>
+                  </div><!--//app-card-->
+                </div><!--//col-->
+
 
 
               </div>
@@ -223,6 +232,99 @@ include("includes/head.php");
         </div>
 
 
+        <!-- Modal Inventario -->
+        <div class="modal fade" id="reporteInventario" tabindex="-1" aria-labelledby="reporteInventarioLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-light">
+              <div class="modal-header text-white">
+                <h1 class="modal-title fs-5" id="reporteInventarioLabel">
+                  <i class="bi bi-calendar-check me-2"></i>Reporte de inventario
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                      <i class="bi bi-info-circle me-2"></i>
+                      <div>
+                        Indica los campos para generar el reporte
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4 mb-3">
+                        <label for="categoriaReport" class="form-label">Categoria</label>
+                        <select name="categoriaReport" id="categoriaReport" class="form-select">
+                          <option value="" selected disabled>Seleccione...</option>
+                          <option value="all">Todas</option>
+                          <?php 
+                            $sqlC = "SELECT * FROM CATEGORIA WHERE empresaID = '$idEmpresaSesion' AND estatusCategoria = '1'";
+                            $queryC = mysqli_query($conexion, $sqlC);
+                            while($fetchC = mysqli_fetch_assoc($queryC)){
+                              $idCat = $fetchC['idCategoria'];
+                              $nombreCat = $fetchC['nombreCategoria'];
+                              echo "<option value='$idCat'>$nombreCat</option>";
+
+                            }//fin del while
+                          ?>
+                        </select>
+                      </div>
+
+                      <div class="col-sm-12 col-md-4 mb-3">
+                        <label for="sucursalReport" class="form-label">Sucursal</label>
+                        <select name="sucursalReport" id="sucursalReport" class="form-select">
+                          <option value="" selected disabled>Seleccione...</option>
+                          <option value="all">Todas</option>
+                          <?php 
+                            $sqlS = "SELECT * FROM SUCURSALES WHERE empresaSucID = '$idEmpresaSesion' AND estatusSuc = '1'";
+                            $queryS = mysqli_query($conexion, $sqlS);
+                            while($fetchS = mysqli_fetch_assoc($queryS)){
+                              $idSuc = $fetchS['idSucursal'];
+                              $nombreSuc = $fetchS['nombreSuc'];
+
+                              echo "<option value='$idSuc'>$nombreSuc</option>";
+                            }//fin del while Sucursales
+                          ?>
+                        </select>
+                      </div>
+
+                      <div class="col-sm-12 col-md-4 mb-3">
+                        <label for="proveedorReport" class="form-label">Proveedor</label>
+                        <select name="proveedorReport" id="proveedorReport" class="form-select">
+                          <option value="" selected disabled>Seleccione...</option>
+                          <option value="all">Todos</option>
+                          <?php 
+                            $sqlP = "SELECT * FROM PROVEEDORES WHERE provEmpresaID = '$idEmpresaSesion' AND estatusProveedor = '1'";
+                            $queryP = mysqli_query($conexion, $sqlP);
+                            while($fetchP = mysqli_fetch_assoc($queryP)){
+                              $idProv = $fetchP['idProveedor'];
+                              $nombreProv = $fetchP['nombreProveedor'];
+
+                              echo "<option value='$idProv'>$nombreProv</option>";
+                            }//fin del while proveedor
+                          ?>
+                        </select>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  <i class="bi bi-x-circle me-1"></i>Cerrar
+                </button>
+
+                <a href="#!" class="btn btn-primary" id="genraReport">Generar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
 
         <?php
         include("includes/footer.php");
@@ -240,6 +342,27 @@ include("includes/head.php");
       <script src="assets/js/app.js"></script>
       <script src="assets/js/swetAlert.js"></script>
       <script src="assets/js/validaDispositivo.js"></script>
+
+      <script>
+        document.getElementById('genraReport').addEventListener('click', function(){
+          let catego = document.getElementById('categoriaReport').value;
+          let sucu = document.getElementById('sucursalReport').value;
+          let prov = document.getElementById('proveedorReport').value;
+
+          if(catego != "" && sucu != "" && prov != ""){
+            let liga = "reporteInventario.php?cate="+catego+"&suc="+sucu+"&prov="+prov;
+            window.open(liga,"_blank");
+          }else{
+            Swal.fire({
+              title: 'Campos Necesarios',
+              text: 'Asegurate de indicar todos los campos',
+              icon: 'error'
+            })
+          }
+
+          
+        })
+      </script>
 </body>
 
 </html>
