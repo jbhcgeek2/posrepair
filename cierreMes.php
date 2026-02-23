@@ -173,8 +173,8 @@
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
-        $mesNombre = "Diciembre";
-        $mesAnterior = "Noviembre";
+        $mesNombre = "Enero";
+        $mesAnterior = "Diciembre";
       }else{
         header('location:reportesCaja.php');
         //reporte no cargado
