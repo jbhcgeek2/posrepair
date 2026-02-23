@@ -166,7 +166,7 @@ include("includes/head.php");
                           <small class="text-muted">Procesado el 09/02/2026</small>
                         </div>
                         <div>
-                          <a href="cierreMes.php?mes=02&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
+                          <a href="cierreMes.php?mes=01&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
                             <i class="bi bi-eye me-1"></i>Ver Detalle
                           </a>
                         </div>

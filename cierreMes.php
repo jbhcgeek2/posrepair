@@ -176,7 +176,7 @@
         $mesNombre = "Diciembre";
         $mesAnterior = "Noviembre";
       }else{
-      header('location:reportesCaja.php');
+        header('location:reportesCaja.php');
         //reporte no cargado
         header('location:reportesCaja.php');
       }
