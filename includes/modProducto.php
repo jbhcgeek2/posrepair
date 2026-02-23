@@ -442,6 +442,41 @@ if(!empty($_SESSION['usuarioPOS'])){
       $res = ["status"=>"error","mensaje"=>"Error al consultar el codigo. ".$th];
       echo json_encode($res);
     }
+  }elseif(!empty($_POST['delChip'])){
+    //Eliminar chip, verificamos que el usuario
+    //sea administrador o encargado de sucursal
+
+    $chip = $_POST['delChip'];
+    $idChip = explode("|",$chip)[2];
+    $sucursal = explode("|",$chip)[1];
+    $producto = explode("|",$chip)[0];
+
+    $usuario = $_SESSION['usuarioPOS'];
+    $empresa = datoEmpresaSesion($usuario,"id");
+    $empresa = json_decode($empresa);
+    $idEmpresa = $empresa->dato;
+
+    $datosUsuarios = getDataUser($usuario,$idEmpresa);
+
+    $datosUsuarios = json_decode($datosUsuarios);
+    $rol = $datosUsuarios->rolID;
+    // print_r($datosUsuarios);
+    if($rol == 1 || $rol == 3){
+      $sql = "UPDATE DETALLECHIP SET estatusChip = 'Baja' WHERE idChip = ? AND empresaID = ?";
+      $query = mysqli_prepare($conexion, $sql);
+      mysqli_stmt_bind_param($query,"ii",$idChip,$idEmpresa);
+      mysqli_stmt_execute($query);
+      //una vez eliminado, actualizamos la cantidad
+
+      $update = updateCantidadChip($producto,$sucursal,$idEmpresa);
+
+      $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+      echo json_encode($res);
+    }else{
+      //sin permisos
+      $res = ['status'=>'error','mensaje'=>'No tienes el perfil de usuario para esta accion.'];
+      echo json_encode($res);
+    }
   }
 }
 

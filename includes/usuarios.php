@@ -40,6 +40,9 @@
           case 'claveAudi':
             $valor = $fetch['claveAuditoria'];
             break;
+          case 'rol':
+            $valor = $fetch['rolID'];
+            break;
           
           default:
             $valor = "error";

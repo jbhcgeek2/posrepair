@@ -724,7 +724,34 @@ function setSalidaArti($numComp,$tipoComp,$montoUnitario,$nArti,$idProveedor,$pr
 
 }//fin funcion setSalidaArti
 
+function updateCantidadChip($prod,$suc,$emp){
+  require('conexion.php');
+  $res = [];
+  if(!$conexion){
+    require('../conexion.php');
+    if(!$conexion){
+      require('../includes/conexion.php');
+    }
+  }
 
+  $sql = "SELECT COUNT(*) AS existencia FROM DETALLECHIP WHERE 
+  empresaID = '$emp' AND sucursalID = '$suc' AND productoID = '$prod' 
+  AND estatusChip = 'Activo'";
+  $query = mysqli_query($conexion, $sql);
+  $fetch = mysqli_fetch_assoc($query);
+  $cantidad = $fetch['existencia'];
+
+  $sql2 = "UPDATE ARTICULOSUCURSAL SET existenciaSucursal = '$cantidad' 
+  WHERE articuloID = '$prod' AND sucursalID = '$suc'";
+  $query2 = mysqli_query($conexion, $sql2);
+  if($query2){
+    $res = ['status'=>'ok','mensaje'=>'operationComplete'];
+    return json_encode($res);
+  }else{
+    $res = ['status'=>'error','mensaje'=>'No fue posible realizar la actualizacion'];
+    return json_encode($res);
+  }
+}
 // precioUnitario = 17
 // precioCOmpra = 12.20
 // existencia = 150

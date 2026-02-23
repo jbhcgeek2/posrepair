@@ -146,3 +146,42 @@ if(document.getElementById('btnTerminaChip')){
     location.reload(true);
   })
 }
+
+function delChip(chip){
+
+  Swal.fire({
+    title: 'Eliminar Registro',
+    text: 'Estas seguro de eliminar el articulo?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Eliminar'
+  }).then((res)=>{
+    if(res.isConfirmed){
+      let datos = new FormData();
+      datos.append('delChip',chip);
+
+      fetch("../includes/modProducto.php",{
+        method: 'POST',
+        body: datos
+      }).then(function(rest){
+        return rest.json();
+      }).then(function(result){
+        if(result.status == "ok"){
+          Swal.fire({
+            title: 'Articulo Eliminado',
+            text: 'Se elimino el registro correctamente',
+            icon: 'success'
+          }).then(function(){
+            location.reload();
+          })
+        }else{
+          Swal.fire({
+            title: 'Ocurrio un error',
+            text: result.mensaje,
+            icon: 'error'
+          })
+        }
+      })
+    }
+  })
+}
