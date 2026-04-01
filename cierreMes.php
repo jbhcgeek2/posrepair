@@ -104,22 +104,35 @@
       header('location:reportesCaja.php');
     }else{
       //cargamos la conexion depende del mes
-      if($mes == "08" && $anio == "2025"){
-        $db = "u427759545_cierre082025";
-        $us = "u427759545_cierre082025";
+      if($mes == "03" && $anio == "2026"){
+        
+        if(gethostname() == "DESKTOP-AUI7NQT"){
+          $db = "u427759545_cierre032026";
+          $us = "root";
+          $pw = "#Tecuani.Joel";
+        }else{
+          $db = "u427759545_cierre032026";
+          $us = "u427759545_cierre032026";
+        }
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
-        $mesNombre = "Agosto";
-      $mesAnterior = "Julio";
-      }elseif($mes == "09" && $anio == "2025"){
-        $db = "u427759545_cierre092025";
-        $us = "u427759545_cierre092025";
+        $mesNombre = "Marzo";
+        $mesAnterior = "Febrero";
+      }elseif($mes == "02" && $anio == "2026"){
+        if(gethostname() == "DESKTOP-AUI7NQT"){
+          $db = "u427759545_cierre022026";
+          $us = "root";
+          $pw = "#Tecuani.Joel";
+        }else{
+          $db = "u427759545_cierre022026";
+          $us = "u427759545_cierre022026";
+        }
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
-        $mesNombre = "Septiembre";
-        $mesAnterior = "Agosto";
+        $mesNombre = "Febrero";
+        $mesAnterior = "Enero";
       }elseif($mes == "10" && $anio == "2025"){
         $db = "u427759545_cierre102025";
         $us = "u427759545_cierre102025";
