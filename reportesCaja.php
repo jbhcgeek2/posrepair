@@ -128,6 +128,15 @@ include("includes/head.php");
                   </div><!--//app-card-->
                 </div><!--//col-->
 
+                <div class="col-6 col-lg-3 mb-3">
+                  <div class="app-card app-card-stat shadow-sm h-100" style="background-color:#e0f2f1;">
+                    <div class="app-card-body p-3 p-lg-4">
+                      <h5 class="stats-type mb-1">Cierres de dia</h5>
+                    </div><!--//app-card-body-->
+                    <a class="app-card-link-mask" href="#!" id="verCierresCaja"></a>
+                  </div><!--//app-card-->
+                </div><!--//col-->
+
 
 
               </div>
@@ -374,6 +383,33 @@ include("includes/head.php");
               icon: 'error'
             })
           }
+        })
+
+        document.getElementById('verCierresCaja').addEventListener('click', function(){
+          // Ejecuta el Swal y espera la respuesta del usuario
+          const result = Swal.fire({
+              title: 'Selecciona una fecha',
+              html: '<input type="date" id="fecha_reporte" class="swal2-input">',
+              focusConfirm: false,
+              confirmButtonText: 'Aceptar',
+              cancelButtonText: 'Cancelar',
+              showCancelButton: true,
+              preConfirm: () => {
+                  // Cuando el usuario hace clic en "Aceptar", obtenemos el valor del input
+                  const fecha = document.getElementById('fecha_reporte').value;
+                  if (!fecha) {
+                      Swal.showValidationMessage('Por favor, selecciona una fecha');
+                  }
+                  return fecha;
+              }
+          }).then(res=>{
+            if(res.isConfirmed){
+              const fechaSeleccionada = res.value;
+              window.open('reporteCierreCaja.php?date='+fechaSeleccionada,'_blank');
+              Swal.fire(`Fecha seleccionada: ${fechaSeleccionada}`, '', 'success');
+              // Aquí puedes enviar la fecha a tu servidor o procesarla como necesites.
+            }
+          });
 
           
         })

@@ -14,7 +14,11 @@ if(!empty($_SESSION['usuarioPOS'])){
   $datosUsuario = getDataUser($usuario,$idEmprersa);
   $idSucursal = json_decode($datosUsuario)->sucursalID;
   $idUsuario = json_decode($datosUsuario)->idUsuario;
-  $fecha = date('Y-m-d');
+  if(!empty($_GET['date'])){
+    $fecha = $_GET['date'];
+  }else{
+    $fecha = date('Y-m-d');
+  }
   $montoGasto = "0";
   $montoPrecortes = "0";
   $contenidoTabla = "";
@@ -253,7 +257,7 @@ if(!empty($_SESSION['usuarioPOS'])){
 
     }else{
       //no procede el reporte
-      echo "no amiguito";
+      echo "no podemos procesar este reporte.";
     }
   } catch (\Throwable $th) {
     //throw $th;
