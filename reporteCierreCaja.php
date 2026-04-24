@@ -26,10 +26,17 @@ if(!empty($_SESSION['usuarioPOS'])){
   $nombreEmpresa = datoEmpresaSesion($usuario,"nombre");
   $nombreEmpresa = json_decode($nombreEmpresa)->dato;
 
-  $sqlUser = "SELECT * FROM USUARIOS WHERE userName = '$usuario'";
+  if($idEmprersa == 4){
+    $nombreEmpresa = "Servicel Acaponeta";
+  }
+
+  $sqlUser = "SELECT * FROM USUARIOS a INNER JOIN SUCURSALES b 
+  ON a.sucursalID = b.idSucursal WHERE a.userName = '$usuario'";
   $queryUser = mysqli_query($conexion, $sqlUser);
   $fetchUser = mysqli_fetch_assoc($queryUser);
   $nombreUsuario = $fetchUser['nombreUsuario']." ".$fetchUser['apPaternoUsuario']." ".$fetchUser['apMaternoUsuario'];
+
+  $domSuc = $fetchUser['calleSuc'];
 
   //consultamos si el usuario ya tiene el cierre procesado
   $sql = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND
@@ -39,6 +46,8 @@ if(!empty($_SESSION['usuarioPOS'])){
     if(mysqli_num_rows($query) == 1){
       //podemos hacer el reporte
       //consultamos las ventas
+      $fetch = mysqli_fetch_assoc($query);
+      $horaCierre = $fetch['horaMovimiento'];
       $sql2 = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b 
       ON a.ventaID = b.idVenta WHERE b.fechaVenta = '$fecha' 
       AND a.usuarioVenta = '$usuario' AND a.sucursalID = '$idSucursal'";
@@ -134,6 +143,15 @@ if(!empty($_SESSION['usuarioPOS'])){
         }
 
         // Mostramos el formato de reporte\
+
+        if(!empty($_GET['date'])){
+          $fechaCierre = $fecha." - ".$horaCierre;
+        }else{
+          $fechaCierre = date('d-m-Y')." - ".date('H:i:s');
+        }
+
+
+
         ?>
           <!DOCTYPE html>
             <html lang="en">
@@ -151,11 +169,17 @@ if(!empty($_SESSION['usuarioPOS'])){
                   <table style="width:100%;">
                     <thead>
                       <tr>
-                        <th colspan="4" style="text-align:left;">Cierre del dia. <?php echo date('d-m-Y'); ?></th>
-                        
+                        <th colspan="4" style="font-size:24px;text-align:center;"><?php echo $nombreEmpresa ?></th>
+                      </tr>
+                      <tr style="padding-top:10px;padding-bottom:25px;">
+                        <th colspan="4" style="font-size:12px;text-align:center;"><?php echo $domSuc ?></th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="4" style="text-align:center;">Cierre del dia. <?php echo $fecha ?></th>
                       </tr>
                       <tr style="font-size:13px;">
-                        <th colspan="4" style="font-weight:100;">Fecha y hora - <?php echo date('d-m-Y')." - ".date('H:i:s'); ?></th>
+                        <th colspan="4" style="font-weight:100;">Fecha y hora - <?php echo $fechaCierre; ?></th>
                         <th></th>
                       </tr>
                       <tr style="font-size:13px;">
