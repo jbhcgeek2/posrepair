@@ -125,7 +125,11 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $nombreArti = $venta->detalleVenta[$x]->nombreServicio." ".
                     $venta->detalleVenta[$x]->marca." ".$venta->detalleVenta[$x]->modelo;
                   }else{
-                    $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
+                    if($venta->detalleVenta[$x]->codigoChip != ""){
+                      $nombreArti = $venta->detalleVenta[$x]->nombreArticulo."<br>".$venta->detalleVenta[$x]->codigoChip;
+                    }else{
+                      $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;
+                    }
                   }
                   $cantidad = $venta->detalleVenta[$x]->cantidadVenta;
                   $subtotal = $venta->detalleVenta[$x]->subtotalVenta;

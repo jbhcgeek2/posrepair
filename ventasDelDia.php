@@ -87,6 +87,7 @@ session_start();
                           $sql = "";
                           if($rolUsuario == "Administrador"){
                             $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+                            LEFT JOIN DETALLECHIP c ON b.chipID = c.idChip 
                             WHERE a.fechaVenta = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
 
                             $sqlGasto = "SELECT * FROM MOVCAJAS WHERE fechaMovimiento = '$fecha' AND 
@@ -94,6 +95,7 @@ session_start();
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            LEFT JOIN DETALLECHIP c ON a.chipID = c.idChip 
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
 
@@ -107,6 +109,7 @@ session_start();
                             // WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
 
                             $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            LEFT JOIN DETALLECHIP c ON a.chipID = c.idChip 
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
 
@@ -149,7 +152,7 @@ session_start();
                                   $sqlExt = "SELECT * FROM ARTICULOS WHERE idArticulo = '$idProd' AND empresaID = '$idEmpresaSesion'";
                                   $queryExt = mysqli_query($conexion, $sqlExt);
                                   $fetchExt = mysqli_fetch_assoc($queryExt);
-                                  $nombreCosa =  $fetchExt['nombreArticulo'];
+                                  $nombreCosa =  $fetchExt['nombreArticulo']."<br>".$fetch['codigoChip'];
                                   $nombreCosa = strtoupper($nombreCosa);
                                 }else{
                                   //es un servicio

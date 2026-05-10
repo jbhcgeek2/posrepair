@@ -49,7 +49,8 @@ if(!empty($_SESSION['usuarioPOS'])){
       $fetch = mysqli_fetch_assoc($query);
       $horaCierre = $fetch['horaMovimiento'];
       $sql2 = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b 
-      ON a.ventaID = b.idVenta WHERE b.fechaVenta = '$fecha' 
+      ON a.ventaID = b.idVenta LEFT JOIN DETALLECHIP c ON a.chipID = c.idChip 
+      WHERE b.fechaVenta = '$fecha' 
       AND a.usuarioVenta = '$usuario' AND a.sucursalID = '$idSucursal'";
       try {
         $query2 = mysqli_query($conexion, $sql2);
@@ -81,7 +82,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                 try {
                   $query3 = mysqli_query($conexion, $sql3);
                   $fetch3 = mysqli_fetch_assoc($query3);
-                  $nombreCosa = $fetch3['nombreArticulo'];
+                  $nombreCosa = $fetch3['nombreArticulo']." <br>".$fetch2['codigoChip'];
                 } catch (\Throwable $th) {
                   //error al consultar el producto
                 }

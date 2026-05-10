@@ -183,7 +183,7 @@ include("includes/head.php");
 
 				<!--  -->
 				<?php 
-					$fechaLimite = "2026-04-02";
+					$fechaLimite = "2026-05-11";
 					$fechaHoy2 = date('Y-m-d');
 					if($fechaHoy2 <= $fechaLimite && $rolUsuario == "Administrador"){
 						?>
@@ -212,11 +212,11 @@ include("includes/head.php");
 											</div>
 
 											<p class="text-secondary mb-3" style="font-size: 13px; line-height: 1.5;">
-												Tu reporte de <span class="text-primary fw-semibold">Marzo</span> ya está disponible.
+												Tu reporte de <span class="text-primary fw-semibold">Abril</span> ya está disponible.
 											</p>
 
 											<div class="d-flex gap-2">
-												<a href="cierreMes.php?mes=03&year=2026" target="_blank" class="btn btn-sm"
+												<a href="cierreMes.php?mes=04&year=2026" target="_blank" class="btn btn-sm"
 													style="font-size: 12px; background: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); border: none; border-radius: 6px;">
 													Ver reporte <i class="bi bi-arrow-right ms-1"></i>
 												</a>

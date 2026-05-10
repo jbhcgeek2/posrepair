@@ -119,14 +119,14 @@
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Marzo";
         $mesAnterior = "Febrero";
-      }elseif($mes == "02" && $anio == "2026"){
+      }elseif($mes == "04" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
           $db = "u427759545_cierre022026";
           $us = "root";
           $pw = "#Tecuani.Joel";
         }else{
-          $db = "u427759545_cierre022026";
-          $us = "u427759545_cierre022026";
+          $db = "u427759545_cierre042026";
+          $us = "u427759545_cierre042026";
         }
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));

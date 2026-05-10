@@ -83,8 +83,19 @@ function verTicket($ticket,$idUsuario){
             ON a.articuloID = b.idArticulo  WHERE ventaID = '$idVenta' AND idDetalleVenta = '$idDetalle'";
             $queryExt2 = mysqli_query($conexion, $sqlExt2);
             $fetchExt2 = mysqli_fetch_assoc($queryExt2);
-            //
             $data2[$x] = $fetchExt2;
+
+            //verificamos si el articulo es un CHIP
+            if($fetchExt2['esChip'] == 1){
+              //consultamos el codigo del chip
+              $idPro = $fetchExt2['chipID'];
+              $sqlExt3 = "SELECT * FROM DETALLECHIP WHERE idChip = '$idPro'";
+              $queryExt3 = mysqli_query($conexion, $sqlExt3);
+              $fetchExt3 = mysqli_fetch_assoc($queryExt3);
+              $codigoChip = $fetchExt3['codigoChip'];
+              $data2[$x] += ['codigoChip'=>$codigoChip];
+
+            }
           }else{
             $idTrabajo = $fetch2['trabajoID'];
             //es trabajo/servicio, consultamos el nombre del servicio para agregarlo al ticket
