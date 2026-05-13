@@ -117,8 +117,9 @@ function setCategoria($idEmpresa,$nombreCat,$estatusCat,$descripCat){
   empresaID) VALUES ('$nombreCat','$estatusCat','$descripCat','$idEmpresa')";
   try {
     $query = mysqli_query($conexion, $sql);
+    $idCat = mysqli_insert_id($conexion);
     //se inserto correctamente la categoria
-    $res = ["status"=>"ok","mensaje"=>"operationSuccess"];
+    $res = ["status"=>"ok","mensaje"=>"operationSuccess","data"=>$idCat];
     return json_encode($res);
   } catch (\Throwable $th) {
     //error al consultar la categoria

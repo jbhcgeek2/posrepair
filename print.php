@@ -125,7 +125,7 @@ if(!empty($_SESSION['usuarioPOS'])){
                     $nombreArti = $venta->detalleVenta[$x]->nombreServicio." ".
                     $venta->detalleVenta[$x]->marca." ".$venta->detalleVenta[$x]->modelo;
                   }else{
-                    if($venta->detalleVenta[$x]->codigoChip != ""){
+                    if($venta->detalleVenta[$x]->chipID != ""){
                       $nombreArti = $venta->detalleVenta[$x]->nombreArticulo."<br>".$venta->detalleVenta[$x]->codigoChip;
                     }else{
                       $nombreArti = $venta->detalleVenta[$x]->nombreArticulo;

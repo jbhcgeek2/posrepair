@@ -4,7 +4,7 @@ if(gethostname() == "DESKTOP-AUI7NQT"){
   $us = "root";
   $pw = "#Tecuani.Joel";
   $ht = "localhost";
-  $db = "u427759545_cierre082025";
+  $db = "u427759545_cierre092025";
 
   $conexion = mysqli_connect($ht,$us,$pw)or die
   ("Ocurrio un error al comunicarse con la base de datos: ".mysqli_error($conexion));
