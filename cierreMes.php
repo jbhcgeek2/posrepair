@@ -118,7 +118,7 @@
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Marzo";
-        $mesAnterior = "Febrero";
+        $mesAnteriorName = "Febrero";
       }elseif($mes == "04" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
           $db = "u427759545_cierre022026";
@@ -132,15 +132,21 @@
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Febrero";
-        $mesAnterior = "Enero";
-      }elseif($mes == "10" && $anio == "2025"){
-        $db = "u427759545_cierre102025";
-        $us = "u427759545_cierre102025";
+        $mesAnteriorName = "Enero";
+      }elseif($mes == "05" && $anio == "2026"){
+        if(gethostname() == "DESKTOP-AUI7NQT"){
+          $db = "u427759545_cierre052026";
+          $us = "root";
+          $pw = "#Tecuani.Joel";
+        }else{
+          $db = "u427759545_cierre052026";
+          $us = "u427759545_cierre052026";
+        }
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
-        $mesNombre = "Octubre";
-        $mesAnterior = "Septiembre";
+        $mesNombre = "Mayo";
+        $mesAnteriorName = "Abril";
 
       }elseif($mes == "11" && $anio == "2025"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
@@ -156,7 +162,7 @@
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Noviembre";
-        $mesAnterior = "Octubre";
+        $mesAnteriorName = "Octubre";
 
       }elseif($mes == "12" && $anio == "2025"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
@@ -172,7 +178,7 @@
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Diciembre";
-        $mesAnterior = "Noviembre";
+        $mesAnteriorName = "Noviembre";
       }elseif($mes == "01" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
           $db = "u427759545_cierre012026";
@@ -187,7 +193,7 @@
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Enero";
-        $mesAnterior = "Diciembre";
+        $mesAnteriorName = "Diciembre";
       }else{
         header('location:reportesCaja.php');
         //reporte no cargado
@@ -810,7 +816,7 @@
           <p id="textSalesTotal" class="mt-3 text-paragraph" style="text-align:justify;">
             Las ventas totales de <?php echo $mesNombre; ?> <strong>alcanzaron $<?php echo $totalVentaText; ?>
             Representando un <?php echo $cambio; ?> del  <?php echo number_format($variacion,2) ?>% </strong>
-            comparado con <?php echo $mesAnterior; ?> donde las ventas alcanzaron 
+            comparado con <?php echo $mesAnteriorName; ?> donde las ventas alcanzaron 
             $<?php echo $totalAnteriorText; ?>. <strong>El dia de mayor venta fue el <?php echo explode("-",$fechaVentaMax)[2]; ?> 
             de <?php echo $mesNombre; ?> con un total de <?php echo $numVentasMax; ?> ventas, acumulando un total de 
             $<?php echo number_format($ventaMaxima,2); ?></strong> en comparacion con el 
