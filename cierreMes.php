@@ -148,6 +148,21 @@
         $mesNombre = "Mayo";
         $mesAnteriorName = "Abril";
 
+      }elseif($mes == "6" && $anio == "2026"){
+        if(gethostname() == "DESKTOP-AUI7NQT"){
+          $db = "u427759545_cierre062026";
+          $us = "root";
+          $pw = "#Tecuani.Joel";
+        }else{
+          $db = "u427759545_cierre062026";
+          $us = "u427759545_cierre052026";
+        }
+        
+        $conexion = mysqli_connect($ht,$us,$pw);
+        mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
+        mysqli_set_charset($conexion, "utf8");
+        $mesNombre = "Junio";
+        $mesAnteriorName = "Mayo";
       }elseif($mes == "11" && $anio == "2025"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
           $db = "u427759545_cierre112025";
@@ -164,21 +179,6 @@
         $mesNombre = "Noviembre";
         $mesAnteriorName = "Octubre";
 
-      }elseif($mes == "06" && $anio == "2026"){
-        if(gethostname() == "DESKTOP-AUI7NQT"){
-          $db = "localhost";
-          $us = "root";
-          $pw = "#Tecuani.Joel";
-        }else{
-          $db = "u427759545_cierre062026";
-          $us = "#Tecuani.Joel1";
-        }
-        
-        $conexion = mysqli_connect($ht,$us,$pw);
-        mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
-        mysqli_set_charset($conexion, "utf8");
-        $mesNombre = "Junio";
-        $mesAnteriorName = "Mayo";
       }elseif($mes == "01" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
           $db = "u427759545_cierre012026";
@@ -236,6 +236,7 @@
       $totalVentaText = number_format($totalVenta,2);
     } catch (Throwable $th) {
       //error al consultar las ventas mensuales
+      echo $th;
     }
 
 
