@@ -155,7 +155,7 @@
           $pw = "#Tecuani.Joel";
         }else{
           $db = "u427759545_cierre062026";
-          $us = "u427759545_cierre052026";
+          $us = "u427759545_cierre062026";
         }
         
         $conexion = mysqli_connect($ht,$us,$pw);
