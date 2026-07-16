@@ -164,14 +164,14 @@
         $mesNombre = "Noviembre";
         $mesAnteriorName = "Octubre";
 
-      }elseif($mes == "12" && $anio == "2025"){
+      }elseif($mes == "06" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
-          $db = "u427759545_cierre112025";
+          $db = "localhost";
           $us = "root";
           $pw = "#Tecuani.Joel";
         }else{
-          $db = "u427759545_cierre122025";
-          $us = "u427759545_cierre122025";
+          $db = "u427759545_postrepair";
+          $us = "Af=c[KM3Kn.d7uf4*";
         }
         
         $conexion = mysqli_connect($ht,$us,$pw);

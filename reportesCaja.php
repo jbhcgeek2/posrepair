@@ -172,6 +172,18 @@ include("includes/head.php");
 
                       <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         <div>
+                          <h6 class="mb-1">Cierre Junio 2026</h6>
+                          <small class="text-muted">Procesado el 15/06/2025</small>
+                        </div>
+                        <div>
+                          <a href="cierreMes.php?mes=06&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-eye me-1"></i>Ver Detalle
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <div>
                           <h6 class="mb-1">Cierre Mayo 2026</h6>
                           <small class="text-muted">Procesado el 10/06/2026</small>
                         </div>
@@ -231,17 +243,7 @@ include("includes/head.php");
                           </a>
                         </div>
                       </div>
-                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 class="mb-1">Cierre Noviembre 2025</h6>
-                          <small class="text-muted">Procesado el 05/12/2025</small>
-                        </div>
-                        <div>
-                          <a href="cierreMes.php?mes=11&year=2025" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver Detalle
-                          </a>
-                        </div>
-                      </div>
+                      
                       
                       
 
