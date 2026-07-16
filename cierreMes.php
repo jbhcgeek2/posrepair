@@ -163,21 +163,23 @@
         mysqli_set_charset($conexion, "utf8");
         $mesNombre = "Junio";
         $mesAnteriorName = "Mayo";
-      }elseif($mes == "11" && $anio == "2025"){
+      }elseif($mes == "07" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
           $db = "u427759545_cierre112025";
           $us = "root";
           $pw = "#Tecuani.Joel";
         }else{
-          $db = "u427759545_cierre112025";
-          $us = "u427759545_cierre112025";
+          $db = "u427759545_postrepair";
+          $us = "u427759545_adminRepair";
+          $pw = "Af=c[KM3Kn.d7uf4*";
+
         }
         
         $conexion = mysqli_connect($ht,$us,$pw);
         mysqli_select_db($conexion, $db)or die("No se establecio la conexion con la tabla: ".mysqli_error($conexion));
         mysqli_set_charset($conexion, "utf8");
-        $mesNombre = "Noviembre";
-        $mesAnteriorName = "Octubre";
+        $mesNombre = "Julio";
+        $mesAnteriorName = "Junio";
 
       }elseif($mes == "01" && $anio == "2026"){
         if(gethostname() == "DESKTOP-AUI7NQT"){
