@@ -46,6 +46,8 @@ session_start();
       $estatusTrab = $trabajo->data->estatusTrabajo;
       $telCliente = $trabajo->data->telefonoCliente;
       $montoFinal = $trabajo->data->costoFinal;
+      $folioTrabajo = $trabajo->data->numTrabajo;
+      
       if(empty($montoFinal)){
         $montoFinal = "No Establecido";
       }
@@ -107,6 +109,8 @@ session_start();
 
 							        <div class="col-auto">
 								        <div class="card-header-action">
+                        <a href="#!" id="enviarWhats" class="btn btn-success me-3" data-bs-toggle="modal" 
+                        data-bs-target="#modalWhatsApp"><i class="fa-brands fa-whatsapp me-2 fs-5"></i> Whats</a>
                           <?php 
                             if($idEmpresaSesion == "3" || $idEmpresaSesion == "1"){
                               ?>
@@ -187,7 +191,7 @@ session_start();
                           <label for="">Precio Final</label>
                           <div class="input-group">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" value="<?php echo $montoFinal; ?>" readonly>
+                            <input type="text" id="precioFinalForm" class="form-control" value="<?php echo $montoFinal; ?>" readonly>
                           </div>
                         </div>
 
@@ -234,6 +238,7 @@ session_start();
                                 
                                 if($tipoDispo == $dispos[$i]){
                                   echo "<option value='".$dispos[$i]."' selected>".$dispos[$i]."</option>";
+                                  $dispositivoSel = $dispos[$i];
                                 }else{
                                   echo "<option value='".$dispos[$i]."' disabled>".$dispos[$i]."</option>";
                                 }
@@ -242,6 +247,12 @@ session_start();
                             ?>
                           </select>
                         </div>
+                        
+                        <?php 
+                          $modeloCompleto = $dispositivoSel." ".$marca." ".$modelo;
+                        ?>
+                        <input type="hidden" id="modeloCompleto" value="<?php echo $modeloCompleto; ?>">
+                        <input type="hidden" id="folioReparacion" value="<?php echo $folioTrabajo; ?>">
 
                         <div class="col-sm-12 col-md-3 col-lg-2 mb-3">
                           <label for="marcaServicio" class="form-label">Marca</label>
@@ -431,6 +442,188 @@ session_start();
                         </table>
                       </div>
                     </div>
+
+                    <div class="modal fade" id="modalWhatsApp" tabindex="-1" data-bs-backdrop="static" 
+     aria-labelledby="modalWhatsAppLabel" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0 rounded-3">
+      
+      <!-- Header -->
+      <div class="modal-header bg-success text-white py-3">
+        <h5 class="modal-title d-flex align-items-center gap-2 fw-semibold" id="modalWhatsAppLabel">
+          <i class="bi bi-whatsapp fs-3"></i>
+          <span>Enviar Mensaje de WhatsApp</span>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <div class="row g-4">
+          
+          <!-- Columna Izquierda: Plantilla y Botones Rápido -->
+          <div class="col-lg-7 border-end pe-lg-4 d-flex flex-column">
+            
+            <!-- Teléfono -->
+            <div class="mb-3">
+              <label for="txtTelefonoModal" class="form-label fw-bold text-secondary">
+                <i class="bi bi-telephone-fill me-1"></i> Teléfono Destinatario
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light fw-bold text-muted">+</span>
+                <input type="tel" class="form-control" id="txtTelefonoModal" placeholder="5215551234567" required value="<?= $telCliente ?>">
+              </div>
+            </div>
+
+            <!-- Botones de ayuda para el usuario (Clic para insertar) -->
+            <div class="mb-2">
+              <label class="form-label fw-bold text-secondary small mb-1">
+                Haz clic para insertar una variable en el mensaje:
+              </label>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="insertarEnPlantilla('[nombreCliente]')">+ [nombreCliente]</button>
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="insertarEnPlantilla('[modelo]')">+ [modelo]</button>
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="insertarEnPlantilla('[estatus]')">+ [estatus]</button>
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="insertarEnPlantilla('[costoTotal]')">+ [costoTotal]</button>
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="insertarEnPlantilla('[folio]')">+ [folio]</button>
+              </div>
+            </div>
+
+            <!-- Textarea Plantilla -->
+            <div class="mb-3 flex-grow-1 d-flex flex-column">
+              <label for="txtPlantilla" class="form-label fw-bold text-secondary">
+                <i class="bi bi-pencil-square me-1"></i> Plantilla del Mensaje
+              </label>
+              <textarea class="form-control flex-grow-1 p-3 fs-6" id="txtPlantilla" rows="7" 
+                        style="resize: vertical; min-height: 180px;">Hola [nombreCliente], tu equipo [modelo] se encuentra [estatus]. El costo total es de [costoTotal]. Folio: #[folio].</textarea>
+            </div>
+
+          </div>
+
+          <!-- Columna Derecha: Vista Previa estilo WhatsApp -->
+          <div class="col-lg-5 ps-lg-4 d-flex flex-column">
+            <h6 class="fw-bold text-secondary mb-3 d-flex align-items-center gap-2">
+              <i class="bi bi-eye-fill text-success"></i>
+              <span>Vista Previa con Datos Reales</span>
+            </h6>
+
+            <div class="whatsapp-preview-container p-3 rounded-3 flex-grow-1 shadow-sm d-flex flex-column justify-content-end" 
+                 style="background-color: #efeae2; min-height: 280px; border: 1px solid #e0e0e0;">
+              
+              <div class="whatsapp-bubble bg-white p-3 rounded-3 shadow-sm position-relative mb-2">
+                <p id="txtVistaPrevia" class="mb-1 text-dark" style="white-space: pre-wrap; font-size: 0.95rem; word-break: break-word;"></p>
+                <div class="text-end" style="font-size: 0.7rem; color: #667781;">
+                  <span id="horaPreview">12:00 PM</span>
+                  <i class="bi bi-check2-all text-primary ms-1"></i>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer bg-light px-4 py-3">
+        <button type="button" class="btn btn-outline-secondary px-4 fw-semibold" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-success px-4 fw-semibold d-flex align-items-center gap-2" id="btnEnviarWS">
+          <i class="bi bi-send-fill"></i>
+          <span>Enviar por WhatsApp</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+// 1. Diccionario de traducción (ClaveUsuario => ID_Real_DOM)
+const mapaCampos = {
+  'nombrecliente': 'clienteTrabajo', 
+  'nombre':        'txt_nombre_cliente_input', 
+  'modelo':        'modeloCompleto',
+  'estatus':       'estatusTrabajo',
+  'costototal':    'precioFinalForm',
+  'folio':         'folioReparacion',
+  'telefono':      'telCliente'
+};
+
+const txtPlantilla = document.getElementById('txtPlantilla');
+const txtVistaPrevia = document.getElementById('txtVistaPrevia');
+const txtTelefonoModal = document.getElementById('txtTelefonoModal');
+
+// Función para insertar botones de etiqueta rápida en la posición del cursor
+function insertarEnPlantilla(etiqueta) {
+  const start = txtPlantilla.selectionStart;
+  const end = txtPlantilla.selectionEnd;
+  const texto = txtPlantilla.value;
+
+  txtPlantilla.value = texto.substring(0, start) + etiqueta + texto.substring(end);
+  txtPlantilla.selectionStart = txtPlantilla.selectionEnd = start + etiqueta.length;
+  txtPlantilla.focus();
+  generarVistaPrevia();
+}
+
+// 2. Traductor de variables a valores de los inputs
+function generarVistaPrevia() {
+  let mensajeFinal = txtPlantilla.value;
+
+  // Cargar teléfono automáticamente si existe en el mapa
+  const idTelefonoOrig = mapaCampos['telefono'];
+  if (idTelefonoOrig && document.getElementById(idTelefonoOrig) && !txtTelefonoModal.value) {
+    txtTelefonoModal.value = document.getElementById(idTelefonoOrig).value;
+  }
+
+  // Buscar cualquier [variable] escrita por el usuario
+  const regex = /\[(.*?)\]/g;
+
+  mensajeFinal = mensajeFinal.replace(regex, (match, palabraUsuario) => {
+    // Normalizar a minúsculas sin espacios
+    const claveLimpia = palabraUsuario.trim().toLowerCase();
+    
+    // Obtener el ID real correspondiente del diccionario
+    const idRealDOM = mapaCampos[claveLimpia];
+
+    if (idRealDOM) {
+      const elInput = document.getElementById(idRealDOM);
+      if (elInput && elInput.value !== undefined && elInput.value.trim() !== '') {
+        return elInput.value; // Reemplazar por el valor real del input
+      }
+    }
+
+    // Si la palabra no existe en el mapa o el input está vacío, conservar el corchete
+    return match;
+  });
+
+  txtVistaPrevia.textContent = mensajeFinal;
+}
+
+// Eventos de sincronización
+document.getElementById('modalWhatsApp').addEventListener('show.bs.modal', () => {
+  const ahora = new Date();
+  document.getElementById('horaPreview').textContent = ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  generarVistaPrevia();
+});
+
+txtPlantilla.addEventListener('input', generarVistaPrevia);
+
+// Enviar por WhatsApp
+document.getElementById('btnEnviarWS').addEventListener('click', function () {
+  const telefono = txtTelefonoModal.value.replace(/[^0-9]/g, '');
+  const mensajeFinal = txtVistaPrevia.textContent;
+
+  if (!telefono) {
+    alert('Por favor, ingresa un número de teléfono válido.');
+    txtTelefonoModal.focus();
+    return;
+  }
+
+  const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(mensajeFinal)}`;
+  window.open(url, '_blank');
+});
+</script>
+                    <!-- FIN MODAL WHATSAPPP -->
 
                     <div class="modal fade" id="modalPieza" tabindex="-1" data-bs-backdrop="static" 
                       aria-labelledby="modalPiezaLabel" data-bs-keyboard="false" aria-hidden="true">

@@ -749,3 +749,10 @@ if(document.getElementById('enviarCorreo')){
     })
   })
 }
+
+
+
+let btnWhats = document.getElementById('enviarWhats');
+btnWhats.addEventListener('click', function(){
+  //aperturamos el modal
+})

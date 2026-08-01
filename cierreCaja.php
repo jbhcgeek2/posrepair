@@ -174,7 +174,7 @@
                                 echo "<tr><td colspan = '4' class='text-center'><h4 class='text-danger'>Cierre ya procesado</h4></td></tr>
                                 <div class='row text-center'>
                                   <div class='col-sm-12 mb-3'>
-                                    <a href='reporteCierreCaja.php' target='_blank' class='btn btn-danger'>Ver Reporte</a>
+                                    <a href='reporteCierreCaja2.php' target='_blank' class='btn btn-danger'>Ver Reporte</a>
                                   </div>
                                 </div>";
                               }
