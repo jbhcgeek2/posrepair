@@ -275,7 +275,7 @@ error_reporting(E_ALL);
                     //consultamos el listado de productos
                     $prods = getProductosEmpresa($idEmpresaSesion);
                     $prods = json_decode($prods);
-                    print_r($prods);
+                    // print_r($prods);
                     $maxProds = 0;
                     
 
