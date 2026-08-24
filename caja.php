@@ -279,70 +279,70 @@ error_reporting(E_ALL);
                     $maxProds = 0;
                     
 
-                    if($prods->mensaje == "operationSuccess"){
-                    if(count($prods->data) >20){
-                      $maxProds = 20;
-                    }else{
-                      $maxProds = count($prods->data);
-                    }
-                      for($x = 0; $x < $maxProds; $x++){
-                        $nombreprod = $prods->data[$x]->nombreArticulo;
-                        $precio = $prods->data[$x]->precioUnitario;
-                        $precioMayo = $prods->data[$x]->precioMayoreo;
-                        $arti = $prods->data[$x]->idArticulo;
-                        $maxLongitud = 22; // Longitud máxima deseada
+                    // if($prods->mensaje == "operationSuccess"){
+                    // if(count($prods->data) >20){
+                    //   $maxProds = 20;
+                    // }else{
+                    //   $maxProds = count($prods->data);
+                    // }
+                    //   for($x = 0; $x < $maxProds; $x++){
+                    //     $nombreprod = $prods->data[$x]->nombreArticulo;
+                    //     $precio = $prods->data[$x]->precioUnitario;
+                    //     $precioMayo = $prods->data[$x]->precioMayoreo;
+                    //     $arti = $prods->data[$x]->idArticulo;
+                    //     $maxLongitud = 22; // Longitud máxima deseada
 
-                        $existencia = getArtiSucursal($idSucursal,$arti);
-                        $numArti = json_decode($existencia)->data;
-                        // echo $numArti;
-                        // print_r($existencia);
+                    //     $existencia = getArtiSucursal($idSucursal,$arti);
+                    //     $numArti = json_decode($existencia)->data;
+                    //     // echo $numArti;
+                    //     // print_r($existencia);
 
-                        if($numArti > 0 || $numArti != null){
-                          if (strlen($nombreprod) > $maxLongitud) {
-                            $cadenaTruncada = substr($nombreprod, 0, $maxLongitud) . "...";
-                          } else {
-                              $cadenaTruncada = $nombreprod;
-                          }
+                    //     if($numArti > 0 || $numArti != null){
+                    //       if (strlen($nombreprod) > $maxLongitud) {
+                    //         $cadenaTruncada = substr($nombreprod, 0, $maxLongitud) . "...";
+                    //       } else {
+                    //           $cadenaTruncada = $nombreprod;
+                    //       }
 
-                          if($prods->data[$x]->imgArticulo != ""){
-                            $imgProd = $prods->data[$x]->imgArticulo;
-                          }else{
-                            $imgProd = 'assets/images/no-image-available.jpeg';
-                          }
+                    //       if($prods->data[$x]->imgArticulo != ""){
+                    //         $imgProd = $prods->data[$x]->imgArticulo;
+                    //       }else{
+                    //         $imgProd = 'assets/images/no-image-available.jpeg';
+                    //       }
 
-                          if($numArti == 0){
-                            $clr = "bg-danger-subtle";
-                          }else{
-                            $clr = "";
-                          }
+                    //       if($numArti == 0){
+                    //         $clr = "bg-danger-subtle";
+                    //       }else{
+                    //         $clr = "";
+                    //       }
                           
-                          echo "<div class='col-sm-12 col-md-6'>
-                            <div class='card mb-3 $clr' style='min-height:75px; !important' onclick='addCarrito($arti)'>
+                    //       echo "<div class='col-sm-12 col-md-6'>
+                    //         <div class='card mb-3 $clr' style='min-height:75px; !important' onclick='addCarrito($arti)'>
 
-                              <div class='row g-0'>
+                    //           <div class='row g-0'>
 
-                                <div class='col-md-12'>
-                                  <div class='card-body pl-1 pt-0 pb-0'>
-                                    <span class='card-title text-truncate mb-0' style='font-size:11px;'><strong>$cadenaTruncada</strong></span><br>
-                                    <span class='card-text mb-0'>$$precio</span><br>
-                                    <span class='card-text mt-0'><small style='font-size:10px;'>Mayoreo: $$precioMayo    Existencia: $numArti</small></span>
-                                  </div>
-                                </div>
+                    //             <div class='col-md-12'>
+                    //               <div class='card-body pl-1 pt-0 pb-0'>
+                    //                 <span class='card-title text-truncate mb-0' style='font-size:11px;'><strong>$cadenaTruncada</strong></span><br>
+                    //                 <span class='card-text mb-0'>$$precio</span><br>
+                    //                 <span class='card-text mt-0'><small style='font-size:10px;'>Mayoreo: $$precioMayo    Existencia: $numArti</small></span>
+                    //               </div>
+                    //             </div>
 
-                              </div>
+                    //           </div>
 
-                            </div>
-                          </div>";
-                        }//fin if numero artioculos
+                    //         </div>
+                    //       </div>";
+                    //     }//fin if numero artioculos
 
                         
-                      }
+                    //   }
                       
-                    }elseif($prods->mensaje == "noData"){
-                      //no se tienen productos capturados
-                    }else{
-                      //ocurrio un error en la consulta
-                    }
+                    // }elseif($prods->mensaje == "noData"){
+                    //   //no se tienen productos capturados
+                    // }else{
+                    //   //ocurrio un error en la consulta
+                    // }
 
                   ?>
 
