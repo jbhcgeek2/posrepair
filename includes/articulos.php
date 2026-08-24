@@ -251,7 +251,7 @@ function getProductosEmpresa($empresa){
     }
   }
 
-  $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$empresa'";
+  $sql = "SELECT * FROM ARTICULOS WHERE empresaID = '$empresa' LIMIT 100";
   try {
     $query = mysqli_query($conexion, $sql);
     $i = 0;

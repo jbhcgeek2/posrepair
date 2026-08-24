@@ -3,7 +3,7 @@
 <?php
 //session_start();
 
-
+error_reporting(E_ALL);
  	include("includes/head.php");
 ?>
 
@@ -21,6 +21,7 @@
     $datosUsuario = getDataUser($usuario,$idEmprersa);
     $idSucursal = json_decode($datosUsuario)->sucursalID;
     $idUsuario = json_decode($datosUsuario)->idUsuario;
+    $idEmpresaSesion = $idEmprersa;
 
     //antes de proceder, verificamos si existe el cierre y apertura del dia
     $apertura = existeApertura($idUsuario,$idSucursal,$idEmprersa);
@@ -276,12 +277,14 @@
                     $prods = json_decode($prods);
                     // print_r($prods);
                     $maxProds = 0;
+                    
+
+                    if($prods->mensaje == "operationSuccess"){
                     if(count($prods->data) >20){
                       $maxProds = 20;
                     }else{
                       $maxProds = count($prods->data);
                     }
-                    if($prods->mensaje == "operationSuccess"){
                       for($x = 0; $x < $maxProds; $x++){
                         $nombreprod = $prods->data[$x]->nombreArticulo;
                         $precio = $prods->data[$x]->precioUnitario;
