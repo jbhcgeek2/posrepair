@@ -235,7 +235,7 @@ session_start();
                           } catch (\Throwable $th) {
                             //error en la consulta
                             echo "<tr>
-                              <td colspan='6'>Error de consulta</td>
+                              <td colspan='6'>Error de consulta: $th</td>
                             </tr>";
                           }
                         ?>
