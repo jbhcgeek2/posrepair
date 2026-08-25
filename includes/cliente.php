@@ -57,14 +57,17 @@ function altaCliente($nombre,$tel,$mail,$dir,$rfc,$idEmpresa){
 }
 
 function verCliente($idCliente,$idEmpresa){
-  // require('conexion.php');
-  // $res = [];
-  // if(!$conexion){
-  //   require('../conexion.php');
-  //   if(!$conexion){
-  //     require('../includes/conexion.php');
-  //   }
-  // }
+  
+    require('conexion.php');
+    $res = [];
+    if(!$conexion){
+      require('../conexion.php');
+      if(!$conexion){
+        require('../includes/conexion.php');
+      }
+    }
+  
+  
 
   if($idCliente == 1){
     //publico en general
