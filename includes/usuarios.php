@@ -190,14 +190,17 @@
   }
 
   function getSucById($idSucursal){
-    require('conexion.php');
-    $res = [];
     if(!$conexion){
-      require('../conexion.php');
+      require('conexion.php');
+      $res = [];
       if(!$conexion){
-        require('../includes/conexion.php');
+        require('../conexion.php');
+        if(!$conexion){
+          require('../includes/conexion.php');
+        }
       }
     }
+    
 
     $sql = "SELECT * FROM SUCURSALES WHERE idSucursal = '$idSucursal'";
     try {
