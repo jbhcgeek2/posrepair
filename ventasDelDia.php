@@ -206,6 +206,7 @@ session_start();
                                   </td>
                                 </tr>";
                               }//fin del while
+                              mysqli_close($conexion);
                               echo "<tr>
                               <td colspan='3' class='fw-bold' style='text-align:right'>Subtotal</td>
                               <td class='fw-bold'>$".number_format($totalVenta,2)."</td>
