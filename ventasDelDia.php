@@ -94,7 +94,7 @@ session_start();
                             empresaMovID = '$idEmpresaSesion' AND conceptoMov IN ('15','2')";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
-                            $sql = "SELECT *,b.trabajoID AS idTrabajo,b.sucursalID AS sucVenta FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            $sql = "SELECT *,a.trabajoID AS idTrabajo,a.sucursalID AS sucVenta FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             LEFT JOIN DETALLECHIP c ON a.chipID = c.idChip 
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
