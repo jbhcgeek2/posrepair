@@ -195,7 +195,7 @@ session_start();
                                 $dataSuc = getSucById($sucVenta);
                                 $nombreSucVenta = json_decode($dataSuc)->dato;
                                 echo "<tr class='$claseTR'>
-                                  <td>$fechaVenta</td>
+                                  <td>$fecha</td>
                                   <td>$nombreCosa</td>
                                   <td>$cantVenta</td>
                                   <td>$".number_format($total,2)."</td>
