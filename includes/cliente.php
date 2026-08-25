@@ -57,7 +57,7 @@ function altaCliente($nombre,$tel,$mail,$dir,$rfc,$idEmpresa){
 }
 
 function verCliente($idCliente,$idEmpresa){
-  
+  if(!$conexion){
     require('conexion.php');
     $res = [];
     if(!$conexion){
@@ -65,7 +65,9 @@ function verCliente($idCliente,$idEmpresa){
       if(!$conexion){
         require('../includes/conexion.php');
       }
-    }
+    } 
+  }
+    
   
   
 
