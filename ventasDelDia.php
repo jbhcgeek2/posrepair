@@ -86,7 +86,7 @@ session_start();
                           // $fecha = '2024-05-25';
                           $sql = "";
                           if($rolUsuario == "Administrador"){
-                            $sql = "SELECT * FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
+                            $sql = "SELECT *,b.trabajoID AS idTrabajo FROM VENTAS a  INNER JOIN DETALLEVENTA b ON a.idVenta = b.ventaID 
                             LEFT JOIN DETALLECHIP c ON b.chipID = c.idChip 
                             WHERE a.fechaVenta = '$fecha' AND a.empresaID = '$idEmpresaSesion'";
 
@@ -94,7 +94,7 @@ session_start();
                             empresaMovID = '$idEmpresaSesion' AND conceptoMov IN ('15','2')";
                           }elseif($rolUsuario == "Vendedor"){
                             //solo podra ver las ventas de su usuario y sucursal
-                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            $sql = "SELECT *,b.trabajoID AS idTrabajo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             LEFT JOIN DETALLECHIP c ON a.chipID = c.idChip 
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
@@ -108,7 +108,7 @@ session_start();
                             // INNER JOIN ARTICULOS c ON a.articuloID = c.idArticulo
                             // WHERE b.fechaVenta = '$fecha' AND a.sucursalID = '$idSucursalN'";
 
-                            $sql = "SELECT * FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
+                            $sql = "SELECT *,b.trabajoID AS idTrabajo FROM DETALLEVENTA a INNER JOIN VENTAS b ON a.ventaID = b.idVenta 
                             LEFT JOIN DETALLECHIP c ON a.chipID = c.idChip 
                             WHERE b.fechaVenta = '$fecha' AND a.usuarioVenta = '$usuario' 
                             AND a.sucursalID = '$idSucursalN'";
@@ -154,9 +154,9 @@ session_start();
                                   $fetchExt = mysqli_fetch_assoc($queryExt);
                                   $nombreCosa =  $fetchExt['nombreArticulo']."<br>".$fetch['codigoChip'];
                                   $nombreCosa = strtoupper($nombreCosa);
-                                }else{
+                                }elseif($fetch['idTrabajo'] >= 1){
                                   //es un servicio
-                                  $idServ = $fetch['trabajoID'];
+                                  $idServ = $fetch['idTrabajo'];
                                   $sqlExt2 = "SELECT a.costoFinal,b.nombreServicio,a.marca,a.modelo 
                                   FROM TRABAJOS a INNER JOIN SERVICIOS b ON a.servicioID = b.idServicio 
                                   WHERE a.idTrabajo = '$idServ'";
