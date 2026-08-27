@@ -57,16 +57,16 @@ function altaCliente($nombre,$tel,$mail,$dir,$rfc,$idEmpresa){
 }
 
 function verCliente($idCliente,$idEmpresa){
-  // if(!isset($conexion)){
-  //   require('conexion.php');
-  //   $res = [];
-  //   if(!$conexion){
-  //     require('../conexion.php');
-  //     if(!$conexion){
-  //       require('../includes/conexion.php');
-  //     }
-  //   } 
-  // }
+  if(!isset($conexion)){
+    require('conexion.php');
+    $res = [];
+    if(!$conexion){
+      require('../conexion.php');
+      if(!$conexion){
+        require('../includes/conexion.php');
+      }
+    } 
+  }
     
   
   
@@ -95,6 +95,7 @@ function verCliente($idCliente,$idEmpresa){
     return json_encode($res);
 
   }
+  mysqli_close($conexion);
 }
 
 function updateCliente($nombre,$direccion,$tel,$mail,$rfc,$idCliente){
