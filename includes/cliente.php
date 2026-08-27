@@ -58,14 +58,14 @@ function altaCliente($nombre,$tel,$mail,$dir,$rfc,$idEmpresa){
 
 function verCliente($idCliente,$idEmpresa){
   // if(!isset($conexion)){
-  //   require_once('conexion.php');
-  //   $res = [];
-  //   if(!$conexion){
-  //     require_once('../conexion.php');
-  //     if(!$conexion){
-  //       require_once('../includes/conexion.php');
-  //     }
-  //   } 
+    require_once('conexion.php');
+    $res = [];
+    if(!$conexion){
+      require_once('../conexion.php');
+      if(!$conexion){
+        require_once('../includes/conexion.php');
+      }
+    } 
   // }
     
   
