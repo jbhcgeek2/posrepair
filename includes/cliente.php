@@ -59,7 +59,7 @@ function altaCliente($nombre,$tel,$mail,$dir,$rfc,$idEmpresa){
 function verCliente($idCliente,$idEmpresa){
   // if(!isset($conexion)){
   //   require_once('conexion.php');
-    $res = [];
+  //   $res = [];
   //   if(!$conexion){
   //     require_once('../conexion.php');
   //     if(!$conexion){
@@ -67,17 +67,6 @@ function verCliente($idCliente,$idEmpresa){
   //     }
   //   } 
   // }
-  if (!isset($conexion) || !$conexion) {
-    $ruta_conexion = __DIR__ . '/conexion.php';
-    if (file_exists($ruta_conexion)) {
-        require_once($ruta_conexion);
-    } else {
-        return json_encode([
-            "status" => "error",
-            "mensaje" => "No se encontró el archivo de conexión"
-        ]);
-    }
-  }
     
   
   
