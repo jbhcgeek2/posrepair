@@ -95,7 +95,7 @@ function verCliente($idCliente,$idEmpresa){
     return json_encode($res);
 
   }
-  mysqli_close($conexion);
+  
 }
 
 function updateCliente($nombre,$direccion,$tel,$mail,$rfc,$idCliente){

@@ -137,8 +137,13 @@
                                       $idCliente = $fetchMov3['clienteID'];
                                       $claseTR = '';
                                       if($fetchMov3['trabajoVenta'] == null){
-                                        $dataCliente = verCliente($idCliente,$idEmprersa);
-                                        $nombreClie = json_decode($dataCliente)->data->nombreCliente;
+                                        if($idCliente == 1){
+                                          $nombreClie = "Publico en General";
+                                        }else{
+                                          $dataCliente = verCliente($idCliente,$idEmprersa);
+                                          $nombreClie = json_decode($dataCliente)->data->nombreCliente;
+                                        }
+                                        
                                       }else{
                                         //se trata de un trabajo
                                         $nombreClie = $fetchMov3['trabajoVenta']." ".$fetchMov3['modeloVenta'];
