@@ -11,7 +11,7 @@ function verClientes($idEmpresa){
     }
 
     $sql = "SELECT * FROM CLIENTES WHERE clienteEmpresaID = '$idEmpresa' 
-    ORDER BY nombreCliente ASC LIMIT 100";
+    ORDER BY nombreCliente ASC";
     try {
       $query = mysqli_query($conexion, $sql);
       $data = [];
