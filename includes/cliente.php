@@ -75,7 +75,8 @@ function verCliente($idCliente,$idEmpresa){
     //publico en general
     $sql = "SELECT * FROM CLIENTES WHERE idClientes = '$idCliente'";
   }else{
-    $sql = "SELECT * FROM CLIENTES WHERE idClientes = '$idCliente' AND clienteEmpresaID = '$idEmpresa'";
+    $sql = "SELECT * FROM CLIENTES WHERE idClientes = '$idCliente' AND clienteEmpresaID = '$idEmpresa' 
+    LIMIT 100";
   }
   
   try {
