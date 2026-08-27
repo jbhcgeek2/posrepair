@@ -11,7 +11,7 @@ function verClientes($idEmpresa){
     }
 
     $sql = "SELECT * FROM CLIENTES WHERE clienteEmpresaID = '$idEmpresa' 
-    ORDER BY nombreCliente ASC";
+    ORDER BY nombreCliente ASC LIMIT 100";
     try {
       $query = mysqli_query($conexion, $sql);
       $data = [];
@@ -75,8 +75,7 @@ function verCliente($idCliente,$idEmpresa){
     //publico en general
     $sql = "SELECT * FROM CLIENTES WHERE idClientes = '$idCliente'";
   }else{
-    $sql = "SELECT * FROM CLIENTES WHERE idClientes = '$idCliente' AND clienteEmpresaID = '$idEmpresa' 
-    LIMIT 100";
+    $sql = "SELECT * FROM CLIENTES WHERE idClientes = '$idCliente' AND clienteEmpresaID = '$idEmpresa'";
   }
   
   try {
