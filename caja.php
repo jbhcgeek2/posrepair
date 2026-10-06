@@ -140,7 +140,12 @@ error_reporting(E_ALL);
     }
 
     //verificamos si ya existe el cierre del dia
-    $fecha = date('Y-m-d');
+    if(empty($_GET['fecha'])){
+      $fecha = date('Y-m-d');
+    }else{
+      $fecha = $_GET['fecha'];
+    }
+
     $existeCierre = existeCierre($fecha,$idUsuario,$idSucursal);
     $existeCierre = json_decode($existeCierre);
     if($existeCierre->status == "ok"){

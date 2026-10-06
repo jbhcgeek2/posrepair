@@ -377,6 +377,9 @@ function cerrarCaja(){
     datos.append("montoRetiraEfe",montoRetiro);
     datos.append("observCierre",observMov);
     datos.append("montoDigital",montoDig);
+    if(document.getElementById('fechaChanged')){
+      datos.append("fechaChanged",document.getElementById('fechaChanged').value);
+    }
   
     let envio = new XMLHttpRequest();
     envio.open("POST","../includes/cajas.php",false);

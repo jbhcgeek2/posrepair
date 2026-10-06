@@ -69,7 +69,13 @@
                     <tbody>
                       <?php 
                         //buscamos los datos de venta
-                        $fecha = date('Y-m-d');
+                        if(empty($_GET['fecha'])){
+                          $fecha = date('Y-m-d');
+                        }else{
+                          $fecha = $_GET['fecha'];
+                          echo "<input type='hidden' id='fechaChanged' value='$fecha'>";
+                        }
+                        
                         $montoInicio = 0;
                         $totalEfectivo = 0;
                         $totalVenta = 0;

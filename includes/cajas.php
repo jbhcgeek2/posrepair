@@ -931,7 +931,13 @@ if(!empty($_SESSION['usuarioPOS'])){
     $idSucursal = json_decode($datosUsuario)->sucursalID;
     $idUsuario = json_decode($datosUsuario)->idUsuario;
 
-    $fecha = date('Y-m-d');
+    if(!empty($_POST['fechaChanged'])){
+      $fecha = $_POST['fechaChanged'];
+    }else{
+      $fecha = date('Y-m-d');
+    }
+
+    
     $hora = date('H:i:s');
     
 
