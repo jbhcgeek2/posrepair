@@ -168,75 +168,53 @@ include("includes/head.php");
                   </div>
 
                   <div class="col-12">
-                    <div class="list-group"> 
+                  <?php
+// Configuración: cuántos meses hacia atrás mostrar
+$mesesAtras = 6;
 
-                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 class="mb-1">Cierre Julio 2026</h6>
-                          <small class="text-muted">Procesado el 01/08/2026</small>
-                        </div>
-                        <div>
-                          <a href="cierreMes.php?mes=07&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver Detalle
-                          </a>
-                        </div>
-                      </div>
+// Nombres de meses en español
+$nombresMeses = [
+    1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+    5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+    9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+];
 
-                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 class="mb-1">Cierre Junio 2026</h6>
-                          <small class="text-muted">Procesado el 15/06/2026</small>
-                        </div>
-                        <div>
-                          <a href="cierreMes.php?mes=06&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver Detalle
-                          </a>
-                        </div>
-                      </div>
+// Fecha base: mes anterior al actual (porque el cierre del mes actual aún no existe)
+$fecha = new DateTime('first day of last month');
 
-                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 class="mb-1">Cierre Mayo 2026</h6>
-                          <small class="text-muted">Procesado el 10/06/2026</small>
-                        </div>
-                        <div>
-                          <a href="cierreMes.php?mes=05&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver Detalle
-                          </a>
-                        </div>
-                      </div>
+// Si quieres que empiece desde Julio 2026 fijo, descomenta:
+// $fecha = new DateTime('2026-07-01');
+?>
 
-                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 class="mb-1">Cierre Abril 2026</h6>
-                          <small class="text-muted">Procesado el 09/05/2026</small>
-                        </div>
-                        <div>
-                          <a href="cierreMes.php?mes=04&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver Detalle
-                          </a>
-                        </div>
-                      </div>
-
-                      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                          <h6 class="mb-1">Cierre Marzo 2026</h6>
-                          <small class="text-muted">Procesado el 01/04/2026</small>
-                        </div>
-                        <div>
-                          <a href="cierreMes.php?mes=03&year=2026" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="bi bi-eye me-1"></i>Ver Detalle
-                          </a>
-                        </div>
-                      </div>
-                      
-
-                      
-                      
-                      
-
-                      <!-- Puedes agregar más elementos de lista aquí -->
-                    </div>
+<div class="list-group">
+    <?php for ($i = 0; $i < $mesesAtras; $i++): 
+        $mes   = (int)$fecha->format('n');
+        $year  = (int)$fecha->format('Y');
+        $mesPad = str_pad($mes, 2, '0', STR_PAD_LEFT);
+        
+        // Fecha de "procesado" (ejemplo: primer día del mes siguiente)
+        $fechaProceso = clone $fecha;
+        $fechaProceso->modify('first day of next month');
+        $fechaProcesado = $fechaProceso->format('d/m/Y');
+    ?>
+        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="mb-1">Cierre <?= $nombresMeses[$mes] ?> <?= $year ?></h6>
+                <small class="text-muted">Procesado el <?= $fechaProcesado ?></small>
+            </div>
+            <div>
+                <a href="cierreMes.php?mes=<?= $mesPad ?>&year=<?= $year ?>" 
+                   target="_blank" 
+                   class="btn btn-sm btn-outline-success">
+                    <i class="bi bi-eye me-1"></i>Ver Detalle
+                </a>
+            </div>
+        </div>
+    <?php 
+        // Retroceder un mes para la siguiente iteración
+        $fecha->modify('-1 month');
+    endfor; ?>
+</div>
                   </div>
                 </div>
               </div>
