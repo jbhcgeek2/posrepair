@@ -12,7 +12,7 @@ $img,$pUni,$pMayo,$mayoDes,$codigo,$proveedor,$chip){
   }
   $fecha = date('Y-m-d');
   //antes de continuar, verificamos si el codigo de barras ya existe
-  $sqlAux = "SELECT COUNT(*) AS codProds FROM ARTICULOS WHERE codigoProducto = '$codigo'";
+  $sqlAux = "SELECT COUNT(*) AS codProds FROM ARTICULOS WHERE codigoProducto = '$codigo' AND empresaID = '$empresa'";
   try {
     $queryAux = mysqli_query($conexion, $sqlAux);
     $fetchAux = mysqli_fetch_assoc($queryAux);
