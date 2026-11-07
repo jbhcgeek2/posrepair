@@ -272,6 +272,7 @@
 											<li class="submenu-item"><a class="submenu-link" href="cierreCaja.php">Cierre de Caja</a></li>
 											<li class="submenu-item"><a class="submenu-link" href="salEntEfec.php">Sal/Ent Efectivo</a></li>
 											<li class="submenu-item"><a class="submenu-link" href="reportesCaja.php">Reportes</a></li>
+											<li class="submenu-item"><a class="submenu-link" href="cancelarVentas.php">Cancelar Ventas</a></li>
 										</ul>
 									</div>
 								</li>

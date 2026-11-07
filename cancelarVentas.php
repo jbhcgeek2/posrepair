@@ -15,62 +15,10 @@ include("includes/head.php");
   // DATOS DE MUESTRA (reemplaza este bloque por tu consulta real)
   // ============================================================
   $hoy = date('Y-m-d');
-  $ventas = [
-    [
-      'idVenta'         => 101,
-      'num_comprobante' => 'V-000101',
-      'horaVenta'       => '09:14:22',
-      'nombreCliente'   => 'Juan Pérez',
-      'vendedor'        => 'María López',
-      'tipoPago'        => 'Efectivo',
-      'totalVenta'      => 450.00,
-      'numArticulos'    => 2,
-    ],
-    [
-      'idVenta'         => 102,
-      'num_comprobante' => 'V-000102',
-      'horaVenta'       => '09:42:07',
-      'nombreCliente'   => 'Ana Ramírez',
-      'vendedor'        => 'Luis Torres',
-      'tipoPago'        => 'Tarjeta',
-      'totalVenta'      => 1280.50,
-      'numArticulos'    => 3,
-    ],
-    [
-      'idVenta'         => 103,
-      'num_comprobante' => 'V-000103',
-      'horaVenta'       => '10:05:51',
-      'nombreCliente'   => 'Público general',
-      'vendedor'        => 'María López',
-      'tipoPago'        => 'Transferencia',
-      'totalVenta'      => 299.99,
-      'numArticulos'    => 1,
-    ],
-    [
-      'idVenta'         => 104,
-      'num_comprobante' => 'V-000104',
-      'horaVenta'       => '11:18:36',
-      'nombreCliente'   => 'Carlos Méndez',
-      'vendedor'        => 'Luis Torres',
-      'tipoPago'        => 'Efectivo',
-      'totalVenta'      => 89.00,
-      'numArticulos'    => 1,
-    ],
-    [
-      'idVenta'         => 105,
-      'num_comprobante' => 'V-000105',
-      'horaVenta'       => '12:47:10',
-      'nombreCliente'   => 'Sofía Hernández',
-      'vendedor'        => 'María López',
-      'tipoPago'        => 'Tarjeta',
-      'totalVenta'      => 2150.00,
-      'numArticulos'    => 5,
-    ],
-  ];
 
   // Totales rápidos para el resumen superior
-  $totalDia    = array_sum(array_column($ventas, 'totalVenta'));
-  $numVentas   = count($ventas);
+  // $totalDia    = array_sum(array_column($ventas, 'totalVenta'));
+  // $numVentas   = count($ventas);
   $hoy = date('Y-m-d');
 
   $sqlV1 = "SELECT v.*,(SELECT SUM(cantidadVenta) FROM DETALLEVENTA dv WHERE dv.ventaID = v.idVenta) AS nProds,
@@ -83,6 +31,8 @@ include("includes/head.php");
   $resV1 = mysqli_stmt_get_result($queryV1);
 
   $resTabla = "";
+  $montoCancelado = 0;
+  $numVentas = mysqli_num_rows($resV1);
   if(mysqli_num_rows($resV1) > 0){
     while($fetchV1 = mysqli_fetch_assoc($resV1)){
       $comprobante = $fetchV1['num_comprobante'];
@@ -93,7 +43,14 @@ include("includes/head.php");
       $articulos = $fetchV1['nProds'];
       $totalVenta = $fetchV1['totalVenta'];
       $nombreCliente = $fetchV1['nombreCliente'];
+      $montoCancelado += $totalVenta;
       $totalTxt = number_format($totalVenta,2);
+      $classCancel = "";
+      if($fetchV1['estatusVenta'] == 1){
+        $classCancel = "bg-danger";
+      }else{
+        $classCancel = "";
+      }
       $classBadge = "";
       switch ($tipoPago) {
         case 'Efectivo':
@@ -110,7 +67,7 @@ include("includes/head.php");
           break;
       }
 
-      $resTabla = "<tr>
+      $resTabla .= "<tr class='$classCancel'>
         <td>$comprobante</td>
         <td>$hora</td>
         <td>$nombreCliente</td>
@@ -120,15 +77,26 @@ include("includes/head.php");
         </td>
         <td class='text-center'>$articulos</td>
         <td class='text-end'>$$totalTxt</td>
-        <td class='text-center'>
-          <a href='#!' 
-          class='btn btn-danger btn-cancelar' 
-          data-id='".$fetchV1['idVenta']."'
-          data-comprobante='$comprobante'
-          data-total='$totalTxt'>Cancelar</a>
-        </td>
-
-      </tr>";
+        ";
+        if($fetchV1['estatusVenta'] == 1){
+          $resTabla .= "
+            <td class='text-center'>
+              <a href='#!' class='btn btn-secondary'>Cancelada</a>
+            </td>
+          </tr>";
+          
+        }else{
+          $resTabla .= "
+            <td class='text-center'>
+              <a href='#!' 
+              class='btn btn-danger btn-cancelar' 
+              data-id='".$fetchV1['idVenta']."'
+              data-comprobante='$comprobante'
+              data-total='$totalTxt'>Cancelar</a>
+            </td>
+          </tr>";
+        }
+        
     }//fin del while V1
   }else{
     //sin resultados de venats
@@ -138,6 +106,15 @@ include("includes/head.php");
   }
 
   mysqli_stmt_close($queryV1);
+
+  $sqlV2 = "SELECT SUM(totalVenta) AS montoCancela FROM VENTASCANCELADAS WHERE fechaVenta = CURDATE() AND empresaID = ?";
+  $queryV2 = mysqli_prepare($conexion, $sqlV2);
+  mysqli_stmt_bind_param($queryV2,"i",$idEmpresaSesion);
+  mysqli_stmt_execute($queryV2);
+  $resV2 = mysqli_stmt_get_result($queryV2);
+  $fetchV2 = mysqli_fetch_assoc($resV2);
+  $montoCancelado = $fetchV2['montoCancela'];
+
 
   ?>
 
@@ -161,8 +138,8 @@ include("includes/head.php");
           <div class="col-6 col-md-4">
             <div class="app-card shadow-sm h-100">
               <div class="app-card-body p-3">
-                <div class="text-muted small">Total del día</div>
-                <div class="fs-4 fw-bold text-success">$<?= number_format($totalDia, 2) ?></div>
+                <div class="text-muted small">Total Cancelado del día</div>
+                <div class="fs-4 fw-bold text-success">$<?= number_format($montoCancelado, 2) ?></div>
               </div>
             </div>
           </div>
@@ -194,12 +171,7 @@ include("includes/head.php");
 
             <div class="app-card-body p-3 p-lg-4" id="contenidoVentas">
 
-              <?php if (empty($ventas)): ?>
-                <div class="text-center text-muted py-5">
-                  <i class="bi bi-receipt fs-1 d-block mb-2"></i>
-                  No hay ventas activas registradas hoy.
-                </div>
-              <?php else: ?>
+              
                 <div class="table-responsive">
                   <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
@@ -223,7 +195,6 @@ include("includes/head.php");
                     </tbody>
                   </table>
                 </div>
-              <?php endif; ?>
 
             </div><!--//app-card-body-->
           </div><!--//app-card-->
@@ -265,8 +236,7 @@ include("includes/head.php");
 
             <input type="hidden" name="mVentaID" id="mVentaID" value="">
             <label for="mMotivo" class="form-label small fw-semibold">Motivo de la cancelación *</label>
-            <textarea class="form-control" id="mMotivo" name="motivo" rows="4"
-            placeholder="Ej. error de cobro, devolución, venta duplicada..." required></textarea>
+            <textarea class="form-control" id="mMotivo" name="motivo" rows="4" required></textarea>
             <div class="form-text">Este motivo quedará registrado junto con tu usuario y la fecha/hora.</div>
 
             <div class="col-sm-12 mt-2">
@@ -292,47 +262,8 @@ include("includes/head.php");
   <!-- Page Specific JS -->
   <script src="assets/js/app.js"></script>
   <script src="assets/js/swetAlert.js"></script>
+  <script src="assets/js/cancelarVentas.js"></script>
 
-  <script>
-    // Abre el modal y rellena los datos de la venta seleccionada
-    document.addEventListener('DOMContentLoaded', function () {
-      const modalEl = document.getElementById('modalCancelar');
-      const modal   = new bootstrap.Modal(modalEl);
-
-      document.querySelectorAll('.btn-cancelar').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          document.getElementById('mVentaID').value        = this.dataset.id;
-          document.getElementById('mComprobante').textContent = this.dataset.comprobante;
-          document.getElementById('mTotal').textContent       = '$' + this.dataset.total;
-          document.getElementById('mMotivo').value            = '';
-          modal.show();
-        });
-      });
-    });
-
-    let btnCancela = document.getElementById('cancelar_venta');
-    btnCancela.addEventListener('click', function(){
-      let datos = new FormData(document.getElementById('formCancelar'));
-
-      fetch("../includes/cancelarVentas.php",{
-        method: 'POST',
-        body: datos
-      }).then(function(res){
-        return res.json();
-      }).then(function(result){
-        if(result.status == "ok"){
-          Swal.fire({
-            title: 'Venta Cancelada',
-            text: 'Se cancelo correctamente la venta.',
-            icon: 'success'
-          }).then(function(){
-            location.reload();
-          })
-        }
-      })
-
-    });
-  </script>
 
 </body>
 </html>
