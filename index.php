@@ -183,7 +183,7 @@ include("includes/head.php");
 
 				<!--  -->
 				<?php 
-					$fechaLimite = "2026-06-12";
+					$fechaLimite = "2026-11-08";
 					$fechaHoy2 = date('Y-m-d');
 					if($fechaHoy2 <= $fechaLimite && $rolUsuario == "Administrador"){
 						?>
@@ -212,11 +212,12 @@ include("includes/head.php");
 											</div>
 
 											<p class="text-secondary mb-3" style="font-size: 13px; line-height: 1.5;">
-												Tu reporte de <span class="text-primary fw-semibold">Mayo</span> ya está disponible.
+												Tu reporte de <span class="text-primary fw-semibold">Octubre</span> ya está disponible.<br>
+												Ademas se integra la cancelacion de ventas
 											</p>
 
 											<div class="d-flex gap-2">
-												<a href="cierreMes.php?mes=05&year=2026" target="_blank" class="btn btn-sm"
+												<a href="cierreMes.php?mes=10&year=2026" target="_blank" class="btn btn-sm"
 													style="font-size: 12px; background: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); border: none; border-radius: 6px;">
 													Ver reporte <i class="bi bi-arrow-right ms-1"></i>
 												</a>
@@ -494,14 +495,33 @@ include("includes/head.php");
 									}
 								}
 
-								$sqlProd = "SELECT SUM(cantidadVenta) AS totales,
-											(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
-											ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID";
+								// $sqlProd = "SELECT SUM(cantidadVenta) AS totales,
+								// 			(SELECT c.nombreArticulo FROM ARTICULOS c WHERE c.idArticulo = a.articuloID) AS nameArti FROM DETALLEVENTA a INNER JOIN SUCURSALES b 
+								// 			ON a.sucursalID = b.idSucursal WHERE a.sucursalID IN ($sucursales) AND a.articuloID > 0 group by articuloID";
+								// $queryProd = mysqli_query($conexion, $sqlProd);
+								// $totalesVentas = 0;
+
+								// while ($fetch5 = mysqli_fetch_assoc($queryProd)) {
+								// 	$totalesVentas = $totalesVentas + $fetch5['totales'];
+								// }
+								$sqlProd = "SELECT
+												a.articuloID,
+												c.nombreArticulo AS nameArti,
+												SUM(a.cantidadVenta) AS totales
+										FROM DETALLEVENTA a
+										LEFT JOIN ARTICULOS c ON c.idArticulo = a.articuloID
+										WHERE a.sucursalID IN ($sucursales)
+											AND a.articuloID > 0
+										GROUP BY a.articuloID, c.nombreArticulo";
+
 								$queryProd = mysqli_query($conexion, $sqlProd);
 								$totalesVentas = 0;
 
-								while ($fetch5 = mysqli_fetch_assoc($queryProd)) {
-									$totalesVentas = $totalesVentas + $fetch5['totales'];
+								if ($queryProd) {
+										while ($fetch5 = mysqli_fetch_assoc($queryProd)) {
+												$totalesVentas += (float) ($fetch5['totales'] ?? 0);
+										}
+										mysqli_free_result($queryProd);
 								}
 								// echo $totalesVentas;
 
@@ -652,6 +672,9 @@ include("includes/head.php");
 
 		<footer class="">
 			<div class="container text-center py-3">
+				<?php 
+					mysqli_close($conexion);
+				?>
 				<!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
 				<small class="copyright">Disenado por </i> by <a class="app-link" href="https://www.tecuanisoft.com" target="_blank">TecuaniSoft</a></small>
 
@@ -673,7 +696,7 @@ include("includes/head.php");
 	<!-- Page Specific JS -->
 	<script src="assets/js/app.js"></script>
 	<!-- <script src="assets/js/index.js"></script> -->
-	<script src="assets/js/validaDispositivo.js"></script>
+	<!-- <script src="assets/js/validaDispositivo.js"></script> -->
 	<script>
 		document.getElementById('reloadButton').addEventListener('click', function() {
 			// Agregar un parámetro temporal único a la URL para forzar la recarga

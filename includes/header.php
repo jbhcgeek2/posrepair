@@ -1,8 +1,7 @@
 <?php 
 
 	session_start();
-	require_once("includes/usuarios.php");
-	require("includes/conexion.php");
+	
 	//consultamos la empresa de la sesion
 
 	//verificaremos la existencia de la sesion del usuario
@@ -11,6 +10,9 @@
 		//usuario vacio
 		header('location:login.php');
 	}else{
+		require_once("includes/usuarios.php");
+		require("includes/conexion.php");
+		
 		$empresa = datoEmpresaSesion($usuario,"id");
 		$empresa = json_decode($empresa);
 		$idEmpresaSesion = $empresa->dato;
